@@ -1,20 +1,1580 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Maths Quest — Académie des Nombres</title><link rel="stylesheet" href="src/style.css"></head><body>
-<header><div class="brand">✦ Maths Quest <small>L’Académie des Nombres</small></div><div class="level">NIVEAU 1 <small>Les bases de l’Académie</small></div><div class="stats"><span id="count">0 / 3 défis</span><div class="bar"><i id="fill"></i></div><small>80 % pour avancer</small></div></header>
-<main><section class="map" id="map" aria-label="Carte de l'Académie et parcours du héros">
-<svg class="landscape" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-<defs><linearGradient id="grass" x2="1" y2="1"><stop stop-color="#a3bf81"/><stop offset="1" stop-color="#587b5d"/></linearGradient><linearGradient id="stone" x2="0" y2="1"><stop stop-color="#e9dfc6"/><stop offset="1" stop-color="#a9aa9c"/></linearGradient><linearGradient id="roof" x2="0" y2="1"><stop stop-color="#42648a"/><stop offset="1" stop-color="#213854"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><pattern id="tiles" width="44" height="28" patternUnits="userSpaceOnUse"><path d="M0 0H44M20 0V28" stroke="#c4b89f" stroke-width="2" opacity=".42"/></pattern></defs>
-<rect width="1200" height="700" fill="url(#grass)"/><path d="M0 0H1200V125L990 170 800 90 560 165 260 115 0 180Z" fill="#496b5b"/><path d="M0 550Q300 420 610 550T1200 480V700H0" fill="#406d77"/><path d="M0 600Q400 460 670 565T1200 520" fill="none" stroke="#80b9b3" stroke-width="26"/>
-<path d="M0 480L290 340 495 225 735 260 950 360 1200 290" fill="none" stroke="#8b866b" stroke-width="142" stroke-linejoin="round" opacity=".45"/><path d="M0 480L290 340 495 225 735 260 950 360 1200 290" fill="none" stroke="url(#stone)" stroke-width="124" stroke-linejoin="round"/><path d="M0 480L290 340 495 225 735 260 950 360 1200 290" fill="none" stroke="#f3ebd5" stroke-width="6" stroke-dasharray="10 20" opacity=".6"/>
-<g id="academy"><g fill="#d8cfb3" stroke="#847e79" stroke-width="6"><path d="M55 225V80H295V215Z"/><path d="M720 110V0H1130V235L1000 250Z"/><path d="M25 670V575L185 500 285 555V700H25Z"/></g><g fill="url(#roof)" stroke="#172a42" stroke-width="8"><path d="M35 90L170 0 325 95Z"/><path d="M700 25L930 -85 1170 35Z"/><path d="M10 585L150 470 305 590Z"/></g><g fill="#26384c"><rect x="100" y="130" width="32" height="65" rx="16"/><rect x="190" y="130" width="32" height="65" rx="16"/><rect x="825" y="105" width="35" height="74" rx="17"/><rect x="960" y="105" width="35" height="74" rx="17"/></g><g fill="#cca96b"><rect x="109" y="145" width="15" height="45"/><rect x="835" y="120" width="15" height="49"/></g></g>
-<g id="decor"></g><path d="M195 490Q275 350 390 340T650 293T1025 380" fill="none" stroke="#ffcd66" stroke-width="15" stroke-linecap="round" stroke-dasharray="8 25" filter="url(#glow)"/>
-<g fill="#f8db82" stroke="#fff5d0" stroke-width="6"><circle cx="390" cy="340" r="19"/><circle cx="650" cy="293" r="19"/><circle cx="1025" cy="380" r="19"/></g>
-<g transform="translate(566 480)"><ellipse rx="130" ry="69" fill="#b0b9ac" stroke="#eddfba" stroke-width="22"/><ellipse rx="96" ry="52" fill="#7bbdcc"/><path d="M-15 4L0 -91 15 4Z" fill="#bca575" stroke="#665b55" stroke-width="4"/><circle cy="-98" r="20" fill="#f4d995"/></g>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111d31">
+  <title>Maths Quest — version 0.3.29 — Bleu royal & or</title>
+  <style>
+    :root { font-family:system-ui,sans-serif; background:#101c2d; color:#eee6d4; color-scheme:dark; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; min-height:0; }
+    body { display:flex; flex-direction:column; height:100vh; height:100dvh; overflow:hidden; }
+    /* Chaque format d'écran affiche la carte entière sans recadrage ni distorsion. */
+    .scene-area { min-height:0; flex:1; display:flex; align-items:center; justify-content:center;
+      padding:clamp(4px,1.3vmin,12px); overflow:hidden; width:100%; }
+    .scene-viewport { position:relative; width:100%; aspect-ratio:1660/947;
+      flex:none; border:2px solid #ae8d55; box-shadow:0 14px 40px #0009;
+      overflow:hidden; background:#13263d; }
+    .scene-area:fullscreen { width:100vw; height:100dvh; background:#101c2d; }
+    .scene-area:-webkit-full-screen { width:100vw; height:100vh; background:#101c2d; }
+    /* Zoom de lecture facultatif sur les petits écrans : défilement tactile. */
+    .scene-area.zoomed { justify-content:flex-start; align-items:flex-start; overflow:auto;
+      -webkit-overflow-scrolling:touch; touch-action:pan-x pan-y; }
+    .scene-area.zoomed .scene-viewport { max-width:none; }
+    .scene-image { display:block; width:100%; height:100%; object-fit:contain;
+      user-select:none; -webkit-user-drag:none; pointer-events:none; }
+    /* Calque d'architecture: l'arche, les piliers et les grilles sont devant le héros.
+       Le PNG transparent provient exactement du décor arrière, donc aucun raccord visuel. */
+    .porch-foreground { position:absolute; left:2.6506%; top:51.2144%; width:20.7229%;
+      height:35.7973%; z-index:6; display:block; object-fit:fill; pointer-events:none;
+      user-select:none; -webkit-user-drag:none; }
+    .hero { position:absolute; left:10.96%; top:67.05%; width:4.34%; height:auto;
+      z-index:5; pointer-events:none; user-select:none; -webkit-user-drag:none;
+      filter:drop-shadow(0 1px 1px #172f30a8); will-change:left,top; }
+    .hero.walking { animation:marche .115s ease-in-out infinite alternate; }
+    @keyframes marche { from { translate:0 0; } to { translate:0 -1.5px; } }
+    .start-hotspot { position:absolute; left:.95%; top:84.9%; width:20.9%; height:12.5%;
+      cursor:pointer; border:0; padding:0; background:transparent; z-index:8; border-radius:18px; }
+    .start-hotspot:focus-visible { outline:4px solid #fff3a3; outline-offset:3px; }
+    .start-hotspot:hover:not(:disabled) { background:#fff2; box-shadow:inset 0 0 20px #fff6; }
+    .start-hotspot:active:not(:disabled) { background:#0002; }
+    .start-hotspot:disabled { cursor:progress; }
+    /* Dès le début de la quête, le bouton et son illustration disparaissent. */
+    .start-hotspot[hidden], .mobile-start[hidden] { display:none!important; }
+    .version { position:absolute; right:10px; bottom:10px; border-radius:99px;
+      font-size:clamp(9px,1vw,13px); padding:5px 11px; color:#fff4da;
+      border:1px solid #dfba77; background:#122440df; box-shadow:0 2px 5px #0004; z-index:7; }
+
+    /* Halte au premier cercle : parchemin de chevalerie à droite du héros.
+       Le personnage reste entièrement visible dans la scène. */
+    .oath {
+      position:absolute; left:32%; top:26%; width:29.5%; z-index:10;
+      padding:clamp(8px,1.1vw,17px) clamp(9px,1.35vw,20px);
+      color:#392c21; background:linear-gradient(135deg,#fff5da 0%,#f3e2b9 65%,#e6cfa1 100%);
+      border:3px solid #a87537; border-radius:16px 16px 21px 21px;
+      box-shadow:inset 0 0 0 2px #f9e6bc,0 10px 24px #111b24ae;
+      text-align:center; transform-origin:0% 56%; animation:unfurl .32s ease-out both;
+    }
+    .oath[hidden]{display:none}
+    .oath:after{content:"";position:absolute;top:56%;left:-18px;bottom:auto;
+      border-width:15px 17px 15px 0;border-style:solid;
+      border-color:transparent #a87537 transparent transparent;filter:drop-shadow(-3px 2px 2px #0004)}
+    .oath h2{margin:0 0 .34em; font:bold clamp(13px,1.75vw,27px) Georgia,serif;color:#603b1e;line-height:1.05}
+    .oath p{font-size:clamp(10px,1.18vw,17px);line-height:1.3;margin:.4em 0}
+    .oath .seal{font-weight:bold;color:#8d3d2b;letter-spacing:.03em}
+    .oath button{margin-top:6px;border:2px solid #a87937;background:linear-gradient(#263d64,#122642);
+      color:#ffe5a9;border-radius:10px;padding:7px 12px;
+      font:700 clamp(10px,1.2vw,16px) Georgia,serif;cursor:pointer;box-shadow:0 3px 5px #0003}
+    .oath button:hover{background:#315a82}
+    .oath button:focus-visible{outline:3px solid #b76d24;outline-offset:3px}
+    .oath .crest{display:block;font-size:clamp(13px,1.5vw,22px);color:#a87a32}
+    @keyframes unfurl {from{opacity:0;transform:scale(.92) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    @media(max-width:700px){
+      /* Le texte doit rester lisible sur smartphone, même lorsque la carte est petite. */
+      .oath{position:fixed;left:auto;right:3vw;top:auto;bottom:calc(78px + env(safe-area-inset-bottom,0px));
+        width:min(93vw,390px);max-height:62dvh;overflow:auto;padding:15px;z-index:30;
+        animation:none;transform:none;border-radius:15px}
+      .oath:after{display:none}
+      .oath h2{font-size:23px}
+      .oath p{font-size:15px;line-height:1.45}
+      .oath .crest{font-size:20px}
+      .oath button{font-size:16px;padding:12px 15px;min-height:44px}
+
+    }
+    @media(max-width:700px) and (orientation:portrait){
+      body:has(.oath:not([hidden])){justify-content:flex-start}
+      body:has(.oath:not([hidden])) .scene-area{align-self:stretch;}
+      .oath{top:calc(57.05vw + 18px);bottom:auto;left:3vw;right:3vw;
+        width:94vw;max-height:calc(100dvh - 57.05vw - 108px);}
+    }
+    @media(prefers-reduced-motion:reduce){.oath{animation:none}}
+
+    .arrival { position:absolute; top:45%; left:25%; z-index:9; border:2px solid #f4d088;
+      border-radius:12px; background:#173451ee; color:#ffe7b4;
+      font:700 clamp(11px,1.2vw,17px) system-ui,sans-serif; padding:8px 12px;
+      max-width:28%; box-shadow:0 4px 15px #0005; }
+    .arrival[hidden] { display:none; }
+    .toolbar { display:flex; flex:0 0 auto; justify-content:center; align-items:center; flex-wrap:wrap;
+      gap:8px; padding:8px 12px calc(9px + env(safe-area-inset-bottom, 0px));
+      font-size:12px; color:#cfc6b7; background:#101c2d; }
+    .toolbar button { background:#263c58; color:#fff0d0; border:1px solid #aa8b59;
+      padding:9px 15px; font:600 13px system-ui; border-radius:9px; cursor:pointer; }
+    .toolbar button:hover { background:#345376; }
+    .toolbar .detail { max-width:690px; line-height:1.35; text-align:center; }
+    .toolbar .secondary { opacity:.86; }
+    .toolbar .zoom-button[aria-pressed="true"] { background:#266f68; border-color:#f1d795; }
+    .mobile-start { display:none; }
+    @media(max-width:700px) { .toolbar button.mobile-start { display:inline-block; background:#17509a; min-height:44px; } }
+    @media(max-width:700px) {
+      .scene-area { padding:4px; }
+      .scene-viewport { border-width:1px; }
+      .toolbar { padding:7px 8px calc(8px + env(safe-area-inset-bottom, 0px)); }
+      .toolbar .detail { width:100%; font-size:11px; line-height:1.2; }
+      .toolbar button { min-height:42px; padding:9px 11px; }
+      .version { bottom:3px; right:3px; padding:3px 7px; }
+      .arrival { top:38%; left:21%; padding:4px 6px; max-width:50%; font-size:10px; }
+      .start-hotspot { min-height:26px; }
+    }
+    @media(max-width:700px) and (orientation:portrait) {
+      /* Sur téléphone vertical, carte et commandes restent regroupées au centre. */
+      body { justify-content:center; }
+      .scene-area { flex:0 0 auto; height:min(calc(57.05vw + 8px),calc(100dvh - 180px)); }
+    }
+    @media(max-height:430px) and (orientation:landscape) {
+      .toolbar { padding:4px 8px; }
+      .toolbar button { padding:5px 9px; min-height:32px; }
+      .toolbar .detail { font-size:10px; max-width:330px; }
+    }
+    @media(prefers-reduced-motion:reduce) { .hero.walking { animation:none; } }
+
+    /* v0.3 — adaptation fidèle de la vue d'exercice d'Activités mentales. */
+    .arrival{left:24%;top:29%;width:23%;max-width:280px;display:flex;flex-direction:column;gap:6px;text-align:center;}
+    .arrival-heading{font-size:clamp(10px,1.1vw,15px);color:#ffe0a4}
+    .arrival strong{font-size:clamp(12px,1.4vw,19px);line-height:1.15}
+    .arrival small{font-size:clamp(9px,1vw,12px);font-weight:500}
+    .arrival-action{margin-top:7px;border:2px solid #e3b15e;background:linear-gradient(180deg,#2e699e,#153c6c);color:#fff8dc;
+      padding:8px;border-radius:9px;font:700 clamp(11px,1.1vw,15px) Georgia,serif;cursor:pointer;box-shadow:0 2px 8px #0007}
+    .arrival-action:hover{filter:brightness(1.15)}
+    .arrival-action:focus-visible{outline:3px solid #ffe08a;outline-offset:2px}
+    .quest-done{position:absolute;left:97.29%;top:32.26%;transform:translate(-50%,-50%);z-index:9;display:grid;place-items:center;width:1.85%;aspect-ratio:1;
+      color:#fff;font-weight:900;border-radius:50%;background:#2d9d57;border:2px solid #fff7ca;box-shadow:0 1px 7px #1118}
+    .quest-done[hidden],.map-counter[hidden]{display:none}
+    .map-counter{position:absolute;left:68.75%;top:10.92%;width:16.4%;background:#0c223b;color:#eee4cd;font:600 clamp(7px,.95vw,15px) Georgia,serif;
+      text-align:left;z-index:9}
+    .quiz-screen[hidden],.quiz-results[hidden],.quiz-questions[hidden]{display:none!important}
+    .quiz-screen{position:fixed;inset:0;z-index:80;overflow-y:auto;overscroll-behavior:contain;
+      background:linear-gradient(150deg,#e6f0f8,#f3f7fb 52%,#e9f2fa);color:#14253d;font:500 16px system-ui,sans-serif;color-scheme:light}
+    .quiz-header{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:12px;
+      background:#0b2b50;color:white;border-bottom:3px solid #f68b1f;padding:14px clamp(14px,3vw,38px);box-shadow:0 4px 15px #102b3c26}
+    .quiz-brand{display:flex;align-items:center;gap:10px}.quiz-brand strong{font-size:19px;font-weight:850;display:block}
+    .quiz-brand small{display:block;font-size:11px;color:#dae7f5}.quiz-logo{background:#fa8b18;color:white;border-radius:10px;
+      width:36px;height:36px;display:grid;place-items:center;font-size:25px}.quiz-stage-label{color:#f5d294;font:700 14px Georgia,serif}
+    .quiz-content{width:min(430px,94%);margin:0 auto;padding:16px 0 36px}
+    .quiz-back{padding:8px 12px;margin:0 0 12px;border:1px solid #d2dde8;border-radius:10px;background:white;
+      color:#465969;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 3px 8px #0012}
+    .quiz-summary-head{position:relative;background:#fff;border:1px solid #dae2eb;border-radius:16px;padding:12px 15px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:8px;box-shadow:0 3px 8px #0001}
+    .quiz-title-wrap{display:flex;align-items:center;gap:8px;min-width:0}
+    .quiz-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:8px;color:#2056d5;background:#e8efff;font-size:20px;font-weight:800}
+    .quiz-title-wrap small{display:block;font-size:10px;letter-spacing:.07em;color:#60758c;font-weight:800}
+    .quiz-title-wrap strong{display:block;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .quiz-score{background:#e8f9eb;border:1px solid #c5edce;border-radius:100px;padding:5px 11px;color:#188249;font-size:14px;font-weight:850}
+    .quiz-progress{position:absolute;left:15px;right:15px;bottom:9px;height:6px;background:#e3e9f0;border-radius:30px;overflow:hidden}
+    .quiz-progress>div{height:100%;width:0;background:linear-gradient(90deg,#2455e8,#70a2ff);transition:width .25s}
+    .quiz-card{position:relative;margin-top:15px;background:#fff;border:1px solid #dce4ef;border-radius:17px;
+      box-shadow:0 6px 18px #00000011;padding:23px 17px 17px;display:flex;flex-direction:column;align-items:center;gap:18px;overflow:hidden}
+    .quiz-card:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:#2c5be8}
+    .timer-ring{position:relative;width:60px;height:60px}.timer-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+    .timer-back{fill:none;stroke:#dce2ea;stroke-width:6}.timer-front{fill:none;stroke:#2558ed;stroke-width:6;stroke-linecap:round;
+      stroke-dasharray:169.646;stroke-dashoffset:0;transition:stroke-dashoffset .95s linear,stroke .2s}
+    .timer-ring span{position:absolute;inset:0;display:grid;place-items:center;font-size:19px;font-weight:850;color:#1c3d86;font-variant-numeric:tabular-nums}
+    .quiz-operation{font-family:Impact,'Arial Narrow',system-ui,sans-serif;font-weight:850;font-stretch:condensed;
+      letter-spacing:.5px;font-size:clamp(42px,8vw,61px);text-align:center;line-height:1.2;white-space:nowrap;color:#12223d}
+    .quiz-answer-form{width:100%;display:flex;align-items:center;flex-direction:column;gap:17px}
+    #quizAnswer{width:142px;text-align:center;padding:9px;background:#fbfcff;border:2px solid #d2dbea;
+      border-radius:13px;font-size:31px;font-weight:800;color:#1a2b46;outline:none;appearance:textfield;-moz-appearance:textfield}
+    #quizAnswer::-webkit-inner-spin-button,#quizAnswer::-webkit-outer-spin-button{appearance:none;margin:0}
+    #quizAnswer:focus{border-color:#2d62ea;box-shadow:0 0 0 4px #2255ec24;background:#fff}
+    #quizAnswer.good{border-color:#32a663;background:#ebffef;color:#167d40}
+    #quizAnswer.bad{border-color:#d34e4e;background:#fff1f1;color:#a43232}
+    .quiz-feedback{min-height:22px;font-size:14px;font-weight:800;text-align:center}
+    .quiz-feedback.good{color:#128049}.quiz-feedback.bad{color:#cc3e36}
+    .quiz-submit{background:#2154e7;color:white;font:800 15px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.04em;
+      width:100%;padding:14px;border:0;border-radius:12px;box-shadow:0 4px 13px #204be640;cursor:pointer}
+    .quiz-submit:hover:not(:disabled){filter:brightness(1.05)}.quiz-submit:disabled{opacity:.45;cursor:default}
+    .quiz-tip{text-align:center;font-size:13px;color:#425675;font-weight:650;margin-top:17px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .quiz-results{background:white;border:1px solid #dae5ef;border-radius:17px;padding:25px 20px;margin-top:15px;text-align:center;box-shadow:0 5px 20px #0001}
+    .quiz-results h2{font-size:24px;margin:0 0 14px}.result-score{font:900 60px Impact,system-ui,sans-serif;color:#1c4fc3}
+    .quiz-results p{color:#465b6b;line-height:1.4}.quiz-results #resultMessage{font-weight:750;color:#2c5260}
+    .result-recap{margin:18px 0;max-height:240px;overflow:auto;text-align:left;border:1px solid #e2e9f0;border-radius:10px}
+    .recap-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 12px;border-bottom:1px solid #e7edf5;font-size:13px}
+    .recap-row:last-child{border-bottom:0}.recap-row .ok{color:#19894d}.recap-row .bad{color:#be433e}
+    .quiz-result-actions{display:flex;flex-direction:column;gap:9px}.quiz-result-actions button{padding:12px;border:0;border-radius:10px;font:750 14px system-ui;cursor:pointer}
+    #finishQuiz{color:white;background:#2154e7}#retryQuiz{color:#1d3c6d;background:#e9f0ff}
+    @media(max-width:700px){.quiz-stage-label{display:none}.quiz-header{padding:9px 14px}.quiz-content{padding-top:13px}
+      .arrival{top:20%;left:22%;min-width:120px;max-width:45%;width:33%;padding:5px 5px;gap:2px}
+      .arrival-heading{font-size:10px}.arrival strong{font-size:11px}.arrival small{font-size:9px}.arrival-action{padding:7px 5px}
+      .quiz-screen{font-size:15px}.quiz-card{padding:22px 13px 14px}}
+    @media(max-height:520px){.quiz-content{padding:10px 0}.quiz-card{gap:10px;padding:10px}.quiz-operation{font-size:39px}
+      .timer-ring,.timer-ring svg{width:50px;height:50px}.timer-ring span{font-size:17px}}
+    @media(prefers-reduced-motion:reduce){.quiz-progress>div,.timer-front{transition:none}}
+
+
+    /* ====================================================================
+       Version 0.3.29 - Thème retenu : Bleu royal, or et parchemin.
+       Toute la logique pédagogique 0.3 reste inchangée.
+       ==================================================================== */
+    .quiz-screen{
+      --royal:#092d70; --royal-deep:#071e4a; --royal-mid:#1254b7;
+      --antique-gold:#bb8131; --bright-gold:#efd17a; --gold-line:#d0a255;
+      --parchment:#fff1d7; --parchment-dark:#f2dfba;
+      color:#142441; color-scheme:light;
+      background:
+        radial-gradient(ellipse at 50% 0%, #cbdafa 0%, transparent 59%),
+        linear-gradient(180deg,#afc8e9 0%,#d6e3f1 39%,#f2ebd9 100%);
+      font-family:system-ui,-apple-system,sans-serif;
+      scrollbar-color:#c9a55d #f4ebda;
+      isolation:isolate;
+    }
+    .quiz-screen::before{
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+      opacity:.6;background:repeating-linear-gradient(120deg,transparent 0 120px,#fff6 121px 123px,transparent 124px 240px);
+    }
+    .quiz-skyline{position:fixed;left:0;bottom:0;width:100%;height:min(53vh,490px);pointer-events:none;z-index:-1}
+    .quiz-header{
+      min-height:104px; padding:12px clamp(15px,3.4vw,56px);
+      border-bottom:5px solid #d4a74e;
+      border-top:3px solid #dfb75f;
+      background:
+        radial-gradient(ellipse at 14% 20%,#164caa 0%,transparent 43%),
+        radial-gradient(ellipse at 85% 80%,#14427b 0%,transparent 48%),
+        linear-gradient(110deg,#041a46 0%,#0a357c 48%,#051b43 100%);
+      box-shadow:0 5px 0 #745121,0 10px 26px #001b4973,inset 0 1px 0 #ffe3a6;
+      color:#fff4d7;
+    }
+    .quiz-header::after{content:"✦";position:absolute;left:50%;bottom:-13px;transform:translateX(-50%);color:#fbe3a6;
+      text-shadow:0 1px 2px #3f2b1a;font-size:16px;pointer-events:none}
+    .quiz-brand{gap:15px;min-width:0}
+    .quiz-logo{position:relative;width:60px;height:64px;flex:0 0 60px;display:grid;place-items:center;
+      background:linear-gradient(160deg,#0b2f73,#061c42);border:2px solid #d8ab54;
+      border-radius:18px 18px 22px 22px;box-shadow:inset 0 0 0 2px #254a83,0 3px 0 #82591d,0 5px 12px #0008}
+    .quiz-logo::before{content:"✦";position:absolute;left:-9px;top:-8px;color:#ffe4a3;font-size:14px}
+    .quiz-logo svg{display:block}
+    .quiz-brand strong{font:700 clamp(25px,3.2vw,41px)/1.02 Georgia,'Times New Roman',serif;
+      color:#ffe4a7;text-shadow:0 2px 3px #020f2bc9,0 0 13px #112f61;letter-spacing:-.025em}
+    .quiz-brand small{font:500 clamp(11px,1.15vw,14px)/1.3 Georgia,serif;
+      color:#f1e3c6;margin-top:4px}
+    .quiz-stage-label{font:700 clamp(13px,1.15vw,18px) Georgia,serif;color:#ffdf9b;text-align:right}
+    .quiz-stage-label small{display:block;font-size:11px;color:#ead7b8;font-weight:normal;margin-top:3px}
+    .quiz-content{position:relative;z-index:1;width:min(540px,calc(100% - 28px));padding:24px 0 55px}
+    .quiz-back{margin-bottom:15px;background:linear-gradient(#fff6df,#f0dfbc);border:2px solid #d5ad65;
+      border-radius:10px;box-shadow:0 3px 0 #b88b4a,0 4px 8px #20375032;
+      color:#162f57;padding:10px 15px;font:750 14px Georgia,serif;transition:filter .12s}
+    .quiz-back:hover{filter:brightness(.97)}
+    .quiz-back:focus-visible,.quiz-submit:focus-visible,.quiz-result-actions button:focus-visible{
+      outline:3px solid #f5b344;outline-offset:3px}
+    .quiz-summary-head{
+      min-height:93px;
+      border:2px solid #cfa254;border-radius:17px;padding:18px 20px 25px;
+      background:radial-gradient(circle at 100% 0%,#fffaf1,#fff0d3 72%,#e9cea1);
+      box-shadow:inset 0 0 0 3px #fff9ee,0 5px 0 #a97931,0 11px 24px #1635582d;
+    }
+    .quiz-summary-head::before,.quiz-summary-head::after{
+      position:absolute;top:0;color:#a47932;font-size:20px;line-height:1;pointer-events:none;
+    }
+    .quiz-summary-head::before{content:"❧";left:8px}
+    .quiz-summary-head::after{content:"❧";right:8px;transform:scaleX(-1)}
+    .quiz-title-wrap{gap:12px}
+    .quiz-icon{width:40px;height:43px;flex:0 0 40px;border:2px solid #b58b45;border-radius:7px 7px 14px 14px;
+      color:#fce0a0;font-size:20px;text-shadow:0 1px 1px #0008;
+      background:linear-gradient(150deg,#164b9e,#061f4e 85%);box-shadow:0 2px 3px #1d1b1b44}
+    .quiz-title-wrap small{color:#695735;font-size:12px;font-weight:900}
+    .quiz-title-wrap strong{font:750 clamp(15px,2vw,20px) Georgia,serif;color:#142646;max-width:none}
+    .quiz-score{background:#e0f2cc;border:1px solid #b6d3a6;color:#23653b;
+      font-size:15px;padding:7px 12px;box-shadow:inset 0 1px 1px #fff8}
+    .quiz-progress{height:9px;background:#aebac7;left:20px;right:20px;bottom:12px;border:1px solid #8193a3;box-shadow:inset 0 1px 3px #223c4b44}
+    .quiz-progress>div{height:100%;background:linear-gradient(90deg,#0c4db3,#2978e8 70%,#6bb9ff);}
+    .quiz-card{
+      margin-top:23px;padding:30px 32px 19px;gap:21px;min-height:438px;
+      background:radial-gradient(circle at 50% 38%,#fffdf6,#fff2db 75%,#ecd8ae);
+      border:2px solid #cda05a;border-radius:20px;
+      box-shadow:inset 0 0 0 4px #fff8e7,inset 0 0 0 7px #e1c58d,0 7px 0 #97703c,0 14px 31px #152e4c4d;
+    }
+    .quiz-card::before{height:0}
+    .quiz-card::after{content:"";position:absolute;inset:10px;pointer-events:none;
+      border:1px solid #e2c58e;border-radius:13px;opacity:.75}
+    .timer-ring{width:76px;height:76px;margin-top:8px}
+    .timer-ring svg{width:76px;height:76px;top:0;left:0}
+    .timer-back{stroke:#d7d9d4;stroke-width:6.8}
+    .timer-front{stroke:#124fb4;stroke-width:6.8}
+    .timer-ring span{font:800 23px system-ui,sans-serif;color:#0a3d93}
+    .quiz-operation{font-family:Georgia,serif;font-weight:800;font-size:clamp(53px,7vw,80px);
+      letter-spacing:.015em;color:#091c43;line-height:1.25;text-shadow:0 2px 0 #fff6}
+    .quiz-answer-form{gap:18px;position:relative;z-index:2}
+    #quizAnswer{width:178px;min-height:78px;border-radius:14px;border:3px solid #0c4da9;
+      background:linear-gradient(#fffefa,#fff5e2);color:#112a4d;
+      font:650 36px Georgia,serif;box-shadow:0 0 0 3px #ecd4a2,0 5px 8px #21364b23;
+      caret-color:#123e8b}
+    #quizAnswer:focus{border-color:#164eab;box-shadow:0 0 0 4px #f0d384,0 5px 15px #104db631}
+    .quiz-feedback{min-height:22px;font-weight:800;color:#3d4354}
+    .quiz-submit{
+      position:relative;width:100%;max-width:470px;min-height:66px;
+      border:3px solid #e3b656;border-radius:12px;
+      background:linear-gradient(180deg,#1760c4 0%,#0b398d 38%,#051e58 100%);
+      color:#fff5d8;letter-spacing:.07em;
+      font:800 clamp(19px,2vw,26px) Georgia,serif;
+      text-shadow:0 2px 2px #06172c;
+      box-shadow:inset 0 0 0 2px #122c64,inset 0 2px 0 #fff7d17d,0 5px 0 #8f6229,0 9px 15px #09194050;
+      transition:transform .11s,filter .11s;
+    }
+    .quiz-submit:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}
+    .quiz-submit:active:not(:disabled){transform:translateY(2px);box-shadow:inset 0 0 0 2px #122c64,0 2px 0 #8f6229}
+    .btn-laurel{display:inline-block;margin:0 15px;color:#f7ca68;font-size:29px;vertical-align:-.07em}
+    .btn-laurel:last-child{transform:scaleX(-1)}
+    .quiz-tip{font:600 14px/1.5 Georgia,serif;color:#163556;text-align:center;
+      margin-top:25px;padding:7px 13px;background:#fff4de9c;border:1px solid #e0c58d;border-radius:99px}
+    .quiz-results{background:linear-gradient(155deg,#fff7e7,#f1dfbc);border:3px solid #c8984c;
+      box-shadow:inset 0 0 0 3px #fffaf1,0 7px 0 #936a39,0 14px 30px #0a1b3450;
+      padding:31px 28px;border-radius:19px}
+    .quiz-results h2{color:#162e59;font:750 28px Georgia,serif}
+    .result-score{color:#0d4da5;font-family:Georgia,serif}
+    .quiz-results p{color:#34404b}
+    .quiz-results #resultMessage{color:#254365}
+    .result-recap{border:1px solid #cbad78;background:#fff7e7}
+    .recap-row{border-bottom:1px solid #e2ccaa}
+    #finishQuiz{background:linear-gradient(#185dc0,#092e73);border:2px solid #dbb264;color:#fff3d7;
+      font:700 15px Georgia,serif;min-height:48px}
+    #retryQuiz{background:#fff7e7;color:#173d7f;border:2px solid #cfb077;font:700 15px Georgia,serif;min-height:46px}
+    @media(max-width:700px){
+      .quiz-header{min-height:84px;padding:10px 14px}
+      .quiz-brand{gap:10px}
+      .quiz-logo{width:46px;height:50px;flex-basis:46px;border-radius:12px}
+      .quiz-logo svg{width:35px;height:40px}
+      .quiz-brand strong{font-size:clamp(24px,6vw,31px)}
+      .quiz-brand small{font-size:10px}
+      .quiz-content{width:min(540px,calc(100% - 26px));padding-top:20px}
+      .quiz-summary-head{min-height:83px;padding:18px 12px 25px}
+      .quiz-title-wrap strong{font-size:15px}
+      .quiz-title-wrap small{font-size:10px}
+      .quiz-icon{width:34px;height:37px;flex-basis:34px}
+      .quiz-score{font-size:13px;padding:6px 9px}
+      .quiz-card{min-height:420px;padding:24px 19px 17px;gap:17px}
+      .quiz-operation{font-size:58px}
+      .quiz-submit{min-height:62px}
+      .btn-laurel{margin:0 5px;font-size:20px}
+      .quiz-tip{font-size:12px}
+    }
+    @media(max-width:390px){
+      .quiz-brand strong{font-size:23px}.quiz-brand small{font-size:10px}
+      .quiz-card{min-height:390px;gap:13px;padding:17px 12px}
+      #quizAnswer{min-height:64px;width:154px;font-size:32px}
+      .quiz-submit{min-height:58px}
+    }
+    @media(max-height:520px){
+      .quiz-content{padding-top:10px}
+      .quiz-card{min-height:0;padding:14px 22px;gap:9px}
+      .timer-ring{margin-top:0;width:56px;height:56px}
+      .timer-ring svg{width:56px;height:56px;top:1px;left:1px}
+      .timer-ring span{font-size:18px}
+      .quiz-operation{font-size:44px;line-height:1.1}
+      #quizAnswer{min-height:55px;font-size:27px}
+      .quiz-submit{min-height:52px;font-size:19px}
+    }
+    @media(prefers-reduced-motion:reduce){.quiz-submit{transition:none}}
+
+
+    /* v0.3.29 — Cartouche de défi à droite du héros. */
+    .arrival{left:50.4%;top:27.7%;width:24.5%;max-width:360px;min-width:0;gap:clamp(3px,.5vw,8px);
+      padding:clamp(5px,.72vw,12px);box-shadow:0 9px 23px #071c3bc7;}
+    .arrival .arrival-heading{font-size:clamp(10px,.94vw,16px)}
+    .arrival strong{font-size:clamp(11px,1.1vw,19px)}
+    .arrival small{font-size:clamp(9px,.8vw,13px)}
+    .arrival .arrival-action{font-size:clamp(10px,.95vw,16px);padding:clamp(6px,.65vw,12px)}
+
+    /* v0.3.29 — Camp d'entrainement de face comme arrière-plan des exercices.
+       L'interface d'Activités mentales reste indépendante de ce fond illustré. */
+    .quiz-screen{
+      background-image:linear-gradient(90deg,rgba(7,27,57,.47),rgba(10,34,63,.31) 50%,rgba(7,27,57,.47)),
+        linear-gradient(180deg,rgba(238,231,211,.08),rgba(4,22,38,.18)),url("assets/decor-tables.png");
+      background-size:cover;
+      background-position:center 45%;
+      background-repeat:no-repeat;
+      background-attachment:local;
+    }
+    .quiz-screen::before,.quiz-skyline{display:none!important}
+    .quiz-content{width:min(550px,calc(100% - 28px));padding:clamp(10px,1.8vw,24px) 0 55px;
+      filter:drop-shadow(0 7px 13px #0c193557);}
+    .quiz-tip{background:#fff5deec;border-color:#bb9251;box-shadow:0 3px 8px #0004}
+    @media(max-width:700px){
+      .arrival{position:fixed;left:50%;right:auto;top:auto;bottom:calc(9px + env(safe-area-inset-bottom,0px));
+        transform:translateX(-50%);width:min(92vw,385px);max-width:none;min-width:0;
+        padding:12px 16px;gap:5px;z-index:40;border-radius:15px}
+      .arrival .arrival-heading{font-size:15px}
+      .arrival strong{font-size:17px}.arrival small{font-size:12px}
+      .arrival .arrival-action{font-size:15px;min-height:43px}
+      .quiz-screen{background-position:44% center}
+      .quiz-content{width:min(550px,calc(100% - 20px));padding:16px 0 40px}
+    }
+    @media(max-width:700px) and (orientation:landscape){
+      .arrival{position:absolute;transform:none;left:52%;right:auto;top:24%;bottom:auto;
+        width:25%;max-height:62%;padding:5px;gap:2px;border-radius:9px;overflow:auto}
+      .arrival .arrival-heading{font-size:10px}.arrival strong{font-size:11px}
+      .arrival small{font-size:9px}.arrival .arrival-action{font-size:10px;padding:6px;min-height:29px}
+    }
+    @media(max-height:570px) and (orientation:landscape){
+      .quiz-header{min-height:68px;padding:6px 18px}
+      .quiz-brand strong{font-size:25px}.quiz-logo{width:43px;height:47px;flex-basis:43px}
+      .quiz-logo svg{width:33px;height:37px}
+      .quiz-content{padding:8px 0 25px;width:min(500px,calc(100% - 24px))}
+      .quiz-card{gap:9px;min-height:0;padding:14px 20px}
+      .quiz-summary-head{min-height:70px;padding:10px 16px 20px}
+      .quiz-operation{font-size:45px}.quiz-submit{min-height:52px}
+      .quiz-tip{margin-top:13px}
+    }
+    @media (prefers-reduced-motion:reduce){.arrival{transition:none}}
+
+
+    /* ================================================================
+       v0.3.29 — adaptation à la HAUTEUR et à la LARGEUR de l'écran.
+       Une question doit tenir dans la zone visible, bouton Valider inclus.
+       Le bilan reste défilable car il contient les dix réponses.
+       ================================================================ */
+    .quiz-screen:not([hidden]) {
+      height:100vh;height:100dvh;
+      display:flex;flex-direction:column;
+      overflow:hidden;
+    }
+    .quiz-header {
+      position:relative;top:auto;flex:0 0 auto;
+      min-height:0;height:clamp(52px,10.5dvh,88px);
+      padding:clamp(4px,1dvh,11px) clamp(12px,2.5vw,36px);
+    }
+    .quiz-brand strong { font-size:clamp(20px,3dvh,29px); }
+    .quiz-brand small { font-size:clamp(9px,1.5dvh,12px); }
+    .quiz-logo { width:clamp(32px,6.2dvh,52px);height:clamp(36px,6.8dvh,57px);flex-basis:clamp(32px,6.2dvh,52px); }
+    .quiz-logo svg { width:100%;height:100%; }
+    .quiz-content {
+      width:min(550px,calc(100% - 24px));
+      flex:1 1 auto;min-height:0;
+      display:flex;flex-direction:column;
+      margin:0 auto;
+      padding:clamp(5px,1.2dvh,12px) 0 clamp(5px,1dvh,10px);
+      overflow:hidden;
+    }
+    .quiz-questions {
+      display:flex;flex-direction:column;flex:1 1 auto;
+      min-height:0;gap:0;
+    }
+    .quiz-back {
+      align-self:flex-start;flex:0 0 auto;
+      margin:0 0 clamp(4px,.8dvh,10px);
+      padding:clamp(4px,.9dvh,8px) 12px;
+      font-size:clamp(11px,1.6dvh,13px);
+    }
+    .quiz-summary-head {
+      flex:0 0 auto;
+      min-height:0;height:clamp(57px,11dvh,84px);
+      padding:clamp(8px,1.6dvh,14px) clamp(11px,2vw,19px) 19px;
+    }
+    .quiz-title-wrap strong {font-size:clamp(14px,2.4dvh,19px)}
+    .quiz-title-wrap small {font-size:clamp(9px,1.5dvh,12px)}
+    .quiz-icon {width:clamp(30px,5dvh,40px);height:clamp(33px,5.6dvh,43px);flex-basis:clamp(30px,5dvh,40px)}
+    .quiz-progress {bottom:9px;height:7px}
+    .quiz-card {
+      flex:1 1 auto;min-height:0;
+      margin-top:clamp(6px,1.4dvh,13px);
+      padding:clamp(7px,1.6dvh,16px) clamp(11px,2vw,26px);
+      gap:clamp(3px,.65dvh,8px);
+      justify-content:space-around;
+    }
+    .quiz-card::after {inset:7px}
+    .timer-ring {flex:0 0 auto;margin:0;width:clamp(42px,9dvh,66px);height:clamp(42px,9dvh,66px)}
+    .timer-ring svg {width:100%;height:100%;top:0;left:0}
+    .timer-ring span {font-size:clamp(17px,2.8dvh,23px)}
+    .quiz-operation {
+      flex:0 0 auto;
+      font-size:clamp(35px,8dvh,72px);
+      line-height:1.08;
+    }
+    .quiz-answer-form {flex:0 0 auto;gap:clamp(2px,.65dvh,8px)}
+    #quizAnswer {
+      width:clamp(128px,20vw,178px);
+      min-height:0;height:clamp(44px,8.2dvh,67px);
+      padding:4px 9px;
+      font-size:clamp(23px,4dvh,34px);
+    }
+    .quiz-feedback {min-height:clamp(14px,2.4dvh,21px);font-size:clamp(11px,1.8dvh,14px);line-height:1.2}
+    .quiz-submit {
+      min-height:0;height:clamp(42px,7.9dvh,61px);
+      padding:5px 9px;
+      font-size:clamp(16px,3.1dvh,23px);
+    }
+    .btn-laurel {font-size:clamp(14px,3dvh,23px);margin:0 clamp(3px,1.2vw,12px)}
+    .quiz-tip {
+      margin:clamp(4px,1dvh,11px) 0 0;
+      padding:clamp(2px,.6dvh,6px) 9px;
+      font-size:clamp(10px,1.65dvh,13px);
+      flex:0 0 auto;
+    }
+    /* Le bilan contient un récapitulatif : il doit rester défilable sans cacher les actions. */
+    .quiz-content:has(.quiz-results:not([hidden])) {overflow-y:auto;display:block;}
+    .quiz-results {margin-top:0;padding:clamp(12px,2dvh,24px) 20px}
+    @media (max-height:570px) {
+      .quiz-header {height:clamp(46px,11dvh,62px);border-bottom-width:3px}
+      .quiz-content {padding:4px 0}
+      .quiz-back {margin-bottom:3px;padding:4px 10px}
+      .quiz-summary-head {height:clamp(50px,12dvh,68px);padding:5px 12px 15px}
+      .quiz-card {margin-top:5px;padding:6px 11px;gap:2px;border-radius:13px}
+      .quiz-card::after {inset:5px}
+      .quiz-tip {margin-top:3px;padding:2px 8px}
+      .timer-ring {width:clamp(36px,9dvh,48px);height:clamp(36px,9dvh,48px)}
+      .quiz-operation {font-size:clamp(28px,9dvh,48px)}
+      #quizAnswer {height:clamp(34px,9dvh,46px);width:130px;font-size:26px}
+      .quiz-submit {height:clamp(36px,9dvh,49px)}
+      .quiz-answer-form {gap:1px}
+      .quiz-feedback {min-height:14px;font-size:11px}
+      .btn-laurel {font-size:15px}
+    }
+    @media (max-height:410px) and (orientation:landscape) {
+      .quiz-stage-label{display:none}
+      .quiz-tip{font-size:10px;line-height:1.1}
+      .quiz-score {padding:3px 8px;font-size:12px}
+    }
+    @media(max-width:700px){
+      .quiz-header {padding-left:10px;padding-right:10px}
+      .quiz-content {width:min(550px,calc(100% - 14px))}
+      .quiz-summary-head {padding-left:10px;padding-right:10px}
+      .quiz-card {padding-left:10px;padding-right:10px}
+    }
+
+
+    /* v0.3.29 — Écran de transition « Tables de multiplication ».
+       L'illustration est un décor, les zones actives sont de vrais boutons HTML. */
+    .trial-transition[hidden] {display:none!important}
+    .trial-transition {position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;
+      background:#08192e;color:#fff3d1;isolation:isolate;animation:fadeTrial .55s ease-out}
+    @keyframes fadeTrial{from{opacity:0}to{opacity:1}}
+    .transition-area{flex:1 1 auto;min-height:0;width:100%;display:flex;justify-content:center;align-items:center;
+      overflow:hidden;padding:4px}
+    .transition-area.zoomed{justify-content:flex-start;align-items:flex-start;overflow:auto;
+      -webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+    .transition-viewport{position:relative;flex:none;width:100%;aspect-ratio:1672/941;overflow:hidden;
+      background:#11213a;border:1px solid #ac843d;box-shadow:0 8px 40px #0009}
+    .transition-image{display:block;width:100%;height:100%;object-fit:contain;
+      pointer-events:none;-webkit-user-drag:none;user-select:none}
+    .transition-hit{position:absolute;border:0;border-radius:11px;background:transparent;padding:0;
+      cursor:pointer;z-index:4;touch-action:manipulation}
+    .transition-hit:hover{box-shadow:inset 0 0 0 3px #fff9,0 0 21px #ffd47177;background:#ffffff13}
+    .transition-hit:focus-visible{outline:4px solid #ffe58b;outline-offset:2px;background:#fff2}
+    .transition-start{left:52%;top:57.9%;width:23%;height:8.4%}
+    .transition-fullscreen{left:10.6%;top:88.85%;width:13.6%;height:7.8%}
+    .transition-zoom{left:25%;top:88.85%;width:16.5%;height:7.8%}
+    .transition-back{left:42%;top:88.85%;width:16.5%;height:7.8%}
+    .transition-replay{left:59.1%;top:88.85%;width:16.7%;height:7.8%}
+    .transition-version{position:absolute;right:1.4%;bottom:2.6%;width:20%;height:7.5%;
+      background:#081e38;color:#fff1c9;display:flex;align-items:center;justify-content:center;
+      border-left:2px solid #d6a252;font:700 clamp(8px,1vw,16px) Georgia,serif;z-index:2}
+    .transition-mobile-actions{display:none;flex:0 0 auto;gap:8px;justify-content:center;align-items:center;
+      padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));background:#0a1d35;
+      border-top:2px solid #cda05e}
+    .transition-mobile-actions button{min-height:44px;padding:9px 14px;border-radius:10px;
+      font:700 15px Georgia,serif;cursor:pointer;border:2px solid #d7a653;background:#12386f;color:#fff0ce}
+    .transition-mobile-actions .primary{background:linear-gradient(#1667d2,#062c75);flex:1;max-width:290px}
+    .transition-recap{position:absolute;left:68%;top:8.3%;width:20.8%;height:5.6%;
+      display:none;background:#0b2541e8;font:750 clamp(9px,1.2vw,17px) Georgia,serif;
+      color:#e6f5c5;text-align:center;align-content:center;z-index:3}
+    .trial-transition.passed .transition-recap{display:block}
+    @media(max-width:800px){.transition-mobile-actions{display:flex}}
+    @media(prefers-reduced-motion:reduce){.trial-transition{animation:none}}
+
+    [hidden].next-trial,[hidden].relative-intro,[hidden].second-done{display:none!important}
+    .next-trial{position:absolute;left:37%;top:48%;z-index:12;max-width:30%;font-size:clamp(8px,1.1vw,17px)}
+    .second-done{top:40.07%;}
+    @media(min-width:701px){.oath{max-height:59%;overflow:auto}}
+    .relative-intro{display:none!important}
+    .transition-recap{left:68.1%;top:10.8%;width:20.8%;height:4%;background:#0b2541;font-size:clamp(8px,1.05vw,17px);border:0;box-shadow:none}
+    /* v0.3.29 — Bilan ajusté à l'écran ; seul le détail des réponses défile. */
+    .quiz-content:has(.quiz-results:not([hidden])) {
+      display:flex;overflow:hidden;width:min(760px,calc(100% - 24px));
+    }
+    .quiz-results:not([hidden]) {
+      flex:1 1 0;min-height:0;min-width:0;overflow:hidden;margin:0;
+      display:grid;grid-template-rows:auto auto auto auto auto minmax(0,1fr) auto;
+      gap:clamp(4px,1dvh,10px);padding:clamp(9px,1.8dvh,20px) clamp(10px,2.5vw,24px);
+    }
+    .quiz-results h2 {font-size:clamp(19px,3.7dvh,28px);line-height:1.15;margin:0;overflow-wrap:anywhere}
+    .quiz-results .result-score {font-size:clamp(34px,7.5dvh,60px);line-height:1.05}
+    .quiz-results p {font-size:clamp(12px,2dvh,16px);line-height:1.25;margin:0;overflow-wrap:anywhere}
+    .quiz-results .result-recap {
+      min-height:0;min-width:0;max-height:none;overflow:auto;overscroll-behavior:contain;
+      scrollbar-gutter:stable;margin:0;-webkit-overflow-scrolling:touch;
+    }
+    .quiz-results .recap-row {gap:10px;padding:clamp(7px,1.3dvh,12px) 10px;font-size:clamp(12px,1.9dvh,15px)}
+    .quiz-results .recap-row span {min-width:0;overflow-wrap:anywhere}
+    .quiz-results .recap-row strong {flex-shrink:0}
+    .quiz-result-actions {display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:0}
+    .quiz-result-actions button {min-width:0;min-height:44px;margin:0;padding:8px;font-size:clamp(12px,1.9dvh,15px);line-height:1.2;white-space:normal;overflow-wrap:anywhere}
+    @media(max-width:420px) {
+      .quiz-content:has(.quiz-results:not([hidden])) {width:calc(100% - 12px)}
+      .quiz-results:not([hidden]) {padding:10px 9px;gap:6px;border-radius:16px}
+      .quiz-results h2 {font-size:clamp(18px,5vw,23px)}
+      .quiz-result-actions {gap:6px}
+    }
+    @media(max-height:500px) and (min-width:600px) {
+      .quiz-content:has(.quiz-results:not([hidden])) {width:min(900px,calc(100% - 20px))}
+      .quiz-results:not([hidden]) {grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:auto auto auto auto minmax(0,1fr) auto;gap:5px 16px;padding:9px 12px}
+      .quiz-results h2 {grid-column:1;grid-row:1;font-size:20px}
+      .quiz-results .result-score {grid-column:1;grid-row:2;font-size:36px}
+      #resultPercent {grid-column:1;grid-row:3}
+      #resultMessage {grid-column:1;grid-row:4}
+      #quizTotalTime {grid-column:1;grid-row:5;align-self:start}
+      .quiz-results .result-recap {grid-column:2;grid-row:1 / 6}
+      .quiz-result-actions {grid-column:1 / 3;grid-row:6}
+    }
+
+    /* Le parchemin entier tient dans l'espace disponible, sans défilement interne. */
+    .oath{max-height:none!important;overflow:visible!important;transform-origin:top left;animation:none}
+    @media(max-width:700px) and (orientation:landscape){
+      .oath{top:8px;bottom:auto;left:3vw;right:auto}
+    }
+    .quest-done{border-width:clamp(1px,.12vw,2px);line-height:1}
+    .quest-done svg{display:block;width:76%;height:76%}
+
+    .quest-progress{position:absolute;z-index:9;overflow:hidden;box-sizing:border-box;border:2px solid #e8d9a9;border-radius:999px;background:#0b263e;box-shadow:0 1px 3px #0008}
+    .quest-progress-fill{display:block;height:100%;width:0;background:linear-gradient(#9bfa47,#39af18 60%,#237b12);border-radius:999px;transition:width .4s ease}
+    .map-progress{left:69.6%;top:8%;width:20.7%;height:2.5%}
+    .transition-progress{left:68%;top:7.35%;width:20.2%;height:2.65%}
+    .map-counter{left:69.8%;top:11.05%;width:20%;height:3.4%;display:flex;align-items:center;background:#0c223b;line-height:1;font-size:clamp(6px,.95vw,15px)}
+    .transition-recap,.trial-transition.passed .transition-recap{display:flex!important;align-items:center;justify-content:flex-start;left:68.1%;top:10.8%;width:20.8%;height:4%;line-height:1}
+    .next-trial{left:39%;top:51%}
+    .arrival .next-trial{position:static;max-width:none;width:100%;align-self:stretch}
+    @media(max-width:700px) and (orientation:portrait){.arrival{left:50%!important;top:auto!important;bottom:9px}}
+    @media(max-width:700px) and (orientation:landscape){.arrival{left:52%!important;top:24%!important}}
+
+    .skip-completed[hidden]{display:none!important}
+    
+    .transition-mobile-actions{flex-wrap:wrap}
+    .transition-mobile-actions .skip-completed{background:linear-gradient(#326d48,#143e29);border-color:#e2be6b;flex:1 1 170px;max-width:290px}
+    @media(max-width:520px){.transition-mobile-actions .primary,.transition-mobile-actions .skip-completed{flex:1 1 42%;max-width:none;font-size:13px}.transition-mobile-actions #transitionBackMobile{flex:0 0 auto}}
+
+    .transition-choice-buttons{position:absolute;left:52.2%;top:58.2%;width:23.4%;height:9%;z-index:5}
+    .transition-choice-buttons .transition-start{left:0;top:0;width:100%;height:100%}
+    .trial-transition.completed .transition-choice-buttons{display:grid;grid-template-columns:1fr;gap:clamp(2px,.4vw,7px);padding:clamp(2px,.35vw,5px);border:2px solid #e9b855;border-radius:12px;background:#09284e;box-shadow:0 2px 5px #0008,inset 0 0 0 1px #fce0a0}
+    .trial-transition.completed.can-skip .transition-choice-buttons{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .trial-transition.completed .transition-choice-buttons button{position:static;display:flex;align-items:center;justify-content:center;min-width:0;width:100%;height:100%;margin:0;padding:2px;border:1px solid #e5bc6d;border-radius:7px;color:#fff3cf;font:700 clamp(7px,1.25vw,22px) Georgia,serif;line-height:1.1;cursor:pointer;box-shadow:inset 0 1px 3px #ffffff20}
+    .trial-transition.completed .transition-choice-buttons .transition-start{background:linear-gradient(#245b9b,#0c3262)}
+    .transition-choice-buttons .skip-completed{background:linear-gradient(#356a4b,#153e2a)}
+    .transition-choice-buttons button:hover{filter:brightness(1.15)}
+    .transition-choice-buttons button:focus-visible{outline:3px solid #fff0ac;outline-offset:1px}
+    @media(max-width:800px){.transition-mobile-actions .primary,.transition-mobile-actions .skip-completed{flex:1 1 90px;max-width:240px}}
+    @media(max-width:520px){.trial-transition.completed .transition-choice-buttons{gap:2px;padding:2px;border-width:1px;border-radius:6px}.trial-transition.completed .transition-choice-buttons button{font-size:clamp(6px,1.7vw,9px);border-radius:4px}.transition-mobile-actions .primary,.transition-mobile-actions .skip-completed{flex:1 1 85px;max-width:none}}
+    .route-layer{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+
+    /* Le bouton est indépendant du fond : sa disparition révèle le même décor. */
+    .start-hotspot{container-type:inline-size;display:flex;align-items:center;justify-content:center;gap:4%;padding:3px 5px;border:clamp(1px,.18vw,3px) solid #efba50;border-radius:clamp(7px,1.2vw,18px);background:linear-gradient(#174c91,#062452 65%,#0b3671);box-shadow:inset 0 0 0 2px #8f622f,0 2px 5px #0007;color:#fff0cf;font-family:Georgia,serif;font-weight:700;text-shadow:0 2px 2px #0009}
+    .start-hotspot .start-icon{display:grid;place-items:center;width:20%;aspect-ratio:1;flex:0 0 20%;border:2px solid #edc772;border-radius:50%;font-size:clamp(9px,9cqw,28px);background:linear-gradient(#245e9a,#092b59);box-shadow:inset 0 0 0 2px #a57436}
+    .start-hotspot .start-label{font-size:clamp(8px,10cqw,32px);line-height:1.04;white-space:nowrap}
+    .start-hotspot:hover:not(:disabled){background:linear-gradient(#2466b4,#103d7d);filter:brightness(1.1)}
+    .porch-foreground{clip-path:inset(0 0 4% 0)}
+
+    .third-done{top:47.89%}
+    .quiz-operation .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.72em;line-height:1.1;min-width:1.2em}
+    .quiz-operation .fr .n{border-bottom:2px solid currentColor;padding:0 .16em .08em}
+    .quiz-operation .fr .d{padding:.08em .16em 0}
+    .quiz-operation .blk{color:#ad6815}
+    .quiz-operation.fraction-question{white-space:nowrap}
+    @media(max-height:450px) and (orientation:landscape){
+      .fractions-quiz .quiz-card{display:grid;grid-template-columns:48px minmax(0,1fr);grid-template-rows:auto 1fr;gap:2px 8px;align-content:center}
+      .fractions-quiz .timer-ring{grid-column:1;grid-row:1;justify-self:center}
+      .fractions-quiz .quiz-operation{grid-column:2;grid-row:1;justify-self:center;font-size:clamp(22px,7dvh,32px)}
+      .fractions-quiz .quiz-answer-form{grid-column:1 / 3;grid-row:2;justify-self:center}
+    }
+
+    .level-two-screen[hidden],.level-two-controls button[hidden]{display:none!important}
+    .level-two-screen{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;height:100dvh;background:#07182c;color:#fff0c9;overflow:hidden}
+    .level-two-heading{flex:0 0 auto;text-align:center;padding:clamp(6px,1.4dvh,14px) 10px;background:linear-gradient(#102f56,#0a203c);border-bottom:2px solid #cda45c}
+    .level-two-heading h1{font:700 clamp(19px,3.8dvh,34px) Georgia,serif;margin:0;color:#ffe3a0}
+    .level-two-heading p{font:500 clamp(11px,1.8dvh,16px) Georgia,serif;margin:4px 0 0}
+    .level-two-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px;overflow:hidden}
+    .level-two-scene{position:relative;flex:none;aspect-ratio:1672/941;overflow:hidden;isolation:isolate;border:1px solid #b9924d;background:#142b43}
+    .level-two-background{display:block;width:100%;height:100%;object-fit:fill;user-select:none;pointer-events:none}
+    .gate-opening{position:absolute;left:40.3%;top:15.6%;width:19.4%;height:46%;z-index:2;perspective:1200px;overflow:hidden;border-radius:45% 45% 0 0 / 18% 18% 0 0;box-shadow:inset 0 0 12px #000b}
+    .gate-door{position:absolute;top:0;width:50.2%;height:100%;box-sizing:border-box;border:clamp(1px,.15vw,3px) solid #d4a557;backface-visibility:hidden;background:repeating-linear-gradient(90deg,transparent 0 13%,#0002 13.5% 14%,transparent 14.5% 28%),linear-gradient(90deg,#0b2649,#174778 45%,#0b2648);box-shadow:inset 0 0 16px #0008;transition:transform 2.7s cubic-bezier(.25,.1,.25,1)}
+    .gate-door-left{left:0;transform-origin:left center;border-radius:65% 0 0 0 / 19% 0 0 0}
+    .gate-door-right{right:0;transform-origin:right center;border-radius:0 65% 0 0 / 0 19% 0 0}
+    .door-inset{position:absolute;inset:15% 12% 9%;border:2px solid #c99b50;box-shadow:inset 0 0 8px #000a,0 0 3px #ffe0a433;border-radius:20% 20% 4px 4px / 8% 8% 4px 4px}
+    .gate-emblem{position:absolute;left:23%;top:35%;width:54%;height:22%;display:grid;place-items:center;background:linear-gradient(135deg,#edc36d,#987028);color:#fff1bf;clip-path:polygon(50% 0,94% 16%,85% 68%,50% 100%,15% 68%,6% 16%);font-size:clamp(12px,4vw,58px);text-shadow:0 2px 3px #4f321b}
+    .gate-handle{position:absolute;top:61%;width:9%;height:8%;border:clamp(1px,.15vw,3px) solid #e2b25e;border-radius:50%;box-shadow:0 2px 4px #0009}
+    .gate-door-left .gate-handle{right:9%}.gate-door-right .gate-handle{left:9%}
+    .gate-open .gate-door-left{transform:rotateY(-105deg)}.gate-open .gate-door-right{transform:rotateY(105deg)}
+    .level-two-walker{position:absolute;left:44.5%;top:70%;width:11%;height:20.75%;z-index:4;transform-origin:50% 100%;filter:drop-shadow(0 5px 4px #06101b99);pointer-events:none}
+    .level-two-walker img{display:block;width:100%;height:100%;object-fit:contain;user-select:none}
+    .level-two-scene.playing .level-two-walker{animation:bridgeApproach 7s linear forwards}
+    .level-two-scene.arrived .level-two-walker{top:43%;transform:scale(.6)}
+    @keyframes bridgeApproach{from{top:70%;transform:scale(1)}to{top:43%;transform:scale(.6)}}
+    .level-two-controls{flex:0 0 auto;text-align:center;padding:clamp(6px,1.2dvh,12px) 10px calc(8px + env(safe-area-inset-bottom,0px));border-top:2px solid #bb9554;background:#0b213d}
+    .level-two-controls p{font:600 clamp(11px,1.9dvh,16px) Georgia,serif;margin:0 0 7px;line-height:1.25}
+    .level-two-buttons{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+    .level-two-buttons button{min-height:40px;border:1px solid #dcb46e;border-radius:9px;padding:7px 12px;background:linear-gradient(#1b4778,#0d2c53);color:#fff0c9;font:700 clamp(11px,1.7dvh,15px) Georgia,serif;cursor:pointer}
+    .level-two-buttons button:hover{filter:brightness(1.15)}.level-two-buttons button:focus-visible{outline:3px solid #ffe2a4;outline-offset:2px}
+    @media(max-height:430px) and (orientation:landscape){.level-two-heading{padding:4px}.level-two-heading p{display:none}.level-two-controls{padding:4px 7px}.level-two-controls p{margin-bottom:4px}.level-two-buttons button{min-height:32px;padding:4px 9px}.level-two-stage{padding:3px}}
+    @media(prefers-reduced-motion:reduce){.gate-door{transition:none}.level-two-scene.playing .level-two-walker{animation:none}}
+  </style>
+</head>
+<body>
+  <main class="scene-area" id="sceneArea">
+    <div class="scene-viewport" id="scene">
+      <img class="scene-image" src="assets/carte.png"
+        alt="L’Académie des Nombres, trois épreuves reliées par des flèches lumineuses, et l'entrée au premier plan." draggable="false">
+      <svg class="route-layer" viewBox="0 0 1660 947" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="routeGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/><feFlood flood-color="#ffc400" flood-opacity=".95"/><feComposite in2="blur" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="routeTip" viewBox="0 0 34 32" refX="31" refY="16" markerWidth="34" markerHeight="32" markerUnits="userSpaceOnUse" orient="auto" overflow="visible"><path d="M1 2 31 16 1 30 8 16Z" fill="#fffce8" stroke="#ffcf3f" stroke-width="2" stroke-linejoin="round"/></marker>
+  </defs>
+  <g filter="url(#routeGlow)" stroke-linecap="butt" stroke-linejoin="round">
+    <g stroke="#ffcd28" stroke-width="15" fill="none">
+      <path d="M219 728 230 705 M240 694 Q290 656 407 621"/>
+      <path d="M448 575 458 561 M467 549 531 470"/>
+      <path d="M590 439 676 439 M700 439 810 435"/>
+      <path d="M878 462 Q908 510 948 538 M963 547 Q1010 565 1067 576"/>
+      <path d="M1090 603 Q1070 617 1055 629 Q1065 649 1086 660 M1101 669 1179 715 M1195 731 1250 781"/>
+    </g>
+    <g stroke="#fffde5" stroke-width="8" fill="none">
+      <path d="M219 728 230 705"/><path d="M240 694 Q290 656 407 621" marker-end="url(#routeTip)"/>
+      <path d="M448 575 458 561"/><path d="M467 549 531 470" marker-end="url(#routeTip)"/>
+      <path d="M590 439 676 439"/><path d="M700 439 810 435" marker-end="url(#routeTip)"/>
+      <path d="M878 462 Q908 510 948 538"/><path d="M963 547 Q1010 565 1067 576" marker-end="url(#routeTip)"/>
+      <path d="M1090 603 Q1070 617 1055 629 Q1065 649 1086 660 M1101 669 1179 715"/><path d="M1195 731 1250 781" marker-end="url(#routeTip)"/>
+    </g>
+  </g>
+  <g id="bridgeCircle" filter="url(#routeGlow)" fill="#ffe76b" aria-label="Entrée future du niveau 2">
+    <ellipse cx="1290" cy="804" rx="30" ry="17" stroke="#ffcd28" stroke-width="15"/>
+    <ellipse cx="1290" cy="804" rx="30" ry="17" stroke="#fffde5" stroke-width="8"/>
+  </g>
 </svg>
-<div class="location one" data-index="0"><div class="station"><b>① Tables de multiplication</b><small>Le camp d’entraînement</small></div><span class="beacon">✕</span></div>
-<div class="location two locked" data-index="1"><div class="station"><b>② Additions de relatifs</b><small>Le cercle des nombres</small></div><span class="beacon">±</span></div>
-<div class="location three locked" data-index="2"><div class="station"><b>③ Fractions équivalentes</b><small>La fontaine des fractions</small></div><span class="beacon">½</span></div>
-<div id="hero" class="hero" aria-label="Personnage de l'aventurier"><div class="hair"></div><div class="face">• •</div><div class="scarf"></div><div class="coat"></div><div class="feet"></div><div class="shadow"></div></div>
-<div class="guide" id="guide">Bienvenue à l’Académie ! Ton héros suit le chemin. Termine chaque défi avec 80 % de réussite pour avancer.</div>
-</section><aside class="quests"><h2>📜 Quêtes du niveau</h2><ol id="questList"></ol><p class="hint">La route est imposée : le personnage marche automatiquement après chaque réussite.</p><button id="play">Commencer le défi</button><button id="restart" class="secondary">Recommencer le parcours</button></aside></main>
-<div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="challengeTitle"><div class="panel"><button class="close" id="close" aria-label="Quitter le défi">×</button><small id="questionCounter"></small><h2 id="challengeTitle"></h2><div class="question" id="question"></div><form id="answerForm"><input id="answer" type="text" inputmode="decimal" autocomplete="off" placeholder="Ta réponse" required><button>Valider</button></form><p id="feedback" aria-live="polite"></p><p id="score"></p></div></div>
-<footer>Maths Quest — prototype des trois premières étapes • Exercices provisoires à remplacer par ceux d’Activités mentales</footer><script src="src/game.js"></script></body></html>
+
+      <img id="hero" class="hero" src="assets/personnage-original.png"
+        alt="Ton aventurier attend sous le porche de l'Académie" draggable="false">
+
+      <section class="oath" id="oath" aria-labelledby="oathTitle" aria-live="polite" hidden>
+        <span class="crest" aria-hidden="true">⚜ ✦ ⚜</span>
+        <h2 id="oathTitle">Le Serment de l’Apprenti</h2>
+        <p>Ô noble aventurier, écoute les lois de l’Académie !</p>
+        <p>Une épreuve à la fois tu affronteras. Pour ouvrir la voie suivante,
+          <strong>8 réponses justes sur 10</strong> il te faudra remporter : tel est le seuil sacré des <strong>80 %</strong>.</p>
+        <p>Le temps sera compté. Si tu trébuches, point de honte : reprends ton courage et retente l’épreuve !</p>
+        <p class="seal">Par ton savoir, que les portes s’ouvrent !</p>
+        <button id="acceptOath" type="button">⚔ En avant, vers le premier défi !</button>
+      </section>
+      <img class="porch-foreground" src="assets/porche.png" alt="" aria-hidden="true" draggable="false">
+      <button id="startQuest" type="button" class="start-hotspot"
+        aria-label="Commencer la quête et avancer jusqu’au premier cercle lumineux"
+        title="Commencer la quête"><span class="start-icon" aria-hidden="true">▶</span><span class="start-label">Commencer<br>la quête</span></button>
+      <div class="arrival" id="arrival" hidden>
+        <span class="arrival-heading">⚔ Première épreuve atteinte !</span>
+        <strong>Tables de multiplication</strong>
+        <small>10 questions · 10 secondes chacune</small>
+        <button type="button" id="startTrial" class="arrival-action">Commencer le défi</button>
+      </div>
+      <button id="nextTrial" class="arrival-action next-trial" type="button" hidden>⚔ Rejoindre les relatifs →</button>
+      <span id="questDone3" class="quest-done third-done" hidden aria-label="Troisième défi validé"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5L20 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span id="questDone2" class="quest-done second-done" hidden aria-label="Deuxième défi validé"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5L20 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span id="questDone" class="quest-done" hidden aria-label="Premier défi validé"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5L20 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="quest-progress map-progress" role="progressbar" aria-label="Défis validés" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span class="quest-progress-fill"></span></div>
+      <span id="mapCounter" class="map-counter" hidden>1 / 3 défis validés</span>
+      <div class="version">Maths Quest · version 0.3.29</div>
+    </div>
+  </main>
+  <footer class="toolbar">
+    <button id="fullscreen" type="button">⛶ Plein écran</button>
+    <button id="zoom" class="zoom-button" type="button" aria-pressed="false">⌕ Agrandir la carte</button>
+    <button id="reset" class="secondary" type="button">↺ Retour au départ</button>
+    <button id="startMobile" class="mobile-start" type="button">▶ Commencer la quête</button>
+    <span id="message" class="detail" role="status" aria-live="polite">
+      Clique sur <b>Commencer la quête</b> pour rejoindre le premier cercle et découvrir les lois de l’Académie.
+    </span>
+  </footer>
+
+  <!-- Transition narrative : carte -> camp d'entraînement vu de face -> activité.
+       Les boutons correspondent à ceux dessinés sur l'illustration, sans changer son aspect. -->
+  <section class="trial-transition" id="trialTransition" hidden
+    aria-label="Entrée du camp d’entraînement des tables de multiplication">
+    <div id="transitionArea" class="transition-area">
+      <div id="transitionViewport" class="transition-viewport">
+        <div class="relative-intro" id="relativeIntro" hidden>
+          <div class="relative-panel"><span class="relative-number">2</span><p>Deuxième épreuve</p>
+          <h1>Additions de relatifs</h1><div class="relative-example">(−7) + 12 = ?</div>
+          <p>10 questions · 10 secondes chacune</p><p>Obtiens au moins 8 bonnes réponses pour valider ce défi.</p>
+          <button type="button" id="relativeStart" class="arrival-action">▶ Commencer le défi</button>
+          <button type="button" id="relativeBack" class="arrival-action">← Retour à la carte</button></div>
+        </div>
+        <img class="transition-image" src="assets/transition-tables.jpeg"
+          alt="Le héros est devant le tableau des tables de multiplication ; une première épreuve de dix questions l’attend."
+          draggable="false">
+        <div class="quest-progress transition-progress" role="progressbar" aria-label="Défis validés" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span class="quest-progress-fill"></span></div>
+        <span class="transition-recap" id="transitionRecap" aria-live="polite">1 / 3 défis validés ✓</span>
+        <span class="transition-version">Maths Quest · v0.3.29</span>
+        <div class="transition-choice-buttons"><button id="transitionStart" class="transition-hit transition-start" type="button"
+          aria-label="Commencer le défi : Tables de multiplication" title="Commencer le défi"></button>
+          <button id="skipCompletedTrial" class="skip-completed" type="button" hidden>Passer</button></div>
+        <button id="transitionFullscreen" class="transition-hit transition-fullscreen" type="button"
+          aria-label="Afficher cette scène en plein écran" title="Plein écran"></button>
+        <button id="transitionZoom" class="transition-hit transition-zoom" type="button"
+          aria-label="Agrandir le décor du défi" aria-pressed="false" title="Agrandir le décor"></button>
+        <button id="transitionBack" class="transition-hit transition-back" type="button"
+          aria-label="Retour à la carte de l’Académie" title="Retour à la carte"></button>
+        <button id="transitionReplay" class="transition-hit transition-replay" type="button"
+          aria-label="Rejouer le trajet depuis le porche" title="Rejouer le trajet"></button>
+      </div>
+    </div>
+    <div class="transition-mobile-actions">
+      <button id="transitionBackMobile" type="button">← Carte</button>
+    </div>
+  </section>
+  <!-- Écran indépendant, directement inspiré de l'interface Activités mentales. -->
+  <section id="quizScreen" class="quiz-screen" hidden aria-label="Épreuve de tables de multiplication">
+    <svg class="quiz-skyline" viewBox="0 0 1440 450" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <g fill="#37628d" opacity=".16">
+        <path d="M0 450V258h48v-75l34-24 34 24v75h34v-115l35-21 35 21v115h42V450Z"/>
+        <path d="M280 450V328h39v-56l24-19 24 19v56h34v-88l39-28 39 28v88h31V450Z"/>
+        <path d="M894 450V309h41v-81l36-27 36 27v81h34V196l42-29 42 29v113h28V450Z"/>
+        <path d="M1166 450V264h33v-91l37-26 37 26v91h48v-119l35-25 35 25v119h49V450Z"/>
+      </g>
+      <g fill="none" stroke="#557ba3" stroke-width="3" opacity=".14"><path d="M-50 376Q200 290 520 383T1160 360T1530 376"/><path d="M-50 418Q210 350 520 418T1160 403T1530 420"/></g>
+    </svg>
+    <header class="quiz-header">
+      <div class="quiz-brand">
+        <span class="quiz-logo" aria-hidden="true"><svg viewBox="0 0 64 68" width="45" height="48" role="presentation"><path d="M32 3 57 12 55 39Q47 55 32 64 17 55 9 39L7 12Z" fill="#173d79" stroke="#f8d38c" stroke-width="3"/><path d="M32 22Q23 14 15 20V43Q25 38 32 45Q39 38 49 43V20Q40 14 32 22Z" fill="#fff3cd" stroke="#d7b36a" stroke-width="2"/><path d="M32 22V45" fill="none" stroke="#aa8246" stroke-width="2"/><path d="M18 25Q25 23 29 27M35 27Q41 23 46 25M18 31Q24 29 29 33M35 33Q41 29 46 31" fill="none" stroke="#a68a5c" stroke-width="1.5"/></svg></span>
+        <span><strong>Maths Quest</strong><small>L'Académie des Nombres · Niveau 1</small></span>
+      </div>
+      <span class="quiz-stage-label">⚜ Les bases de l'Académie <small>Version 0.3.29</small></span>
+    </header>
+    <div class="quiz-content">
+      <div id="quizQuestions" class="quiz-questions">
+        <button id="quizBack" class="quiz-back" type="button">← Retour à la carte</button>
+        <div class="quiz-summary-head">
+          <div class="quiz-title-wrap">
+            <span class="quiz-icon" aria-hidden="true">⚔</span>
+            <span><small id="questionLabel">QUESTION 1 / 10</small><strong>Tables de multiplication</strong></span>
+          </div>
+          <div class="quiz-score">✓ <span id="quizScore">0</span></div>
+          <div class="quiz-progress"><div id="quizProgressFill"></div></div>
+        </div>
+        <div id="quizCard" class="quiz-card">
+          <div class="timer-ring" role="timer" aria-label="Temps restant par question">
+            <svg width="60" height="60" viewBox="0 0 60 60" aria-hidden="true">
+              <circle class="timer-back" cx="30" cy="30" r="27"/>
+              <circle id="quizTimerArc" class="timer-front" cx="30" cy="30" r="27"/>
+            </svg>
+            <span id="quizTimerNumber">10</span>
+          </div>
+          <div class="quiz-operation" id="quizOperation" aria-live="off">3 × 4</div>
+          <form id="quizForm" class="quiz-answer-form" autocomplete="off">
+            <label class="sr-only" for="quizAnswer">Résultat de la multiplication</label>
+            <input type="number" id="quizAnswer" inputmode="numeric" step="1" placeholder="?" aria-describedby="quizFeedback" required>
+            <div id="quizFeedback" class="quiz-feedback" role="status" aria-live="polite"></div>
+            <button id="quizSubmit" class="quiz-submit" type="submit"><span class="btn-laurel" aria-hidden="true">❧</span> Valider <span class="btn-laurel" aria-hidden="true">❧</span></button>
+          </form>
+        </div>
+        <p class="quiz-tip">⚜ Obtiens au moins 8 bonnes réponses pour ouvrir la voie suivante.</p>
+      </div>
+      <div id="quizResults" class="quiz-results" hidden>
+        <h2 id="resultTitle">Bilan de l'épreuve</h2>
+        <div class="result-score" id="resultScore">8 / 10</div>
+        <p id="resultPercent"></p>
+        <p id="resultMessage"></p>
+        <p class="quiz-time-total" id="quizTotalTime"></p>
+        <div id="resultRecap" class="result-recap" tabindex="0" role="region" aria-label="Détail des dix réponses"></div>
+        <div class="quiz-result-actions">
+          <button type="button" id="retryQuiz">↻ Refaire l'épreuve</button>
+          <button type="button" id="finishQuiz">← Retour à la carte</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <template id="relativeArt"><img src="assets/transition-relatifs.png" alt="Le héros devant la sphère magique des additions de relatifs ; deuxième épreuve de dix questions."></template>
+<template id="heroAngles"><img src="assets/marche-00.png"><img src="assets/marche-01.png"><img src="assets/marche-02.png"><img src="assets/marche-03.png"><img src="assets/marche-04.png"><img src="assets/marche-05.png"><img src="assets/marche-06.png"><img src="assets/marche-07.png"><img src="assets/marche-08.png"><img src="assets/marche-09.png"><img src="assets/marche-10.png"><img src="assets/marche-11.png"><img src="assets/marche-12.png"><img src="assets/marche-13.png"><img src="assets/marche-14.png"><img src="assets/marche-15.png"><img src="assets/marche-16.png"><img src="assets/marche-17.png"><img src="assets/marche-18.png"><img src="assets/marche-19.png"><img src="assets/marche-20.png"><img src="assets/marche-21.png"><img src="assets/marche-22.png"><img src="assets/marche-23.png"><img src="assets/marche-24.png"><img src="assets/marche-25.png"><img src="assets/marche-26.png"><img src="assets/marche-27.png"><img src="assets/marche-28.png"><img src="assets/marche-29.png"><img src="assets/marche-30.png"><img src="assets/marche-31.png"></template>
+<template id="heroIdle"><img src="assets/repos-00.png"><img src="assets/repos-01.png"><img src="assets/repos-02.png"><img src="assets/repos-03.png"><img src="assets/repos-04.png"><img src="assets/repos-05.png"><img src="assets/repos-06.png"><img src="assets/repos-07.png"></template>
+<template id="fractionArt"><img src="assets/transition-fractions.png" alt="Le héros face à la fontaine des fractions équivalentes."></template>
+
+  <section id="levelTwoScreen" class="level-two-screen" hidden aria-label="Transition vers le niveau 2">
+    <header class="level-two-heading"><h1>Niveau 2</h1><p>Au-delà des portes de l’Académie</p></header>
+    <div id="levelTwoStage" class="level-two-stage">
+      <div id="levelTwoScene" class="level-two-scene">
+        <img class="level-two-background" src="assets/entree-niveau-2.png" alt="Un pont de pierre conduit à la grande porte de l’Académie." draggable="false">
+        <div class="gate-opening" aria-hidden="true"><div class="gate-door gate-door-left"><span class="door-inset"></span><span class="gate-emblem">✦</span><span class="gate-handle"></span></div><div class="gate-door gate-door-right"><span class="door-inset"></span><span class="gate-emblem">✦</span><span class="gate-handle"></span></div></div>
+        <div class="level-two-walker"><img id="levelTwoHero" alt="Le héros, vu de dos, avance vers la grande porte." draggable="false"></div>
+      </div>
+    </div>
+    <footer class="level-two-controls"><p id="levelTwoStatus" role="status" aria-live="polite">Le héros s’avance sur le pont…</p><div class="level-two-buttons"><button id="levelTwoBack" type="button">← Retour au pont</button><button id="levelTwoSkip" type="button">Passer l’animation</button><button id="levelTwoReplay" type="button" hidden>↻ Revoir la transition</button><button id="levelTwoFullscreen" type="button">⛶ Plein écran</button></div></footer>
+  </section>
+
+  <script>
+  (()=>{
+    'use strict';
+    const scene=document.getElementById('scene');
+    const sceneArea=document.getElementById('sceneArea');
+    const zoomButton=document.getElementById('zoom');
+    const ratio=1660/947;
+    let isZoomed=false;
+    function fitScene(){
+      const cs=getComputedStyle(sceneArea);
+      const width=sceneArea.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+      const height=sceneArea.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+      if(width<=0||height<=0)return;
+      const w=isZoomed?Math.max(760,width):Math.min(width,height*ratio);
+      scene.style.width=w+'px';
+      scene.style.height=(w/ratio)+'px';
+    }
+    zoomButton.addEventListener('click',()=>{
+      isZoomed=!isZoomed;
+      sceneArea.classList.toggle('zoomed',isZoomed);
+      zoomButton.setAttribute('aria-pressed',String(isZoomed));
+      zoomButton.textContent=isZoomed?'⊟ Voir toute la carte':'⌕ Agrandir la carte';
+      fitScene();
+      sceneArea.scrollLeft=0;sceneArea.scrollTop=0;
+    });
+    new ResizeObserver(fitScene).observe(sceneArea);
+    window.addEventListener('resize',fitScene);
+    if(window.visualViewport)window.visualViewport.addEventListener('resize',fitScene);
+    document.addEventListener('fullscreenchange',()=>requestAnimationFrame(fitScene));
+    fitScene();
+    const hero=document.getElementById('hero');
+    const heroAngles=Array.from(document.getElementById('heroAngles').content.querySelectorAll('img'),img=>img.src);
+    const heroIdle=Array.from(document.getElementById('heroIdle').content.querySelectorAll('img'),img=>img.src);
+    heroIdle.forEach(src=>{const frame=new Image();frame.src=src;});
+    const facingNames=['est','sud-est','sud','sud-ouest','ouest','nord-ouest','nord','nord-est'];
+    let facingFrame=0;
+    const directionArtwork=[0,1,2,3,4,7,6,5];
+    let heroFacing=6;
+    function faceHero(direction,step=1){
+      const url=heroAngles[(step%4)*8+directionArtwork[direction]];
+      heroFacing=direction;
+      hero.style.transform=step%4===3?'scaleX(-1)':'';
+      if(hero.src!==url)hero.src=url;
+      hero.dataset.facing=facingNames[direction];
+    }
+    heroAngles.forEach(src=>{const frame=new Image();frame.src=src;});
+    function settleHero(){
+      hero.style.transform='';
+      hero.src=heroIdle[heroFacing];
+      hero.dataset.facing=facingNames[heroFacing];
+    }
+    const landmarkFacing={1:6,2:5,3:7,4:1};
+    function pauseAtCircle(id,stage=null){
+      if(Object.hasOwn(landmarkFacing,stage))heroFacing=landmarkFacing[stage];
+      settleHero();
+      return new Promise(resolve=>setTimeout(()=>resolve(id===tripId),650));
+    }
+    faceHero(6);settleHero();
+    function lookAlongPath(path,progress,step=1){
+      const t=Math.max(0,Math.min(progress,.999999));
+      let i=0;while(i<path.length-2&&t>=path[i+1].offset)i++;
+      const dx=(parseFloat(path[i+1].left)-parseFloat(path[i].left))*1660;
+      const dy=(parseFloat(path[i+1].top)-parseFloat(path[i].top))*947;
+      if(Math.abs(dx)+Math.abs(dy)<.001)return;
+      const direction=(Math.round(Math.atan2(dy,dx)/(Math.PI/4))+8)%8;
+      faceHero(direction,step);
+    }
+    function followFacing(path,duration){
+      cancelAnimationFrame(facingFrame);
+      const active=animation;
+      function tick(){
+        if(animation!==active||!active||!hero.classList.contains('walking'))return;
+        const time=Number(active.currentTime)||0;
+        lookAlongPath(path,time/duration,Math.floor(time/115));
+        facingFrame=requestAnimationFrame(tick);
+      }
+      tick();
+    }
+    const play=document.getElementById('startQuest');
+    const reset=document.getElementById('reset');
+    const mobileStart=document.getElementById('startMobile');
+    const message=document.getElementById('message');
+    const arrival=document.getElementById('arrival');
+    const oath=document.getElementById('oath');
+    const acceptOath=document.getElementById('acceptOath');
+    function fitOath(){
+      if(oath.hidden)return;
+      oath.style.scale='1';
+      const rect=oath.getBoundingClientRect();
+      const mobile=window.matchMedia('(max-width:700px)').matches;
+      const bounds=mobile?{right:window.innerWidth-8,bottom:window.innerHeight-8}:scene.getBoundingClientRect();
+      const toolbar=document.querySelector('.toolbar').getBoundingClientRect();
+      const bottom=mobile&&toolbar.top>rect.top?Math.min(bounds.bottom,toolbar.top-8):bounds.bottom-8;
+      const factor=Math.min(1,Math.max(1,bottom-rect.top)/oath.offsetHeight,Math.max(1,bounds.right-rect.left-8)/oath.offsetWidth);
+      oath.style.scale=String(factor);
+    }
+    new ResizeObserver(()=>requestAnimationFrame(fitOath)).observe(scene);
+    new ResizeObserver(()=>requestAnimationFrame(fitOath)).observe(oath);
+    window.addEventListener('resize',()=>requestAnimationFrame(fitOath));
+    if(window.visualViewport)window.visualViewport.addEventListener('resize',()=>requestAnimationFrame(fitOath));
+
+    // v0.3.29 : une scène illustrée de face, distincte de la carte et de l'exercice.
+    const transition=document.getElementById('trialTransition');
+    const transitionArea=document.getElementById('transitionArea');
+    const transitionViewport=document.getElementById('transitionViewport');
+    const transitionStart=document.getElementById('transitionStart');
+    const transitionZoom=document.getElementById('transitionZoom');
+    const transitionBack=document.getElementById('transitionBack');
+    let transitionIsZoomed=false;
+    let currentStage=1;
+    // Each future challenge registers its ID, legacy save key and next route here.
+    const challenges=[
+      {stage:1,id:'tables',legacyKey:'maths-quest-mult-v0.3',next:2,move:()=>continueToSecond()},
+      {stage:2,id:'relatifs',legacyKey:'maths-quest-add-rel-v0.3',next:3,move:()=>continueToThird()},
+      {stage:3,id:'fractions',legacyKey:'maths-quest-frac-equiv-v0.3',next:4,move:()=>continueToBridge()}
+    ];
+    const PROGRESS_KEY='maths-quest-completed-challenges-v1';
+    const completedChallenges=new Set();
+    try{
+      const saved=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'[]');
+      if(Array.isArray(saved))saved.filter(id=>typeof id==='string').forEach(id=>completedChallenges.add(id));
+    }catch(e){}
+    for(const challenge of challenges){
+      try{if(challenge.legacyKey&&localStorage.getItem(challenge.legacyKey)==='passed')completedChallenges.add(challenge.id)}catch(e){}
+    }
+    function isChallengeCompleted(stage=currentStage){
+      const challenge=challenges.find(item=>item.stage===stage);
+      return !!challenge&&completedChallenges.has(challenge.id);
+    }
+    function markChallengeCompleted(stage){
+      const challenge=challenges.find(item=>item.stage===stage);if(!challenge)return;
+      completedChallenges.add(challenge.id);
+      try{localStorage.setItem(PROGRESS_KEY,JSON.stringify([...completedChallenges]));if(challenge.legacyKey)localStorage.setItem(challenge.legacyKey,'passed')}catch(e){}
+    }
+    function skipCompletedChallenge(){
+      const challenge=challenges.find(item=>item.stage===currentStage);
+      if(!challenge||!isChallengeCompleted()||!challenge.next||!challenge.move)return;
+      challenge.move();
+    }
+    function updateChallengeChoices(){
+      const challenge=challenges.find(item=>item.stage===currentStage);
+      const done=isChallengeCompleted();
+      const canSkip=done&&!!challenge?.next&&!!challenge?.move;
+      transition.classList.toggle('completed',done);
+      document.getElementById('skipCompletedTrial').hidden=!canSkip;
+      transition.classList.toggle('can-skip',canSkip);
+      const label=done?'Rejouer':'⚔ Commencer le défi';
+      transitionStart.textContent=done?'Rejouer':'';
+      transitionStart.title=label;
+      transitionStart.setAttribute('aria-label',label);
+    }
+    document.getElementById('skipCompletedTrial').addEventListener('click',skipCompletedChallenge);
+    const nextTrial=document.getElementById('nextTrial');
+    const relativeIntro=document.getElementById('relativeIntro');
+    const transitionImage=document.querySelector('.transition-image');
+    const tableArt=transitionImage.src,tableAlt=transitionImage.alt;
+    const relativeArt=document.getElementById('relativeArt').content.querySelector('img');
+    const fractionArt=document.getElementById('fractionArt').content.querySelector('img');
+    const stageTitles={1:'Tables de multiplication',2:'Additions de relatifs',3:'Fractions équivalentes'};
+    const mapSource=document.querySelector('.scene-image').src;
+    document.getElementById('relativeStart').addEventListener('click',launchFromTransition);
+    document.getElementById('relativeBack').addEventListener('click',returnFromTransition);
+    nextTrial.addEventListener('click',()=>currentStage===4?returnFromBridge():skipCompletedChallenge());
+
+    function fitTransition(){
+      const css=getComputedStyle(transitionArea);
+      const w=transitionArea.clientWidth-parseFloat(css.paddingLeft)-parseFloat(css.paddingRight);
+      const h=transitionArea.clientHeight-parseFloat(css.paddingTop)-parseFloat(css.paddingBottom);
+      if(w<=0||h<=0)return;
+      const ratio=1672/941;
+      const fit=transitionIsZoomed?Math.max(1100,w):Math.min(w,h*ratio);
+      transitionViewport.style.width=fit+'px';
+      transitionViewport.style.height=(fit/ratio)+'px';
+    }
+    // Fullscreen must contain the map, transitions and quiz together.
+    async function toggleAppFullscreen(){
+      try{
+        if(document.fullscreenElement)await document.exitFullscreen();
+        else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();
+      }catch(e){message.textContent='Le plein écran n’est pas disponible dans ce navigateur.';}
+    }
+    function releasePartialFullscreen(resume){
+      const active=document.fullscreenElement;
+      if(!active||active===document.documentElement)return false;
+      const stage=currentStage,trip=tripId;
+      document.exitFullscreen().then(()=>{
+        if(stage===currentStage&&trip===tripId)resume();
+      }).catch(()=>{message.textContent='Le navigateur n’a pas pu changer le mode plein écran.';});
+      return true;
+    }
+    function showTransition(){
+      if(releasePartialFullscreen(showTransition))return;
+      if(currentStage<1||currentStage>3)return;
+      arrival.hidden=true;oath.hidden=true;
+      transition.classList.toggle('relatives',currentStage===2);
+      relativeIntro.hidden=true;
+      transitionImage.src=currentStage===3?fractionArt.src:currentStage===2?relativeArt.src:tableArt;
+      transitionImage.alt=currentStage===3?fractionArt.alt:currentStage===2?relativeArt.alt:tableAlt;
+      transitionViewport.style.backgroundImage='';
+      transitionStart.setAttribute('aria-label','Commencer le défi : '+stageTitles[currentStage]);
+      transition.setAttribute('aria-label',stageTitles[currentStage]);
+      updateChallengeChoices();
+      transition.hidden=false;
+      transition.classList.toggle('passed',passed);
+      requestAnimationFrame(fitTransition);
+      // Large, accessible button beneath the scene on narrow screens.
+      requestAnimationFrame(()=>{
+        transitionStart.focus({preventScroll:true});
+      });
+    }
+    function hideTransition(){transition.hidden=true;}
+    function returnFromTransition(){
+      hideTransition();
+      arrival.hidden=false;
+      document.getElementById('startTrial').textContent='Voir le camp d’entraînement';
+      updateArrival();
+    }
+    function replayFromTransition(){
+      hideTransition();backToStart();start();
+    }
+    function toggleTransitionZoom(){
+      transitionIsZoomed=!transitionIsZoomed;
+      transitionArea.classList.toggle('zoomed',transitionIsZoomed);
+      transitionZoom.setAttribute('aria-pressed',String(transitionIsZoomed));
+      transitionZoom.setAttribute('aria-label',transitionIsZoomed?'Afficher tout le décor':'Agrandir le décor du défi');
+      fitTransition();transitionArea.scrollTop=0;transitionArea.scrollLeft=0;
+    }
+    function launchFromTransition(){hideTransition();showQuiz();}
+    transitionStart.addEventListener('click',launchFromTransition);
+    transitionBack.addEventListener('click',returnFromTransition);
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&!transition.hidden&&!document.fullscreenElement) returnFromTransition();
+    });
+    document.getElementById('transitionBackMobile').addEventListener('click',returnFromTransition);
+    document.getElementById('transitionReplay').addEventListener('click',replayFromTransition);
+    transitionZoom.addEventListener('click',toggleTransitionZoom);
+    document.getElementById('transitionFullscreen').addEventListener('click',toggleAppFullscreen);
+    new ResizeObserver(fitTransition).observe(transitionArea);
+    window.addEventListener('resize',fitTransition);
+    document.addEventListener('fullscreenchange',()=>requestAnimationFrame(fitTransition));
+
+    const levelTwoScreen=document.getElementById('levelTwoScreen');
+    const levelTwoStage=document.getElementById('levelTwoStage');
+    const levelTwoScene=document.getElementById('levelTwoScene');
+    const levelTwoHero=document.getElementById('levelTwoHero');
+    const levelTwoStatus=document.getElementById('levelTwoStatus');
+    let levelTwoFrame=0,levelTwoDoorTimer=null,levelTwoFinishTimer=null;
+    levelTwoHero.src=heroIdle[6];
+    function fitLevelTwo(){
+      const css=getComputedStyle(levelTwoStage);
+      const w=levelTwoStage.clientWidth-parseFloat(css.paddingLeft)-parseFloat(css.paddingRight);
+      const h=levelTwoStage.clientHeight-parseFloat(css.paddingTop)-parseFloat(css.paddingBottom);
+      if(w<=0||h<=0)return;
+      const width=Math.min(w,h*1672/941);levelTwoScene.style.width=width+'px';levelTwoScene.style.height=width*941/1672+'px';
+    }
+    function clearLevelTwoAnimation(){cancelAnimationFrame(levelTwoFrame);clearTimeout(levelTwoDoorTimer);clearTimeout(levelTwoFinishTimer);levelTwoFrame=0;}
+    function finishLevelTwoEntrance(){
+      clearLevelTwoAnimation();if(levelTwoScreen.hidden)return;
+      levelTwoScene.classList.remove('playing');levelTwoScene.classList.add('gate-open','arrived');
+      levelTwoHero.src=heroIdle[6];levelTwoHero.style.transform='';
+      levelTwoStatus.textContent='La grande porte est ouverte. Bienvenue au niveau 2 !';
+      document.getElementById('levelTwoSkip').hidden=true;document.getElementById('levelTwoReplay').hidden=false;
+    }
+    function playLevelTwoEntrance(){
+      if(levelTwoScreen.hidden)return;clearLevelTwoAnimation();
+      levelTwoScene.classList.remove('playing','gate-open','arrived');
+      levelTwoHero.src=heroIdle[6];levelTwoHero.style.transform='';
+      document.getElementById('levelTwoSkip').hidden=false;document.getElementById('levelTwoReplay').hidden=true;
+      levelTwoStatus.textContent='Le héros s’avance sur le pont…';
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishLevelTwoEntrance();return}
+      void levelTwoScene.offsetWidth;levelTwoScene.classList.add('playing');
+      const started=performance.now();
+      function step(){
+        if(levelTwoScreen.hidden)return;
+        const elapsed=performance.now()-started;
+        if(elapsed>=7000){levelTwoHero.src=heroIdle[6];levelTwoHero.style.transform='';return}
+        const phase=Math.floor(elapsed/115)%4;levelTwoHero.src=heroAngles[phase*8+6];levelTwoHero.style.transform=phase===3?'scaleX(-1)':'';
+        levelTwoFrame=requestAnimationFrame(step);
+      }
+      step();
+      levelTwoDoorTimer=setTimeout(()=>{if(!levelTwoScreen.hidden){levelTwoScene.classList.add('gate-open');levelTwoStatus.textContent='La grande porte s’ouvre devant lui…';}},3200);
+      levelTwoFinishTimer=setTimeout(finishLevelTwoEntrance,7200);
+    }
+    function showLevelTwoEntrance(){
+      if(!isChallengeCompleted(3)||currentStage!==4)return;
+      if(releasePartialFullscreen(showLevelTwoEntrance))return;
+      hideTransition();arrival.hidden=true;oath.hidden=true;levelTwoScreen.hidden=false;
+      requestAnimationFrame(fitLevelTwo);playLevelTwoEntrance();document.getElementById('levelTwoBack').focus({preventScroll:true});
+    }
+    function hideLevelTwoEntrance(){
+      clearLevelTwoAnimation();levelTwoScreen.hidden=true;levelTwoScene.classList.remove('playing','gate-open','arrived');
+      levelTwoHero.src=heroIdle[6];levelTwoHero.style.transform='';
+    }
+    function returnToBridge(){hideLevelTwoEntrance();arrival.hidden=false;updateArrival();startTrial.focus({preventScroll:true});}
+    document.getElementById('levelTwoBack').addEventListener('click',returnToBridge);
+    document.getElementById('levelTwoReplay').addEventListener('click',playLevelTwoEntrance);
+    document.getElementById('levelTwoSkip').addEventListener('click',finishLevelTwoEntrance);
+    document.getElementById('levelTwoFullscreen').addEventListener('click',toggleAppFullscreen);
+    new ResizeObserver(fitLevelTwo).observe(levelTwoStage);window.addEventListener('resize',()=>requestAnimationFrame(fitLevelTwo));
+    document.addEventListener('fullscreenchange',()=>requestAnimationFrame(fitLevelTwo));
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!levelTwoScreen.hidden&&!document.fullscreenElement)returnToBridge();});
+
+    const origin={left:'10.96%',top:'67.05%'};
+    const destination={left:'24.02%',top:'51.85%'};
+    const firstTrial={left:'30.40%',top:'33.65%'};
+    let animation=null,tripId=0;
+    const steps=[
+      {offset:0,...origin},
+      {offset:.23,left:'14.1%',top:'62.9%'},
+      {offset:.49,left:'17.8%',top:'59.1%'},
+      {offset:.76,left:'21.5%',top:'55.4%'},
+      {offset:1,...destination}
+    ];
+    function stop(){cancelAnimationFrame(facingFrame);tripId++;if(animation){animation.cancel();animation=null;}hero.classList.remove('walking');settleHero();}
+    function backToStart(){hideLevelTwoEntrance();faceHero(6);startTrial.disabled=false;currentStage=1;nextTrial.hidden=true;hideTransition();stop();hero.style.left=origin.left;hero.style.top=origin.top;
+      oath.hidden=true;arrival.hidden=true;play.hidden=false;mobileStart.hidden=false;
+      play.disabled=false;mobileStart.disabled=false;mobileStart.textContent='▶ Commencer la quête';play.setAttribute('aria-label','Commencer la quête et avancer jusqu’au premier cercle lumineux');
+      message.innerHTML='Le héros attend sous le porche. Clique sur <b>Commencer la quête</b>.';}
+    async function start(){
+      stop();const id=tripId;
+      hero.style.left=origin.left;hero.style.top=origin.top;
+      oath.hidden=true;arrival.hidden=true;play.hidden=true;mobileStart.hidden=true;
+      play.disabled=true;mobileStart.disabled=true;
+      message.textContent='Le héros suit le chemin vers les tables de multiplication…';
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches || !hero.animate){
+        lookAlongPath(steps,1);hero.style.left=destination.left;hero.style.top=destination.top;
+        finish(id);return;
+      }
+      hero.classList.add('walking');
+      animation=hero.animate(steps,{duration:4600,easing:'linear',fill:'forwards'});followFacing(steps,4600);
+      try{await animation.finished;}catch(e){return;}
+      if(id!==tripId)return;
+      lookAlongPath(steps,1);hero.style.left=destination.left;hero.style.top=destination.top;
+      animation.cancel();animation=null;
+      finish(id);
+    }
+    async function finish(id){
+      if(id!==tripId)return;
+      hero.classList.remove('walking');settleHero();
+      if(!await pauseAtCircle(id))return;
+      // Premier cercle du parcours : halte obligatoire, lecture des règles.
+      oath.hidden=false;
+      fitOath();requestAnimationFrame(fitOath);
+      acceptOath.focus({preventScroll:true});
+      message.innerHTML='Le héros fait halte au <b>premier cercle</b>. Écoute le serment de l’Académie avant de rejoindre les tables de multiplication.';
+    }
+    async function continueQuest(){
+      if(oath.hidden)return;
+      stop();const id=tripId;
+      oath.hidden=true;arrival.hidden=true;
+      play.disabled=true;mobileStart.disabled=true;
+      hero.style.left=destination.left;hero.style.top=destination.top;
+      message.textContent='L’aventurier rejoint la première épreuve : Tables de multiplication…';
+      const nextSteps=[
+        {offset:0,...destination},
+        {offset:.32,left:'26.1%',top:'46.6%'},
+        {offset:.67,left:'28.6%',top:'39.5%'},
+        {offset:1,...firstTrial}
+      ];
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches || !hero.animate){
+        lookAlongPath(nextSteps,1);hero.style.left=firstTrial.left;hero.style.top=firstTrial.top;
+        finishTrial(id);return;
+      }
+      hero.classList.add('walking');
+      animation=hero.animate(nextSteps,{duration:2800,easing:'linear',fill:'forwards'});followFacing(nextSteps,2800);
+      try{await animation.finished;}catch(e){return;}
+      if(id!==tripId)return;
+      lookAlongPath(nextSteps,1);hero.style.left=firstTrial.left;hero.style.top=firstTrial.top;
+      animation.cancel();animation=null;
+      finishTrial(id);
+    }
+    async function continueToSecond(){
+      if(!passed)return;
+      hideTransition();stop();const id=tripId;currentStage=2;
+      arrival.hidden=true;nextTrial.hidden=true;oath.hidden=true;
+      hero.style.left=firstTrial.left;hero.style.top=firstTrial.top;
+      message.textContent='Le héros rejoint la deuxième épreuve : Additions de relatifs…';
+      const target={left:'49.5%',top:'32.4%'};
+      const path=[{offset:0,...firstTrial},{offset:.35,left:'37%',top:'33.3%'},{offset:.7,left:'44%',top:'32.9%'},{offset:1,...target}];
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&hero.animate){
+        hero.classList.add('walking');animation=hero.animate(path,{duration:3300,easing:'linear',fill:'forwards'});followFacing(path,3300);
+        try{await animation.finished}catch(e){return}if(id!==tripId)return;
+        animation.cancel();animation=null;
+      }
+      lookAlongPath(path,1);hero.style.left=target.left;hero.style.top=target.top;hero.classList.remove('walking');settleHero();
+      message.textContent='Deuxième épreuve atteinte : Additions de relatifs.';
+      if(!await pauseAtCircle(id,2))return;
+      showTransition();
+    }
+    const fractionPath=[
+      {offset:0,left:'49.5%',top:'32.4%'},
+      {offset:.2,left:'50.8%',top:'38%'},
+      {offset:.4,left:'53%',top:'43.4%'},
+      {offset:.63,left:'57.5%',top:'47.6%'},
+      {offset:.84,left:'62%',top:'49.5%'},
+      {offset:1,left:'64.5%',top:'48.8%'}
+    ];
+    async function travelFractionPath(reverse=false){
+      if(!secondPassed)return;
+      hideTransition();stop();const id=tripId;
+      arrival.hidden=true;nextTrial.hidden=true;oath.hidden=true;
+      const path=reverse?fractionPath.slice().reverse().map(p=>({...p,offset:1-p.offset})):fractionPath;
+      const target=path[path.length-1];currentStage=reverse?2:3;
+      message.textContent=reverse?'Le héros revient vers les relatifs…':'Le héros tourne et descend vers les fractions…';
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&hero.animate){
+        hero.classList.add('walking');animation=hero.animate(path,{duration:4500,easing:'linear',fill:'forwards'});followFacing(path,4500);
+        try{await animation.finished}catch(e){return}if(id!==tripId)return;
+        animation.cancel();animation=null;
+      }
+      lookAlongPath(path,1);hero.style.left=target.left;hero.style.top=target.top;hero.classList.remove('walking');settleHero();
+      if(!await pauseAtCircle(id,currentStage))return;
+      if(!reverse){showTransition();return}
+      arrival.hidden=false;updateArrival();nextTrial.focus({preventScroll:true});
+    }
+    function continueToThird(){return travelFractionPath(false)}
+    function returnToSecond(){return travelFractionPath(true)}
+    // The bridge path follows the paving around the left end of the low wall.
+    const bridgeFeet=[[1107,579],[1090,603],[1070,617],[1055,629],[1065,649],[1086,660],[1101,669],[1140,692],[1179,715],[1195,731],[1222,758],[1250,781],[1290,804]];
+    const bridgeDistances=bridgeFeet.map((p,i)=>i?Math.hypot(p[0]-bridgeFeet[i-1][0],p[1]-bridgeFeet[i-1][1]):0);
+    const bridgeLength=bridgeDistances.reduce((a,b)=>a+b,0);
+    let bridgeCovered=0;
+    const bridgePath=bridgeFeet.map((p,i)=>{bridgeCovered+=bridgeDistances[i];return {offset:bridgeCovered/bridgeLength,left:(p[0]/1660*100-2.17)+'%',top:(p[1]/947*100-12.15)+'%'}});
+    bridgePath[0]={offset:0,left:'64.5%',top:'48.8%'};
+    async function travelBridge(reverse=false){
+      if(!isChallengeCompleted(3))return;
+      hideTransition();stop();const id=tripId;
+      arrival.hidden=true;nextTrial.hidden=true;oath.hidden=true;
+      const path=reverse?bridgePath.slice().reverse().map(p=>({...p,offset:1-p.offset})):bridgePath;
+      const target=path[path.length-1];currentStage=reverse?3:4;
+      message.textContent=reverse?'Le héros revient vers la fontaine des fractions…':'Le héros contourne le muret et rejoint le cercle du pont…';
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&hero.animate){
+        hero.classList.add('walking');animation=hero.animate(path,{duration:6000,easing:'linear',fill:'forwards'});followFacing(path,6000);
+        try{await animation.finished}catch(e){return}if(id!==tripId)return;
+        animation.cancel();animation=null;
+      }
+      lookAlongPath(path,1);hero.style.left=target.left;hero.style.top=target.top;hero.classList.remove('walking');settleHero();
+      if(!await pauseAtCircle(id,currentStage))return;
+      if(reverse){showTransition();return}
+      showLevelTwoEntrance();
+    }
+    function continueToBridge(){return travelBridge(false)}
+    function returnFromBridge(){hideLevelTwoEntrance();return travelBridge(true)}
+    function updateArrival(){
+      arrival.append(nextTrial);startTrial.disabled=false;
+      if(currentStage===4){
+        arrival.style.left='49%';arrival.style.top='66%';
+        arrival.querySelector('.arrival-heading').textContent='🏆 Premier niveau terminé !';
+        arrival.querySelector('strong').textContent='Entrée du niveau 2';
+        arrival.querySelector('small').textContent='La grande porte t’attend de l’autre côté du pont.';
+        startTrial.textContent='Entrer dans le niveau 2';startTrial.disabled=false;
+        nextTrial.hidden=false;nextTrial.textContent='← Revenir aux fractions';nextTrial.setAttribute('aria-label','Revenir aux fractions');
+        message.textContent='Les trois défis sont validés ! Le héros a atteint le dernier cercle, sur le pont.';return;
+      }
+      arrival.style.left=currentStage===3?'40%':currentStage===2?'57%':'';
+      arrival.style.top=currentStage===3?'62%':currentStage===2?'30%':'';
+      arrival.querySelector('.arrival-heading').textContent=isChallengeCompleted()?'🏆 Défi déjà validé !':'⚔ Épreuve atteinte !';
+      arrival.querySelector('strong').textContent=stageTitles[currentStage];
+      arrival.querySelector('small').textContent='10 questions · '+(currentStage===3?'30':'10')+' secondes chacune';
+      startTrial.textContent='Voir le défi';nextTrial.hidden=!isChallengeCompleted();
+      nextTrial.textContent='Passer le défi →';nextTrial.setAttribute('aria-label','Passer le défi déjà validé');
+      message.textContent='Le héros est devant '+stageTitles[currentStage]+'.';
+    }
+    async function finishTrial(id){
+      if(id!==tripId)return;
+      hero.classList.remove('walking');settleHero();
+      arrival.hidden=true;
+      if(passed){arrival.querySelector('.arrival-heading').textContent='🏆 Épreuve remportée !';arrival.querySelector('strong').textContent='Tables de multiplication : validées';arrival.querySelector('small').textContent='La voie suivante est débloquée';startTrial.textContent='↻ Rejouer les tables';}
+      // Après le départ, le bouton de quête ne revient pas :
+      // « Retour au départ » permet de recommencer le parcours.
+      play.hidden=true;mobileStart.hidden=true;
+      message.innerHTML='Le héros est arrivé devant <b>Tables de multiplication</b>. Clique sur <b>Commencer le défi</b>.';
+      if(!await pauseAtCircle(id,1))return;
+      showTransition();
+    }
+    acceptOath.addEventListener('click',continueQuest);
+    play.addEventListener('click',start);
+    mobileStart.addEventListener('click',start);
+    reset.addEventListener('click',backToStart);
+
+    /* V0.3 : module mult repris d'Activités mentales (tables 2 à 9, 10 questions aléatoires
+       distinctes, 10 s par question). L'interface est locale, sans appel réseau. */
+    const quizScreen=document.getElementById('quizScreen');
+    const startTrial=document.getElementById('startTrial');
+    const questionArea=document.getElementById('quizQuestions');
+    const resultsArea=document.getElementById('quizResults');
+    const qForm=document.getElementById('quizForm');
+    const qInput=document.getElementById('quizAnswer');
+    const qSubmit=document.getElementById('quizSubmit');
+    const qFeedback=document.getElementById('quizFeedback');
+    const qProgress=document.getElementById('quizProgressFill');
+    const qScore=document.getElementById('quizScore');
+    const qLabel=document.getElementById('questionLabel');
+    const qOperation=document.getElementById('quizOperation');
+    const qTimerNum=document.getElementById('quizTimerNumber');
+    const qTimerArc=document.getElementById('quizTimerArc');
+    const STORAGE='maths-quest-mult-v0.3';
+    let questions=[],questionIndex=0,correct=0,completed=false,quizActive=false;
+    let quizTimer=null,advanceTimer=null,deadline=0,totalSpentMs=0,lastQuestionStarted=0,answers=[];
+    let sessionToken=0;
+    const CIRC=2*Math.PI*27;
+    let passed=isChallengeCompleted(1),secondPassed=isChallengeCompleted(2);
+    let questionTime=10000;
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]]}}
+    function generateTables(){
+      // Identique au générateur MODULES.mult d'Activités mentales.
+      const pool=[];
+      for(let a=2;a<=9;a++)for(let b=2;b<=9;b++)pool.push({a,b,answer:a*b});
+      shuffle(pool);return pool.slice(0,10);
+    }
+// Source : Offsidealex/Activites_mentales, index.html, blob 535d121d101d3e1bddaa44c82d0a3f0c6100e6de
+function generateRelatives(level){
+  const rand=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+  const signed=(min,max)=>{const n=rand(min,max);return Math.random()<.5?-n:n;};
+  const fmt=n=>n<0?'('+String(n).replace('-','−')+')':String(n);
+  const minus=n=>n<0?'− '+fmt(-n):'+ '+fmt(n);
+  const questions=[],seen=new Set();
+  let tries=0;
+  while(questions.length<10 && tries++<1000){
+    let html,ans,a,b,c;
+    if(level==='add'){
+      a=signed(1,45);b=signed(1,45);html=fmt(a)+' + '+fmt(b);ans=a+b;
+    }else if(level==='mult'){
+      a=signed(2,12);b=signed(2,12);html=fmt(a)+' × '+fmt(b);ans=a*b;
+    }else if(level==='sub'){
+      a=signed(1,50);b=signed(1,50);html=fmt(a)+' − '+fmt(b);ans=a-b;
+    }else if(level==='chain'){
+      a=signed(1,40);b=signed(1,30);c=signed(1,30);
+      const first=Math.random()<.5,second=Math.random()<.5;
+      html=fmt(a)+(first?' + ':' − ')+fmt(b)+(second?' + ':' − ')+fmt(c);
+      ans=a+(first?b:-b)+(second?c:-c);
+    }else{
+      a=signed(2,40);b=signed(2,10);c=signed(2,10);
+      const first=Math.random()<.5,second=Math.random()<.5;
+      if(first){
+        html=fmt(a)+(second?' + ':' − ')+fmt(b)+' × '+fmt(c);
+        ans=a+(second?1:-1)*b*c;
+      }else{
+        html=fmt(a)+' × '+fmt(b)+(second?' + ':' − ')+fmt(c);
+        ans=a*b+(second?c:-c);
+      }
+    }
+    if(seen.has(html))continue;
+    seen.add(html);questions.push({html,ans});
+  }
+  return questions;
+}
+
+    // Exact fraction question pool from Offsidealex/Activites_mentales MODULES.frac_equiv (30 s).
+    function generateEquivalentFractions(){
+      const F=(n,d)=>'<span class="fr"><span class="n">'+n+'</span><span class="d">'+d+'</span></span>';
+      const pool=[[1, 2, 4, 2], [1, 5, 10, 2], [4, 5, 10, 8], [6, 2, 4, 12], [7, 8, 16, 14], [6, 7, 14, 12], [3, 8, 24, 9], [5, 6, 30, 25], [12, 5, 30, 72], [12, 6, 36, 72], [15, 8, 40, 75], [12, 7, 21, 36], [4, 6, 48, 32], [5, 6, 42, 35], [14, 12, 24, 28], [15, 11, 22, 30], [11, 9, 72, 88], [12, 9, 81, 108], [6, 8, 56, 42], [8, 7, 56, 64]].map(([n,d,target,answer])=>({html:F(n,d)+' = '+F('<span class="blk">?</span>',target),text:n+'/'+d+' = ?/'+target,answer,n,d,target}));
+      shuffle(pool);return pool.slice(0,10);
+    }
+    function operation(q){return q.text||q.html||q.a+' × '+q.b;}
+    function stopQuizTimers(){clearInterval(quizTimer);clearTimeout(advanceTimer);quizTimer=null;advanceTimer=null}
+    function setMapStatus(){
+      document.getElementById('questDone').hidden=!passed;
+      document.getElementById('questDone2').hidden=!secondPassed;
+      document.getElementById('questDone3').hidden=!isChallengeCompleted(3);
+      const count=challenges.filter(challenge=>isChallengeCompleted(challenge.stage)).length;
+      const total=challenges.length;
+      document.getElementById('mapCounter').hidden=false;
+      document.querySelectorAll('.quest-progress').forEach(bar=>{
+        bar.setAttribute('aria-valuenow',String(count));bar.setAttribute('aria-valuemax',String(total));
+        bar.setAttribute('aria-valuetext',count+' défis validés sur '+total);
+        bar.querySelector('.quest-progress-fill').style.width=(count/total*100)+'%';
+      });
+      document.getElementById('mapCounter').textContent=count+' / '+total+' défis validés';
+      document.getElementById('transitionRecap').textContent=count+' / '+total+' défis validés ✓';
+    }
+    function showQuiz(){
+      if(releasePartialFullscreen(showQuiz))return;
+      if(currentStage<1||currentStage>3||(currentStage>1&&!isChallengeCompleted(currentStage-1)))return;
+      hideTransition();stopQuizTimers();sessionToken++;
+      questions=currentStage===3?generateEquivalentFractions():currentStage===2?generateRelatives('add').map(q=>({...q,answer:q.ans})):generateTables();
+      questionTime=currentStage===3?30000:10000;questionIndex=0;correct=0;answers=[];totalSpentMs=0;
+      const title=stageTitles[currentStage];
+      quizScreen.classList.toggle('fractions-quiz',currentStage===3);
+      document.querySelector('.quiz-tip').textContent=currentStage===3?'Trouve le numérateur manquant · 8 bonnes réponses pour rejoindre le pont.':'⚜ Obtiens au moins 8 bonnes réponses pour ouvrir la voie suivante.';
+      document.querySelector('.quiz-title-wrap strong').textContent=title;
+      quizScreen.setAttribute('aria-label','Épreuve : '+title);
+      document.querySelector('label[for="quizAnswer"]').textContent=currentStage===3?'Numérateur manquant de la fraction':currentStage===2?'Résultat de l’addition (signe moins autorisé)':'Résultat de la multiplication';
+      qInput.setAttribute('inputmode',currentStage===2?'text':'numeric');
+      quizScreen.style.backgroundSize=currentStage>1?'auto 160%':'';quizScreen.style.backgroundPosition=currentStage>1?'50% 30%':'';
+      quizScreen.style.backgroundImage=currentStage>1?'linear-gradient(#071b3999,#071b3999),url("'+mapSource+'")':'';
+      quizActive=true;completed=false;
+      resultsArea.hidden=true;questionArea.hidden=false;
+      quizScreen.hidden=false;
+      document.body.style.overflow='hidden';
+      renderQuestion();
+    }
+    function updateClock(remaining){
+      const t=Math.max(0,Math.min(questionTime/1000,Math.ceil(remaining/1000)));
+      qTimerNum.textContent=String(t);
+      qTimerArc.style.strokeDashoffset=String(CIRC*(1-Math.max(0,remaining)/questionTime));
+      const color=t<=3?'#d64548':t<=5?'#e09d37':'#2256ed';
+      qTimerArc.style.stroke=color;qTimerNum.style.color=color;
+    }
+    function renderQuestion(){
+      if(!quizActive)return;
+      const q=questions[questionIndex];completed=false;
+      qLabel.textContent='QUESTION '+(questionIndex+1)+' / 10';
+      qOperation.classList.toggle('fraction-question',currentStage===3);
+      if(currentStage===3)qOperation.innerHTML=q.html;else qOperation.textContent=operation(q);
+      qScore.textContent=String(correct);
+      qProgress.style.width=(questionIndex*10)+'%';
+      qInput.value='';qInput.disabled=false;qInput.className='';
+      qSubmit.disabled=false;
+      qFeedback.textContent='';qFeedback.className='quiz-feedback';
+      deadline=performance.now()+questionTime;lastQuestionStarted=performance.now();
+      updateClock(questionTime);
+      clearInterval(quizTimer);
+      quizTimer=setInterval(()=>{
+        const remain=deadline-performance.now();updateClock(remain);
+        if(remain<=0)gradeAnswer(true);
+      },100);
+      qInput.readOnly=false;
+      qInput.focus({preventScroll:true});
+      requestAnimationFrame(()=>{if(quizActive&&!quizScreen.hidden&&!completed)qInput.focus({preventScroll:true});});
+    }
+    function gradeAnswer(timeout=false){
+      if(!quizActive||completed)return;
+      completed=true;clearInterval(quizTimer);
+      const q=questions[questionIndex];
+      const given=qInput.value.trim();
+      const good=!timeout && /^[+-]?\d+$/.test(given) && Number(given)===q.answer && performance.now()<=deadline;
+      if(good)correct++;
+      totalSpentMs+=Math.min(questionTime,Math.max(0,performance.now()-lastQuestionStarted));
+      answers.push({html:operation(q),a:q.a,b:q.b,answer:q.answer,given:timeout?null:given,ok:good});
+      qInput.disabled=true;qSubmit.disabled=true;
+      qInput.className=good?'good':'bad';
+      qFeedback.textContent=good?'✅ Bravo !':timeout?'⏱️ Temps écoulé · réponse : '+q.answer:'❌ Pas tout à fait · réponse : '+q.answer;
+      qFeedback.className='quiz-feedback '+(good?'good':'bad');
+      qScore.textContent=String(correct);
+      const token=sessionToken;
+      advanceTimer=setTimeout(()=>{
+        if(!quizActive||token!==sessionToken)return;
+        questionIndex++;
+        if(questionIndex<10)renderQuestion();else showResults();
+      },1400);
+    }
+    function showResults(){
+      stopQuizTimers();quizActive=false;
+      qProgress.style.width='100%';
+      const success=correct>=8;
+      if(success){
+        if(currentStage===1)passed=true;else if(currentStage===2)secondPassed=true;
+        markChallengeCompleted(currentStage);
+      }
+      document.getElementById('resultTitle').textContent=success?'🏆 Épreuve remportée !':'⚔ Épreuve à retenter';
+      document.getElementById('resultScore').textContent=correct+' / 10';
+      document.getElementById('resultPercent').textContent=(correct*10)+' % de réussite';
+      document.getElementById('resultMessage').textContent=success?
+        (currentStage===1?'Bravo ! La voie vers les additions de relatifs est ouverte.':currentStage===2?'Bravo ! Le deuxième défi est validé. Tu peux maintenant rejoindre le cercle des fractions.':'Bravo ! Les trois défis sont validés. Rejoins le dernier cercle sur le pont !'):
+        'Le seuil des 80 % n’est pas atteint. Reprends courage et retente cette épreuve !';
+      document.getElementById('quizTotalTime').textContent='⏱ Temps de réponse total : '+Math.round(totalSpentMs/1000)+' s';
+      const recap=document.getElementById('resultRecap');recap.replaceChildren();
+      answers.forEach((v,i)=>{
+        const row=document.createElement('div');row.className='recap-row';
+        const first=document.createElement('span');first.textContent=(i+1)+'. '+v.html;
+        const second=document.createElement('strong');second.className=v.ok?'ok':'bad';
+        second.textContent=v.ok?'✓ '+v.answer:(v.given===null?'⏱ ':((v.given||'—')+' → '))+v.answer;
+        row.append(first,second);recap.append(row);
+      });
+      document.getElementById('finishQuiz').textContent=success?(currentStage===1?'⚔ Rejoindre les relatifs →':currentStage===2?'⚔ Rejoindre les fractions →':'⚔ Rejoindre le pont →'):'← Retour à la carte';
+      questionArea.hidden=true;resultsArea.hidden=false;
+    }
+    function closeQuiz(advance=false){
+      sessionToken++;stopQuizTimers();quizActive=false;
+      quizScreen.hidden=true;questionArea.hidden=false;resultsArea.hidden=true;
+      document.body.style.overflow='';setMapStatus();
+      if(advance&&correct>=8&&isChallengeCompleted()){skipCompletedChallenge();return}
+      arrival.hidden=false;updateArrival();startTrial.focus({preventScroll:true});
+    }
+    startTrial.addEventListener('click',()=>currentStage===4?showLevelTwoEntrance():showTransition());
+    qForm.addEventListener('submit',e=>{e.preventDefault();if(!completed)gradeAnswer(false)});
+    document.getElementById('quizBack').addEventListener('click',()=>closeQuiz());
+    document.getElementById('retryQuiz').addEventListener('click',showQuiz);
+    document.getElementById('finishQuiz').addEventListener('click',()=>closeQuiz(true));
+    setMapStatus();
+
+    const fullscreen=document.getElementById('fullscreen');
+    fullscreen.addEventListener('click',toggleAppFullscreen);
+  })();
+  </script>
+</body>
+</html>
