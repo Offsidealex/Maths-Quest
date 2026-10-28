@@ -1,0 +1,17 @@
+# Maths Quest v0.3.36 — local uniquement
+
+Livrables outputs/Maths-Quest-v0.3.36-autonome.html (62 MB) et ZIP. HTML également dans /home/alexis/Bureau/Maths Quest, anciennes versions conservées. Aucune publication GitHub.
+
+Niveau 3 approuvé : L’Observatoire royal. Carte source work/observatory-map-v0336.png : garçon et lignes peints retirés, escaliers ajoutés à droite entre stations 6/7 et passerelle supérieure. Images intégrées JPEG de qualité pour limiter la taille. 13 scènes de face dans work/observatory-station-N.png, grande porte frontale work/observatory-gate-v0336.png. Prompts image_gen dans work/observatory-v0336-prompts.txt ; ultime retouche carte : ajouter deux liaisons d’escaliers à x1280..1370, y350..760 en conservant les 13 stations et HUD.
+
+Builder work/build-v0336.py, adaptateur work/observatory-v0336.js et CSS, sortie JS work/game-v0336.js. Part de v0.3.35. Ne pas relancer un ancien builder après modifications manuelles sans les reporter.
+
+Moteur Cour généralisé à deux mondes (courtWorld=2 ou3), mêmes carte/transition/quiz/progression, setCourtWorld conserve les deux configurations. Monde 2 stages5..10 +11final ; monde3 stages12..24 +25final. Le registre de défis ajoute IDs niveau3-*. Monde3 courtAt0entrée,1..13stations,14fin. Retour niveau2 revient à son entrée sans effacer les sauvegardes. Déplacements suivent les mêmes points que les lignes SVG ; liaisons6/7 à droite, puis station7 à8 par la terrasse supérieure (le héros passe devant les futures stations sans déclencher leurs épreuves). Masque de profondeur du parchemin à droite pour cacher le héros quand il passe derrière l’interface.
+
+Modules originaux Github Offsidealex/Activites_mentales (copie fraîche work/activites-source-level3.html) : mult10, mult_rel, arrondir, carre, moyenne, conversions2, angles, tableau_prop2, pct_variation, probas_des, reductions, eq_niv2, eq_niv7. 10 questions, 8/10. Durées20,15,20,20,30,25,20,30,25,25,40,25,50 secondes. Réduction comparée par coefficients de polynômes sans eval ; accepte expressions équivalentes et ²/^2. Calculatrice existante disponible pour étendue et arrondir/carre, avec indice adapté. Écran exercices garde le décor de sa propre transition. Interface niveau1 conservée, parchemin des13quêtes à droite. Carte groupe les compteurs5/2/6.
+
+Fin niveau2 : victoire existante + bouton Rejoindre l’Observatoire royal. Nouvelle cinématique indépendante : pont et escaliers, héros vu de dos pendant7s, battants ouvrants à3.2s, fin7.2s. Porte calibrée left41.9%,top19.4%,width16.3%,height36%; marche finaletop35.2%, pieds55.95% devant seuil55.4%. Passer/revoir/retour/plein écran, mouvement réduit respecté. Bouton Passer au niveau3 dans la Cour pour tester sans falsifier réussites précédentes. Flag session levelThreeDirectAccess. Fin niveau3 victoire puis niveau4àvenir.
+
+Validation : node work/test-game-v0336.cjs (ancien niveau1 et2, calculatrice, sauvegarde, 13modules, groupes13/13, tous trajets animés via API simulée, transitions3.2/7.2, annulation, polynômes). python3 work/verify-v0336.py (IDs, 70images, aucune ressource distante, ZIP et standalone identiques). Illustrations inspectées en planches work/observatory-contact-0.jpg et1.jpg.
+
+Limite : aucun rendu réel local dans navigateur (CUA a bloqué file:// dans les tours précédents ; ne pas contourner). Vérification fonctionnelle par VM et faux DOM/temps simulé. Les placements visuels doivent être confirmés par l’utilisateur. Ne pas prétendre validation navigateur.

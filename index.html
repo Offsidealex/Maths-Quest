@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111d31">
-  <title>Maths Quest — version 0.3.29 — Bleu royal & or</title>
+  <title>Maths Quest — version 0.3.36 — Bleu royal & or</title>
   <style>
     :root { font-family:system-ui,sans-serif; background:#101c2d; color:#eee6d4; color-scheme:dark; }
     * { box-sizing:border-box; }
@@ -203,7 +203,7 @@
 
 
     /* ====================================================================
-       Version 0.3.29 - Thème retenu : Bleu royal, or et parchemin.
+       Version 0.3.36 - Thème retenu : Bleu royal, or et parchemin.
        Toute la logique pédagogique 0.3 reste inchangée.
        ==================================================================== */
     .quiz-screen{
@@ -365,7 +365,7 @@
     @media(prefers-reduced-motion:reduce){.quiz-submit{transition:none}}
 
 
-    /* v0.3.29 — Cartouche de défi à droite du héros. */
+    /* v0.3.36 — Cartouche de défi à droite du héros. */
     .arrival{left:50.4%;top:27.7%;width:24.5%;max-width:360px;min-width:0;gap:clamp(3px,.5vw,8px);
       padding:clamp(5px,.72vw,12px);box-shadow:0 9px 23px #071c3bc7;}
     .arrival .arrival-heading{font-size:clamp(10px,.94vw,16px)}
@@ -373,7 +373,7 @@
     .arrival small{font-size:clamp(9px,.8vw,13px)}
     .arrival .arrival-action{font-size:clamp(10px,.95vw,16px);padding:clamp(6px,.65vw,12px)}
 
-    /* v0.3.29 — Camp d'entrainement de face comme arrière-plan des exercices.
+    /* v0.3.36 — Camp d'entrainement de face comme arrière-plan des exercices.
        L'interface d'Activités mentales reste indépendante de ce fond illustré. */
     .quiz-screen{
       background-image:linear-gradient(90deg,rgba(7,27,57,.47),rgba(10,34,63,.31) 50%,rgba(7,27,57,.47)),
@@ -417,7 +417,7 @@
 
 
     /* ================================================================
-       v0.3.29 — adaptation à la HAUTEUR et à la LARGEUR de l'écran.
+       v0.3.36 — adaptation à la HAUTEUR et à la LARGEUR de l'écran.
        Une question doit tenir dans la zone visible, bouton Valider inclus.
        Le bilan reste défilable car il contient les dix réponses.
        ================================================================ */
@@ -530,7 +530,7 @@
     }
 
 
-    /* v0.3.29 — Écran de transition « Tables de multiplication ».
+    /* v0.3.36 — Écran de transition « Tables de multiplication ».
        L'illustration est un décor, les zones actives sont de vrais boutons HTML. */
     .trial-transition[hidden] {display:none!important}
     .trial-transition {position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;
@@ -575,7 +575,7 @@
     @media(min-width:701px){.oath{max-height:59%;overflow:auto}}
     .relative-intro{display:none!important}
     .transition-recap{left:68.1%;top:10.8%;width:20.8%;height:4%;background:#0b2541;font-size:clamp(8px,1.05vw,17px);border:0;box-shadow:none}
-    /* v0.3.29 — Bilan ajusté à l'écran ; seul le détail des réponses défile. */
+    /* v0.3.36 — Bilan ajusté à l'écran ; seul le détail des réponses défile. */
     .quiz-content:has(.quiz-results:not([hidden])) {
       display:flex;overflow:hidden;width:min(760px,calc(100% - 24px));
     }
@@ -701,6 +701,148 @@
     .level-two-buttons button:hover{filter:brightness(1.15)}.level-two-buttons button:focus-visible{outline:3px solid #ffe2a4;outline-offset:2px}
     @media(max-height:430px) and (orientation:landscape){.level-two-heading{padding:4px}.level-two-heading p{display:none}.level-two-controls{padding:4px 7px}.level-two-controls p{margin-bottom:4px}.level-two-buttons button{min-height:32px;padding:4px 9px}.level-two-stage{padding:3px}}
     @media(prefers-reduced-motion:reduce){.gate-door{transition:none}.level-two-scene.playing .level-two-walker{animation:none}}
+    #courtScreen[hidden],#courtTrial[hidden],#courtComplete[hidden],.court-controls button[hidden],.court-actions button[hidden],.court-done[hidden]{display:none!important}
+    .court-screen{position:fixed;inset:0;z-index:60;background:#07182c;color:#fff0c9;display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+    .court-area{flex:1;min-height:0;padding:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .court-area.zoomed{overflow:auto;align-items:flex-start;justify-content:flex-start}
+    .court-map,.court-trial-scene{position:relative;flex:none;isolation:isolate;overflow:hidden;border:1px solid #bb934b;background:#092544}
+    .court-map>img.court-background,.court-trial-art{width:100%;height:100%;display:block;object-fit:fill;pointer-events:none;user-select:none}
+    .court-hero{position:absolute;width:4.34%;height:auto;z-index:6;pointer-events:none;filter:drop-shadow(0 3px 2px #0006);transform-origin:50% 100%}
+    .court-routes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+    .court-progress-cover{position:absolute;left:69.5%;top:7.5%;width:20.9%;height:5.6%;background:#08233f;z-index:5;display:flex;flex-direction:column;justify-content:space-between;font:700 clamp(5px,1vw,17px) Georgia,serif}
+    .court-progress{height:40%;border:1px solid #f4e7c4;border-radius:999px;overflow:hidden;background:#06182a;box-shadow:inset 0 1px 3px #0009}
+    .court-progress>span{display:block;height:100%;width:0;background:linear-gradient(#c2ff64,#64cc16 50%,#2f8b00);transition:width .4s}
+    .court-done{position:absolute;left:97.2%;width:2.04%;height:3.4%;transform:translate(-50%,-50%);border:1px solid #fff7c7;border-radius:50%;background:#359e44;color:white;display:grid;place-items:center;font:bold clamp(7px,1.4vw,23px) system-ui;z-index:7;box-shadow:0 1px 4px #294d23}
+    .court-controls{flex:0 0 auto;border-top:2px solid #ba954d;background:#0a203b;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));text-align:center}
+    .court-controls p{font:500 clamp(11px,1.8dvh,16px) system-ui;margin:0 0 7px;line-height:1.3}
+    .court-buttons{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+    .court-controls button,.court-complete button{border:1px solid #e6b860;border-radius:9px;min-height:40px;padding:8px 13px;background:linear-gradient(#1a477a,#0b2c51);color:#fff1cd;font:700 clamp(11px,1.8dvh,16px) Georgia,serif;cursor:pointer}
+    .court-controls button:hover,.court-actions button:hover{filter:brightness(1.15)}
+    .court-screen button:focus-visible,.court-complete button:focus-visible{outline:3px solid #fff2ab;outline-offset:3px}
+    #courtAction,#courtEnter{background:linear-gradient(#2266bb,#12396d)}
+    .court-trial{z-index:70}
+    .court-trial-caption{position:absolute;left:3%;top:3%;max-width:50%;padding:1.2% 2%;border:2px solid #e6ba67;background:linear-gradient(#0b345e,#062141);color:#fff0cc;border-radius:12px;font:700 clamp(11px,2.1vw,34px) Georgia,serif;text-align:center;box-shadow:0 3px 8px #0008}
+    .court-trial-hero{position:absolute;left:27.8%;top:64.5%;width:7%;height:20.5%;object-fit:contain;z-index:3;filter:drop-shadow(0 4px 2px #0008)}
+    .court-panel{position:absolute;left:57%;top:17%;width:39%;height:66%;padding:2%;box-sizing:border-box;border:3px solid #ecb44d;border-radius:22px;background:linear-gradient(135deg,#0b3c70,#051e3e);box-shadow:inset 0 0 0 2px #ffdc8b,0 5px 12px #0009;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:2%;text-align:center;color:#fff1ce;font:600 clamp(8px,1.3vw,21px) Georgia,serif}
+    .court-panel .court-order{color:#ffdf79;font-size:.85em;letter-spacing:.05em}
+    .court-panel h1{font-size:1.65em;line-height:1.05;margin:0;color:#ffe78d}
+    .court-panel p{margin:0;line-height:1.2}
+    .court-panel .court-line{height:1px;width:88%;background:linear-gradient(90deg,transparent,#e9b255,transparent)}
+    .court-actions{display:flex;gap:5px;width:100%;min-height:17%}
+    .court-actions button{flex:1;min-width:0;border:2px solid #f1c267;border-radius:10px;color:#fff3d3;background:linear-gradient(#2865ac,#103765);font:700 clamp(8px,1.45vw,24px) Georgia,serif;cursor:pointer;padding:3% 1%;box-shadow:inset 0 1px 3px #fff5,0 2px 4px #0008}
+    .court-actions #courtTrialPass{background:linear-gradient(#43775b,#1c4d38)}
+    .court-trial-count{position:absolute;right:2%;top:3%;padding:1% 2%;border:1px solid #d6ab5b;border-radius:9px;background:#08233fe8;font:700 clamp(8px,1.3vw,20px) Georgia,serif}
+    .court-complete{position:fixed;inset:0;z-index:75;display:grid;place-items:center;background:#04142cc9;padding:18px}
+    .court-complete>div{max-width:480px;border:3px solid #d9ac55;border-radius:18px;background:#fff0ce;color:#14345c;text-align:center;padding:24px;box-shadow:0 10px 60px #0009;font:500 17px system-ui;line-height:1.5}
+    .court-complete h2{font-family:Georgia,serif;margin:0 0 12px}
+    .level2-quiz .quiz-operation{font-size:clamp(19px,3vw,38px);line-height:1.35;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+    .level2-quiz .quiz-operation table{max-width:100%;color:#153457}
+    .level2-quiz .quiz-answer-form input{min-width:0;max-width:100%}
+    .level2-quiz #quizAnswer{width:min(300px,65vw)}
+    @media(max-width:600px){.court-panel{border-width:1px;border-radius:10px}.court-panel h1{font-size:1.3em}.court-trial-caption{border-width:1px;border-radius:6px}.court-actions{gap:3px}.court-actions button{border-width:1px;border-radius:5px}.court-controls{padding:6px}.court-buttons{gap:5px}.court-controls button{padding:7px 9px}.court-panel .court-rule{font-size:.9em}}
+    @media(max-height:450px) and (orientation:landscape){.court-controls{padding:4px 6px}.court-controls p{font-size:11px;margin:0 0 3px}.court-controls button{min-height:30px;padding:4px 9px}.court-area{padding:3px}.level2-quiz .quiz-operation{font-size:clamp(15px,5dvh,24px)}.level2-quiz .quiz-operation table td,.level2-quiz .quiz-operation table th{padding:3px 7px!important}.level2-quiz .quiz-card{gap:3px;padding:8px}.level2-quiz .timer-ring{width:46px;height:46px}.level2-quiz #quizAnswer{font-size:22px;height:35px}.level2-quiz .quiz-submit{padding:5px 16px;min-height:33px}}
+
+/* Interface des transitions du niveau 1, réutilisée pour toute la Cour. */
+.court-trial-scene{container-type:inline-size}
+.court-trial-art{position:absolute;inset:0;width:100%;height:88.4%;object-fit:fill}
+.court-ui-header{position:absolute;inset:0;width:100%;height:100%;clip-path:inset(0 0 84% 0);pointer-events:none;z-index:4}
+.court-world-title{position:absolute;left:39.7%;top:3%;width:20.5%;height:8.2%;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#05203e;color:#fff0ce;font:700 2.8cqw/1 Georgia,serif;text-shadow:0 2px 2px #000}
+.court-world-title small{font-size:1.4cqw;font-weight:400;margin-top:1%}
+.court-trial-progress{position:absolute;left:68%;top:7.1%;width:20.2%;height:6.6%;z-index:5;background:#06213d;display:flex;flex-direction:column;justify-content:space-between}
+.court-trial-progress .court-progress{height:38%;border-width:1px}
+.court-trial-count{position:static;padding:0;border:0;border-radius:0;background:none;font:700 1.5cqw/1 Georgia,serif}
+.court-trial-caption{left:19.6%;top:22%;width:24.5%;height:10%;max-width:none;padding:0 1% 0 5.5%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:2px solid #efbc58;border-radius:0 20% 20% 0;background:linear-gradient(#08325b,#031a35);font:700 2cqw/1.02 Georgia,serif;z-index:3;box-shadow:inset 0 0 0 1px #ffe0a2,0 3px 6px #0008}
+.court-station-number{position:absolute;left:-3%;top:-8%;width:25%;height:114%;display:grid;place-items:center;border:2px solid #f6cf7a;border-radius:50%;background:radial-gradient(ellipse at 40% 20%,#69401c,#241009);box-shadow:0 0 0 2px #a5722d,inset 0 0 0 2px #d9a14b;color:#fff5d6;font:700 4.6cqw/1 Georgia,serif}
+.court-panel{left:50.4%;top:25.5%;width:27%;height:45.6%;border:0;border-radius:0;background-color:transparent;background-repeat:no-repeat;background-size:371% 220.4%;background-position:69% 46.7%;box-shadow:none;padding:2.2% 2.5% 2.4%;font:400 1.65cqw/1.1 Georgia,serif;gap:0;justify-content:space-between;isolation:isolate}
+.court-panel:before{content:'';position:absolute;inset:5% 5% 6%;background:linear-gradient(130deg,#073563,#031d3e);z-index:-1}
+.court-panel .court-order{color:#fff0ce;font:700 2.05cqw/1.02 Georgia,serif;letter-spacing:0;text-shadow:0 2px 2px #000;margin:0;min-height:25%;display:flex;align-items:center;justify-content:center}
+.court-panel h1{font:700 1.72cqw/1.04 Georgia,serif;color:#ffe76b;margin:0;min-height:12%;display:grid;place-items:center}
+.court-panel p{width:100%;text-align:left;line-height:1.1;margin:0}
+.court-panel .court-rule,.court-panel .court-threshold{display:none}
+.court-panel .court-line{width:100%;position:relative;background:linear-gradient(90deg,#8b5d16,#f3ce74 50%,#8b5d16);flex:none;height:1px;margin:2% 0}
+.court-panel .court-line:after{content:'◆';position:absolute;left:47%;top:50%;transform:translateY(-50%);padding:0 3%;color:#ffda75;background:#06284d;font-size:1.1cqw}
+.court-actions{width:100%;min-height:18%;padding:1.5%;box-sizing:border-box;border:2px solid #eab949;border-radius:1.2cqw;background:#062349;box-shadow:inset 0 0 0 1px #ffe4a3,0 2px 3px #0008;gap:3%}
+.court-actions button{font:700 1.5cqw/1.05 Georgia,serif;padding:1%;border-width:1px;border-radius:.8cqw;box-shadow:inset 0 1px 3px #fff4}
+.court-panel .court-actions:has(#courtTrialPass[hidden]) #courtTrialStart{font-size:1.7cqw}
+.court-quests{position:absolute;left:78.1%;top:20.6%;width:20.9%;height:49.5%;z-index:4;background-repeat:no-repeat;background-size:464.4% 196%;background-position:99.1% 41.2%;box-sizing:border-box;padding:2.1% 1.8% 2%;color:#281809;font:700 1.16cqw/1.08 Georgia,serif;isolation:isolate}
+.court-quests:before{content:'';position:absolute;inset:4% 5% 5%;background:linear-gradient(100deg,#fbe6b4,#ffedc5 40%,#f4d994);z-index:-1}
+.court-quests h2{margin:0 0 4%;text-align:center;font:700 2cqw/1.1 Georgia,serif}
+.court-quest-row{display:grid;grid-template-columns:15% 1fr 10%;gap:5%;align-items:center;height:10%;border-top:1px solid #b5893a88}
+.court-quest-row b{display:grid;place-items:center;aspect-ratio:1;border:1px solid #f4c674;border-radius:50%;background:radial-gradient(ellipse at 40% 20%,#67401c,#27120b);color:#fff0cf;box-shadow:0 0 0 1px #9d681f;font-size:1.5cqw}
+.court-quest-check{display:grid;place-items:center;border:1px solid #ba8231;border-radius:50%;aspect-ratio:1;font:700 1.1cqw/1 system-ui;color:transparent}
+.court-quest-check.validated{background:#4c9b23;color:#fff7b8;border-color:#476516}
+.court-quests .court-goal{border-top:1px solid #ac7f32;margin:4% 0 0;padding-top:7%;font-size:1.1cqw;line-height:1.15}
+.court-transition-tools{position:absolute;inset:auto 0 0;height:11.6%;display:flex;align-items:center;justify-content:center;gap:1.4%;padding:0 3%;box-sizing:border-box;background:linear-gradient(#06294b,#031c35);border-top:2px solid #e1ad50;color:#ffecc1}
+.court-transition-tools button{height:62%;border:1px solid #eebc54;border-radius:1.4cqw;padding:0 2%;background:linear-gradient(#073a68,#001a33);color:#fff0cd;font:700 1.5cqw Georgia,serif;box-shadow:0 2px 3px #0009,inset 0 0 0 1px #ac7b28;cursor:pointer;white-space:nowrap}
+.court-transition-tools .court-version{border-left:1px solid #d7a64c;padding-left:2%;font:700 1.2cqw Georgia,serif}
+@media(max-width:600px){.court-panel h1{font-size:1.72cqw}.court-trial-caption{border-width:1px}.court-panel .court-actions{border-width:1px}.court-quests h2{font-size:2cqw}}
+
+#calculatorToggle[hidden],#calculatorDrawer[hidden]{display:none!important}
+.calculator-launch{margin:0 0 12px 8px;padding:8px 12px;border:2px solid #d5ad65;border-radius:10px;background:linear-gradient(#163e70,#08264b);color:#fff0c8;font:700 14px Georgia,serif;cursor:pointer;min-height:40px}
+.calculator-drawer{position:fixed;z-index:85;right:14px;top:clamp(76px,13dvh,122px);bottom:14px;width:310px;max-height:620px;box-sizing:border-box;overflow-y:auto;overscroll-behavior:contain;padding:16px;border:2px solid #d2a85e;border-radius:16px;background:linear-gradient(130deg,#fff4d9,#efdab0);box-shadow:0 8px 35px #0008;color:#14345d;font-family:system-ui,sans-serif;color-scheme:light}
+.calculator-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.calculator-heading h2{font:700 22px Georgia,serif;margin:0}.calculator-heading button{border:1px solid #c8a561;border-radius:8px;background:#fff5df;color:#153452;min-width:36px;min-height:36px;font-size:23px;cursor:pointer}
+.calculator-display{width:100%;box-sizing:border-box;min-height:64px;border:2px solid #bca777;border-radius:9px;padding:10px;background:#fffdf3;color:#16365d;font:600 24px/1.2 system-ui;text-align:right;margin-bottom:12px}
+.calculator-keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.calculator-keys button{min-height:48px;border:1px solid #c5a56a;border-radius:8px;background:linear-gradient(#fffaf0,#ecdcbb);color:#14345b;font:700 21px system-ui;box-shadow:0 2px 2px #5d451d22;cursor:pointer}.calculator-keys button.calc-operator{background:linear-gradient(#27588c,#123963);color:#fff2cf}.calculator-keys button.calc-equals{background:linear-gradient(#39794e,#1b4e31);color:#fff3d7}.calculator-keys button:hover{filter:brightness(1.07)}
+.calculator-copy{width:100%;margin-top:12px;padding:11px 8px;border:1px solid #dbaf61;border-radius:9px;background:linear-gradient(#235a99,#103463);color:#fff1cc;font:700 15px Georgia,serif;cursor:pointer}.calculator-copy:disabled{opacity:.5;cursor:default}.calculator-drawer p{font-size:12px;line-height:1.35;margin:9px 0 0}.calculator-status{min-height:32px;color:#724b19}
+.calculator-drawer button:focus-visible,.calculator-launch:focus-visible,.calculator-display:focus-visible{outline:3px solid #236bc5;outline-offset:2px}
+@media(min-width:960px){.quiz-screen.calculator-open .quiz-content{width:min(550px,calc(100% - 370px));transform:translateX(-165px)}}
+@media(max-width:959px){.calculator-drawer{width:min(310px,calc(100% - 20px));right:10px;bottom:10px;top:76px;max-height:calc(100dvh - 86px)}}
+@media(max-height:500px){.calculator-drawer{top:58px;padding:10px;bottom:6px;max-height:calc(100dvh - 64px)}.calculator-heading{margin-bottom:6px}.calculator-heading h2{font-size:18px}.calculator-display{min-height:40px;font-size:20px;padding:5px;margin-bottom:7px}.calculator-keys{gap:4px}.calculator-keys button{min-height:31px;font-size:18px}.calculator-copy{margin-top:7px;padding:7px}.calculator-drawer p{font-size:11px}}
+
+.court-complete>div.court-victory-card{width:min(1000px,calc(100vw - 32px));max-width:1000px;max-height:calc(100dvh - 32px);padding:0;overflow:auto;background:#08284b;color:#ffedc3;border:2px solid #e3b55a}
+.court-victory-scene{position:relative;width:100%;aspect-ratio:16/8;overflow:hidden;background:#17365b;isolation:isolate}
+.court-victory-backdrop{position:absolute;width:180%;height:180%;max-width:none;left:-80%;top:-80%;object-fit:fill;filter:brightness(.8);transform-origin:90% 90%}
+.court-victory-title{position:absolute;top:5%;left:10%;right:10%;padding:12px;border:2px solid #edc56f;border-radius:14px;background:linear-gradient(#093b6be8,#031b3cf5);text-align:center;z-index:4;color:#ffeab3;text-shadow:0 2px 3px #000;font:700 clamp(20px,3vw,36px)/1.1 Georgia,serif}
+.court-victory-title small{display:block;font-size:.55em;margin-top:7px;color:#fff4d9}
+.court-victory-walker{position:absolute;left:72%;top:65%;width:10%;height:29%;filter:drop-shadow(0 3px 2px #0007);z-index:3;transform-origin:50% 100%}
+.court-victory-walker img{width:100%;height:100%;object-fit:contain}
+.court-victory-aura{position:absolute;left:73%;top:82%;width:12%;height:9%;border:3px solid #fff6ac;border-radius:50%;box-shadow:0 0 18px 8px #ffda2480,inset 0 0 18px #ffcf18;background:#ffdc2440;z-index:2}
+.court-victory-spark{position:absolute;left:var(--sx);top:var(--sy);color:#ffe980;font-size:clamp(18px,3vw,38px);text-shadow:0 0 10px #ffcf27;opacity:0;z-index:4;pointer-events:none}
+.celebrating .court-victory-walker{animation:victoryWalk 3.2s linear forwards}.celebrating .court-victory-backdrop{animation:victoryCamera 4.8s ease-in-out forwards}.celebrating .court-victory-aura{animation:victoryAura 2s 2.8s ease-out both}.celebrating .court-victory-spark{animation:victorySpark 1.7s calc(2.6s + var(--delay)) ease-out both}
+.court-victory-scene.finished .court-victory-walker{left:74%;top:50%;transform:scale(.78)}.court-victory-scene.finished .court-victory-backdrop{transform:scale(1.06)}.court-victory-scene.finished .court-victory-aura{opacity:.7}
+.court-victory-footer{padding:16px;text-align:center}.court-victory-footer p{margin:0 0 8px;font:600 clamp(13px,2vw,18px)/1.35 Georgia,serif}.court-victory-footer .court-victory-next{font:400 13px system-ui;color:#dccdaa}.court-victory-footer button{margin:3px}
+@keyframes victoryWalk{from{left:72%;top:65%;transform:scale(1)}to{left:74%;top:50%;transform:scale(.78)}}
+@keyframes victoryCamera{from{transform:scale(1)}to{transform:scale(1.06)}}
+@keyframes victoryAura{0%{transform:scale(.6);opacity:0}50%{transform:scale(1.6);opacity:1}100%{transform:scale(1);opacity:.7}}
+@keyframes victorySpark{0%{opacity:0;transform:translateY(20px) scale(.2) rotate(0)}40%{opacity:1}100%{opacity:0;transform:translateY(-70px) scale(1.3) rotate(70deg)}}
+@media(prefers-reduced-motion:reduce){.court-victory-scene *{animation:none!important}}
+@media(max-height:500px){.court-victory-scene{aspect-ratio:16/6}.court-victory-title{padding:6px;top:3%;font-size:20px}.court-victory-title small{margin-top:3px}.court-victory-footer{padding:8px}}
+
+.court-map .court-depth-board{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;clip-path:polygon(17.3% 63%,21.65% 62%,21.65% 76%,17.3% 75%);z-index:7;pointer-events:none}
+
+.court-routes path{stroke-linejoin:round;stroke-linecap:round}
+.observatory-group-count,.observatory-group-done{position:absolute;z-index:7;display:flex;align-items:center;justify-content:flex-start;left:87.5%;width:5%;height:3.6%;background:#ffe8b5;color:#261b12;font:700 clamp(7px,1.4vw,24px)/1 Georgia,serif}
+.observatory-group-done{left:95.3%;width:2.3%;height:4%;border:1px solid #4d5a20;background:#4b9529;border-radius:50%;justify-content:center;color:#fff3b4;font-size:1.3vw}
+.observatory-group-count[hidden],.observatory-group-done[hidden],.court-quest-row[hidden],#courtTrialRing[hidden],#skipLevelTwo[hidden],#observatoryContinue[hidden],#observatoryEntrance[hidden],#observatoryEnter[hidden],#observatoryEntranceSkip[hidden]{display:none!important}
+.court-screen.observatory .court-progress-cover{left:71.5%;top:7.4%;width:20%;height:5.8%}
+.observatory .court-ui-header{clip-path:url(#observatoryHudClip)}
+.observatory .court-quests{padding:1.8% 1.6% 1.4%}
+.observatory .court-quests h2{font-size:1.8cqw;margin-bottom:2%}
+.observatory .court-quest-row{height:6%;gap:4%;grid-template-columns:12% 1fr 8%;font-size:.83cqw;line-height:1.03}
+.observatory .court-quest-row b{font-size:1.06cqw}
+.observatory .court-quest-check{font-size:.75cqw}
+.observatory .court-quests .court-goal{font-size:.88cqw;padding-top:3%;margin-top:3%;line-height:1.1}
+#courtTrialRing{position:absolute;left:25%;top:77.5%;width:10%;height:5%;border:2px solid #fff5a1;border-radius:50%;background:#ffd82d44;box-shadow:0 0 12px 5px #ffd82499,inset 0 0 0 4px #ffda32;z-index:2;pointer-events:none}
+.observatory #courtTrialHero{left:26.5%!important;top:59.5%!important}
+.observatory-entrance{z-index:105;animation:observatoryFade .65s ease-out both}
+.observatory-entrance .gate-opening{left:41.9%;top:19.4%;width:16.3%;height:36%;border-radius:50% 50% 0 0 / 42% 42% 0 0}
+.observatory-entrance .gate-door{background:repeating-linear-gradient(90deg,transparent 0 13%,#0003 13.5% 14%,transparent 14.5% 28%),linear-gradient(90deg,#06132c,#153b70 45%,#06142e)}
+.observatory-entrance .level-two-scene.playing .level-two-walker{animation:observatoryApproach 7s linear forwards}
+.observatory-entrance .level-two-scene.arrived .level-two-walker{top:35.2%;transform:scale(.6)}
+@keyframes observatoryApproach{from{top:70%;transform:scale(1)}to{top:35.2%;transform:scale(.6)}}
+@keyframes observatoryFade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.observatory-entrance{animation:none}.observatory-entrance .level-two-scene.playing .level-two-walker{animation:none}}
+
+.observatory-victory .court-victory-backdrop{width:100%;height:100%;left:0;top:0;transform-origin:center}
+.observatory-victory .court-victory-walker{left:45%;top:65%}
+.observatory-victory .celebrating .court-victory-walker{animation:observatoryVictoryWalk 3.2s linear forwards}
+.observatory-victory .court-victory-scene.finished .court-victory-walker{left:45%;top:27%;transform:scale(.65)}
+.observatory-victory .court-victory-aura{left:44%;top:52%;width:12%}
+@keyframes observatoryVictoryWalk{from{left:45%;top:65%;transform:scale(1)}to{left:45%;top:27%;transform:scale(.65)}}
+
+.observatory .court-map .court-depth-board{clip-path:polygon(82% 18%,100% 18%,100% 73%,82% 73%)}
+.observatory-group-count,.observatory-group-done{z-index:8}
+
   </style>
 </head>
 <body>
@@ -764,13 +906,14 @@
       <span id="questDone" class="quest-done" hidden aria-label="Premier défi validé"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 5 5L20 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <div class="quest-progress map-progress" role="progressbar" aria-label="Défis validés" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span class="quest-progress-fill"></span></div>
       <span id="mapCounter" class="map-counter" hidden>1 / 3 défis validés</span>
-      <div class="version">Maths Quest · version 0.3.29</div>
+      <div class="version">Maths Quest · version 0.3.36</div>
     </div>
   </main>
   <footer class="toolbar">
     <button id="fullscreen" type="button">⛶ Plein écran</button>
     <button id="zoom" class="zoom-button" type="button" aria-pressed="false">⌕ Agrandir la carte</button>
     <button id="reset" class="secondary" type="button">↺ Retour au départ</button>
+    <button id="skipLevelOne" type="button" title="Accéder directement au niveau 2 pour le tester">Passer au niveau 2 →</button>
     <button id="startMobile" class="mobile-start" type="button">▶ Commencer la quête</button>
     <span id="message" class="detail" role="status" aria-live="polite">
       Clique sur <b>Commencer la quête</b> pour rejoindre le premier cercle et découvrir les lois de l’Académie.
@@ -795,7 +938,7 @@
           draggable="false">
         <div class="quest-progress transition-progress" role="progressbar" aria-label="Défis validés" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span class="quest-progress-fill"></span></div>
         <span class="transition-recap" id="transitionRecap" aria-live="polite">1 / 3 défis validés ✓</span>
-        <span class="transition-version">Maths Quest · v0.3.29</span>
+        <span class="transition-version">Maths Quest · v0.3.36</span>
         <div class="transition-choice-buttons"><button id="transitionStart" class="transition-hit transition-start" type="button"
           aria-label="Commencer le défi : Tables de multiplication" title="Commencer le défi"></button>
           <button id="skipCompletedTrial" class="skip-completed" type="button" hidden>Passer</button></div>
@@ -829,11 +972,12 @@
         <span class="quiz-logo" aria-hidden="true"><svg viewBox="0 0 64 68" width="45" height="48" role="presentation"><path d="M32 3 57 12 55 39Q47 55 32 64 17 55 9 39L7 12Z" fill="#173d79" stroke="#f8d38c" stroke-width="3"/><path d="M32 22Q23 14 15 20V43Q25 38 32 45Q39 38 49 43V20Q40 14 32 22Z" fill="#fff3cd" stroke="#d7b36a" stroke-width="2"/><path d="M32 22V45" fill="none" stroke="#aa8246" stroke-width="2"/><path d="M18 25Q25 23 29 27M35 27Q41 23 46 25M18 31Q24 29 29 33M35 33Q41 29 46 31" fill="none" stroke="#a68a5c" stroke-width="1.5"/></svg></span>
         <span><strong>Maths Quest</strong><small>L'Académie des Nombres · Niveau 1</small></span>
       </div>
-      <span class="quiz-stage-label">⚜ Les bases de l'Académie <small>Version 0.3.29</small></span>
+      <span class="quiz-stage-label">⚜ Les bases de l'Académie <small>Version 0.3.36</small></span>
     </header>
     <div class="quiz-content">
       <div id="quizQuestions" class="quiz-questions">
         <button id="quizBack" class="quiz-back" type="button">← Retour à la carte</button>
+        <button id="calculatorToggle" class="calculator-launch" type="button" aria-expanded="false" aria-controls="calculatorDrawer" hidden>▦ Calculatrice</button>
         <div class="quiz-summary-head">
           <div class="quiz-title-wrap">
             <span class="quiz-icon" aria-hidden="true">⚔</span>
@@ -888,9 +1032,17 @@
         <div class="level-two-walker"><img id="levelTwoHero" alt="Le héros, vu de dos, avance vers la grande porte." draggable="false"></div>
       </div>
     </div>
-    <footer class="level-two-controls"><p id="levelTwoStatus" role="status" aria-live="polite">Le héros s’avance sur le pont…</p><div class="level-two-buttons"><button id="levelTwoBack" type="button">← Retour au pont</button><button id="levelTwoSkip" type="button">Passer l’animation</button><button id="levelTwoReplay" type="button" hidden>↻ Revoir la transition</button><button id="levelTwoFullscreen" type="button">⛶ Plein écran</button></div></footer>
+    <footer class="level-two-controls"><p id="levelTwoStatus" role="status" aria-live="polite">Le héros s’avance sur le pont…</p><div class="level-two-buttons"><button id="levelTwoBack" type="button">← Retour au pont</button><button id="levelTwoSkip" type="button">Passer l’animation</button><button id="levelTwoReplay" type="button" hidden>↻ Revoir la transition</button><button id="courtEnter" type="button" hidden>Entrer dans la Cour des Savoirs →</button><button id="levelTwoFullscreen" type="button">⛶ Plein écran</button></div></footer>
   </section>
 
+<section id="courtScreen" class="court-screen" hidden aria-label="Niveau 2, La Cour des Savoirs">
+<div id="courtArea" class="court-area"><div id="courtMap" class="court-map"><img id="courtBackground" class="court-background" src="assets/cour-des-savoirs.png" alt="La Cour des Savoirs : six ateliers autour de la fontaine au cheval." draggable="false"><svg class="court-routes" viewBox="0 0 1616 970" aria-hidden="true"><defs><filter id="courtGlow"><feGaussianBlur stdDeviation="5"/></filter><marker id="courtArrow" viewBox="0 0 24 24" refX="19" refY="12" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M2 2 22 12 2 22 7 12Z" fill="#fff7a8" stroke="#ffd52e" stroke-width="2"/></marker></defs><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/></svg><div class="court-progress-cover"><div id="courtProgress" class="court-progress" role="progressbar" aria-label="Défis validés du niveau 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="courtProgressFill"></span></div><span id="courtCount">0 / 6 défis validés</span></div><span id="courtDone0" class="court-done" style="top:27%" hidden aria-label="Défi 1 validé">✓</span><span id="courtDone1" class="court-done" style="top:33.3%" hidden aria-label="Défi 2 validé">✓</span><span id="courtDone2" class="court-done" style="top:39.8%" hidden aria-label="Défi 3 validé">✓</span><span id="courtDone3" class="court-done" style="top:46.1%" hidden aria-label="Défi 4 validé">✓</span><span id="courtDone4" class="court-done" style="top:52.36%" hidden aria-label="Défi 5 validé">✓</span><span id="courtDone5" class="court-done" style="top:58.42%" hidden aria-label="Défi 6 validé">✓</span><span id="observatoryGroup0" class="observatory-group-count" style="top:30.6%" hidden>0 / 5</span><span id="observatoryGroupDone0" class="observatory-group-done" style="top:28.7%" hidden>✓</span><span id="observatoryGroup1" class="observatory-group-count" style="top:43.4%" hidden>0 / 2</span><span id="observatoryGroupDone1" class="observatory-group-done" style="top:39.0%" hidden>✓</span><span id="observatoryGroup2" class="observatory-group-count" style="top:54.1%" hidden>0 / 6</span><span id="observatoryGroupDone2" class="observatory-group-done" style="top:50.8%" hidden>✓</span><img id="courtHero" class="court-hero" alt="Le héros se déplace vers les épreuves." draggable="false"><img id="courtDepthBoard" class="court-depth-board" alt="" aria-hidden="true"></div></div>
+<footer class="court-controls"><p id="courtMessage" role="status" aria-live="polite"></p><div class="court-buttons"><button id="courtAction" type="button">⚔ Commencer le parcours</button><button id="courtFullscreen" type="button">⛶ Plein écran</button><button id="courtZoom" type="button">⌕ Agrandir la carte</button><button id="courtReset" type="button">↻ Retour à l’entrée</button><button id="skipLevelTwo" type="button">Passer au niveau 3 →</button><button id="courtBack" type="button">← Niveau 1</button></div></footer></section>
+<section id="courtTrial" class="court-screen court-trial" hidden aria-label="Entrée de l’épreuve du niveau 2"><div id="courtTrialArea" class="court-area"><div id="courtTrialScene" class="court-trial-scene"><img id="courtTrialHeader" class="court-ui-header" alt="" aria-hidden="true"><div class="court-world-title"><span id="courtWorldTitle">Niveau 2</span><small id="courtWorldSubtitle">La Cour des Savoirs</small></div><div class="court-trial-progress"><div class="court-progress" role="progressbar" id="courtTrialProgress" aria-label="Défis validés du niveau 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="courtTrialProgressFill"></span></div><span id="courtTrialCount" class="court-trial-count"></span></div><aside id="courtTrialQuests" class="court-quests" aria-label="Quêtes du niveau"><h2>Quêtes du niveau</h2><div id="worldQuestRow0" class="court-quest-row"><b>1</b><span id="worldQuestLabel0">Conversions de longueurs</span><span id="courtTrialDone0" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow1" class="court-quest-row"><b>2</b><span id="worldQuestLabel1">Tableaux de proportionnalité</span><span id="courtTrialDone1" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow2" class="court-quest-row"><b>3</b><span id="worldQuestLabel2">Étendue d’une série</span><span id="courtTrialDone2" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow3" class="court-quest-row"><b>4</b><span id="worldQuestLabel3">Probabilités</span><span id="courtTrialDone3" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow4" class="court-quest-row"><b>5</b><span id="worldQuestLabel4">Calcul d’expressions</span><span id="courtTrialDone4" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow5" class="court-quest-row"><b>6</b><span id="worldQuestLabel5">Équations</span><span id="courtTrialDone5" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow6" class="court-quest-row" hidden><b>7</b><span id="worldQuestLabel6"></span><span id="courtTrialDone6" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow7" class="court-quest-row" hidden><b>8</b><span id="worldQuestLabel7"></span><span id="courtTrialDone7" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow8" class="court-quest-row" hidden><b>9</b><span id="worldQuestLabel8"></span><span id="courtTrialDone8" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow9" class="court-quest-row" hidden><b>10</b><span id="worldQuestLabel9"></span><span id="courtTrialDone9" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow10" class="court-quest-row" hidden><b>11</b><span id="worldQuestLabel10"></span><span id="courtTrialDone10" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow11" class="court-quest-row" hidden><b>12</b><span id="worldQuestLabel11"></span><span id="courtTrialDone11" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow12" class="court-quest-row" hidden><b>13</b><span id="worldQuestLabel12"></span><span id="courtTrialDone12" class="court-quest-check" aria-label="Non validé">✓</span></div><p class="court-goal">⭐ Obtiens au moins<br><strong>80 %</strong> de bonnes réponses<br>pour avancer au niveau <span id="courtGoalLevel">3</span>.</p></aside><img id="courtTrialArt" class="court-trial-art" alt="Vue de face de l’atelier" draggable="false"><div class="court-trial-caption"><span id="courtTrialNumber" class="court-station-number"></span><span id="courtTrialPlace"></span></div><div id="courtTrialRing" hidden aria-hidden="true"></div><img id="courtTrialHero" class="court-trial-hero" alt="Le héros regarde l’atelier." draggable="false"><div class="court-panel"><span id="courtTrialOrder" class="court-order"></span><h1 id="courtTrialTitle"></h1><div class="court-line"></div><p id="courtTrialRule" class="court-rule"></p><p>🎯 10 questions</p><p id="courtTrialTime"></p><p class="court-threshold">⭐ 8 bonnes réponses pour continuer</p><div class="court-line"></div><div class="court-actions"><button id="courtTrialStart" type="button">▶ Commencer le défi</button><button id="courtTrialPass" type="button" hidden>Passer</button></div></div><footer class="court-transition-tools"><button id="courtTrialBack" type="button">← Retour à la carte</button><button id="courtTrialFullscreen" type="button">⛶ Plein écran</button><button id="courtTrialZoom" type="button">⌕ Agrandir la carte</button><button id="courtTrialReplay" type="button">↻ Rejouer le trajet</button><span class="court-version">Maths Quest · v0.3.36</span></footer></div></div></section>
+<div id="courtComplete" class="court-complete" hidden role="dialog" aria-modal="true" aria-labelledby="courtCompleteTitle"><div class="court-victory-card"><div id="courtVictoryScene" class="court-victory-scene"><img id="courtVictoryBackdrop" class="court-victory-backdrop" alt="La dernière porte de la Cour des Savoirs."><h2 id="courtCompleteTitle" class="court-victory-title">🏆 Niveau 2 terminé !<small>La Cour des Savoirs</small></h2><div class="court-victory-aura" aria-hidden="true"></div><div class="court-victory-walker"><img id="courtVictoryHero" alt="Le héros avance vers la porte puis s’arrête."></div><span class="court-victory-spark" aria-hidden="true" style="--sx:64%;--sy:57%;--delay:0.0s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:70%;--sy:50%;--delay:0.08s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:76%;--sy:45%;--delay:0.16s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:83%;--sy:53%;--delay:0.24s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:91%;--sy:60%;--delay:0.32s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:86%;--sy:72%;--delay:0.4s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:68%;--sy:75%;--delay:0.48s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:78%;--sy:68%;--delay:0.56s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:58%;--sy:65%;--delay:0.64s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:94%;--sy:43%;--delay:0.72s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:55%;--sy:43%;--delay:0.8s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:88%;--sy:36%;--delay:0.88s">✦</span></div><div class="court-victory-footer"><p id="courtVictoryStatus" role="status" aria-live="polite">Six épreuves remportées !</p><p id="courtVictoryNext" class="court-victory-next">La prochaine aventure sera ajoutée au-delà de cette porte.</p><button id="observatoryContinue" type="button">Rejoindre l’Observatoire royal →</button><button id="courtVictoryReplay" type="button">↻ Revoir l’animation</button><button id="courtCompleteClose" type="button">Revenir à la cour</button></div></div></div>
+<template id="courtArts"><img src="assets/atelier-1.png" alt="Atelier 1"><img src="assets/atelier-2.png" alt="Atelier 2"><img src="assets/atelier-3.png" alt="Atelier 3"><img src="assets/atelier-4.png" alt="Atelier 4"><img src="assets/atelier-5.png" alt="Atelier 5"><img src="assets/atelier-6.png" alt="Atelier 6"></template>
+<aside id="calculatorDrawer" class="calculator-drawer" hidden aria-labelledby="calculatorTitle"><div class="calculator-heading"><h2 id="calculatorTitle">Calculatrice</h2><button id="calculatorClose" type="button" aria-label="Fermer la calculatrice">×</button></div><label class="sr-only" for="calculatorDisplay">Calcul et résultat</label><input id="calculatorDisplay" class="calculator-display" type="text" readonly value="0" aria-describedby="calculatorStatus" autocomplete="off"><div class="calculator-keys"><button id="calculatorKey0" type="button" aria-label="Effacer tout">C</button><button id="calculatorKey1" type="button" aria-label="Effacer le dernier caractère">⌫</button><button id="calculatorKey2" type="button">(</button><button id="calculatorKey3" type="button">)</button><button id="calculatorKey4" type="button">7</button><button id="calculatorKey5" type="button">8</button><button id="calculatorKey6" type="button">9</button><button id="calculatorKey7" type="button" class="calc-operator">÷</button><button id="calculatorKey8" type="button">4</button><button id="calculatorKey9" type="button">5</button><button id="calculatorKey10" type="button">6</button><button id="calculatorKey11" type="button" class="calc-operator">×</button><button id="calculatorKey12" type="button">1</button><button id="calculatorKey13" type="button">2</button><button id="calculatorKey14" type="button">3</button><button id="calculatorKey15" type="button" class="calc-operator">−</button><button id="calculatorKey16" type="button">0</button><button id="calculatorKey17" type="button">,</button><button id="calculatorKey18" type="button" class="calc-equals">=</button><button id="calculatorKey19" type="button" class="calc-operator">+</button></div><button id="calculatorCopy" class="calculator-copy" type="button" disabled>Reporter le résultat</button><p id="calculatorStatus" class="calculator-status" role="status" aria-live="polite"></p><p><span id="calculatorHint">Étendue = maximum − minimum.</span><br>Le temps continue de s’écouler.</p></aside>
+<section id="observatoryEntrance" class="level-two-screen observatory-entrance" hidden aria-label="Transition vers le niveau 3"><header class="level-two-heading"><h1>Niveau 3 · L’Observatoire royal</h1><p>De la Cour des Savoirs aux terrasses étoilées</p></header><div id="observatoryEntranceArea" class="level-two-stage"><div id="observatoryEntranceScene" class="level-two-scene"><img id="observatoryGatePicture" class="level-two-background" src="assets/observatory-gate.jpg" alt="Un pont et un escalier montent vers la grande porte constellée de l’Observatoire."><div class="gate-opening" aria-hidden="true"><div class="gate-door gate-door-left"><span class="door-inset"></span><span class="gate-emblem">✦</span><span class="gate-handle"></span></div><div class="gate-door gate-door-right"><span class="door-inset"></span><span class="gate-emblem">✦</span><span class="gate-handle"></span></div></div><div class="level-two-walker"><img id="observatoryEntranceHero" alt="Le héros vu de dos avance vers la porte." draggable="false"></div></div></div><footer class="level-two-controls"><p id="observatoryEntranceStatus" role="status" aria-live="polite"></p><div class="level-two-buttons"><button id="observatoryEntranceBack" type="button">← Retour à la cour</button><button id="observatoryEntranceSkip" type="button">Passer l’animation</button><button id="observatoryEntranceReplay" type="button">↻ Revoir la transition</button><button id="observatoryEnter" type="button" hidden>Entrer dans l’Observatoire →</button><button id="observatoryEntranceFullscreen" type="button">⛶ Plein écran</button></div></footer></section><svg width="0" height="0" aria-hidden="true"><defs><clipPath id="observatoryHudClip" clipPathUnits="objectBoundingBox"><rect x="0" y="0" width=".33" height=".15"/><rect x=".386" y="0" width=".227" height=".127"/><rect x=".664" y="0" width=".332" height=".165"/></clipPath></defs></svg><template id="observatoryMapArt"><img src="assets/observatory-map.jpg" alt="La carte de l’Observatoire royal."></template><template id="observatoryArts"><img src="assets/observatory-station-0.jpg" alt="Épreuve 1 de l’Observatoire."><img src="assets/observatory-station-1.jpg" alt="Épreuve 2 de l’Observatoire."><img src="assets/observatory-station-2.jpg" alt="Épreuve 3 de l’Observatoire."><img src="assets/observatory-station-3.jpg" alt="Épreuve 4 de l’Observatoire."><img src="assets/observatory-station-4.jpg" alt="Épreuve 5 de l’Observatoire."><img src="assets/observatory-station-5.jpg" alt="Épreuve 6 de l’Observatoire."><img src="assets/observatory-station-6.jpg" alt="Épreuve 7 de l’Observatoire."><img src="assets/observatory-station-7.jpg" alt="Épreuve 8 de l’Observatoire."><img src="assets/observatory-station-8.jpg" alt="Épreuve 9 de l’Observatoire."><img src="assets/observatory-station-9.jpg" alt="Épreuve 10 de l’Observatoire."><img src="assets/observatory-station-10.jpg" alt="Épreuve 11 de l’Observatoire."><img src="assets/observatory-station-11.jpg" alt="Épreuve 12 de l’Observatoire."><img src="assets/observatory-station-12.jpg" alt="Épreuve 13 de l’Observatoire."></template><template id="observatoryRoutes"><svg viewBox="0 0 1672 941"><defs><filter id="observatoryGlow"><feGaussianBlur stdDeviation="4"/></filter><marker id="observatoryArrow" viewBox="0 0 24 24" refX="19" refY="12" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M2 2 22 12 2 22 7 12Z" fill="#fff7a8" stroke="#ffd52e" stroke-width="2"/></marker></defs><path d="M223.43,863.22 L208,850 L180,807 L183.32,772.97" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M223.43,863.22 L208,850 L180,807 L183.32,772.97" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M223.43,863.22 L208,850 L180,807 L183.32,772.97" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M188.32,760.49 L213,729 L215.13,725.76" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M188.32,760.49 L213,729 L215.13,725.76" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M188.32,760.49 L213,729 L215.13,725.76" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M270.29,701.0 L285,704 L333.46,722.5" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M270.29,701.0 L285,704 L333.46,722.5" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M270.29,701.0 L285,704 L333.46,722.5" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M346.86,726.37 L390,735 L392.19,734.44" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M346.86,726.37 L390,735 L392.19,734.44" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M346.86,726.37 L390,735 L392.19,734.44" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M450.14,752.9 L454,758 L435,794 L448.09,822.63" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M450.14,752.9 L454,758 L435,794 L448.09,822.63" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M450.14,752.9 L454,758 L435,794 L448.09,822.63" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M457.21,832.23 L501,855 L547,871 L557.52,872.75" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M457.21,832.23 L501,855 L547,871 L557.52,872.75" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M457.21,832.23 L501,855 L547,871 L557.52,872.75" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M629.7,883.59 L663,888 L748.01,893.54" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M629.7,883.59 L663,888 L748.01,893.54" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M629.7,883.59 L663,888 L748.01,893.54" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M762.0,894.23 L809.02,895.76" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M762.0,894.23 L809.02,895.76" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M762.0,894.23 L809.02,895.76" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M881.95,898.8 L944,902 L1031.0,902.0" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M881.95,898.8 L944,902 L1031.0,902.0" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M881.95,898.8 L944,902 L1031.0,902.0" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1044.98,901.47 L1079.11,898.88" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1044.98,901.47 L1079.11,898.88" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1044.98,901.47 L1079.11,898.88" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1149.42,882.81 L1176,872 L1208.43,834.31" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1149.42,882.81 L1176,872 L1208.43,834.31" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1149.42,882.81 L1176,872 L1208.43,834.31" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1216.07,822.71 L1234,786 L1233.78,785.58" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1216.07,822.71 L1234,786 L1233.78,785.58" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1216.07,822.71 L1234,786 L1233.78,785.58" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1250.79,755.87 L1270,758 L1333,765 L1378,758 L1409,732 L1414,702 L1403.95,680.35" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1250.79,755.87 L1270,758 L1333,765 L1378,758 L1409,732 L1414,702 L1403.95,680.35" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1250.79,755.87 L1270,758 L1333,765 L1378,758 L1409,732 L1414,702 L1403.95,680.35" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1397.36,668.02 L1387,651 L1368,623 L1356,594 L1351,561 L1293,543 L1210.97,539.58" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1397.36,668.02 L1387,651 L1368,623 L1356,594 L1351,561 L1293,543 L1210.97,539.58" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1397.36,668.02 L1387,651 L1368,623 L1356,594 L1351,561 L1293,543 L1210.97,539.58" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1207.72,542.42 L1228,545 L1280,548 L1327,549 L1352,540 L1362,520 L1361,500 L1353,480 L1345,455 L1339,434 L1325,413 L1308,395 L1289.11,384.42" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1207.72,542.42 L1228,545 L1280,548 L1327,549 L1352,540 L1362,520 L1361,500 L1353,480 L1345,455 L1339,434 L1325,413 L1308,395 L1289.11,384.42" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1207.72,542.42 L1228,545 L1280,548 L1327,549 L1352,540 L1362,520 L1361,500 L1353,480 L1345,455 L1339,434 L1325,413 L1308,395 L1289.11,384.42" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1276.29,379.01 L1246,370 L1215,362 L1114,343 L1016,362 L908,356 L808,344 L710,342 L620,341 L531,350 L454,361 L369,386 L323.22,400.51" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1276.29,379.01 L1246,370 L1215,362 L1114,343 L1016,362 L908,356 L808,344 L710,342 L620,341 L531,350 L454,361 L369,386 L323.22,400.51" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1276.29,379.01 L1246,370 L1215,362 L1114,343 L1016,362 L908,356 L808,344 L710,342 L620,341 L531,350 L454,361 L369,386 L323.22,400.51" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M319.54,399.1 L345,389 L396.38,371.28" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M319.54,399.1 L345,389 L396.38,371.28" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M319.54,399.1 L345,389 L396.38,371.28" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M409.92,367.92 L416.46,366.89" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M409.92,367.92 L416.46,366.89" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M409.92,367.92 L416.46,366.89" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M488.63,355.93 L529.07,350.01" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M488.63,355.93 L529.07,350.01" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M488.63,355.93 L529.07,350.01" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M542.97,348.34 L582.17,344.6" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M542.97,348.34 L582.17,344.6" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M542.97,348.34 L582.17,344.6" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M655.0,340.62 L705.0,340.08" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M655.0,340.62 L705.0,340.08" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M655.0,340.62 L705.0,340.08" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M718.99,340.29 L770.03,342.42" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M718.99,340.29 L770.03,342.42" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M718.99,340.29 L770.03,342.42" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M842.87,346.97 L895.03,351.41" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M842.87,346.97 L895.03,351.41" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M842.87,346.97 L895.03,351.41" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M908.97,352.61 L978.15,358.68" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M908.97,352.61 L978.15,358.68" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M908.97,352.61 L978.15,358.68" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1050.97,360.57 L1114,358 L1179.28,338.96" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1050.97,360.57 L1114,358 L1179.28,338.96" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1050.97,360.57 L1114,358 L1179.28,338.96" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1192.13,333.63 L1212.7,322.31" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1192.13,333.63 L1212.7,322.31" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1192.13,333.63 L1212.7,322.31" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/></svg></template>
   <script>
   (()=>{
     'use strict';
@@ -1152,13 +1304,13 @@
       levelTwoScene.classList.remove('playing');levelTwoScene.classList.add('gate-open','arrived');
       levelTwoHero.src=heroIdle[6];levelTwoHero.style.transform='';
       levelTwoStatus.textContent='La grande porte est ouverte. Bienvenue au niveau 2 !';
-      document.getElementById('levelTwoSkip').hidden=true;document.getElementById('levelTwoReplay').hidden=false;
+      document.getElementById('levelTwoSkip').hidden=true;document.getElementById('levelTwoReplay').hidden=false;document.getElementById('courtEnter').hidden=false;
     }
     function playLevelTwoEntrance(){
       if(levelTwoScreen.hidden)return;clearLevelTwoAnimation();
       levelTwoScene.classList.remove('playing','gate-open','arrived');
       levelTwoHero.src=heroIdle[6];levelTwoHero.style.transform='';
-      document.getElementById('levelTwoSkip').hidden=false;document.getElementById('levelTwoReplay').hidden=true;
+      document.getElementById('levelTwoSkip').hidden=false;document.getElementById('levelTwoReplay').hidden=true;document.getElementById('courtEnter').hidden=true;
       levelTwoStatus.textContent='Le héros s’avance sur le pont…';
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishLevelTwoEntrance();return}
       void levelTwoScene.offsetWidth;levelTwoScene.classList.add('playing');
@@ -1450,8 +1602,8 @@ function generateRelatives(level){
       document.getElementById('questDone').hidden=!passed;
       document.getElementById('questDone2').hidden=!secondPassed;
       document.getElementById('questDone3').hidden=!isChallengeCompleted(3);
-      const count=challenges.filter(challenge=>isChallengeCompleted(challenge.stage)).length;
-      const total=challenges.length;
+      const count=challenges.filter(challenge=>challenge.stage<=3&&isChallengeCompleted(challenge.stage)).length;
+      const total=3;
       document.getElementById('mapCounter').hidden=false;
       document.querySelectorAll('.quest-progress').forEach(bar=>{
         bar.setAttribute('aria-valuenow',String(count));bar.setAttribute('aria-valuemax',String(total));
@@ -1460,24 +1612,33 @@ function generateRelatives(level){
       });
       document.getElementById('mapCounter').textContent=count+' / '+total+' défis validés';
       document.getElementById('transitionRecap').textContent=count+' / '+total+' défis validés ✓';
+      updateCourtStatus();
     }
     function showQuiz(){
       if(releasePartialFullscreen(showQuiz))return;
-      if(currentStage<1||currentStage>3||(currentStage>1&&!isChallengeCompleted(currentStage-1)))return;
-      hideTransition();stopQuizTimers();sessionToken++;
-      questions=currentStage===3?generateEquivalentFractions():currentStage===2?generateRelatives('add').map(q=>({...q,answer:q.ans})):generateTables();
-      questionTime=currentStage===3?30000:10000;questionIndex=0;correct=0;answers=[];totalSpentMs=0;
+      if(!challenges.some(item=>item.stage===currentStage)||(currentStage===5&&!isChallengeCompleted(3)&&!levelTwoDirectAccess)||(currentStage===12&&!levelThreeDirectAccess&&!worldTwo.modules.every((_,i)=>isChallengeCompleted(i+5)))||(currentStage>1&&currentStage!==5&&currentStage!==12&&!isChallengeCompleted(currentStage-1)))return;
+      hideTransition();courtTrial.hidden=true;stopQuizTimers();sessionToken++;closeCalculator();resetCalculator();calcToggle.hidden=!calculatorAvailable();document.getElementById('calculatorHint').textContent=currentStage===7?'Étendue = maximum − minimum.':currentStage===14?'Arrondis le résultat au dixième.':'Pour un carré, multiplie le nombre par lui-même.';
+      questions=currentStage>=5?courtModule().gen().map(q=>({...q,answer:q.ans})):currentStage===3?generateEquivalentFractions():currentStage===2?generateRelatives('add').map(q=>({...q,answer:q.ans})):generateTables();
+      questionTime=currentStage>=5?courtModule().time*1000:currentStage===3?30000:10000;questionIndex=0;correct=0;answers=[];totalSpentMs=0;
       const title=stageTitles[currentStage];
-      quizScreen.classList.toggle('fractions-quiz',currentStage===3);
+      document.querySelector('.quiz-brand small').textContent="L’Académie des Nombres · Niveau "+(currentStage>=12?'3':currentStage>=5?'2':'1');
+      document.querySelector('.quiz-stage-label').innerHTML=(currentStage>=12?'⚜ L’Observatoire royal':currentStage>=5?'⚜ La Cour des Savoirs':'⚜ Les bases de l’Académie')+' <small>Version 0.3.36</small>';
+      quizScreen.classList.toggle('fractions-quiz',currentStage===3);quizScreen.classList.toggle('level2-quiz',currentStage>=5);
       document.querySelector('.quiz-tip').textContent=currentStage===3?'Trouve le numérateur manquant · 8 bonnes réponses pour rejoindre le pont.':'⚜ Obtiens au moins 8 bonnes réponses pour ouvrir la voie suivante.';
       document.querySelector('.quiz-title-wrap strong').textContent=title;
       quizScreen.setAttribute('aria-label','Épreuve : '+title);
       document.querySelector('label[for="quizAnswer"]').textContent=currentStage===3?'Numérateur manquant de la fraction':currentStage===2?'Résultat de l’addition (signe moins autorisé)':'Résultat de la multiplication';
-      qInput.setAttribute('inputmode',currentStage===2?'text':'numeric');
-      quizScreen.style.backgroundSize=currentStage>1?'auto 160%':'';quizScreen.style.backgroundPosition=currentStage>1?'50% 30%':'';
-      quizScreen.style.backgroundImage=currentStage>1?'linear-gradient(#071b3999,#071b3999),url("'+mapSource+'")':'';
+      qInput.type=currentStage>=5?'text':'number';
+      qInput.setAttribute('inputmode',currentStage>=5?(courtModule().ansType==='fraction'?'text':courtModule().ansType==='decimal'?'decimal':courtModule().ansType==='text'?'text':'numeric'):currentStage===2?'text':'numeric');
+      qInput.placeholder=currentStage>=5&&courtModule().ansType==='fraction'?'Ex. : 3/5':currentStage>=12&&courtModule().ansType==='text'?'Ex. : 2x + 3':'?';
+      if(currentStage>=5){document.querySelector('label[for="quizAnswer"]').textContent=courtModule().ansType==='fraction'?'Probabilité sous forme de fraction (exemple : 3/5)':'Ta réponse';document.querySelector('.quiz-tip').textContent=courtModule().ansType==='fraction'?'Écris une fraction, par exemple 3/5. Les fractions équivalentes sont acceptées.':courtModule().ansType==='decimal'?'Virgule ou point acceptés · 8 bonnes réponses pour continuer.':'8 bonnes réponses pour continuer.';}
+      // Each exercise keeps the frontal scenery of its own preceding transition.
+      const exerciseScenery=currentStage>=5?courtArts[currentStage-courtBase]:currentStage===3?fractionArt.src:currentStage===2?relativeArt.src:tableArt;
+      quizScreen.style.backgroundSize='cover';quizScreen.style.backgroundPosition='center';
+      quizScreen.style.backgroundImage='linear-gradient(#071b3999,#071b3999),url("'+exerciseScenery+'")';
       quizActive=true;completed=false;
       resultsArea.hidden=true;questionArea.hidden=false;
+      if(currentStage>=12&&courtModule().ansType==='text')document.querySelector('.quiz-tip').textContent='Réduis l’expression. Carré : ² ou ^2 ; termes équivalents acceptés.';
       quizScreen.hidden=false;
       document.body.style.overflow='hidden';
       renderQuestion();
@@ -1491,10 +1652,10 @@ function generateRelatives(level){
     }
     function renderQuestion(){
       if(!quizActive)return;
-      const q=questions[questionIndex];completed=false;
+      const q=questions[questionIndex];completed=false;resetCalculator();
       qLabel.textContent='QUESTION '+(questionIndex+1)+' / 10';
       qOperation.classList.toggle('fraction-question',currentStage===3);
-      if(currentStage===3)qOperation.innerHTML=q.html;else qOperation.textContent=operation(q);
+      if(currentStage===3||currentStage>=5)qOperation.innerHTML=q.html;else qOperation.textContent=operation(q);
       qScore.textContent=String(correct);
       qProgress.style.width=(questionIndex*10)+'%';
       qInput.value='';qInput.disabled=false;qInput.className='';
@@ -1513,16 +1674,16 @@ function generateRelatives(level){
     }
     function gradeAnswer(timeout=false){
       if(!quizActive||completed)return;
-      completed=true;clearInterval(quizTimer);
+      completed=true;clearInterval(quizTimer);calcCopy.disabled=true;
       const q=questions[questionIndex];
       const given=qInput.value.trim();
-      const good=!timeout && /^[+-]?\d+$/.test(given) && Number(given)===q.answer && performance.now()<=deadline;
+      const good=!timeout && acceptsAnswer(given,q) && performance.now()<=deadline;
       if(good)correct++;
       totalSpentMs+=Math.min(questionTime,Math.max(0,performance.now()-lastQuestionStarted));
-      answers.push({html:operation(q),a:q.a,b:q.b,answer:q.answer,given:timeout?null:given,ok:good});
+      answers.push({html:operation(q),a:q.a,b:q.b,answer:answerText(q.answer),given:timeout?null:given,ok:good});
       qInput.disabled=true;qSubmit.disabled=true;
       qInput.className=good?'good':'bad';
-      qFeedback.textContent=good?'✅ Bravo !':timeout?'⏱️ Temps écoulé · réponse : '+q.answer:'❌ Pas tout à fait · réponse : '+q.answer;
+      qFeedback.textContent=good?'✅ Bravo !':timeout?'⏱️ Temps écoulé · réponse : '+answerText(q.answer):'❌ Pas tout à fait · réponse : '+answerText(q.answer);
       qFeedback.className='quiz-feedback '+(good?'good':'bad');
       qScore.textContent=String(correct);
       const token=sessionToken;
@@ -1533,7 +1694,7 @@ function generateRelatives(level){
       },1400);
     }
     function showResults(){
-      stopQuizTimers();quizActive=false;
+      stopQuizTimers();quizActive=false;closeCalculator();calcToggle.hidden=true;
       qProgress.style.width='100%';
       const success=correct>=8;
       if(success){
@@ -1544,25 +1705,26 @@ function generateRelatives(level){
       document.getElementById('resultScore').textContent=correct+' / 10';
       document.getElementById('resultPercent').textContent=(correct*10)+' % de réussite';
       document.getElementById('resultMessage').textContent=success?
-        (currentStage===1?'Bravo ! La voie vers les additions de relatifs est ouverte.':currentStage===2?'Bravo ! Le deuxième défi est validé. Tu peux maintenant rejoindre le cercle des fractions.':'Bravo ! Les trois défis sont validés. Rejoins le dernier cercle sur le pont !'):
+        (currentStage>=5?(currentStage===courtBase+courtModules.length-1?'Bravo ! Tous les défis du niveau sont validés. Rejoins la dernière porte !':'Bravo ! La prochaine épreuve est débloquée.'):currentStage===1?'Bravo ! La voie vers les additions de relatifs est ouverte.':currentStage===2?'Bravo ! Le deuxième défi est validé. Tu peux maintenant rejoindre le cercle des fractions.':'Bravo ! Les trois défis sont validés. Rejoins le dernier cercle sur le pont !'):
         'Le seuil des 80 % n’est pas atteint. Reprends courage et retente cette épreuve !';
       document.getElementById('quizTotalTime').textContent='⏱ Temps de réponse total : '+Math.round(totalSpentMs/1000)+' s';
       const recap=document.getElementById('resultRecap');recap.replaceChildren();
       answers.forEach((v,i)=>{
         const row=document.createElement('div');row.className='recap-row';
-        const first=document.createElement('span');first.textContent=(i+1)+'. '+v.html;
+        const first=document.createElement('span');first.textContent=(i+1)+'. '+v.html.replace(/<\/(?:td|th)>/g,' · ').replace(/<\/tr>/g,' / ').replace(/<[^>]*>/g,' ');
         const second=document.createElement('strong');second.className=v.ok?'ok':'bad';
         second.textContent=v.ok?'✓ '+v.answer:(v.given===null?'⏱ ':((v.given||'—')+' → '))+v.answer;
         row.append(first,second);recap.append(row);
       });
-      document.getElementById('finishQuiz').textContent=success?(currentStage===1?'⚔ Rejoindre les relatifs →':currentStage===2?'⚔ Rejoindre les fractions →':'⚔ Rejoindre le pont →'):'← Retour à la carte';
+      document.getElementById('finishQuiz').textContent=success?(currentStage>=5?(currentStage===courtBase+courtModules.length-1?'⚔ Rejoindre la dernière porte →':'⚔ Rejoindre la prochaine épreuve →'):currentStage===1?'⚔ Rejoindre les relatifs →':currentStage===2?'⚔ Rejoindre les fractions →':'⚔ Rejoindre le pont →'):'← Retour à la carte';
       questionArea.hidden=true;resultsArea.hidden=false;
     }
     function closeQuiz(advance=false){
-      sessionToken++;stopQuizTimers();quizActive=false;
+      sessionToken++;stopQuizTimers();quizActive=false;closeCalculator();calcToggle.hidden=true;
       quizScreen.hidden=true;questionArea.hidden=false;resultsArea.hidden=true;
       document.body.style.overflow='';setMapStatus();
       if(advance&&correct>=8&&isChallengeCompleted()){skipCompletedChallenge();return}
+      if(currentStage>=5){courtArrival();return}
       arrival.hidden=false;updateArrival();startTrial.focus({preventScroll:true});
     }
     startTrial.addEventListener('click',()=>currentStage===4?showLevelTwoEntrance():showTransition());
@@ -1570,6 +1732,436 @@ function generateRelatives(level){
     document.getElementById('quizBack').addEventListener('click',()=>closeQuiz());
     document.getElementById('retryQuiz').addEventListener('click',showQuiz);
     document.getElementById('finishQuiz').addEventListener('click',()=>closeQuiz(true));
+function fmtProp(n){return String(n).replace('.',',');}
+function tableauProp(l1,l2,a,b,c,d){return `<table style="border-collapse:collapse;margin:auto;font:700 clamp(14px,3.5vw,19px) 'Open Sans',sans-serif;text-align:center"><tr><th style="border:2px solid #94a3b8;padding:9px 12px;background:#eff6ff">${l1}</th><td style="border:2px solid #94a3b8;padding:9px 16px">${a}</td><td style="border:2px solid #94a3b8;padding:9px 16px">${b}</td></tr><tr><th style="border:2px solid #94a3b8;padding:9px 12px;background:#eff6ff">${l2}</th><td style="border:2px solid #94a3b8;padding:9px 16px">${c}</td><td style="border:2px solid #94a3b8;padding:9px 16px;color:#ea580c">${d}</td></tr></table>`;}
+
+
+function generateEquations(level){
+ const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+ const nz=(a,b)=>{let v=0;while(!v)v=rand(a,b);return v;};
+ const fmt=n=>String(n).replace('-', '−').replace('.',',');
+ const signed=n=>n<0?' − '+fmt(-n):' + '+fmt(n);
+ const coef=n=>n===1?'x':n===-1?'−x':fmt(n)+'x';
+ const out=[],seen=new Set();let tries=0;
+ while(out.length<10 && tries++<2000){
+  let x=rand(-10,10),a=nz(2,9),b=rand(-12,12),c=rand(-8,8),d,html,ans=x;
+  switch(level){
+   case 1:html='x'+signed(b)+' = '+fmt(x+b);break;
+   case 2:html=coef(a)+' = '+fmt(a*x);break;
+   case 3:html=coef(a)+signed(b)+' = '+fmt(a*x+b);break;
+   case 4:html=fmt(a)+'(x'+signed(b)+') = '+fmt(a*(x+b));break;
+   case 5:c=nz(-6,6);if(c===a)continue;d=a*x+b-c*x;html=coef(a)+signed(b)+' = '+coef(c)+signed(d);break;
+   case 6:a=-rand(2,9);html=coef(a)+signed(b)+' = '+fmt(a*x+b);break;
+   case 7:a=rand(2,8);x=rand(-8,8)*a;ans=x;html='x / '+a+signed(b)+' = '+fmt(x/a+b);break;
+   case 8:c=nz(-5,5);if(c===a)continue;d=a*(x+b)-c*x;html=fmt(a)+'(x'+signed(b)+') = '+coef(c)+signed(d);break;
+   case 9:c=nz(2,6);d=rand(-8,8);{const e=a*(x+b)-c*(x+d);html=fmt(a)+'(x'+signed(b)+') − '+fmt(c)+'(x'+signed(d)+') = '+fmt(e);if(a===c)continue;}break;
+
+  }
+  if(seen.has(html))continue;seen.add(html);out.push({html,ans});
+ }
+ // Dernière question : coefficients décimaux, dans le même type d'équation.
+ const x=rand(-16,16)/2, a=rand(2,9)/10, b=rand(-20,20)/10;
+ const f=n=>String(Math.round(n*10000)/10000).replace('-', '−').replace('.',',');
+ const plus=n=>n<0?' − '+f(-n):' + '+f(n);
+ let html,ans=x;
+ switch(level){
+  case 1:html='x'+plus(b)+' = '+f(x+b);break;
+  case 2:html=f(a)+'x = '+f(a*x);break;
+  case 3:html=f(a)+'x'+plus(b)+' = '+f(a*x+b);break;
+  case 4:html=f(a)+'(x'+plus(b)+') = '+f(a*(x+b));break;
+  case 5:{const c=-rand(2,8)/10;html=f(a)+'x'+plus(b)+' = '+f(c)+'x'+plus((a-c)*x+b);break;}
+  case 6:{const c=-a;html=f(c)+'x'+plus(b)+' = '+f(c*x+b);break;}
+  case 7:{const k=rand(2,8);html='x / '+f(k/10)+plus(b)+' = '+f(x/(k/10)+b);break;}
+  case 8:{const c=-rand(2,8)/10;html=f(a)+'(x'+plus(b)+') = '+f(c)+'x'+plus(a*(x+b)-c*x);break;}
+  case 9:{const c=rand(2,8)/10,d=rand(-15,15)/10;html=f(a)+'(x'+plus(b)+') − '+f(c)+'(x'+plus(d)+') = '+f(a*(x+b)-c*(x+d));break;}
+ }
+ out[9]={html,ans};
+ return out;
+}
+
+const LEVEL_TWO_MODULES={
+conv_long:{group:'Mesures & conversions',color:'#a855f7',icon:'📏',title:'Conversions de longueurs',desc:'Convertir des longueurs (cm, dm, m, mm)',tags:['longueurs','⏱ 25s'],time:25,ansType:'decimal',tol:1e-9,
+    gen(){const p=[{html:'440 cm → m',ans:4.4},{html:'650 cm → m',ans:6.5},{html:'300 dm → m',ans:30},{html:'400 dm → m',ans:40},{html:'5,9 cm → m',ans:0.059},{html:'3,3 cm → m',ans:0.033},{html:'85 cm → m',ans:0.85},{html:'56 cm → m',ans:0.56},{html:'144 cm → m',ans:1.44},{html:'123 cm → m',ans:1.23},{html:'0,22 m → mm',ans:220},{html:'0,23 m → mm',ans:230},{html:'240 cm → m',ans:2.4},{html:'125 cm → m',ans:1.25},{html:'6 cm → m',ans:0.06},{html:'8 cm → m',ans:0.08},{html:'0,6 mm → m',ans:0.0006},{html:'0,8 mm → m',ans:0.0008},{html:'2 300 mm → m',ans:2.3},{html:'2 500 mm → m',ans:2.5}];shuffle(p);return p.slice(0,10);}},
+tableau_prop1:{group:'Proportionnalité & %',color:'#0d9488',icon:'▦',title:'Tableaux — Niveau 1',desc:'Compléter un tableau avec un coefficient entier',tags:['tableaux','⏱ 25s'],time:25,ansType:'int',smallFont:true,
+    gen(){const p=[];for(let k=2;k<=9;k++)for(let a=2;a<=12;a++){const b=a+[2,3,5][a%3];p.push({html:tableauProp('Quantité','Prix (€)',a,b,a*k,'?'),ans:b*k});}shuffle(p);return p.slice(0,10);}},
+etendue:{group:'Statistiques',color:'#16a34a',icon:'📐',title:"Étendue d'une série",desc:"Calculer l'étendue de chaque série",tags:['stats','⏱ 30s'],time:30,ansType:'decimal',tol:0.005,note:'📐 Étendue = max − min',smallFont:true,
+    gen(){const p=[{html:'{1 ; 2 ; 3 ; 4 ; 5}',ans:4},{html:'{120 ; 102 ; 130 ; 104 ; 105}',ans:28},{html:'{410 ; 402 ; 440 ; 455 ; 405}',ans:53},{html:'{1,2 ; 1,01 ; 1,3 ; 1,4 ; 1,06}',ans:0.39},{html:'{4,1 ; 4,01 ; 4,4 ; 4,6 ; 4,06}',ans:0.59},{html:'{9 ; 8,9 ; 1,6 ; 7,64 ; 5,38}',ans:7.4},{html:'{8 ; 7,9 ; 1,5 ; 8,64 ; 5,65}',ans:7.14},{html:'{87 ; 89 ; 85 ; 86 ; 84}',ans:5},{html:'{78 ; 79 ; 75 ; 77 ; 76}',ans:4},{html:'{102,1 ; 1 110 ; 12,8 ; 105,3 ; 115,4}',ans:1097.2},{html:'{141,8 ; 1 327 ; 129,7 ; 234,8 ; 2,56}',ans:1324.44},{html:'{2,1 ; 11 ; 2,8 ; 15,3 ; 15,04}',ans:13.2},{html:'{11,8 ; 2,09 ; 12,7 ; 2,8 ; 2,6}',ans:10.61},{html:'{2,1 ; 11 ; 2,8 ; 15,3 ; 15,44}',ans:13.34},{html:'{11,9 ; 2,09 ; 12,77 ; 2,8 ; 2,6}',ans:10.68},{html:'{12,5 ; 101 ; 12,8 ; 15,3 ; 5,4}',ans:95.6},{html:'{11,8 ; 2,9 ; 2,7 ; 2,8 ; 1,6}',ans:10.2},{html:'{2,501 ; 2,150 ; 2,015 ; 2,051 ; 2,510}',ans:0.495},{html:'{3,804 ; 3,408 ; 3,840 ; 3,084 ; 3,048}',ans:0.792}];shuffle(p);return p.slice(0,10);}},
+probas_simples:{group:'Probabilités',color:'#16a34a',icon:'⚪',title:'Probabilités — Niveau 1',desc:'Calculer une probabilité avec des boules ou des jetons',tags:['probas','niveau 1','fractions','⏱ 20s'],time:20,ansType:'fraction',note:'🎯 Probabilité = cas favorables / cas possibles',
+    gen(){const p=[{html:'Sac : 3 rouges et 2 bleues. Tirer une rouge.',ans:{n:3,d:5}},{html:'Sac : 1 rouge et 4 bleues. Tirer une rouge.',ans:{n:1,d:5}},{html:'Sac : 2 vertes et 6 jaunes. Tirer une verte.',ans:{n:1,d:4}},{html:'Sac : 5 noires et 5 blanches. Tirer une blanche.',ans:{n:1,d:2}},{html:'Sac : 2 rouges et 8 bleues. Tirer une bleue.',ans:{n:4,d:5}},{html:'Urne : 3 vertes, 3 rouges, 3 bleues. Tirer une verte.',ans:{n:1,d:3}},{html:'Sac : 4 jaunes et 6 noires. Tirer une jaune.',ans:{n:2,d:5}},{html:'Urne : 7 rouges et 3 bleues. Tirer une bleue.',ans:{n:3,d:10}},{html:'Sac : 1 blanche et 9 noires. Tirer une noire.',ans:{n:9,d:10}},{html:'Urne : 4 rouges et 12 vertes. Tirer une rouge.',ans:{n:1,d:4}},{html:'Sac : 6 bleues et 2 jaunes. Tirer une jaune.',ans:{n:1,d:4}},{html:'Urne : 8 vertes et 2 rouges. Tirer une verte.',ans:{n:4,d:5}},{html:'Sac : 5 rouges et 15 bleues. Tirer une rouge.',ans:{n:1,d:4}},{html:'Urne : 9 jaunes et 3 noires. Tirer une noire.',ans:{n:1,d:4}},{html:'Sac : 2 blanches et 2 noires. Tirer une blanche.',ans:{n:1,d:2}}];shuffle(p);return p.slice(0,10);}},
+expressions:{group:'Algèbre',color:'#7c3aed',icon:'🔣',title:"Calcul d'expressions",desc:'Calculer une expression algébrique',tags:['algèbre','⏱ 25s'],time:25,ansType:'int',smallFont:true,
+    gen(){const p=[{html:'a=1, b=4 → a+b',ans:5},{html:'a=4, b=1 → a+b',ans:5},{html:'a=2, b=3 → ab',ans:6},{html:'a=5, b=2 → ab',ans:10},{html:'a=5 → 5+a²',ans:30},{html:'a=3 → 5+a²',ans:14},{html:'a=3 → 1+5a²',ans:46},{html:'a=2 → 1+5a²',ans:21},{html:'a=3, b=5 → 3a+2b',ans:19},{html:'a=2, b=5 → 3a+2b',ans:16},{html:'a=5, b=6 → a²+2b',ans:37},{html:'a=3, b=7 → a²+2b',ans:23},{html:'a=3, b=4 → a²+b²',ans:25},{html:'a=4, b=3 → a²+b²',ans:25},{html:'a=5, b=2 → b²+3a',ans:19},{html:'a=4, b=2 → b²+3a',ans:16},{html:'a=5, b=2 → 2b²+5a',ans:33},{html:'a=4, b=2 → 2b²+5a',ans:28},{html:'a=1, b=1 → 3a(a+2b)',ans:9}];shuffle(p);return p.slice(0,10);}},
+eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Niveau 1',desc:'x + a = b',tags:['équations','niveau 1','⏱ 20s'],time:20,ansType:'decimal',tol:0.001,smallFont:true,gen(){return generateEquations(1);}},
+};
+
+    // La Cour des Savoirs : six modules originaux, entièrement hors ligne.
+    const courtScreen=document.getElementById('courtScreen');
+    const courtMap=document.getElementById('courtMap');
+    const courtHero=document.getElementById('courtHero');
+    const courtTrial=document.getElementById('courtTrial');
+    const courtScene=document.getElementById('courtTrialScene');
+    const courtMessage=document.getElementById('courtMessage');
+    let courtModules=['conv_long','tableau_prop1','etendue','probas_simples','expressions','eq_niv1'];
+    let courtPlaces=['Atelier des mesures','Halle des échanges','Jardin des statistiques','Tour du hasard','Laboratoire des expressions','Sanctuaire des équations'];
+    let courtPoints=[[704,879],[257,796],[380,540],[549,392],[788,386],[1046,497],[1154,780],[1433,919]];
+    let courtRoutes=[[[704, 879], [677, 808], [647, 757], [615, 724], [575, 712], [540, 724], [508, 752], [482, 785], [438, 815], [383, 825], [327, 822], [287, 807], [257, 796]], [[257, 796], [291, 772], [322, 745], [332, 716], [330, 684], [333, 649], [352, 609], [380, 540]], [[380, 540], [435, 506], [483, 470], [521, 431], [549, 392]], [[549, 392], [618, 377], [683, 364], [733, 374], [788, 386]], [[788, 386], [824, 423], [887, 451], [965, 475], [1046, 497]], [[1046, 497], [1000, 535], [952, 577], [918, 630], [909, 687], [962, 727], [1044, 756], [1154, 780]], [[1154, 780], [1215, 823], [1275, 866], [1339, 901], [1433, 919]]];
+    let levelTwoDirectAccess=false,levelThreeDirectAccess=false,courtWorld=2,courtBase=5;
+    let courtAt=0,courtTrip=0,courtAnimation=null,courtRaf=0,courtFacing=6;
+    let courtZoom=false,courtTrialZoom=false;
+    let courtArts=Array.from(document.getElementById('courtArts').content.querySelectorAll('img'),img=>img.src);
+    let courtBackground=document.getElementById('courtBackground').src;document.getElementById('courtDepthBoard').src=courtBackground;
+    courtHero.src=heroIdle[6];
+    const classicFrame=fractionArt.src;document.getElementById('courtTrialHeader').src=classicFrame;
+    document.querySelector('.court-panel').style.backgroundImage='url("'+classicFrame+'")';document.getElementById('courtTrialQuests').style.backgroundImage='url("'+classicFrame+'")';
+    courtModules.forEach((key,i)=>{
+      const stage=i+5;stageTitles[stage]=LEVEL_TWO_MODULES[key].title;
+      challenges.push({stage,id:'niveau2-'+key,next:stage+1,move:()=>moveCourt(i+2)});
+    });
+    function courtModule(){return (courtWorld===3?LEVEL_THREE_MODULES:LEVEL_TWO_MODULES)[courtModules[currentStage-courtBase]];}
+    function courtFit(){
+      for(const [area,node,zoomed,r] of [[document.getElementById('courtArea'),courtMap,courtZoom,courtWorld===3?1672/941:1614/974],[document.getElementById('courtTrialArea'),courtScene,courtTrialZoom,16/9]]){
+        const w=area.clientWidth-12,h=area.clientHeight-12;if(w<=0||h<=0)continue;
+        const fit=zoomed?Math.max(w,1100):Math.min(w,h*r);node.style.width=fit+'px';node.style.height=fit/r+'px';
+      }
+    }
+    new ResizeObserver(courtFit).observe(document.getElementById('courtArea'));
+    new ResizeObserver(courtFit).observe(document.getElementById('courtTrialArea'));
+    window.addEventListener('resize',courtFit);document.addEventListener('fullscreenchange',()=>requestAnimationFrame(courtFit));
+    function updateCourtStatus(){worldProgress()}
+    function courtPosition(p){return {left:(p[0]/(courtWorld===3?1672:1616)*100-2.17)+'%',top:(p[1]/(courtWorld===3?941:970)*100-(courtWorld===3?12.6:12.05))+'%'};}
+    function courtRest(direction=courtFacing){courtFacing=direction;courtHero.src=heroIdle[direction];courtHero.style.transform='';courtHero.dataset.facing=facingNames[direction];}
+    function cancelCourt(){courtTrip++;cancelAnimationFrame(courtRaf);if(courtAnimation){courtAnimation.cancel();courtAnimation=null}courtRest();}
+    function enterCourt(requestedWorld=2){
+      const nextWorld=requestedWorld===3?3:2;
+      if(nextWorld===3&&!levelThreeDirectAccess&&!worldTwo.modules.every((_,i)=>isChallengeCompleted(i+5)))return;
+      if(nextWorld===2&&!isChallengeCompleted(3)&&!levelTwoDirectAccess)return;
+      hideObservatoryEntrance();setCourtWorld(nextWorld);
+      hideLevelTwoEntrance();hideTransition();arrival.hidden=true;oath.hidden=true;
+      courtScreen.hidden=false;courtTrial.hidden=true;document.getElementById('courtComplete').hidden=true;cancelCourt();cancelVictory();courtAt=0;currentStage=courtBase;
+      Object.assign(courtHero.style,courtPosition(courtPoints[0]));courtRest(6);
+      document.getElementById('courtAction').hidden=false;document.getElementById('courtAction').textContent='⚔ Commencer le parcours';
+      courtMessage.textContent=courtWorld===3?'Bienvenue à l’Observatoire royal ! Treize épreuves t’attendent sous les étoiles.':'Bienvenue dans la Cour des Savoirs ! Six épreuves t’attendent autour du cheval.';
+      updateCourtStatus();requestAnimationFrame(courtFit);document.getElementById('courtAction').focus({preventScroll:true});
+    }
+    function leaveCourt(){
+      if(courtWorld===3){enterCourt(2);return}
+      cancelCourt();cancelVictory();courtScreen.hidden=true;courtTrial.hidden=true;document.getElementById('courtComplete').hidden=true;
+      if(!isChallengeCompleted(3)){backToStart();return}
+      currentStage=4;arrival.hidden=false;updateArrival();startTrial.focus({preventScroll:true});
+    }
+    async function moveCourt(target){
+      if(target<1||target>courtModules.length+1)return;
+      if(target>1&&!isChallengeCompleted(courtBase+target-2))return;
+      // Only the current landing point can launch the next part of the route.
+      if(target!==courtAt+1)return;
+      cancelCourt();const token=courtTrip;
+      courtTrial.hidden=true;document.getElementById('courtAction').hidden=true;
+      courtMessage.textContent=target===courtModules.length+1?'Le héros rejoint la dernière porte de la Cour…':'Le héros rejoint '+courtPlaces[target-1]+'…';
+      const points=courtRoutes[target-1],dist=points.map((p,i)=>i?Math.hypot(p[0]-points[i-1][0],p[1]-points[i-1][1]):0),length=dist.reduce((a,b)=>a+b,0);
+      let covered=0;const path=points.map((p,i)=>{covered+=dist[i];return {offset:covered/length,...courtPosition(p)}});
+      const duration=Math.max(2800,length*8);
+      function faceAt(time){
+        const progress=Math.min(.999999,time/duration);let i=0;while(i<path.length-2&&progress>=path[i+1].offset)i++;
+        const a=points[i],b=points[i+1],dir=(Math.round(Math.atan2(b[1]-a[1],b[0]-a[0])/(Math.PI/4))+8)%8;
+        const step=Math.floor(time/115)%4;courtFacing=dir;courtHero.src=heroAngles[step*8+directionArtwork[dir]];courtHero.style.transform=step===3?'scaleX(-1)':'';courtHero.dataset.facing=facingNames[dir];
+      }
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&courtHero.animate){
+        courtAnimation=courtHero.animate(path,{duration,easing:'linear',fill:'forwards'});const active=courtAnimation;
+        function tick(){if(token!==courtTrip||courtAnimation!==active)return;faceAt(Number(active.currentTime)||0);courtRaf=requestAnimationFrame(tick)}tick();
+        try{await active.finished}catch(e){return}if(token!==courtTrip)return;
+        cancelAnimationFrame(courtRaf);courtAnimation=null;Object.assign(courtHero.style,path[path.length-1]);active.cancel();
+      }else{faceAt(duration);Object.assign(courtHero.style,path[path.length-1]);}
+      courtAt=target;currentStage=target+courtBase-1;
+      courtRest(courtWorld===3?6:[6,5,5,6,6,7,6,0][target]);
+      if(!await new Promise(resolve=>setTimeout(()=>resolve(token===courtTrip),650)))return;
+      if(target===courtModules.length+1){
+        courtMessage.textContent=courtWorld===3?'🏆 Les treize défis sont validés ! L’Observatoire royal est conquis.':'🏆 Les six défis sont validés ! La voie vers le niveau 3 est ouverte.';
+        document.getElementById('courtAction').textContent='🏆 Niveau '+courtWorld+' terminé';document.getElementById('courtAction').hidden=false;
+        document.getElementById('courtComplete').hidden=false;startVictory();document.getElementById('courtCompleteClose').focus({preventScroll:true});return;
+      }
+      showCourtTrial();
+    }
+    function showCourtTrial(){
+      const mod=courtModule();if(!mod||courtAt<1||courtAt>courtModules.length)return;
+      if(releasePartialFullscreen(showCourtTrial))return;
+      document.getElementById('courtTrialArt').src=courtArts[courtAt-1];
+      document.getElementById('courtTrialArt').alt=courtPlaces[courtAt-1]+', vue de face.';
+      document.getElementById('courtTrialHero').src=heroIdle[6];
+      const landing=courtWorld===3?[30,90.5]:[[34.3,88.3],[35.2,86.4],[28.4,89],[31.8,89],[31.6,88.1],[28.3,90.9]][courtAt-1];
+      document.getElementById('courtTrialHero').style.left=(landing[0]-3.5)+'%';document.getElementById('courtTrialHero').style.top=(landing[1]*.884-20.5)+'%';
+      document.getElementById('courtTrialPlace').textContent=mod.title;document.getElementById('courtTrialNumber').textContent=String(courtAt);
+      document.getElementById('courtTrialTitle').textContent=mod.title;
+      document.getElementById('courtTrialOrder').textContent='⚔ '+['Première','Deuxième','Troisième','Quatrième','Cinquième','Sixième','Septième','Huitième','Neuvième','Dixième','Onzième','Douzième','Treizième'][courtAt-1]+' épreuve atteinte !';
+      document.getElementById('courtTrialTime').textContent='⌛ '+mod.time+' secondes chacune';
+      document.getElementById('courtTrialRule').textContent=mod.desc;
+      const done=isChallengeCompleted();document.getElementById('courtTrialStart').textContent=done?'Rejouer':'▶ Commencer le défi';
+      document.getElementById('courtTrialPass').hidden=!done;
+      courtTrial.hidden=false;updateCourtStatus();requestAnimationFrame(courtFit);document.getElementById('courtTrialStart').focus({preventScroll:true});
+      courtMessage.textContent='Le héros regarde '+courtPlaces[courtAt-1]+'.';
+    }
+    function courtArrival(){
+      courtTrial.hidden=true;updateCourtStatus();
+      document.getElementById('courtAction').hidden=false;document.getElementById('courtAction').textContent='⚔ Voir le défi';
+      courtMessage.textContent='Épreuve '+courtAt+' : '+stageTitles[currentStage]+'.';document.getElementById('courtAction').focus({preventScroll:true});
+    }
+    document.getElementById('skipLevelOne').addEventListener('click',()=>{stop();levelTwoDirectAccess=true;enterCourt(courtWorld)});
+    document.getElementById('courtEnter').addEventListener('click',enterCourt);
+    document.getElementById('courtBack').addEventListener('click',leaveCourt);
+    document.getElementById('courtReset').addEventListener('click',()=>{document.getElementById('courtComplete').hidden=true;enterCourt()});
+    document.getElementById('courtAction').addEventListener('click',()=>courtAt===0?moveCourt(1):courtAt===courtModules.length+1?(()=>{document.getElementById('courtComplete').hidden=false;startVictory()})():showCourtTrial());
+    document.getElementById('courtTrialStart').addEventListener('click',showQuiz);
+    document.getElementById('courtTrialPass').addEventListener('click',skipCompletedChallenge);
+    document.getElementById('courtTrialBack').addEventListener('click',courtArrival);
+    document.getElementById('courtTrialReplay').addEventListener('click',()=>{const target=courtAt;courtAt--;Object.assign(courtHero.style,courtPosition(courtPoints[courtAt]));moveCourt(target)});
+    for(const id of ['courtFullscreen','courtTrialFullscreen'])document.getElementById(id).addEventListener('click',toggleAppFullscreen);
+    document.getElementById('courtZoom').addEventListener('click',()=>{courtZoom=!courtZoom;document.getElementById('courtArea').classList.toggle('zoomed',courtZoom);document.getElementById('courtZoom').textContent=courtZoom?'⊟ Voir toute la carte':'⌕ Agrandir la carte';courtFit()});
+    document.getElementById('courtTrialZoom').addEventListener('click',()=>{courtTrialZoom=!courtTrialZoom;document.getElementById('courtTrialArea').classList.toggle('zoomed',courtTrialZoom);courtFit()});
+    document.getElementById('courtCompleteClose').addEventListener('click',()=>{cancelVictory();document.getElementById('courtComplete').hidden=true});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!courtTrial.hidden&&!document.fullscreenElement)courtArrival()});
+    function answerText(value){return typeof value==='object'?value.n+'/'+value.d:String(value).replace('.',',')}
+    function acceptsAnswer(given,q){
+      const mod=currentStage>=5?courtModule():null;
+      if(!mod)return /^[+-]?\d+$/.test(given)&&Number(given)===q.answer;
+      const clean=given.replace(/−/g,'-').replace(/,/g,'.');
+      if(mod.ansType==='text')return polynomialEqual(given,q.answer);
+      if(mod.ansType==='fraction'){
+        const m=clean.match(/^([+-]?\d+)\s*\/\s*([+-]?\d+)$/);if(!m)return false;
+        const n=Number(m[1]),d=Number(m[2]);return Number.isSafeInteger(n)&&Number.isSafeInteger(d)&&d!==0&&n*q.answer.d===q.answer.n*d;
+      }
+      if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(clean))return false;
+      const value=Number(clean);return Number.isFinite(value)&&(mod.ansType==='int'?Number.isInteger(value)&&value===q.answer:Math.abs(value-q.answer)<=(mod.tol||1e-9)+(courtWorld===3?Math.abs(q.answer)*.0001:0));
+    }
+
+    const calcDrawer=document.getElementById('calculatorDrawer');
+    const calcToggle=document.getElementById('calculatorToggle');
+    const calcDisplay=document.getElementById('calculatorDisplay');
+    const calcCopy=document.getElementById('calculatorCopy');
+    let calcExpression='',calcEvaluated=false,calcResult=null;
+    function calculateExpression(source){
+      const s=source.replace(/,/g,'.').replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/\s/g,'');
+      if(!s||s.length>120||/[^\d.+*/()\-]/.test(s))throw Error('Calcul incomplet');
+      let i=0;
+      function atom(){
+        if(s[i]==='+'){i++;return atom()}
+        if(s[i]==='-'){i++;return -atom()}
+        if(s[i]==='('){i++;const value=sum();if(s[i++]!==')')throw Error('Parenthèse manquante');return value}
+        const m=s.slice(i).match(/^(?:\d+(?:\.\d*)?|\.\d+)/);if(!m)throw Error('Calcul incomplet');i+=m[0].length;return Number(m[0]);
+      }
+      function product(){let v=atom();while(s[i]==='*'||s[i]==='/'){const op=s[i++],n=atom();if(op==='/'&&n===0)throw Error('Division par zéro');v=op==='*'?v*n:v/n}return v}
+      function sum(){let v=product();while(s[i]==='+'||s[i]==='-'){const op=s[i++],n=product();v=op==='+'?v+n:v-n}return v}
+      const value=sum();if(i!==s.length)throw Error('Calcul incomplet');if(!Number.isFinite(value)||Math.abs(value)>1e15)throw Error('Résultat trop grand');return Number(value.toPrecision(12));
+    }
+    function resetCalculator(){calcExpression='';calcEvaluated=false;calcResult=null;calcDisplay.value='0';calcCopy.disabled=true;document.getElementById('calculatorStatus').textContent='';}
+    function closeCalculator(focus=false){calcDrawer.hidden=true;quizScreen.classList.remove('calculator-open');calcToggle.setAttribute('aria-expanded','false');if(focus)calcToggle.focus({preventScroll:true})}
+    function calculatorKey(key){
+      if(calcDrawer.hidden||!calculatorAvailable()||!quizActive)return;
+      document.getElementById('calculatorStatus').textContent='';
+      if(key==='C'){resetCalculator();return}
+      if(key==='='){
+        try{calcResult=calculateExpression(calcExpression);calcExpression=calcResult.toLocaleString('en-US',{useGrouping:false,maximumSignificantDigits:12});calcEvaluated=true;calcDisplay.value=calcExpression.replace('.',',');calcCopy.disabled=completed;}
+        catch(e){document.getElementById('calculatorStatus').textContent=e.message;calcResult=null;calcCopy.disabled=true}return;
+      }
+      if(key==='Backspace'){calcExpression=calcExpression.slice(0,-1)}
+      else if(/^[\d.,+*/()\-]$/.test(key)){
+        if(calcEvaluated&&/[\d.,(]/.test(key))calcExpression='';
+        if(calcExpression.length>=120)return;calcExpression+=key.replace(',','.');
+      }else return;
+      calcEvaluated=false;calcResult=null;calcCopy.disabled=true;calcDisplay.value=(calcExpression||'0').replace(/\./g,',').replace(/\*/g,'×').replace(/\//g,'÷');
+    }
+    calcToggle.addEventListener('click',()=>{
+      if(!calculatorAvailable()||!quizActive)return;
+      if(!calcDrawer.hidden){closeCalculator(true);return}
+      calcDrawer.hidden=false;quizScreen.classList.add('calculator-open');calcToggle.setAttribute('aria-expanded','true');calcDisplay.focus({preventScroll:true});positionCalculator();
+    });
+    document.getElementById('calculatorClose').addEventListener('click',()=>closeCalculator(true));
+    const calculatorKeys=['C','Backspace','(',')','7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'];
+    calculatorKeys.forEach((key,i)=>document.getElementById('calculatorKey'+i).addEventListener('click',()=>calculatorKey(key)));
+    calcDrawer.addEventListener('keydown',event=>{
+      if(event.ctrlKey||event.metaKey||event.altKey)return;
+      if(event.key==='Escape'){event.preventDefault();closeCalculator(true);return}
+      if(event.key==='Enter'&&['calculatorCopy','calculatorClose'].includes(event.target?.id))return;
+      const key=event.key==='Enter'?'=':event.key==='Delete'?'C':event.key;
+      if(key==='='||key==='C'||key==='Backspace'||/^[\d.,+*/()\-]$/.test(key)){event.preventDefault();calculatorKey(key)}
+    });
+    calcCopy.addEventListener('click',()=>{
+      if(!calculatorAvailable()||!quizActive||completed||!calcEvaluated||calcResult===null)return;
+      qInput.value=calcExpression.replace('.',',');qInput.focus({preventScroll:true});document.getElementById('calculatorStatus').textContent='Résultat reporté. Clique sur Valider pour répondre.';
+    });
+
+    // Center the calculator in the actual free space beside the exercise.
+    function positionCalculator(){
+      if(calcDrawer.hidden)return;
+      if(window.innerWidth<960){calcDrawer.style.right='10px';return}
+      const edge=document.querySelector('.quiz-content').getBoundingClientRect().right;
+      const width=calcDrawer.getBoundingClientRect().width;
+      calcDrawer.style.right=Math.max(12,(window.innerWidth-edge-width)/2)+'px';
+    }
+    new ResizeObserver(positionCalculator).observe(document.querySelector('.quiz-content'));
+    window.addEventListener('resize',positionCalculator);
+    let victoryFrame=0,victoryTimer=null,victoryToken=0;
+    const victoryHero=document.getElementById('courtVictoryHero');
+    document.getElementById('courtVictoryBackdrop').src=courtBackground;
+    function cancelVictory(){victoryToken++;cancelAnimationFrame(victoryFrame);clearTimeout(victoryTimer);document.getElementById('courtVictoryScene').classList.remove('celebrating');victoryHero.src=heroIdle[6];victoryHero.style.transform='';}
+    function finishVictory(){
+      cancelAnimationFrame(victoryFrame);clearTimeout(victoryTimer);victoryHero.src=heroIdle[6];victoryHero.style.transform='';
+      document.getElementById('courtVictoryScene').classList.add('finished');
+      document.getElementById('courtVictoryStatus').textContent=courtWorld===3?'Treize épreuves remportées ! L’Observatoire royal est conquis.':'Six épreuves remportées ! La Cour des Savoirs est conquise.';
+    }
+    function startVictory(){
+      if(courtAt!==courtModules.length+1||!courtModules.every((_,i)=>isChallengeCompleted(courtBase+i)))return;
+      cancelVictory();const token=victoryToken,scene=document.getElementById('courtVictoryScene');scene.classList.remove('finished');victoryHero.src=heroIdle[6];
+      document.getElementById('courtVictoryStatus').textContent='Le héros fait ses derniers pas vers la porte…';
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishVictory();return}
+      void scene.offsetWidth;scene.classList.add('celebrating');const started=performance.now();
+      function step(){
+        if(token!==victoryToken||document.getElementById('courtComplete').hidden)return;
+        const elapsed=performance.now()-started;if(elapsed>=3200){victoryHero.src=heroIdle[6];victoryHero.style.transform='';return}
+        const phase=Math.floor(elapsed/115)%4;victoryHero.src=heroAngles[phase*8+6];victoryHero.style.transform=phase===3?'scaleX(-1)':'';victoryFrame=requestAnimationFrame(step);
+      }step();victoryTimer=setTimeout(()=>{if(token===victoryToken&&!document.getElementById('courtComplete').hidden)finishVictory()},4800);
+    }
+    document.getElementById('courtVictoryReplay').addEventListener('click',startVictory);
+
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.getElementById('courtComplete').hidden){cancelVictory();document.getElementById('courtComplete').hidden=true;document.getElementById('courtAction').focus({preventScroll:true})}});
+
+const F=(n,d)=>`<span class="fr"><span class="n">${n}</span><span class="d">${d}</span></span>`;
+const LEVEL_THREE_MODULES={
+mult10:{group:'Calcul de base',color:'#9333ea',icon:'×',title:'Multiplier par 10, 100, 1 000',desc:'Multiplications par puissances de 10',tags:['calcul','⏱ 20s'],time:20,ansType:'int',
+    gen(){const p=[{html:'100 × 596',ans:59600},{html:'614 × 10',ans:6140},{html:'121 × 100',ans:12100},{html:'880 × 10',ans:8800},{html:'445 × 10',ans:4450},{html:'10 × 569',ans:5690},{html:'100 × 510',ans:51000},{html:'100 × 837',ans:83700},{html:'850 × 10',ans:8500},{html:'727 × 100',ans:72700},{html:'10 × 850',ans:8500},{html:'1 000 × 45',ans:45000},{html:'1 000 × 3,2',ans:3200},{html:'100 × 7,5',ans:750},{html:'10 × 0,8',ans:8}];shuffle(p);return p.slice(0,10);}},
+mult_rel:{group:'Nombres relatifs',color:'#7c3aed',icon:'✖️',title:'Multiplication de relatifs',desc:'Multiplications avec entiers relatifs',tags:['relatifs','niveau 2','⏱ 15s'],time:15,ansType:'int',
+    gen(){return generateRelatives('mult');}},
+arrondir:{group:'Fractions',color:'#16a34a',icon:'🎯',title:'Arrondir au dixième',desc:'Arrondir des fractions à 0,1 (calculatrice)',tags:['fractions','calculatrice','⏱ 20s'],time:20,ansType:'decimal',tol:0.051,note:'📱 Calculatrice — arrondir à 0,1',
+    gen(){const r=(n,d)=>Math.round(n/d*10)/10;const p=[{html:F(3,7),ans:r(3,7)},{html:F(6,14),ans:r(6,14)},{html:F(6,9),ans:r(6,9)},{html:F(5,13),ans:r(5,13)},{html:F(50,23),ans:r(50,23)},{html:F(100,62),ans:r(100,62)},{html:F(12,59),ans:r(12,59)},{html:F(15,4),ans:r(15,4)},{html:F(15,3),ans:r(15,3)},{html:F(18,6),ans:r(18,6)},{html:F(16,19),ans:r(16,19)},{html:F(17,20),ans:r(17,20)},{html:F(160,9),ans:r(160,9)},{html:F(185,3),ans:r(185,3)},{html:F(3214,3215),ans:r(3214,3215)},{html:F(3215,3216),ans:r(3215,3216)},{html:F(0,4),ans:0},{html:F(0,3),ans:0}];shuffle(p);return p.slice(0,10);}},
+carre:{group:'Pythagore & racines',color:'#ea580c',icon:'x²',title:'Calculer un carré',desc:'Calculer x² à la calculatrice',tags:['calculatrice','⏱ 20s'],time:20,ansType:'decimal',tol:0.005,note:'📱 Calculatrice autorisée',
+    gen(){const s=n=>Math.round(n*n*1000)/1000;const p=[{html:'3²',ans:9},{html:'4²',ans:16},{html:'5²',ans:25},{html:'6²',ans:36},{html:'7²',ans:49},{html:'8²',ans:64},{html:'9²',ans:81},{html:'11²',ans:121},{html:'12²',ans:144},{html:'13²',ans:169},{html:'15²',ans:225},{html:'20²',ans:400},{html:'25²',ans:625},{html:'30²',ans:900},{html:'45²',ans:2025},{html:'50²',ans:2500},{html:'1,5²',ans:s(1.5)},{html:'2,5²',ans:s(2.5)},{html:'3,5²',ans:s(3.5)},{html:'4,5²',ans:s(4.5)},{html:'0,5²',ans:s(0.5)},{html:'1,2²',ans:s(1.2)},{html:'2,3²',ans:s(2.3)},{html:'3,7²',ans:s(3.7)},{html:'14²',ans:196},{html:'16²',ans:256},{html:'18²',ans:324},{html:'22²',ans:484},{html:'0,4²',ans:s(0.4)},{html:'1,8²',ans:s(1.8)}];shuffle(p);return p.slice(0,10);}},
+moyenne:{group:'Statistiques',color:'#0891b2',icon:'📊',title:'Calcul de moyenne',desc:"Calculer la moyenne d'une série",tags:['stats','⏱ 30s'],time:30,ansType:'decimal',tol:0.01,note:'📊 Calcule la moyenne',
+    gen(){const p=[{html:'1 ; 2 ; 3',ans:2},{html:'1,5 ; 2,5 ; 4,5 ; 1,5',ans:2.5},{html:'15 ; 25 ; 45 ; 15',ans:25},{html:'16 ; 18 ; 13 ; 12 ; 11',ans:14},{html:'78 ; 88 ; 98 ; 28 ; 18',ans:62},{html:'185 ; 12 ; 8 ; 255',ans:115},{html:'11 ; 12 ; 10 ; 13 ; 14 ; 15',ans:12.5},{html:'11,5 ; 12,5 ; 12 ; 12 ; 12 ; 12',ans:12},{html:'11 ; 12 ; 13 ; 9 ; 4 ; 3 ; 18',ans:10},{html:'9,5 ; 13 ; 19 ; 9,5 ; 4,5 ; 3,5 ; 18',ans:11}];shuffle(p);return p.slice(0,10);}},
+conversions2:{group:'Mesures & conversions',color:'#1e40af',icon:'⇄',title:'Conversions masses, volumes, aires',desc:'Convertir kg/g, L/mL, m²/cm²',tags:['mesures','⏱ 25s'],time:25,ansType:'decimal',tol:1e-9,smallFont:true,
+    gen(){const p=[{html:'3,5 kg → g',ans:3500},{html:'2 400 g → kg',ans:2.4},{html:'0,75 kg → g',ans:750},{html:'5 200 g → kg',ans:5.2},{html:'2,5 L → mL',ans:2500},{html:'750 mL → L',ans:0.75},{html:'0,3 L → cL',ans:30},{html:'45 cL → L',ans:0.45},{html:'4 m² → cm²',ans:40000},{html:'25 000 cm² → m²',ans:2.5},{html:'1,2 kg → g',ans:1200},{html:'8 500 g → kg',ans:8.5},{html:'1,5 L → cL',ans:150},{html:'250 cL → L',ans:2.5},{html:'6 m² → dm²',ans:600},{html:'0,04 m² → cm²',ans:400},{html:'3 dm³ → L',ans:3},{html:'500 mL → dL',ans:5},{html:'0,5 m² → cm²',ans:5000},{html:'2,5 dm³ → L',ans:2.5}];shuffle(p);return p.slice(0,10);}},
+angles:{group:'Géométrie',color:'#6d28d9',icon:'∠',title:'Angles dans un triangle',desc:'Calculer le troisième angle',tags:['géométrie','⏱ 20s'],time:20,ansType:'int',smallFont:true,
+    gen(){const p=[{html:'Angles : 60° et 60° → 3ᵉ ?',ans:60},{html:'Angles : 90° et 40° → 3ᵉ ?',ans:50},{html:'Angles : 45° et 55° → 3ᵉ ?',ans:80},{html:'Angles : 30° et 110° → 3ᵉ ?',ans:40},{html:'Angles : 75° et 75° → 3ᵉ ?',ans:30},{html:'Angles : 90° et 60° → 3ᵉ ?',ans:30},{html:'Angles : 35° et 85° → 3ᵉ ?',ans:60},{html:'Angles : 20° et 130° → 3ᵉ ?',ans:30},{html:'Angles : 55° et 65° → 3ᵉ ?',ans:60},{html:'Angles : 90° et 27° → 3ᵉ ?',ans:63},{html:'Angles : 48° et 72° → 3ᵉ ?',ans:60},{html:'Angles : 100° et 42° → 3ᵉ ?',ans:38},{html:'Angles : 15° et 135° → 3ᵉ ?',ans:30},{html:'Angles : 66° et 54° → 3ᵉ ?',ans:60},{html:'Angles : 90° et 18° → 3ᵉ ?',ans:72}];shuffle(p);return p.slice(0,10);}},
+tableau_prop2:{group:'Proportionnalité & %',color:'#0284c7',icon:'▦',title:'Tableaux — Niveau 2',desc:'Compléter un tableau avec des nombres décimaux',tags:['tableaux','⏱ 30s'],time:30,ansType:'decimal',tol:0.011,smallFont:true,
+    gen(){const p=[];for(const k of [1.5,2.5,3.5,0.5,1.2,2.4])for(const a of [2,4,5,8,10]){const b=a+2;p.push({html:tableauProp('Quantité','Masse (kg)',a,b,fmtProp(a*k),'?'),ans:Math.round(b*k*100)/100});}shuffle(p);return p.slice(0,10);}},
+pct_variation:{group:'Proportionnalité & %',color:'#9f1239',icon:'↑%',title:'Augmentation / diminution en %',desc:'Appliquer une hausse ou baisse en %',tags:['%','⏱ 25s'],time:25,ansType:'decimal',tol:0.1,smallFont:true,note:'📊 Donner la valeur finale',
+    gen(){const p=[{html:'200 € augmenté de 10 %',ans:220},{html:'150 € augmenté de 20 %',ans:180},{html:'80 kg diminué de 25 %',ans:60},{html:'120 € diminué de 10 %',ans:108},{html:'500 € augmenté de 5 %',ans:525},{html:'40 € diminué de 50 %',ans:20},{html:'350 € augmenté de 20 %',ans:420},{html:'90 € diminué de 30 %',ans:63},{html:'1 000 € augmenté de 15 %',ans:1150},{html:'60 € diminué de 15 %',ans:51},{html:'250 € augmenté de 8 %',ans:270},{html:'400 € diminué de 5 %',ans:380},{html:'75 € augmenté de 40 %',ans:105},{html:'200 € diminué de 35 %',ans:130},{html:'180 € augmenté de 50 %',ans:270},{html:'320 € diminué de 25 %',ans:240}];shuffle(p);return p.slice(0,10);}},
+probas_des:{group:'Probabilités',color:'#ea580c',icon:'🎲',title:'Probabilités — Niveau 2',desc:'Probabilités avec 1 ou 2 dés à 6 faces',tags:['probas','fractions','⏱ 25s'],time:25,ansType:'fraction',note:'🎲 Dés équilibrés à 6 faces',
+    gen(){const p=[{html:'1 dé : obtenir un 6',ans:{n:1,d:6}},{html:'1 dé : obtenir un 3',ans:{n:1,d:6}},{html:'1 dé : obtenir un nombre pair',ans:{n:1,d:2}},{html:'1 dé : obtenir un nombre impair',ans:{n:1,d:2}},{html:'1 dé : obtenir un multiple de 3',ans:{n:1,d:3}},{html:'1 dé : obtenir un multiple de 2',ans:{n:1,d:2}},{html:'1 dé : obtenir un nombre &gt; 4',ans:{n:1,d:3}},{html:'1 dé : obtenir un nombre ≥ 5',ans:{n:1,d:3}},{html:'1 dé : obtenir un nombre &lt; 3',ans:{n:1,d:3}},{html:'1 dé : obtenir un 7',ans:{n:0,d:1}},{html:'1 dé : obtenir un nombre entre 1 et 6',ans:{n:1,d:1}},{html:'2 dés : somme = 2',ans:{n:1,d:36}},{html:'2 dés : somme = 12',ans:{n:1,d:36}},{html:'2 dés : somme = 7',ans:{n:1,d:6}},{html:'2 dés : somme = 6',ans:{n:5,d:36}},{html:'2 dés : somme = 8',ans:{n:5,d:36}},{html:'2 dés : somme = 5',ans:{n:1,d:9}},{html:'2 dés : somme = 9',ans:{n:1,d:9}},{html:'2 dés : somme = 3',ans:{n:1,d:18}},{html:'2 dés : somme = 11',ans:{n:1,d:18}},{html:'2 dés : somme = 13',ans:{n:0,d:1}},{html:'2 dés : faire un double',ans:{n:1,d:6}},{html:'2 dés : faire un double 6',ans:{n:1,d:36}},{html:'2 dés : au moins un 6',ans:{n:11,d:36}}];shuffle(p);return p.slice(0,10);}},
+reductions:{group:'Algèbre',color:'#0891b2',icon:'✏️',title:"Réductions d'expressions",desc:'Réduire une expression algébrique',tags:['algèbre','⏱ 40s'],time:40,ansType:'text',note:'✏️ Format : ax²+bx+c (utilise ^ pour ²)',smallFont:true,
+    gen(){const p=[{html:'2x + 3 − x + 5',ans:'x+8'},{html:'2x + 4 − x + 2',ans:'x+6'},{html:'2x + 3 − x + 2',ans:'x+5'},{html:'2x + 4 − x + 3',ans:'x+7'},{html:'−x + 2 + 3x + 8',ans:'2x+10'},{html:'−x + 4 + 4x + 6',ans:'3x+10'},{html:'3b + 2 − 5b − 3',ans:'-2b-1'},{html:'−4b + 4 + 5b + 6',ans:'b+10'},{html:'−3x + 2 + 3x + 8',ans:'10'},{html:'−4x + 2 + 4x + 8',ans:'10'},{html:'3x² + 2 + x² + 5',ans:'4x^2+7'},{html:'4x² + 2 + x² + 7',ans:'5x^2+9'},{html:'3x² + x + x² + 5x + 8',ans:'4x^2+6x+8'},{html:'2x² + x + x² + 4x + 5',ans:'3x^2+5x+5'},{html:'3x² + x − x² − 2x',ans:'2x^2-x'},{html:'4x² + x − x² − 3x',ans:'3x^2-2x'},{html:'−x² + x + 3x² − 2x',ans:'2x^2-x'},{html:'−x² + 5x − 4x² − 2x',ans:'-5x^2+3x'},{html:`${F('18x',9)} + ${F(15,3)} + ${F('6x',2)} + 1`,ans:'5x+6'},{html:`${F('9x',3)} + ${F(12,6)} + ${F('15x',5)} + 1`,ans:'6x+3'}];shuffle(p);return p.slice(0,10);}},
+eq_niv2:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Niveau 2',desc:'ax = b',tags:['équations','niveau 2','⏱ 25s'],time:25,ansType:'decimal',tol:0.001,smallFont:true,gen(){return generateEquations(2);}},
+eq_niv7:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Niveau 7',desc:'x / a + b = c',tags:['équations','niveau 7','⏱ 50s'],time:50,ansType:'decimal',tol:0.001,smallFont:true,gen(){return generateEquations(7);}},
+};
+
+    // Worlds share their movement, challenge and result interface.
+    const worldTwo={modules:courtModules,places:courtPlaces,points:courtPoints,routes:courtRoutes,arts:courtArts,background:courtBackground,routeMarkup:document.querySelector('.court-routes').innerHTML};
+    const worldThree={
+      modules:['mult10','mult_rel','arrondir','carre','moyenne','conversions2','angles','tableau_prop2','pct_variation','probas_des','reductions','eq_niv2','eq_niv7'],
+      places:['Galerie des puissances de dix','Atelier des relatifs','Cadran des arrondis','Pavillon des carrés','Jardin des moyennes','Atelier des mesures','Terrasse des triangles','Marché des proportions','Comptoir des pourcentages','Tour des probabilités','Bibliothèque des expressions','Balance des équations','Sanctuaire des constellations'],
+      points:[[250,886],[236,694],[429,725],[595,879],[847,897],[1117,896],[1216,752],[1173,538],[287,412],[454,361],[620,341],[808,344],[1016,362],[1246,304],[1250,238]],
+      routes:[[[250, 886], [208, 850], [180, 807], [184, 766], [213, 729], [236, 694]], [[236, 694], [285, 704], [340, 725], [390, 735], [429, 725]], [[429, 725], [454, 758], [435, 794], [451, 829], [501, 855], [547, 871], [595, 879]], [[595, 879], [663, 888], [755, 894], [847, 897]], [[847, 897], [944, 902], [1038, 902], [1117, 896]], [[1117, 896], [1176, 872], [1213, 829], [1234, 786], [1216, 752]], [[1216, 752], [1270, 758], [1333, 765], [1378, 758], [1409, 732], [1414, 702], [1401, 674], [1387, 651], [1368, 623], [1356, 594], [1351, 561], [1293, 543], [1173, 538]], [[1173, 538], [1228, 545], [1280, 548], [1327, 549], [1352, 540], [1362, 520], [1361, 500], [1353, 480], [1345, 455], [1339, 434], [1325, 413], [1308, 395], [1283, 381], [1246, 370], [1215, 362], [1114, 343], [1016, 362], [908, 356], [808, 344], [710, 342], [620, 341], [531, 350], [454, 361], [369, 386], [287, 412]], [[287, 412], [345, 389], [403, 369], [454, 361]], [[454, 361], [536, 349], [620, 341]], [[620, 341], [712, 340], [808, 344]], [[808, 344], [902, 352], [1016, 362]], [[1016, 362], [1114, 358], [1186, 337], [1246, 304]], [[1246, 304], [1250, 272], [1250, 238]]],
+      arts:Array.from(document.getElementById('observatoryArts').content.querySelectorAll('img'),img=>img.src),
+      background:document.getElementById('observatoryMapArt').content.querySelector('img').src,
+      routeMarkup:document.getElementById('observatoryRoutes').content.querySelector('svg').innerHTML
+    };
+    worldThree.modules.forEach((key,i)=>{const stage=i+12;stageTitles[stage]=LEVEL_THREE_MODULES[key].title;challenges.push({stage,id:'niveau3-'+key,next:stage+1,move:()=>moveCourt(i+2)})});
+    function setCourtWorld(world){
+      courtWorld=world===3?3:2;const cfg=courtWorld===3?worldThree:worldTwo;
+      courtBase=courtWorld===3?12:5;courtModules=cfg.modules;courtPlaces=cfg.places;courtPoints=cfg.points;courtRoutes=cfg.routes;courtArts=cfg.arts;courtBackground=cfg.background;
+      document.getElementById('courtBackground').src=courtBackground;
+      document.querySelector('.court-routes').innerHTML=cfg.routeMarkup;
+      document.querySelector('.court-routes').setAttribute('viewBox',courtWorld===3?'0 0 1672 941':'0 0 1616 970');
+      courtScreen.classList.toggle('observatory',courtWorld===3);courtTrial.classList.toggle('observatory',courtWorld===3);
+      document.getElementById('courtTrialRing').hidden=courtWorld!==3;
+      document.getElementById('courtDepthBoard').hidden=false;document.getElementById('courtDepthBoard').src=courtBackground;
+      document.getElementById('courtBack').textContent=courtWorld===3?'← Niveau 2':'← Niveau 1';
+      document.getElementById('skipLevelTwo').hidden=courtWorld===3;
+      document.getElementById('courtWorldTitle').textContent='Niveau '+courtWorld;
+      document.getElementById('courtWorldSubtitle').textContent=courtWorld===3?'L’Observatoire royal':'La Cour des Savoirs';
+      document.getElementById('courtGoalLevel').textContent=String(courtWorld+1);
+      for(let i=0;i<6;i++)document.getElementById('courtDone'+i).hidden=courtWorld===3||!isChallengeCompleted(i+5);
+      for(let i=0;i<3;i++){document.getElementById('observatoryGroup'+i).hidden=courtWorld!==3;document.getElementById('observatoryGroupDone'+i).hidden=true}
+      for(let i=0;i<13;i++){
+        const row=document.getElementById('worldQuestRow'+i);row.hidden=i>=courtModules.length;
+        if(i<courtModules.length){document.getElementById('worldQuestLabel'+i).textContent=(courtWorld===3?LEVEL_THREE_MODULES:LEVEL_TWO_MODULES)[courtModules[i]].title;document.getElementById('courtTrialDone'+i).classList.toggle('validated',isChallengeCompleted(courtBase+i))}
+      }
+      document.getElementById('courtComplete').classList.toggle('observatory-victory',courtWorld===3);document.getElementById('courtVictoryBackdrop').src=courtWorld===3?document.getElementById('observatoryGatePicture').src:courtBackground;
+      document.getElementById('courtCompleteTitle').innerHTML='🏆 Niveau '+courtWorld+' terminé !<small>'+(courtWorld===3?'L’Observatoire royal':'La Cour des Savoirs')+'</small>';
+      document.getElementById('courtVictoryNext').textContent=courtWorld===3?'La prochaine aventure sera ajoutée au-delà de cette porte.':'La porte de l’Observatoire royal t’attend.';
+      document.getElementById('observatoryContinue').hidden=courtWorld!==2;
+      courtFit();
+    }
+    function worldProgress(){
+      const total=courtModules.length,count=courtModules.filter((_,i)=>isChallengeCompleted(courtBase+i)).length;
+      for(const id of ['courtProgress','courtTrialProgress']){const bar=document.getElementById(id);bar.setAttribute('aria-valuemax',String(total));bar.setAttribute('aria-valuenow',String(count))}
+      for(const id of ['courtProgressFill','courtTrialProgressFill'])document.getElementById(id).style.width=count/total*100+'%';
+      for(const id of ['courtCount','courtTrialCount'])document.getElementById(id).textContent=count+' / '+total+' défis validés';
+      courtModules.forEach((_,i)=>{const badge=document.getElementById('courtTrialDone'+i),done=isChallengeCompleted(courtBase+i);badge.classList.toggle('validated',done);badge.setAttribute('aria-label',done?'Validé':'Non validé')});
+      if(courtWorld===2){for(let i=0;i<6;i++)document.getElementById('courtDone'+i).hidden=!isChallengeCompleted(i+5)}
+      else for(const [i,lo,hi] of [[0,0,5],[1,5,7],[2,7,13]]){
+        const done=courtModules.slice(lo,hi).filter((_,j)=>isChallengeCompleted(12+lo+j)).length;
+        document.getElementById('observatoryGroup'+i).textContent=done+' / '+(hi-lo);
+        document.getElementById('observatoryGroupDone'+i).hidden=done!==hi-lo;
+      }
+    }
+    function calculatorAvailable(){return currentStage===7||(currentStage>=12&&!!courtModule()?.tags?.includes('calculatrice'))}
+    // Exact comparison of polynomial coefficients: no evaluation of entered JavaScript.
+    function polynomialEqual(student,canonical){
+      const variable=(canonical.match(/[a-z]/i)||['x'])[0].toLowerCase();
+      function parse(raw){
+        const src=raw.toLowerCase().replace(/−/g,'-').replace(/²/g,'^2').replace(/,/g,'.').replace(/\s/g,'').replace(/×/g,'*');
+        if(!src||src.length>160||/[^0-9a-z.+*/^()\-]/.test(src))throw Error('Expression');
+        const tokens=src.match(/(?:\d+(?:\.\d*)?|\.\d+)|[a-z]|[+*/^()\-]/g)||[];let at=0;
+        const add=(a,b,sign=1)=>Array.from({length:Math.max(a.length,b.length)},(_,i)=>(a[i]||0)+sign*(b[i]||0));
+        function multiply(a,b){if(a.length+b.length>8)throw Error('Degré');const out=Array(a.length+b.length-1).fill(0);a.forEach((x,i)=>b.forEach((y,j)=>out[i+j]+=x*y));return out}
+        function atom(){
+          const t=tokens[at++];let p;
+          if(t==='+')return atom();if(t==='-')return atom().map(v=>-v);
+          if(t==='('){p=sum();if(tokens[at++]!==')')throw Error('Parenthèse')}
+          else if(t===variable)p=[0,1];else if(t!==undefined&&/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(t))p=[Number(t)];else throw Error('Terme');
+          if(tokens[at]==='^'){at++;const exp=tokens[at++];if(!/^[0-4]$/.test(exp||''))throw Error('Puissance');let q=[1];for(let k=0;k<Number(exp);k++)q=multiply(q,p);p=q}return p;
+        }
+        function product(){let a=atom();while(at<tokens.length){const t=tokens[at];if(t==='*'||t==='/'){at++;const b=atom();if(t==='/'){if(b.length!==1||b[0]===0)throw Error('Division');a=a.map(v=>v/b[0])}else a=multiply(a,b)}else if(t==='('||t===variable){a=multiply(a,atom())}else break}return a}
+        function sum(){let a=product();while(tokens[at]==='+'||tokens[at]==='-'){const op=tokens[at++];a=add(a,product(),op==='+'?1:-1)}return a}
+        const out=sum();if(at!==tokens.length||out.some(v=>!Number.isFinite(v)))throw Error('Expression');return out;
+      }
+      try{const a=parse(student),b=parse(canonical);return Array.from({length:Math.max(a.length,b.length)},(_,i)=>Math.abs((a[i]||0)-(b[i]||0))<1e-8).every(Boolean)}catch(e){return false}
+    }
+    const observatoryEntrance=document.getElementById('observatoryEntrance');
+    const observatoryEntranceScene=document.getElementById('observatoryEntranceScene');
+    const observatoryEntranceHero=document.getElementById('observatoryEntranceHero');
+    let observatoryRaf=0,observatoryDoorTimer=null,observatoryFinishTimer=null,observatoryToken=0;
+    observatoryEntranceHero.src=heroIdle[6];
+    function cancelObservatoryEntrance(){observatoryToken++;cancelAnimationFrame(observatoryRaf);clearTimeout(observatoryDoorTimer);clearTimeout(observatoryFinishTimer);observatoryEntranceHero.src=heroIdle[6];observatoryEntranceHero.style.transform=''}
+    function fitObservatoryEntrance(){const area=document.getElementById('observatoryEntranceArea'),w=Math.min(area.clientWidth-12,(area.clientHeight-12)*1672/941);if(w>0){observatoryEntranceScene.style.width=w+'px';observatoryEntranceScene.style.height=w*941/1672+'px'}}
+    new ResizeObserver(fitObservatoryEntrance).observe(document.getElementById('observatoryEntranceArea'));window.addEventListener('resize',fitObservatoryEntrance);document.addEventListener('fullscreenchange',fitObservatoryEntrance);
+    function finishObservatoryEntrance(){
+      cancelObservatoryEntrance();if(observatoryEntrance.hidden)return;
+      observatoryEntranceScene.classList.remove('playing');observatoryEntranceScene.classList.add('gate-open','arrived');
+      document.getElementById('observatoryEntranceStatus').textContent='La porte s’ouvre sur l’Observatoire royal. Bienvenue au niveau 3 !';
+      document.getElementById('observatoryEnter').hidden=false;document.getElementById('observatoryEntranceSkip').hidden=true;document.getElementById('observatoryEnter').focus({preventScroll:true});
+    }
+    function showObservatoryEntrance(direct=false){
+      if(!direct&&!worldTwo.modules.every((_,i)=>isChallengeCompleted(i+5)))return;
+      if(direct===true)levelThreeDirectAccess=true;
+      if(releasePartialFullscreen(()=>showObservatoryEntrance(direct)))return;
+      cancelCourt();cancelVictory();document.getElementById('courtComplete').hidden=true;courtTrial.hidden=true;observatoryEntrance.hidden=false;cancelObservatoryEntrance();
+      observatoryEntranceScene.classList.remove('gate-open','arrived','playing');document.getElementById('observatoryEnter').hidden=true;document.getElementById('observatoryEntranceSkip').hidden=false;
+      document.getElementById('observatoryEntranceStatus').textContent='Le héros quitte la Cour et monte vers les étoiles…';fitObservatoryEntrance();document.getElementById('observatoryEntranceBack').focus({preventScroll:true});
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishObservatoryEntrance();return}
+      void observatoryEntranceScene.offsetWidth;observatoryEntranceScene.classList.add('playing');const token=observatoryToken,started=performance.now();
+      function step(){if(token!==observatoryToken||observatoryEntrance.hidden)return;const elapsed=performance.now()-started;if(elapsed>=7000){observatoryEntranceHero.src=heroIdle[6];observatoryEntranceHero.style.transform='';return}const phase=Math.floor(elapsed/115)%4;observatoryEntranceHero.src=heroAngles[phase*8+6];observatoryEntranceHero.style.transform=phase===3?'scaleX(-1)':'';observatoryRaf=requestAnimationFrame(step)}step();
+      observatoryDoorTimer=setTimeout(()=>{if(token===observatoryToken&&!observatoryEntrance.hidden){observatoryEntranceScene.classList.add('gate-open');document.getElementById('observatoryEntranceStatus').textContent='La grande porte constellée s’ouvre devant lui…'}},3200);
+      observatoryFinishTimer=setTimeout(finishObservatoryEntrance,7200);
+    }
+    function hideObservatoryEntrance(){cancelObservatoryEntrance();observatoryEntrance.hidden=true;observatoryEntranceScene.classList.remove('playing','gate-open','arrived')}
+    document.getElementById('skipLevelTwo').addEventListener('click',()=>showObservatoryEntrance(true));
+    document.getElementById('observatoryContinue').addEventListener('click',()=>showObservatoryEntrance(false));
+    document.getElementById('observatoryEnter').addEventListener('click',()=>{hideObservatoryEntrance();enterCourt(3)});
+    document.getElementById('observatoryEntranceSkip').addEventListener('click',finishObservatoryEntrance);
+    document.getElementById('observatoryEntranceReplay').addEventListener('click',()=>showObservatoryEntrance(levelThreeDirectAccess));
+    document.getElementById('observatoryEntranceBack').addEventListener('click',()=>{hideObservatoryEntrance();document.getElementById('courtAction').focus({preventScroll:true})});
+    document.getElementById('observatoryEntranceFullscreen').addEventListener('click',toggleAppFullscreen);
+
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!observatoryEntrance.hidden&&!document.fullscreenElement){hideObservatoryEntrance();document.getElementById('courtAction').focus({preventScroll:true})}});
+
     setMapStatus();
 
     const fullscreen=document.getElementById('fullscreen');
