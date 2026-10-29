@@ -1,0 +1,112 @@
+[
+  {
+    "id": "tables",
+    "module": "mult",
+    "title": "Tables de multiplication"
+  },
+  {
+    "id": "relatifs",
+    "module": "add_rel",
+    "title": "Addition de relatifs"
+  },
+  {
+    "id": "fractions",
+    "module": "frac_equiv",
+    "title": "Fractions équivalentes"
+  },
+  {
+    "id": "niveau2-conv_long",
+    "module": "conv_long",
+    "title": "Conversions de longueurs"
+  },
+  {
+    "id": "niveau2-tableau_prop1",
+    "module": "tableau_prop1",
+    "title": "Tableaux — Niveau 1"
+  },
+  {
+    "id": "niveau2-etendue",
+    "module": "etendue",
+    "title": "Étendue d'une série"
+  },
+  {
+    "id": "niveau2-probas_simples",
+    "module": "probas_simples",
+    "title": "Probabilités — Niveau 1"
+  },
+  {
+    "id": "niveau2-expressions",
+    "module": "expressions",
+    "title": "Calcul d'expressions"
+  },
+  {
+    "id": "niveau2-eq_niv1",
+    "module": "eq_niv1",
+    "title": "Équations — Niveau 1"
+  },
+  {
+    "id": "niveau3-mult10",
+    "module": "mult10",
+    "title": "Multiplier par 10, 100, 1 000"
+  },
+  {
+    "id": "niveau3-mult_rel",
+    "module": "mult_rel",
+    "title": "Multiplication de relatifs"
+  },
+  {
+    "id": "niveau3-arrondir",
+    "module": "arrondir",
+    "title": "Arrondir au dixième"
+  },
+  {
+    "id": "niveau3-carre",
+    "module": "carre",
+    "title": "Calculer un carré"
+  },
+  {
+    "id": "niveau3-moyenne",
+    "module": "moyenne",
+    "title": "Calcul de moyenne"
+  },
+  {
+    "id": "niveau3-conversions2",
+    "module": "conversions2",
+    "title": "Conversions masses, volumes, aires"
+  },
+  {
+    "id": "niveau3-angles",
+    "module": "angles",
+    "title": "Angles dans un triangle"
+  },
+  {
+    "id": "niveau3-tableau_prop2",
+    "module": "tableau_prop2",
+    "title": "Tableaux — Niveau 2"
+  },
+  {
+    "id": "niveau3-pct_variation",
+    "module": "pct_variation",
+    "title": "Augmentation / diminution en %"
+  },
+  {
+    "id": "niveau3-probas_des",
+    "module": "probas_des",
+    "title": "Probabilités — Niveau 2"
+  },
+  {
+    "id": "niveau3-reductions",
+    "module": "reductions",
+    "title": "Réductions d'expressions"
+  },
+  {
+    "id": "niveau3-eq_niv2",
+    "module": "eq_niv2",
+    "title": "Équations — Niveau 2"
+  },
+  {
+    "id": "niveau3-eq_niv7",
+    "module": "eq_niv7",
+    "title": "Équations — Niveau 7"
+  }
+]
