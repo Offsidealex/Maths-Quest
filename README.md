@@ -1,3 +1,3 @@
-# Maths Quest 0.3.42
+# Maths Quest 0.3.44
 
-Compte élève en haut à droite à la place du panneau de progression, menu connexion/changement de compte/actualisation/déconnexion. Bandeau inférieur et espace réservé supprimés. Correction arrondi .41 conservée.
+Nouvelle enseigne compte .43 conservée. Commande plein écran discrète en bas à droite ; version courte sous le titre illustré des cartes et épreuves.

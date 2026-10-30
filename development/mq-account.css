@@ -16,3 +16,17 @@ body{--mq-account-space:0px!important;padding-bottom:0!important}
 .court-progress-cover,.court-trial-progress,.map-progress,.map-counter{visibility:hidden}
 @media(max-width:640px){#mq-account-bar{font-size:clamp(8px,2vw,12px)}#mq-account-toggle{border-width:1px;border-radius:5px}#mq-account-bar.mq-floating{right:5px;top:5px;width:180px;height:50px;font-size:11px}}
 #mq-login-dialog{z-index:10000;width:min(420px,calc(100% - 32px));box-sizing:border-box;border:2px solid #c8a25b;border-radius:16px;padding:24px;background:#fff8e9;color:#182b44;font:15px system-ui}#mq-login-dialog::backdrop{background:#071727bd}#mq-login-dialog h2{margin-top:0;font-size:21px}#mq-login-dialog label{display:block;margin:14px 0;font-weight:600}#mq-login-dialog input,#mq-login-dialog select{display:block;box-sizing:border-box;width:100%;padding:10px;margin-top:5px;border:1px solid #a5afba;border-radius:7px;font:inherit}#mq-login-dialog button{padding:10px 14px;margin-right:8px;background:#174e8c;color:white;border:0;border-radius:7px;cursor:pointer}#mq-login-dialog a{color:#194c87}.mq-login-error{color:#9e2626}#mq-account-bar button:disabled{opacity:.5}
+/* Enseigne royale, assortie au titre Maths Quest. */
+#mq-account-toggle{border:0;border-radius:0;background:transparent;box-shadow:none;isolation:isolate;padding:5% 10% 5% 25%;align-items:center;text-align:center;gap:7%;filter:drop-shadow(0 3px 3px #0008)}
+.mq-sign-frame{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.mq-account-crest{position:absolute;left:5%;top:11%;width:19%;height:78%;filter:drop-shadow(0 2px 2px #0009);pointer-events:none}
+#mq-account-label{font-size:1.35em;color:#fff0c9;letter-spacing:.015em;text-shadow:0 2px 1px #000,0 0 10px #e7b55425;white-space:nowrap}
+#mq-account-user{font-size:.92em;font-weight:400;color:#f4e8c9;text-shadow:0 1px 2px #000}
+.mq-account-chevron{right:6%;top:44%;color:#f8d27b;font-size:.85em}
+#mq-account-toggle:hover{filter:drop-shadow(0 3px 3px #0008) brightness(1.12)}
+#mq-account-toggle[aria-expanded="true"] .mq-account-chevron{transform:rotate(180deg)}
+#mq-account-menu{border-color:#d4aa53;border-radius:3px 3px 12px 12px;background:linear-gradient(135deg,#0c2b47,#04172e);box-shadow:inset 0 0 0 3px #091829,inset 0 0 0 4px #80602d,0 8px 24px #0008;padding:18px}
+#mq-account-menu button{border-color:#b78d43;background:linear-gradient(#1b4974,#0b2a4c);font-family:Georgia,serif;font-weight:700;color:#ffedc8;box-shadow:inset 0 0 0 1px #f5d38220}
+#mq-account-menu button:hover{background:linear-gradient(#295d8c,#12375b)}
+#mq-account-bar.mq-floating #mq-account-toggle{padding:8px 30px 8px 25%}
+@media(max-width:640px){#mq-account-label{font-size:1.15em}#mq-account-user{font-size:.9em}}
