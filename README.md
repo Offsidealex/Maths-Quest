@@ -1,3 +1,3 @@
-# Maths Quest 0.3.40
+# Maths Quest 0.3.41
 
-Parchemin des épreuves du niveau 3 regroupé comme sur la carte : Calculs 5, Mesures et géométrie 2, Raisonnement 6. Compteurs et coches synchronisés avec les réussites.
+Arrondir au dixième : validation exacte du résultat arrondi, virgule ou point acceptés, zéros finaux et entiers acceptés. Un quotient non arrondi ou une valeur proche est refusé.
