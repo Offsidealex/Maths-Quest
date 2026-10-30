@@ -14,6 +14,7 @@
   function notify(message) { status = message; if (document.getElementById('mq-account-status')) document.getElementById('mq-account-status').textContent = message; }
   function controls() {
     const user = document.getElementById('mq-account-user');
+    const label = document.getElementById('mq-account-label');if(label)label.textContent=identity?'Compte élève':'Connexion élève';
     if (user) user.textContent = identity ? identity.eleve.prenom + ' · ' + identity.eleve.classe : 'Mode invité';
     if (document.getElementById('mq-account-login')) document.getElementById('mq-account-login').textContent = identity ? 'Changer de compte' : 'Connexion élève';
     for (const id of ['mq-account-sync', 'mq-account-logout']) if (document.getElementById(id)) document.getElementById(id).hidden = !identity;
@@ -136,9 +137,33 @@
   }
   function mount() {
     const bar = document.createElement('aside'); bar.id = 'mq-account-bar'; bar.setAttribute('aria-label', 'Compte et sauvegarde');
-    bar.innerHTML = '<strong id="mq-account-user">Mode invité</strong><span id="mq-account-status" role="status"></span><button id="mq-account-login" type="button">Connexion élève</button><button id="mq-account-sync" type="button" hidden>Actualiser</button><button id="mq-account-logout" type="button" hidden>Déconnexion</button>';
+    bar.innerHTML = '<button id="mq-account-toggle" type="button" aria-expanded="false" aria-controls="mq-account-menu"><span id="mq-account-label">Connexion élève</span><strong id="mq-account-user">Mode invité</strong><span class="mq-account-chevron" aria-hidden="true">▾</span></button><div id="mq-account-menu" hidden><span id="mq-account-status" role="status"></span><button id="mq-account-login" type="button">Connexion élève</button><button id="mq-account-sync" type="button" hidden>Actualiser</button><button id="mq-account-logout" type="button" hidden>Déconnexion</button></div>';
     document.body.append(bar); controls(); notify(status);
-    document.getElementById('mq-account-login').onclick = openLogin;
+    const menu=document.getElementById('mq-account-menu'),toggle=document.getElementById('mq-account-toggle');
+    function closeMenu(){menu.hidden=true;toggle.setAttribute('aria-expanded','false')}
+    toggle.onclick=()=>{menu.hidden=!menu.hidden;toggle.setAttribute('aria-expanded',String(!menu.hidden))};
+    document.addEventListener('click',e=>{if(!bar.contains(e.target))closeMenu()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){closeMenu();toggle.focus()}});
+    document.getElementById('mq-account-login').onclick = ()=>{closeMenu();openLogin()};
+    // Keep the same account controls when the adventure changes scene.
+    if(typeof MutationObserver!=='undefined'){
+      let scheduled=false;
+      const dock=()=>{
+        scheduled=false;
+        const visible=id=>{const el=document.getElementById(id);return el&&!el.hidden&&el.getClientRects().length>0};
+        let host=document.body;
+        if(visible('quizScreen'))host=document.body;
+        else if(visible('courtTrial'))host=document.getElementById('courtTrialScene');
+        else if(visible('observatoryEntrance')||visible('levelTwoScreen')||visible('trialTransition')||visible('courtComplete'))host=document.body;
+        else if(visible('courtScreen'))host=document.getElementById('courtMap');
+        else host=document.getElementById('scene')||document.body;
+        if(bar.parentElement!==host){closeMenu();host.append(bar)}
+        const floating=host===document.body;if(bar.classList.contains('mq-floating')!==floating)bar.classList.toggle('mq-floating',floating);
+      };
+      new MutationObserver(()=>{if(!scheduled){scheduled=true;requestAnimationFrame(dock)}}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['hidden','class']});
+      dock();
+    }
+
     document.getElementById('mq-account-sync').onclick = () => void sync();
     document.getElementById('mq-account-logout').onclick = logout;
   }
