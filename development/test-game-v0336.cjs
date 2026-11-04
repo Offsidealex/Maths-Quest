@@ -95,7 +95,7 @@ function app(saved={},motion=false){
  for(let i=0;i<7;i++){
   assert.equal(obs.t.stage,i+12);obs.t.showQuiz();assert.equal(obs.t.limit,limits[i]*1000);assert.equal(obs.get('calculatorToggle').hidden,![2,3].includes(i));assert(obs.get('quizScreen').style.backgroundImage.includes('observatoryArts-'+artIndices[i]));assert(obs.get('.quiz-brand small').textContent.includes('3'));
   for(let j=0;j<10;j++){const q=obs.t.questions[obs.t.index];obs.get('quizAnswer').value=typeof q.answer==='object'?q.answer.n+'/'+q.answer.d:String(q.answer).replace('.',',');obs.t.gradeAnswer(false);await obs.advance(1400)}
-  assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+12));obs.t.closeQuiz(true);await obs.advance(650);
+  assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+12));obs.t.closeQuiz(true);await obs.advance(i===6?18000:650);
  }
  assert.equal(obs.t.stage,19);assert.equal(obs.t.courtAt,8);assert.equal(obs.get('courtCount').textContent,'7 / 7 défis validés');assert.equal(obs.get('trialGroupCount0').textContent,'2 / 2');assert.equal(obs.get('trialGroupCount3').textContent,'1 / 1');assert(!obs.get('courtComplete').hidden);assert(!obs.get('enterLevelFour').hidden);assert(obs.get('observatoryContinue').hidden);assert(obs.get('courtVictoryStatus').textContent.includes('Sept'));
  assert(obs.t.polynomialEqual('8 + x','x+8'));assert(obs.t.polynomialEqual('(x+1)^2','x^2+2x+1'));assert(obs.t.polynomialEqual('2b - 1','2b-1'));assert(!obs.t.polynomialEqual('x+7','x+8'));assert(!obs.t.polynomialEqual('alert(1)','x+8'));assert(!obs.t.polynomialEqual('1/x','x'));
@@ -104,7 +104,7 @@ function app(saved={},motion=false){
  for(let i=0;i<6;i++){
   assert.equal(obs.t.stage,i+19);obs.t.showQuiz();assert.equal(obs.t.limit,limits[i+7]*1000);assert.equal(obs.get('calculatorToggle').hidden,i!==0);assert(obs.get('quizScreen').style.backgroundImage.includes('observatoryArts-'+artIndices[i+7]));assert(obs.get('.quiz-brand small').textContent.includes('4'));
   for(let j=0;j<10;j++){const q=obs.t.questions[obs.t.index];obs.get('quizAnswer').value=typeof q.answer==='object'?q.answer.n+'/'+q.answer.d:String(q.answer).replace('.',',');obs.t.gradeAnswer(false);await obs.advance(1400)}
-  assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+19));obs.t.closeQuiz(true);await obs.advance(650);
+  assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+19));obs.t.closeQuiz(true);await obs.advance(i===5?18000:650);
  }
  assert.equal(obs.t.stage,25);assert.equal(obs.t.courtAt,7);assert.equal(obs.get('courtCount').textContent,'6 / 6 défis validés');assert.equal(obs.get('trialGroupCount0').textContent,'2 / 2');assert.equal(obs.get('trialGroupCount3').textContent,'1 / 1');assert(!obs.get('courtComplete').hidden);assert(obs.get('enterLevelFour').hidden);assert(obs.get('courtVictoryStatus').textContent.includes('Six'));
  obs.get('courtCompleteClose').events.click();obs.t.leaveCourt();assert.equal(obs.t.world,3);assert.equal(obs.t.stage,12);obs.t.leaveCourt();assert.equal(obs.t.world,2);assert.equal(obs.t.stage,5);assert.equal(obs.get('courtCount').textContent,'0 / 6 défis validés');obs.get('skipLevelTwo').events.click();obs.get('observatoryEnter').events.click();obs.t.moveCourt(1);await obs.advance(650);assert.equal(obs.get('courtTrialStart').textContent,'Rejouer');obs.t.skipCompletedChallenge();await obs.advance(650);assert.equal(obs.t.stage,13);
