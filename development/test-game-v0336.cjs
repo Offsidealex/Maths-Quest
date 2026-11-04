@@ -1,5 +1,5 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const raw=fs.readFileSync('work/game-v0336.js','utf8');
+const raw=fs.readFileSync('index.html','utf8').split('<script>').at(-1).split('</script>')[0];
 function app(saved={},motion=false){
  let now=0,id=0;const timers=new Map(),els=new Map(),store=new Map(Object.entries(saved));
  class El{
@@ -7,6 +7,7 @@ function app(saved={},motion=false){
   animate(path,{duration}){let resolve,reject;const start=now;const finished=new Promise((a,b)=>{resolve=a;reject=b});const handle=timer(resolve,duration);let done=false;return{finished,get currentTime(){return now-start},cancel(){timers.delete(handle);reject(new Error('cancelled'))}}}
   setAttribute(k,v){this.attrs[k]=String(v)}getAttribute(k){return this.attrs[k]||null}
   addEventListener(k,f){this.events[k]=f}focus(){document.activeElement=this}append(...x){this.children.push(...x)}replaceChildren(...x){this.children=[...x]}
+  closest(k){return get(this.name+' '+k)}
   querySelector(k){return get(this.name+' '+k)}querySelectorAll(k){if(k==='img')return Array.from({length:this.name==='heroIdle'?8:32},(_,i)=>({src:this.name+'-'+i}));return []}
   getBoundingClientRect(){return {x:0,y:100,left:0,top:100,width:1000,height:600,right:1000,bottom:700}}
  }
@@ -23,6 +24,7 @@ function app(saved={},motion=false){
  return{t:ctx.window.test,get,advance,store,document};
 }
 (async()=>{
+ const partial=app({'maths-quest-completed-challenges-v1':JSON.stringify(['tables','niveau2-etendue','niveau3-moyenne'])});assert.equal(partial.get('mapQuestCount0').textContent,'1 / 2');assert.equal(partial.get('transitionQuestCount1').textContent,'0 / 1');partial.get('skipLevelOne').events.click();assert.equal(partial.get('trialGroupCount1').textContent,'1 / 2');assert.equal(partial.get('worldMapGroupCount1').textContent,'1 / 2');partial.get('skipLevelTwo').events.click();partial.get('observatoryEnter').events.click();assert.equal(partial.get('trialGroupCount3').textContent,'1 / 2');assert.equal(partial.get('worldMapGroupCount0').textContent,'0 / 7');
  const a=app();a.t.showLevelTwoEntrance();assert(a.get('levelTwoScreen').hidden);await a.get('fullscreen').events.click();assert.equal(a.document.fullscreenElement,a.document.documentElement);a.t.start();await a.advance(650);assert(!a.get('oath').hidden);a.t.continueQuest();await a.advance(650);assert(!a.get('trialTransition').hidden);
  async function solve(app,score){const t=app.t;for(let i=0;i<10;i++){const q=t.questions[t.index];app.get('quizAnswer').value=String(i<score?q.answer:9999);t.gradeAnswer(false);await app.advance(1400)}assert.equal(t.correct,score);assert(!app.get('quizResults').hidden)}
  a.t.showQuiz();assert(a.get('quizScreen').style.backgroundImage.includes('.transition-image'));assert.equal(a.t.limit,10000);await solve(a,8);assert(a.t.isChallengeCompleted(1));a.t.closeQuiz(true);await a.advance(650);assert.equal(a.t.stage,2);assert(!a.get('trialTransition').hidden);
@@ -54,7 +56,8 @@ function app(saved={},motion=false){
   }
   assert.equal(c.t.correct,10);assert(c.t.isChallengeCompleted(stage));c.t.closeQuiz(true);await c.advance(650);
  }
- assert.equal(c.t.stage,11);assert.equal(c.t.courtAt,7);assert(!c.get('courtComplete').hidden);assert.equal(c.get('courtCount').textContent,'6 / 6 défis validés');assert.equal(c.get('mapCounter').textContent,'3 / 3 défis validés');
+ assert.equal(c.get('trialGroupCount0').textContent,'2 / 2');assert.equal(c.get('trialGroupCount1').textContent,'2 / 2');assert.equal(c.get('trialGroupCount2').textContent,'2 / 2');
+ assert.equal(c.t.stage,11);assert.equal(c.t.courtAt,7);assert(!c.get('observatoryEntrance').hidden);assert.equal(c.get('courtCount').textContent,'6 / 6 défis validés');assert.equal(c.get('mapCounter').textContent,'3 / 3 défis validés');
  c.t.leaveCourt();assert(c.get('courtScreen').hidden);assert.equal(c.t.stage,4);c.t.enterCourt();c.t.moveCourt(1);await c.advance(650);assert(!c.get('courtTrialPass').hidden);assert.equal(c.get('courtTrialStart').textContent,'Rejouer');
  // A failed replay does not erase validation; 7/10 never advances automatically.
  c.t.showQuiz();await solve(c,7);assert(c.t.isChallengeCompleted(5));c.t.closeQuiz(true);assert.equal(c.t.courtAt,1);c.t.skipCompletedChallenge();await c.advance(650);assert.equal(c.t.courtAt,2);
@@ -81,9 +84,8 @@ function app(saved={},motion=false){
  calc.get('.quiz-content').getBoundingClientRect=()=>({right:900});calc.get('calculatorDrawer').getBoundingClientRect=()=>({width:310});calc.t.positionCalculator();assert(calc.get('calculatorDrawer').hidden);calc.t.showQuiz();calc.get('calculatorToggle').events.click();assert.equal(calc.get('calculatorDrawer').style.right,'78px');
  console.log('PASS calculatrice : réservée à étendue, volet droite, clavier numérique, décimaux/parenthèses/priorités, erreurs, report sans validation, timer actif, remise à zéro et fermeture.');
 
- assert(walk.get('courtVictoryScene').classList.contains('finished'));assert.equal(walk.get('courtVictoryHero').src,'heroIdle-6');walk.get('courtVictoryReplay').events.click();await walk.advance(200);assert(walk.get('courtVictoryScene').classList.contains('celebrating'));assert(!walk.get('courtVictoryScene').classList.contains('finished'));walk.get('courtCompleteClose').events.click();await walk.advance(6000);assert(walk.get('courtComplete').hidden);assert(!walk.get('courtVictoryScene').classList.contains('celebrating'));
- locked.t.startVictory();assert(!locked.get('courtVictoryScene').classList.contains('celebrating'));
- console.log('PASS finale : déclenchement après six réussites, marche et effets, pose finale, relecture, fermeture et annulation.');
+ assert(!walk.get('observatoryEntrance').hidden);
+ console.log('PASS finale niveau 2 : accès à l’Observatoire après six réussites.');
 
  const obs=app();obs.get('skipLevelOne').events.click();obs.get('skipLevelTwo').events.click();assert(!obs.get('observatoryEntrance').hidden);assert(obs.get('observatoryEntranceScene').classList.contains('gate-open'));obs.get('observatoryEnter').events.click();assert.equal(obs.t.world,3);assert.equal(obs.t.stage,12);assert.equal(obs.get('courtCount').textContent,'0 / 13 défis validés');assert(obs.get('courtDone0').hidden);assert(!obs.get('observatoryGroup0').hidden);assert(!obs.t.isChallengeCompleted(5));obs.t.moveCourt(1);await obs.advance(650);
  const limits=[20,15,20,20,30,25,20,30,25,25,40,25,50];
@@ -92,7 +94,7 @@ function app(saved={},motion=false){
   for(let j=0;j<10;j++){const q=obs.t.questions[obs.t.index];obs.get('quizAnswer').value=typeof q.answer==='object'?`${q.answer.n*2}/${q.answer.d*2}`:String(q.answer).replace('.',',');obs.t.gradeAnswer(false);await obs.advance(1400)}
   assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+12));obs.t.closeQuiz(true);await obs.advance(650);
  }
- assert.equal(obs.t.stage,25);assert.equal(obs.t.courtAt,14);assert.equal(obs.get('courtCount').textContent,'13 / 13 défis validés');assert.equal(obs.get('observatoryGroup0').textContent,'5 / 5');assert.equal(obs.get('observatoryGroup1').textContent,'2 / 2');assert.equal(obs.get('observatoryGroup2').textContent,'6 / 6');assert(!obs.get('courtComplete').hidden);assert(obs.get('observatoryContinue').hidden);assert(obs.get('courtVictoryStatus').textContent.includes('Treize'));
+ assert.equal(obs.t.stage,25);assert.equal(obs.t.courtAt,14);assert.equal(obs.get('courtCount').textContent,'13 / 13 défis validés');assert.equal(obs.get('trialGroupCount0').textContent,'7 / 7');assert.equal(obs.get('trialGroupCount3').textContent,'2 / 2');assert.equal(obs.get('observatoryGroup0').textContent,'5 / 5');assert.equal(obs.get('observatoryGroup1').textContent,'2 / 2');assert.equal(obs.get('observatoryGroup2').textContent,'6 / 6');assert(!obs.get('courtComplete').hidden);assert(obs.get('observatoryContinue').hidden);assert(obs.get('courtVictoryStatus').textContent.includes('Treize'));
  assert(obs.t.polynomialEqual('8 + x','x+8'));assert(obs.t.polynomialEqual('(x+1)^2','x^2+2x+1'));assert(obs.t.polynomialEqual('2b - 1','2b-1'));assert(!obs.t.polynomialEqual('x+7','x+8'));assert(!obs.t.polynomialEqual('alert(1)','x+8'));assert(!obs.t.polynomialEqual('1/x','x'));
  obs.get('courtCompleteClose').events.click();obs.t.leaveCourt();assert.equal(obs.t.world,2);assert.equal(obs.t.stage,5);assert.equal(obs.get('courtCount').textContent,'0 / 6 défis validés');obs.get('skipLevelTwo').events.click();obs.get('observatoryEnter').events.click();obs.t.moveCourt(1);await obs.advance(650);assert.equal(obs.get('courtTrialStart').textContent,'Rejouer');obs.t.skipCompletedChallenge();await obs.advance(650);assert.equal(obs.t.stage,13);
  const og=app({'maths-quest-completed-challenges-v1':JSON.stringify(['tables','relatifs','fractions',...moduleKeys.map(k=>'niveau2-'+k)])},true);og.t.enterCourt();og.t.showObservatoryEntrance(false);assert(!og.get('observatoryEntrance').hidden);assert(og.get('observatoryEntranceScene').classList.contains('playing'));await og.advance(3300);assert(og.get('observatoryEntranceScene').classList.contains('gate-open'));await og.advance(4000);assert(og.get('observatoryEntranceScene').classList.contains('arrived'));assert.equal(og.get('observatoryEntranceHero').src,'heroIdle-6');og.get('observatoryEnter').events.click();assert.equal(og.t.world,3);og.t.moveCourt(1);await og.advance(15000);assert.equal(og.t.courtAt,1);assert(!og.get('courtTrial').hidden);og.t.leaveCourt();assert.equal(og.t.world,2);og.t.showObservatoryEntrance();await og.advance(100);og.t.hideObservatoryEntrance();await og.advance(8000);assert(og.get('observatoryEntrance').hidden);assert(!og.get('observatoryEntranceScene').classList.contains('gate-open'));
