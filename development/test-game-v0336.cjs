@@ -90,7 +90,7 @@ function app(saved={},motion=false){
  const obs=app();obs.get('skipLevelOne').events.click();obs.get('skipLevelTwo').events.click();assert(!obs.get('observatoryEntrance').hidden);assert(obs.get('observatoryEntranceScene').classList.contains('gate-open'));obs.get('observatoryEnter').events.click();assert.equal(obs.t.world,3);assert.equal(obs.t.stage,12);assert.equal(obs.get('courtCount').textContent,'0 / 13 défis validés');assert(obs.get('courtDone0').hidden);assert(!obs.get('observatoryGroup0').hidden);assert(!obs.t.isChallengeCompleted(5));obs.t.moveCourt(1);await obs.advance(650);
  const limits=[20,15,20,20,30,25,20,30,25,25,40,25,50];
  for(let i=0;i<13;i++){
-  assert.equal(obs.t.stage,i+12);obs.t.showQuiz();assert.equal(obs.t.limit,limits[i]*1000);assert.equal(obs.get('calculatorToggle').hidden,![2,3].includes(i));assert(obs.get('quizScreen').style.backgroundImage.includes('observatoryArts-'+i));assert(obs.get('.quiz-brand small').textContent.includes('3'));
+  assert.equal(obs.t.stage,i+12);obs.t.showQuiz();assert.equal(obs.t.limit,limits[i]*1000);assert.equal(obs.get('calculatorToggle').hidden,![2,3,4].includes(i));assert(obs.get('quizScreen').style.backgroundImage.includes('observatoryArts-'+i));assert(obs.get('.quiz-brand small').textContent.includes('3'));
   for(let j=0;j<10;j++){const q=obs.t.questions[obs.t.index];obs.get('quizAnswer').value=typeof q.answer==='object'?`${q.answer.n*2}/${q.answer.d*2}`:String(q.answer).replace('.',',');obs.t.gradeAnswer(false);await obs.advance(1400)}
   assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+12));obs.t.closeQuiz(true);await obs.advance(650);
  }
