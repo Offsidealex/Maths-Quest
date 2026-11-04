@@ -5,7 +5,7 @@
 🎮 **[Jouer à Maths Quest](https://offsidealex.github.io/Maths-Quest/)**  
 🔗 **[Code source sur GitHub](https://github.com/Offsidealex/Maths-Quest)**
 
-> Version actuelle : **0.3.45** — projet en développement. L'adresse de jeu ci-dessus suit l'URL GitHub Pages du dépôt ; vérifier que GitHub Pages est activé si la page ne s'ouvre pas.
+> Version actuelle : **0.3.46** — projet en développement. L'adresse de jeu ci-dessus suit l'URL GitHub Pages du dépôt ; vérifier que GitHub Pages est activé si la page ne s'ouvre pas.
 
 ## Le principe du jeu
 
@@ -43,7 +43,7 @@ Ouvrir le [jeu en ligne](https://offsidealex.github.io/Maths-Quest/) dans un nav
 
 ## Développement
 
-- **Version :** 0.3.45
+- **Version :** 0.3.46
 - **Technologies :** HTML, CSS et JavaScript.
 - **Hébergement prévu :** GitHub Pages.
 - **Dépôt :** [Offsidealex/Maths-Quest](https://github.com/Offsidealex/Maths-Quest)
