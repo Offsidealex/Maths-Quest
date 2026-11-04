@@ -2514,8 +2514,9 @@ eq_niv7:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
         modules:keys,
         places:keys.map(key=>worldThree.places[worldThree.modules.indexOf(key)]),
         arts:keys.map(key=>worldThree.arts[worldThree.modules.indexOf(key)]),
-        points:worldThree.points.slice(first,last+2),
-        routes:worldThree.routes.slice(first,last+1)
+        // Inclure le dernier point ET le trajet vers la porte après la dernière épreuve.
+        points:worldThree.points.slice(first,last+3),
+        routes:worldThree.routes.slice(first,last+2)
       };
     }
     const worldThreeA=observatoryPartConfig(order3A,0,6);
