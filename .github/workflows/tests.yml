@@ -1,0 +1,24 @@
+name: Maths Quest — tests des modifications
+
+on:
+  pull_request:
+    branches: [main, test]
+  push:
+    branches: [test]
+
+permissions:
+  contents: read
+
+jobs:
+  mathematical-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Tester les défis, la progression et les transitions
+        run: node development/test-game-v0336.cjs
+      - name: Vérifier le fichier HTML du jeu
+        run: |
+          test -s index.html
+          test -d assets
