@@ -2,10 +2,11 @@
 
 **Maths Quest** est un jeu de rôle éducatif (RPG) en 2D qui transforme les exercices de mathématiques en aventures. L'élève explore des décors fantastiques, déplace son personnage, découvre des lieux, relève des défis et progresse en réussissant des épreuves.
 
-🎮 **[Jouer à Maths Quest](https://offsidealex.github.io/Maths-Quest/)**  
+🎮 **[Version publique](https://offsidealex.github.io/Maths-Quest/)**  
+🧪 **[Version de test](https://offsidealex.github.io/Maths-Quest/test/)**  
 🔗 **[Code source sur GitHub](https://github.com/Offsidealex/Maths-Quest)**
 
-> Version actuelle : **0.3.47** — projet en développement. L'adresse de jeu ci-dessus suit l'URL GitHub Pages du dépôt ; vérifier que GitHub Pages est activé si la page ne s'ouvre pas.
+> Version actuelle : **0.3.47** — projet en développement. Les deux adresses utilisent GitHub Pages. Pour activer cette publication automatisée, choisir **GitHub Actions** dans *Settings → Pages → Build and deployment → Source*.
 
 ## Le principe du jeu
 
@@ -54,3 +55,18 @@ Maths Quest est un projet pédagogique en évolution : nouveaux niveaux, nouvell
 ## Nouveauté 0.3.47
 
 La calculatrice intégrée est aussi accessible pendant l'épreuve **Calcul de moyenne** du niveau 3. Elle permet de poser les additions et divisions, puis de reporter le résultat dans la réponse sans interrompre le chronomètre.
+
+## Versions publique et de test
+
+- **`main`** : version validée, diffusée à l'adresse [Maths Quest](https://offsidealex.github.io/Maths-Quest/).
+- **`test`** : nouveautés à essayer avant validation, diffusées à l'adresse [Maths Quest — Test](https://offsidealex.github.io/Maths-Quest/test/).
+
+Les deux versions sont déployées ensemble par [GitHub Actions](.github/workflows/pages.yml) à chaque modification de `main` ou `test`. Les tests de parcours s'exécutent avant publication et une erreur empêche le déploiement. Les pull requests vers ces deux branches déclenchent également les [tests automatiques](.github/workflows/tests.yml).
+
+### Méthode pour les prochaines modifications
+
+1. Développer sur une branche de travail et ouvrir une pull request vers `test`.
+2. Une fois les tests passés, fusionner vers `test`, puis essayer la version dans le navigateur à l'adresse **/test/**.
+3. Quand la version est validée, ouvrir une pull request de `test` vers `main` et fusionner : l'adresse publique est alors mise à jour.
+
+**Configuration initiale indispensable :** dans GitHub → **Settings → Pages**, sélectionner **GitHub Actions** comme source du déploiement. Les liens sont prévus dans le workflow, mais ne deviennent actifs qu'une fois les déploiements réussis. Ne pas choisir la branche `test` comme source Pages : cela remplacerait le site public au lieu de créer le sous-dossier `/test/`.
