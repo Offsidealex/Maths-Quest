@@ -5,7 +5,7 @@
 🎮 **[Jouer à Maths Quest](https://offsidealex.github.io/Maths-Quest/)**  
 🔗 **[Code source sur GitHub](https://github.com/Offsidealex/Maths-Quest)**
 
-> Version actuelle : **0.3.46** — projet en développement. L'adresse de jeu ci-dessus suit l'URL GitHub Pages du dépôt ; vérifier que GitHub Pages est activé si la page ne s'ouvre pas.
+> Version actuelle : **0.3.47** — projet en développement. L'adresse de jeu ci-dessus suit l'URL GitHub Pages du dépôt ; vérifier que GitHub Pages est activé si la page ne s'ouvre pas.
 
 ## Le principe du jeu
 
@@ -43,10 +43,14 @@ Ouvrir le [jeu en ligne](https://offsidealex.github.io/Maths-Quest/) dans un nav
 
 ## Développement
 
-- **Version :** 0.3.46
+- **Version :** 0.3.47
 - **Technologies :** HTML, CSS et JavaScript.
 - **Hébergement prévu :** GitHub Pages.
 - **Dépôt :** [Offsidealex/Maths-Quest](https://github.com/Offsidealex/Maths-Quest)
 - **Projet associé :** [Activités mentales](https://github.com/Offsidealex/Activites_mentales)
 
 Maths Quest est un projet pédagogique en évolution : nouveaux niveaux, nouvelles épreuves et améliorations de l'ergonomie sont progressivement ajoutés.
+
+## Nouveauté 0.3.47
+
+La calculatrice intégrée est aussi accessible pendant l'épreuve **Calcul de moyenne** du niveau 3. Elle permet de poser les additions et divisions, puis de reporter le résultat dans la réponse sans interrompre le chronomètre.
