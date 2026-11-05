@@ -2061,7 +2061,7 @@ function generateRelatives(level){
     function showQuiz(){
       if(releasePartialFullscreen(showQuiz))return;
       if(!challenges.some(item=>item.stage===currentStage)||(currentStage===5&&!isChallengeCompleted(3)&&!levelTwoDirectAccess)||(currentStage===12&&!levelThreeDirectAccess&&!worldTwo.modules.every((_,i)=>isChallengeCompleted(i+5)))||(currentStage>1&&currentStage!==5&&currentStage!==12&&!isChallengeCompleted(currentStage-1)))return;
-      hideTransition();courtTrial.hidden=true;stopQuizTimers();sessionToken++;closeCalculator();resetCalculator();calcToggle.hidden=!calculatorAvailable();document.getElementById('calculatorHint').textContent=currentStage===7?'Étendue = maximum − minimum.':currentStage===14?'Arrondis le résultat au dixième.':currentStage===16?'Moyenne = somme des valeurs ÷ nombre de valeurs.':'Pour un carré, multiplie le nombre par lui-même.';
+      hideTransition();courtTrial.hidden=true;stopQuizTimers();sessionToken++;closeCalculator();resetCalculator();calcToggle.hidden=!calculatorAvailable();document.getElementById('calculatorHint').textContent=currentStage===7?'Étendue = maximum − minimum.':currentStage===14?'Arrondis le résultat au dixième.':currentStage===15?'Moyenne = somme des valeurs ÷ nombre de valeurs.':'Pour un carré, multiplie le nombre par lui-même.';
       quizAccount=window.MQAccount?.accountId()||null;
       questions=currentStage>=5?courtModule().gen().map(q=>({...q,answer:q.ans})):currentStage===3?generateEquivalentFractions():currentStage===2?generateRelatives('add').map(q=>({...q,answer:q.ans})):generateTables();
       questionTime=currentStage>=5?courtModule().time*1000:currentStage===3?30000:10000;questionIndex=0;correct=0;answers=[];totalSpentMs=0;
