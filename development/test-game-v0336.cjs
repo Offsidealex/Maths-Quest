@@ -97,9 +97,9 @@ function app(saved={},motion=false){
   for(let j=0;j<10;j++){const q=obs.t.questions[obs.t.index];obs.get('quizAnswer').value=typeof q.answer==='object'?q.answer.n+'/'+q.answer.d:String(q.answer).replace('.',',');obs.t.gradeAnswer(false);await obs.advance(1400)}
   assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+12));obs.t.closeQuiz(true);await obs.advance(i===6?18000:650);
  }
- assert.equal(obs.t.world,4);assert.equal(obs.t.stage,19);assert.equal(obs.t.courtAt,0);assert(obs.get('courtComplete').hidden);assert(obs.get('harbourBoat').hidden);assert(!obs.get('courtHero').hidden);for(let i=12;i<=18;i++)assert(obs.t.isChallengeCompleted(i));
+ assert.equal(obs.t.world,4);assert.equal(obs.t.stage,19);assert.equal(obs.t.courtAt,0);assert(obs.get('courtComplete').hidden);assert(!obs.get('harbourBoat').hidden);assert(!obs.get('courtHero').hidden);for(let i=12;i<=18;i++)assert(obs.t.isChallengeCompleted(i));
  assert(obs.t.polynomialEqual('8 + x','x+8'));assert(obs.t.polynomialEqual('(x+1)^2','x^2+2x+1'));assert(obs.t.polynomialEqual('2b - 1','2b-1'));assert(!obs.t.polynomialEqual('x+7','x+8'));assert(!obs.t.polynomialEqual('alert(1)','x+8'));assert(!obs.t.polynomialEqual('1/x','x'));
- assert.equal(obs.t.world,4);assert.equal(obs.t.stage,19);assert.equal(obs.get('courtCount').textContent,'0 / 6 défis validés');assert(obs.get('courtBackground').src.includes('forge-niveau4.svg'));assert.equal(obs.get('courtWorldTitle').textContent,'Niveau 4');
+ assert.equal(obs.t.world,4);assert.equal(obs.t.stage,19);assert.equal(obs.get('courtCount').textContent,'0 / 6 défis validés');assert(obs.get('courtBackground').src.includes('forge-niveau4.png'));assert.equal(obs.get('courtWorldTitle').textContent,'Niveau 4');
  obs.t.moveCourt(1);await obs.advance(650);
  for(let i=0;i<6;i++){
   assert.equal(obs.t.stage,i+19);obs.t.showQuiz();assert.equal(obs.t.limit,limits[i+7]*1000);assert.equal(obs.get('calculatorToggle').hidden,i!==0);assert(obs.get('quizScreen').style.backgroundImage.includes('observatoryArts-'+artIndices[i+7]));assert(obs.get('.quiz-brand small').textContent.includes('4'));
