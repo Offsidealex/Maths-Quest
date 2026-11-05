@@ -88,10 +88,10 @@ function app(saved={},motion=false){
  console.log('PASS finale niveau 2 : accès à l’Observatoire après six réussites.');
 
  const obs=app();obs.get('skipLevelOne').events.click();obs.get('skipLevelTwo').events.click();assert(!obs.get('observatoryEntrance').hidden);assert(obs.get('observatoryEntranceScene').classList.contains('gate-open'));obs.get('observatoryEnter').events.click();assert.equal(obs.t.world,3);assert.equal(obs.t.stage,12);assert.equal(obs.t.moduleKeys.length,7);assert.equal(obs.get('observatorySevenMarkers').children.length,7);assert(obs.get('courtBackground').src.endsWith('observatoire_niveau3_sans_parchemin.png'));assert.equal(obs.get('courtCount').textContent,'0 / 7 défis validés');assert(obs.get('courtDone0').hidden);assert(!obs.get('observatoryGroup0').hidden);assert(!obs.t.isChallengeCompleted(5));obs.t.moveCourt(1);await obs.advance(650);
- const levelThreeKeys=['mult10','mult_rel','arrondir','moyenne','tableau_prop2','probas_des','eq_niv2'];
+ const levelThreeKeys=['mult10','mult_rel','arrondir','moyenne','probas_des','tableau_prop2','eq_niv2'];
  const levelFourKeys=['carre','conversions2','angles','pct_variation','reductions','eq_niv7'];
- const limits=[20,15,20,45,30,25,25,20,25,20,25,40,50];
- const artIndices=[0,1,2,4,7,9,11,3,5,6,8,10,12];
+ const limits=[20,15,20,45,25,30,25,20,25,20,25,40,50];
+ const artIndices=[0,1,2,4,9,7,11,3,5,6,8,10,12];
  for(let i=0;i<7;i++){
   assert.equal(obs.t.stage,i+12);obs.t.showQuiz();assert.equal(obs.t.limit,limits[i]*1000);assert.equal(obs.get('calculatorToggle').hidden,![2,3].includes(i));assert(obs.get('quizScreen').style.backgroundImage.includes('observatoryArts-'+artIndices[i]));assert(obs.get('.quiz-brand small').textContent.includes('3'));
   for(let j=0;j<10;j++){const q=obs.t.questions[obs.t.index];obs.get('quizAnswer').value=typeof q.answer==='object'?q.answer.n+'/'+q.answer.d:String(q.answer).replace('.',',');obs.t.gradeAnswer(false);await obs.advance(1400)}
