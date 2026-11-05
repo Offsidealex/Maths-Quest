@@ -97,9 +97,9 @@ function app(saved={},motion=false){
   for(let j=0;j<10;j++){const q=obs.t.questions[obs.t.index];obs.get('quizAnswer').value=typeof q.answer==='object'?q.answer.n+'/'+q.answer.d:String(q.answer).replace('.',',');obs.t.gradeAnswer(false);await obs.advance(1400)}
   assert.equal(obs.t.correct,10);assert(obs.t.isChallengeCompleted(i+12));obs.t.closeQuiz(true);await obs.advance(i===6?18000:650);
  }
- assert.equal(obs.t.stage,19);assert.equal(obs.t.courtAt,8);assert.equal(obs.get('courtCount').textContent,'7 / 7 défis validés');assert.equal(obs.get('trialGroupCount0').textContent,'2 / 2');assert.equal(obs.get('trialGroupCount3').textContent,'1 / 1');assert(!obs.get('courtComplete').hidden);assert(!obs.get('enterLevelFour').hidden);assert(obs.get('observatoryContinue').hidden);assert(obs.get('courtVictoryStatus').textContent.includes('Sept'));
+ assert.equal(obs.t.world,4);assert.equal(obs.t.stage,19);assert.equal(obs.t.courtAt,0);assert(obs.get('courtComplete').hidden);assert(obs.get('harbourBoat').hidden);assert(!obs.get('courtHero').hidden);for(let i=12;i<=18;i++)assert(obs.t.isChallengeCompleted(i));
  assert(obs.t.polynomialEqual('8 + x','x+8'));assert(obs.t.polynomialEqual('(x+1)^2','x^2+2x+1'));assert(obs.t.polynomialEqual('2b - 1','2b-1'));assert(!obs.t.polynomialEqual('x+7','x+8'));assert(!obs.t.polynomialEqual('alert(1)','x+8'));assert(!obs.t.polynomialEqual('1/x','x'));
- obs.get('enterLevelFour').events.click();assert.equal(obs.t.world,4);assert.equal(obs.t.stage,19);assert.equal(obs.get('courtCount').textContent,'0 / 6 défis validés');assert(obs.get('courtBackground').src.includes('forge-niveau4.svg'));assert.equal(obs.get('courtWorldTitle').textContent,'Niveau 4');
+ assert.equal(obs.t.world,4);assert.equal(obs.t.stage,19);assert.equal(obs.get('courtCount').textContent,'0 / 6 défis validés');assert(obs.get('courtBackground').src.includes('forge-niveau4.svg'));assert.equal(obs.get('courtWorldTitle').textContent,'Niveau 4');
  obs.t.moveCourt(1);await obs.advance(650);
  for(let i=0;i<6;i++){
   assert.equal(obs.t.stage,i+19);obs.t.showQuiz();assert.equal(obs.t.limit,limits[i+7]*1000);assert.equal(obs.get('calculatorToggle').hidden,i!==0);assert(obs.get('quizScreen').style.backgroundImage.includes('observatoryArts-'+artIndices[i+7]));assert(obs.get('.quiz-brand small').textContent.includes('4'));
@@ -113,7 +113,15 @@ function app(saved={},motion=false){
  for(const key of ['mult10','mult_rel','arrondir','carre','moyenne','conversions2','angles','tableau_prop2','pct_variation','probas_des','reductions','eq_niv2','eq_niv7'])for(let z=0;z<25;z++){const qs=obs.t.LEVEL_THREE_MODULES[key].gen();assert.equal(qs.length,10);for(const q of qs)assert(typeof q.ans==='object'?q.ans.d!==0:typeof q.ans==='string'?q.ans.length>0:Number.isFinite(q.ans))}
 
  const full=app({'maths-quest-completed-challenges-v1':JSON.stringify(['tables','relatifs','fractions',...moduleKeys.map(k=>'niveau2-'+k),...Object.keys(obs.t.LEVEL_THREE_MODULES).map(k=>'niveau3-'+k)])},true);
- full.t.enterCourt(3);for(let n=1;n<=8;n++){full.t.moveCourt(n);await full.advance(18000);assert.equal(full.t.courtAt,n);assert.equal(full.get('courtHero').src,'heroIdle-6')}assert.equal(full.get('courtCount').textContent,'7 / 7 défis validés');
+ full.t.enterCourt(3);for(let n=1;n<=7;n++){full.t.moveCourt(n);await full.advance(18000);assert.equal(full.t.courtAt,n);assert.equal(full.get('courtHero').src,'heroIdle-6')}
+ full.t.moveCourt(8);assert(full.get('courtScreen').classList.contains('harbour-departure'));await full.advance(11000);assert.equal(full.t.world,3);assert(!full.get('harbourPassenger').hidden);assert.equal(full.get('harbourGangplank').getAttribute('visibility'),'hidden');assert(full.get('courtHero').hidden);assert(!full.get('boatSkip').hidden);await full.advance(10000);assert.equal(full.t.world,4);assert.equal(full.t.courtAt,0);assert(full.get('boatSkip').hidden);assert(!full.get('courtHero').hidden);
+ // Reset during sailing cancels navigation; skip reaches level four only once.
+ for(const skip of [false,true]){
+   full.t.enterCourt(3);for(let n=1;n<=7;n++){full.t.moveCourt(n);await full.advance(18000)}full.t.moveCourt(8);await full.advance(11000);
+   if(skip)full.get('boatSkip').events.click();else full.get('courtReset').events.click();
+   await full.advance(10000);assert.equal(full.t.world,skip?4:3);assert.equal(full.t.courtAt,0);assert(!full.get('courtHero').hidden);assert(full.get('boatSkip').hidden);assert(!full.get('courtScreen').classList.contains('harbour-departure'));
+ }
+ console.log('PASS bateau : quai dévoilé après sept épreuves, embarquement, traversée automatique, mouvements réduits, annulation au retour et passage rapide.');
  full.t.enterCourt(4);for(let n=1;n<=7;n++){full.t.moveCourt(n);await full.advance(18000);assert.equal(full.t.courtAt,n);assert.equal(full.get('courtHero').src,'heroIdle-6')}assert.equal(full.get('courtCount').textContent,'6 / 6 défis validés');assert(full.get('courtVictoryScene').classList.contains('finished'));full.t.leaveCourt();assert.equal(full.t.world,3);
  console.log('PASS niveaux 3 et 4 : 7+6 modules, calculatrice, polynômes, progression conservée, accès au niveau 4, carte de Forge, quêtes, sauvegarde/rejouer/passer et retours.');
  console.log('PASS niveau 2 : six modules originaux, durées, virgules, fractions équivalentes, verrouillage, parcours complet, 6/6, rejouer/passer, échec sans avance, sauvegarde et annulation de trajet.');
