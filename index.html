@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111d31">
-  <title>Maths Quest — version 0.3.47 — Bleu royal & or</title>
+  <title>Maths Quest — version 0.3.86-public — Bleu royal & or</title>
   <style>
     :root { font-family:system-ui,sans-serif; background:#101c2d; color:#eee6d4; color-scheme:dark; }
     * { box-sizing:border-box; }
@@ -203,7 +203,7 @@
 
 
     /* ====================================================================
-       v0.3.46 - Thème retenu : Bleu royal, or et parchemin.
+       v0.3.86-public - Thème retenu : Bleu royal, or et parchemin.
        Toute la logique pédagogique 0.3 reste inchangée.
        ==================================================================== */
     .quiz-screen{
@@ -365,7 +365,7 @@
     @media(prefers-reduced-motion:reduce){.quiz-submit{transition:none}}
 
 
-    /* v0.3.46 — Cartouche de défi à droite du héros. */
+    /* v0.3.86-public — Cartouche de défi à droite du héros. */
     .arrival{left:50.4%;top:27.7%;width:24.5%;max-width:360px;min-width:0;gap:clamp(3px,.5vw,8px);
       padding:clamp(5px,.72vw,12px);box-shadow:0 9px 23px #071c3bc7;}
     .arrival .arrival-heading{font-size:clamp(10px,.94vw,16px)}
@@ -373,7 +373,7 @@
     .arrival small{font-size:clamp(9px,.8vw,13px)}
     .arrival .arrival-action{font-size:clamp(10px,.95vw,16px);padding:clamp(6px,.65vw,12px)}
 
-    /* v0.3.46 — Camp d'entrainement de face comme arrière-plan des exercices.
+    /* v0.3.86-public — Camp d'entrainement de face comme arrière-plan des exercices.
        L'interface d'Activités mentales reste indépendante de ce fond illustré. */
     .quiz-screen{
       background-image:linear-gradient(90deg,rgba(7,27,57,.47),rgba(10,34,63,.31) 50%,rgba(7,27,57,.47)),
@@ -417,7 +417,7 @@
 
 
     /* ================================================================
-       v0.3.46 — adaptation à la HAUTEUR et à la LARGEUR de l'écran.
+       v0.3.86-public — adaptation à la HAUTEUR et à la LARGEUR de l'écran.
        Une question doit tenir dans la zone visible, bouton Valider inclus.
        Le bilan reste défilable car il contient les dix réponses.
        ================================================================ */
@@ -530,7 +530,7 @@
     }
 
 
-    /* v0.3.46 — Écran de transition « Tables de multiplication ».
+    /* v0.3.86-public — Écran de transition « Tables de multiplication ».
        L'illustration est un décor, les zones actives sont de vrais boutons HTML. */
     .trial-transition[hidden] {display:none!important}
     .trial-transition {position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;
@@ -575,7 +575,7 @@
     @media(min-width:701px){.oath{max-height:59%;overflow:auto}}
     .relative-intro{display:none!important}
     .transition-recap{left:68.1%;top:10.8%;width:20.8%;height:4%;background:#0b2541;font-size:clamp(8px,1.05vw,17px);border:0;box-shadow:none}
-    /* v0.3.46 — Bilan ajusté à l'écran ; seul le détail des réponses défile. */
+    /* v0.3.86-public — Bilan ajusté à l'écran ; seul le détail des réponses défile. */
     .quiz-content:has(.quiz-results:not([hidden])) {
       display:flex;overflow:hidden;width:min(760px,calc(100% - 24px));
     }
@@ -779,14 +779,14 @@
 
 #calculatorToggle[hidden],#calculatorDrawer[hidden]{display:none!important}
 .calculator-launch{margin:0 0 12px 8px;padding:8px 12px;border:2px solid #d5ad65;border-radius:10px;background:linear-gradient(#163e70,#08264b);color:#fff0c8;font:700 14px Georgia,serif;cursor:pointer;min-height:40px}
-.calculator-drawer{position:fixed;z-index:85;right:14px;top:clamp(76px,13dvh,122px);bottom:14px;width:310px;max-height:620px;box-sizing:border-box;overflow-y:auto;overscroll-behavior:contain;padding:16px;border:2px solid #d2a85e;border-radius:16px;background:linear-gradient(130deg,#fff4d9,#efdab0);box-shadow:0 8px 35px #0008;color:#14345d;font-family:system-ui,sans-serif;color-scheme:light}
-.calculator-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.calculator-heading h2{font:700 22px Georgia,serif;margin:0}.calculator-heading button{border:1px solid #c8a561;border-radius:8px;background:#fff5df;color:#153452;min-width:36px;min-height:36px;font-size:23px;cursor:pointer}
-.calculator-display{width:100%;box-sizing:border-box;min-height:64px;border:2px solid #bca777;border-radius:9px;padding:10px;background:#fffdf3;color:#16365d;font:600 24px/1.2 system-ui;text-align:right;margin-bottom:12px}
-.calculator-keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.calculator-keys button{min-height:48px;border:1px solid #c5a56a;border-radius:8px;background:linear-gradient(#fffaf0,#ecdcbb);color:#14345b;font:700 21px system-ui;box-shadow:0 2px 2px #5d451d22;cursor:pointer}.calculator-keys button.calc-operator{background:linear-gradient(#27588c,#123963);color:#fff2cf}.calculator-keys button.calc-equals{background:linear-gradient(#39794e,#1b4e31);color:#fff3d7}.calculator-keys button:hover{filter:brightness(1.07)}
-.calculator-copy{width:100%;margin-top:12px;padding:11px 8px;border:1px solid #dbaf61;border-radius:9px;background:linear-gradient(#235a99,#103463);color:#fff1cc;font:700 15px Georgia,serif;cursor:pointer}.calculator-copy:disabled{opacity:.5;cursor:default}.calculator-drawer p{font-size:12px;line-height:1.35;margin:9px 0 0}.calculator-status{min-height:32px;color:#724b19}
+.calculator-drawer{position:fixed;z-index:85;right:14px;top:clamp(76px,13dvh,122px);bottom:auto;width:248px;max-height:calc(100dvh - 100px);box-sizing:border-box;overflow-y:auto;overscroll-behavior:contain;padding:12px;border:2px solid #d2a85e;border-radius:16px;background:linear-gradient(130deg,#fff4d9,#efdab0);box-shadow:0 8px 35px #0008;color:#14345d;font-family:system-ui,sans-serif;color-scheme:light}
+.calculator-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.calculator-heading h2{font:700 18px Georgia,serif;margin:0}.calculator-heading button{border:1px solid #c8a561;border-radius:8px;background:#fff5df;color:#153452;min-width:30px;min-height:30px;font-size:20px;cursor:pointer}
+.calculator-display{width:100%;box-sizing:border-box;min-height:46px;border:2px solid #bca777;border-radius:9px;padding:10px;background:#fffdf3;color:#16365d;font:600 20px/1.2 system-ui;text-align:right;margin-bottom:8px}
+.calculator-keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.calculator-keys button{min-height:38px;border:1px solid #c5a56a;border-radius:8px;background:linear-gradient(#fffaf0,#ecdcbb);color:#14345b;font:700 18px system-ui;box-shadow:0 2px 2px #5d451d22;cursor:pointer}.calculator-keys button.calc-operator{background:linear-gradient(#27588c,#123963);color:#fff2cf}.calculator-keys button.calc-equals{background:linear-gradient(#39794e,#1b4e31);color:#fff3d7}.calculator-keys button:hover{filter:brightness(1.07)}
+.calculator-copy{width:100%;margin-top:8px;padding:8px 6px;border:1px solid #dbaf61;border-radius:9px;background:linear-gradient(#235a99,#103463);color:#fff1cc;font:700 13px Georgia,serif;cursor:pointer}.calculator-copy:disabled{opacity:.5;cursor:default}.calculator-drawer p{font-size:11px;line-height:1.35;margin:9px 0 0}.calculator-status{min-height:18px;color:#724b19}
 .calculator-drawer button:focus-visible,.calculator-launch:focus-visible,.calculator-display:focus-visible{outline:3px solid #236bc5;outline-offset:2px}
-@media(min-width:960px){.quiz-screen.calculator-open .quiz-content{width:min(550px,calc(100% - 370px));transform:translateX(-165px)}}
-@media(max-width:959px){.calculator-drawer{width:min(310px,calc(100% - 20px));right:10px;bottom:10px;top:76px;max-height:calc(100dvh - 86px)}}
+@media(min-width:960px){.quiz-screen.calculator-open .quiz-content{width:min(550px,calc(100% - 300px));transform:translateX(-135px)}}
+@media(max-width:959px){.calculator-drawer{width:min(248px,calc(100% - 20px));right:10px;bottom:auto;top:76px;max-height:calc(100dvh - 86px)}}
 @media(max-height:500px){.calculator-drawer{top:58px;padding:10px;bottom:6px;max-height:calc(100dvh - 64px)}.calculator-heading{margin-bottom:6px}.calculator-heading h2{font-size:18px}.calculator-display{min-height:40px;font-size:20px;padding:5px;margin-bottom:7px}.calculator-keys{gap:4px}.calculator-keys button{min-height:31px;font-size:18px}.calculator-copy{margin-top:7px;padding:7px}.calculator-drawer p{font-size:11px}}
 
 .court-complete>div.court-victory-card{width:min(1000px,calc(100vw - 32px));max-width:1000px;max-height:calc(100dvh - 32px);padding:0;overflow:auto;background:#08284b;color:#ffedc3;border:2px solid #e3b55a}
@@ -901,7 +901,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
 @media(max-width:640px){#appFullscreen{right:8px;bottom:8px;width:34px;height:34px;padding:7px}.brand-version{font-size:clamp(6px,1.5vw,10px)}}
 
 
-/* v0.3.46 — Progression retirée des images sources, sans plaque de masquage. */
+/* v0.3.86-public — Progression retirée des images sources, sans plaque de masquage. */
 #scene,.transition-viewport{container-type:inline-size}
 .court-quests .court-quest-row{display:none!important}
 .court-quests .trial-groups{display:grid;height:68%;grid-auto-rows:minmax(0,1fr);grid-template-rows:none}
@@ -925,15 +925,223 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
 .world-map-quests h2{font-size:1.5cqw}
 .world-map-quests p{font-size:.95cqw}
 .observatory .world-map-quests{left:83%;top:19.8%;width:15.5%;height:51.8%}
+/* Niveau 1 : les trois anciens badges flottants étaient superposés aux
+   coches du nouveau parchemin regroupé. On conserve les données de réussite
+   et les coches de groupes, mais on retire ces doublons visuels. */
+#scene .quest-done{display:none!important}
+#scene .level-one-quests .trial-group{
+  grid-template-columns:19% minmax(0,1fr) 13%;
+  column-gap:5%;
+  align-items:center;
+}
+#scene .level-one-quests .trial-group>.court-quest-check{
+  width:100%;
+  justify-self:center;
+  align-self:center;
+  margin:0;
+  transform:none;
+}
+
+/* Parchemin de la CARTE de l'Observatoire : quatre groupes et pied de page
+   sur des lignes distinctes, sans chevauchement des compteurs. */
+.observatory .world-map-quests{
+  top:19.8%;
+  height:68%;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  padding:1.5% 1.3% 1.7%;
+  row-gap:0;
+}
+.observatory .world-map-quests h2{
+  margin:0 0 3%;
+  font-size:1.55cqw;
+  line-height:1.05;
+}
+.observatory .world-map-quests .trial-groups{
+  display:grid;
+  height:100%;
+  min-height:0;
+  grid-template-rows:none;
+  grid-auto-rows:minmax(0,1fr);
+}
+.observatory .world-map-quests .trial-group{
+  min-height:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:19% minmax(0,1fr) 12%;
+  column-gap:5%;
+  align-items:center;
+  box-sizing:border-box;
+}
+.observatory .world-map-quests .trial-group>b{
+  width:100%;
+  align-self:center;
+  justify-self:center;
+  line-height:1;
+}
+.observatory .world-map-quests .trial-group>div{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:.3cqw;
+  min-width:0;
+  min-height:0;
+  font-size:.98cqw;
+  line-height:1.08;
+}
+.observatory .world-map-quests .trial-group>div>span{
+  display:block;
+  overflow-wrap:normal;
+}
+.observatory .world-map-quests .trial-group strong{
+  display:block;
+  margin:0;
+  font-size:1.75cqw;
+  line-height:1;
+}
+.observatory .world-map-quests .trial-group>.court-quest-check{
+  width:100%;
+  align-self:center;
+  justify-self:center;
+}
+.observatory .world-map-quests p{
+  margin:0;
+  padding-top:4%;
+  font-size:.88cqw;
+  line-height:1.17;
+}
+
+/* Alignement des catégories du parchemin de l'Observatoire (branche test).
+   Les quatre groupes restent dans le parchemin sans empiéter sur l'objectif. */
+.observatory .court-quests .trial-groups{
+  height:62%;
+  grid-template-rows:none;
+  grid-auto-rows:minmax(0,1fr);
+  min-height:0;
+}
+.observatory .court-quests .trial-group{
+  grid-template-columns:19% minmax(0,1fr) 13%;
+  column-gap:5%;
+  align-items:center;
+  min-height:0;
+  padding:0;
+  box-sizing:border-box;
+}
+.observatory .court-quests .trial-group>b{
+  width:100%;
+  line-height:1;
+  align-self:center;
+  justify-self:center;
+}
+.observatory .court-quests .trial-group>div{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:.25cqw;
+  min-width:0;
+  min-height:0;
+  font-size:1.02cqw;
+  line-height:1.04;
+}
+.observatory .court-quests .trial-group>div>span{
+  display:block;
+  overflow-wrap:normal;
+  hyphens:auto;
+}
+.observatory .court-quests .trial-group strong{
+  display:block;
+  margin:0;
+  font-size:1.8cqw;
+  line-height:1;
+}
+.observatory .court-quests .trial-group>.court-quest-check{
+  width:100%;
+  justify-self:center;
+  align-self:center;
+}
+.observatory .court-quests .court-goal{
+  margin-top:1.5%;
+  padding-top:3%;
+  line-height:1.12;
+}
+
 .court-done,.observatory-group-count,.observatory-group-done{visibility:hidden}
+
+/* Observatoire 7 haltes : espace droit réservé au parchemin (carte 1672×941).
+   Les numéros sont des couches HTML, pas incrustés dans l'illustration. */
+.court-screen.observatory-seven-map .world-map-quests{
+  left:76.5%; top:18.5%; width:21.5%; height:68%;
+}
+.court-screen.observatory-seven-map .world-map-quests h2{font-size:1.75cqw}
+.court-screen.observatory-seven-map .world-map-quests .trial-group>div{font-size:1.10cqw}
+.observatory-seven-markers{position:absolute;inset:0;z-index:5;pointer-events:none}
+.observatory-seven-markers[hidden]{display:none!important}
+.observatory-seven-marker{
+  position:absolute;transform:translate(-50%,-145%);display:grid;place-items:center;
+  width:2.8%;aspect-ratio:1;border-radius:50%;
+  color:#fff3d1;background:linear-gradient(#14599a,#08244a);
+  border:2px solid #ffda69;box-shadow:0 1px 8px #000b,0 0 9px #ffca46;
+  font:700 1.4cqw Georgia,serif;
+}
+.court-screen.observatory-seven-map .court-progress-cover{display:none!important}
+.observatory-seven-map .court-depth-board{display:none!important}
+.harbour-departure .world-map-quests{display:none!important}
+.harbour-boat{position:absolute;left:80.1435%;top:60.5739%;width:17.9426%;aspect-ratio:3/2;z-index:5;pointer-events:none}
+.harbour-boat[hidden],.harbour-passenger[hidden],#courtHero[hidden],#harbourGangplank[hidden],#boatSkip[hidden]{display:none!important}
+.harbour-vessel{position:relative;width:100%;height:100%}
+.harbour-boat-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.harbour-passenger{position:absolute;left:34.6667%;top:-3.5%;width:24%;height:auto;z-index:2;filter:drop-shadow(0 2px 2px #0007)}
+.harbour-sailing .harbour-boat{animation:harbourSail 6.5s ease-in forwards}
+.harbour-sailing .harbour-vessel{animation:harbourBob 1.6s ease-in-out infinite}
+.harbour-sailing .harbour-boat:before{content:"";position:absolute;width:70%;height:16%;left:-35%;top:73%;border-bottom:3px solid #c3edff99;border-radius:50%;filter:blur(1px)}
+@keyframes harbourSail{0%,12%{transform:translate(0,0)}100%{transform:translate(135%,45%)}}
+@keyframes harbourBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(-1deg)}}
+@media(prefers-reduced-motion:reduce){.harbour-sailing .harbour-boat,.harbour-sailing .harbour-vessel{animation:none}}
+
+.forge-map .harbour-boat{left:0;top:86.6%;width:14%}
+.forge-arriving .harbour-boat{animation:forgeDock 3.5s ease-out forwards}
+@keyframes forgeDock{from{transform:translate(-130%,8%)}to{transform:translate(0,0)}}
+@media(prefers-reduced-motion:reduce){.forge-arriving .harbour-boat{animation:none}}
+.forge-foreground{display:none;position:absolute;inset:0;width:100%;height:100%;z-index:7;pointer-events:none}.forge-map .forge-foreground{display:block}
+.observatory-foreground{display:none;position:absolute;inset:0;width:100%;height:100%;z-index:7;pointer-events:none}.observatory-seven-map:not(.forge-map):not(.cloud-map) .observatory-foreground{display:block}
+.quiz-tip button{border:1px solid #aa8137;border-radius:6px;background:#123c77;color:#fff4cd;padding:3px 10px;font:inherit;cursor:pointer}.quiz-tip button:focus-visible{outline:3px solid #ffd45b;outline-offset:2px}
+.cloud-map .world-map-quests{width:17%;right:0.5%;font-size:12px}.cloud-map .world-map-quests h2{font-size:21px}.cloud-map .world-map-quests .trial-group{padding:9px 2px}.cloud-map .court-depth-board{display:none!important}
+.court-screen.cloud-map .world-map-quests{left:83%;right:auto;width:16.4%;top:18%;height:51%;padding:1.1%}.court-screen.cloud-map .world-map-quests h2{font-size:1.3cqw}.court-screen.cloud-map .world-map-quests .trial-group>div>span{font-size:.9cqw}.court-screen.cloud-map .world-map-quests .trial-group>b{width:2.5cqw;height:2.5cqw;font-size:1.4cqw}.court-screen.cloud-map .world-map-quests .trial-group strong{font-size:1.4cqw}
 </style>
-</head>
+<style>
+/* Bandeau commun hors du décor : les coordonnées du jeu restent inchangées. */
+.map-heading{flex:0 0 76px;min-height:76px;position:relative;z-index:20;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:18px;padding:6px 24px;color:#ffedc7;background:linear-gradient(110deg,#102e4b,#05182d 52%,#103552);border-bottom:2px solid #c99b46;box-shadow:0 3px 12px #0005;font-family:Georgia,serif}
+.map-brand{display:flex;align-items:center;gap:12px;min-width:0}.map-brand-icon{font-size:36px}.map-brand strong{display:block;font-size:29px;color:#ffe1a0;text-shadow:0 2px 2px #000}.map-brand small{display:block;font-size:14px;margin-top:2px}
+.map-level{text-align:center;line-height:1.15;min-width:0}.map-level strong{display:block;font-size:26px}.map-level small{display:block;font-size:16px;margin-top:4px}
+.map-account-slot{position:relative;justify-self:end;width:min(100%,310px);height:62px}
+.map-heading #mq-account-bar{position:relative;inset:auto;width:100%;height:100%;font-size:14px}
+.map-heading #mq-account-toggle{padding:6px 30px 6px 23%;gap:3px}
+.map-heading #mq-account-label{font-size:17px}.map-heading #mq-account-user{font-size:14px}
+.map-title-restoration{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.observatory .map-title-restoration{display:none}
+#scene>.brand-version,#courtMap>.brand-version{display:none}
+@media(max-width:700px){.map-heading{grid-template-columns:1fr 1fr;grid-template-rows:52px auto;gap:4px 8px;flex-basis:100px;min-height:100px;padding:4px 10px}.map-brand{gap:6px}.map-brand-icon{font-size:25px}.map-brand strong{font-size:21px}.map-brand small{font-size:10px}.map-level{grid-column:1/-1;grid-row:2;display:flex;justify-content:center;align-items:center;gap:10px}.map-level strong{font-size:18px}.map-level small{font-size:13px;margin:0}.map-account-slot{grid-column:2;grid-row:1;height:52px}.map-heading #mq-account-label{font-size:13px}.map-heading #mq-account-user{font-size:11px}.map-heading #mq-account-toggle{padding-right:20px}}
+@media(max-height:500px) and (min-width:701px){.map-heading{flex-basis:56px;min-height:56px;padding:2px 14px}.map-brand strong{font-size:22px}.map-brand small{font-size:11px}.map-level strong{font-size:21px}.map-level small{font-size:12px}.map-account-slot{height:50px}}
+</style>
+<style>
+.cloud-trial-heading{display:none}
+.cloud-map>.cloud-trial-heading{display:grid}
+#courtTrial.cloud-map .court-ui-header,#courtTrial.cloud-map .court-world-title,#courtTrial.cloud-map .brand-version,#courtTrial.cloud-map .court-trial-progress{display:none}
+#courtTrial.cloud-map .court-trial-caption{top:5%;left:8%;width:38%;height:10%;font-size:2cqw}
+#courtTrial.cloud-map .court-station-number{width:15%;font-size:3.3cqw}
+#courtTrial.cloud-map #courtTrialRing{background:radial-gradient(ellipse,#fff9bd,#ffe05c 55%,#eeb000);border:4px solid #fffbd2;box-shadow:0 0 0 4px #ffc900,0 0 14px 7px #ffd82499}
+.cloud-map .court-hero{will-change:translate}
+</style><style>#skipLevelOne,#skipLevelTwo,#skipLevelThree,#skipLevelFour,#courtBack,#enterLevelFive{display:none!important}</style></head>
 <body>
-<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><clipPath id="worldHeaderPanels" clipPathUnits="objectBoundingBox"><rect width=".33" height=".15"/><rect x=".39" width=".225" height=".15"/></clipPath></defs></svg>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><clipPath id="cleanMapTitles" clipPathUnits="objectBoundingBox"><rect width=".32" height=".155"/><rect x=".39" width=".225" height=".14"/></clipPath><clipPath id="worldHeaderPanels" clipPathUnits="objectBoundingBox"><rect width=".33" height=".15"/><rect x=".39" width=".225" height=".15"/></clipPath></defs></svg>
+  <header class="map-heading" aria-label="Maths Quest, niveau 1"><div class="map-brand"><span class="map-brand-icon" aria-hidden="true">📖</span><div><strong>Maths Quest</strong><small>L’Académie des Nombres</small></div></div><div class="map-level"><strong id="academyLevel">Niveau 1</strong><small id="academyName">Les bases de l’Académie</small></div><div class="map-account-slot" id="academyAccount"></div></header>
   <main class="scene-area" id="sceneArea">
-    <div class="scene-viewport" id="scene"><span class="brand-version">v0.3.46</span>
+    <div class="scene-viewport" id="scene"><span class="brand-version">v0.3.86-public</span>
       <img class="scene-image" src="assets/carte-sans-progression.png"
         alt="L’Académie des Nombres, trois épreuves reliées par des flèches lumineuses, et l'entrée au premier plan." draggable="false">
+      <img class="map-title-restoration" src="assets/academie-sans-titres-v0384.png" alt="" aria-hidden="true">
       <svg class="route-layer" viewBox="0 0 1660 947" preserveAspectRatio="none" aria-hidden="true" focusable="false">
   <defs>
     <filter id="routeGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/><feFlood flood-color="#ffc400" flood-opacity=".95"/><feComposite in2="blur" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -1022,7 +1230,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
           draggable="false">
         <div class="quest-progress transition-progress" role="progressbar" aria-label="Défis validés" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span class="quest-progress-fill"></span></div>
         <span class="transition-recap" id="transitionRecap" aria-live="polite">1 / 3 défis validés ✓</span>
-        <span class="transition-version">Maths Quest · v0.3.46</span>
+        <span class="transition-version">Maths Quest · v0.3.86-public</span>
         <aside class="level-one-quests" aria-label="Quêtes du niveau 1"><h2>Quêtes du niveau</h2><div class="trial-groups"><div class="trial-group"><b>1</b><div><span id="transitionQuestLabel0">Calculs entiers</span><strong id="transitionQuestCount0"></strong></div><span id="transitionQuestDone0" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>2</b><div><span id="transitionQuestLabel1">Fractions</span><strong id="transitionQuestCount1"></strong></div><span id="transitionQuestDone1" class="court-quest-check" aria-label="Groupe en cours">✓</span></div></div><p>⭐ Obtiens au moins <strong>80 %</strong> de bonnes réponses pour avancer au niveau 2.</p></aside><div class="transition-panel-title">À toi de jouer !</div><div class="transition-choice-buttons"><button id="transitionStart" class="transition-hit transition-start" type="button"
           aria-label="Commencer le défi : Tables de multiplication" title="Commencer le défi"></button>
           <button id="skipCompletedTrial" class="skip-completed" type="button" hidden>Passer</button></div>
@@ -1056,7 +1264,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
         <span class="quiz-logo" aria-hidden="true"><svg viewBox="0 0 64 68" width="45" height="48" role="presentation"><path d="M32 3 57 12 55 39Q47 55 32 64 17 55 9 39L7 12Z" fill="#173d79" stroke="#f8d38c" stroke-width="3"/><path d="M32 22Q23 14 15 20V43Q25 38 32 45Q39 38 49 43V20Q40 14 32 22Z" fill="#fff3cd" stroke="#d7b36a" stroke-width="2"/><path d="M32 22V45" fill="none" stroke="#aa8246" stroke-width="2"/><path d="M18 25Q25 23 29 27M35 27Q41 23 46 25M18 31Q24 29 29 33M35 33Q41 29 46 31" fill="none" stroke="#a68a5c" stroke-width="1.5"/></svg></span>
         <span><strong>Maths Quest</strong><small>L'Académie des Nombres · Niveau 1</small></span>
       </div>
-      <span class="quiz-stage-label">⚜ Les bases de l'Académie <small>v0.3.47</small></span>
+      <span class="quiz-stage-label">⚜ Les bases de l'Académie <small>v0.3.86-public</small></span>
     </header>
     <div class="quiz-content">
       <div id="quizQuestions" class="quiz-questions">
@@ -1120,10 +1328,11 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
   </section>
 
 <section id="courtScreen" class="court-screen" hidden aria-label="Niveau 2, La Cour des Savoirs">
-<div id="courtArea" class="court-area"><div id="courtMap" class="court-map"><span class="brand-version">v0.3.46</span><img id="courtBackground" class="court-background" src="assets/cour-des-savoirs-sans-progression.png" alt="La Cour des Savoirs : six ateliers autour de la fontaine au cheval." draggable="false"><svg class="court-routes" viewBox="0 0 1616 970" aria-hidden="true"><defs><filter id="courtGlow"><feGaussianBlur stdDeviation="5"/></filter><marker id="courtArrow" viewBox="0 0 24 24" refX="19" refY="12" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M2 2 22 12 2 22 7 12Z" fill="#fff7a8" stroke="#ffd52e" stroke-width="2"/></marker></defs><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/></svg><div class="court-progress-cover"><div id="courtProgress" class="court-progress" role="progressbar" aria-label="Défis validés du niveau 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="courtProgressFill"></span></div><span id="courtCount">0 / 6 défis validés</span></div><span id="courtDone0" class="court-done" style="top:27%" hidden aria-label="Défi 1 validé">✓</span><span id="courtDone1" class="court-done" style="top:33.3%" hidden aria-label="Défi 2 validé">✓</span><span id="courtDone2" class="court-done" style="top:39.8%" hidden aria-label="Défi 3 validé">✓</span><span id="courtDone3" class="court-done" style="top:46.1%" hidden aria-label="Défi 4 validé">✓</span><span id="courtDone4" class="court-done" style="top:52.36%" hidden aria-label="Défi 5 validé">✓</span><span id="courtDone5" class="court-done" style="top:58.42%" hidden aria-label="Défi 6 validé">✓</span><span id="observatoryGroup0" class="observatory-group-count" style="top:30.6%" hidden>0 / 5</span><span id="observatoryGroupDone0" class="observatory-group-done" style="top:28.7%" hidden>✓</span><span id="observatoryGroup1" class="observatory-group-count" style="top:43.4%" hidden>0 / 2</span><span id="observatoryGroupDone1" class="observatory-group-done" style="top:39.0%" hidden>✓</span><span id="observatoryGroup2" class="observatory-group-count" style="top:54.1%" hidden>0 / 6</span><span id="observatoryGroupDone2" class="observatory-group-done" style="top:50.8%" hidden>✓</span><aside class="level-one-quests world-map-quests" aria-label="Quêtes du niveau"><h2>Quêtes du niveau</h2><div class="trial-groups"><div class="trial-group"><b>1</b><div><span id="worldMapGroupLabel0">Mesures & proportionnalité</span><strong id="worldMapGroupCount0"></strong></div><span id="worldMapGroupDone0" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>2</b><div><span id="worldMapGroupLabel1">Statistiques & probabilités</span><strong id="worldMapGroupCount1"></strong></div><span id="worldMapGroupDone1" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>3</b><div><span id="worldMapGroupLabel2">Calcul & algèbre</span><strong id="worldMapGroupCount2"></strong></div><span id="worldMapGroupDone2" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>4</b><div><span id="worldMapGroupLabel3"></span><strong id="worldMapGroupCount3"></strong></div><span id="worldMapGroupDone3" class="court-quest-check" aria-label="Groupe en cours">✓</span></div></div><p>⭐ Obtiens au moins <strong>80 %</strong> de bonnes réponses pour valider chaque épreuve.</p></aside><img id="courtHero" class="court-hero" alt="Le héros se déplace vers les épreuves." draggable="false"><img id="courtDepthBoard" class="court-depth-board" alt="" aria-hidden="true"></div></div>
-<footer class="court-controls"><p id="courtMessage" role="status" aria-live="polite"></p><div class="court-buttons"><button id="courtAction" type="button">⚔ Commencer le parcours</button><button id="courtFullscreen" type="button">⛶ Plein écran</button><button id="courtZoom" type="button">⌕ Agrandir la carte</button><button id="courtReset" type="button">↻ Retour à l’entrée</button><button id="skipLevelTwo" type="button">Passer au niveau 3 →</button><button id="courtBack" type="button">← Niveau 1</button></div></footer></section>
-<section id="courtTrial" class="court-screen court-trial" hidden aria-label="Entrée de l’épreuve du niveau 2"><div id="courtTrialArea" class="court-area"><div id="courtTrialScene" class="court-trial-scene"><span class="brand-version">v0.3.46</span><img id="courtTrialHeader" class="court-ui-header" alt="" aria-hidden="true"><div class="court-world-title"><span id="courtWorldTitle">Niveau 2</span><small id="courtWorldSubtitle">La Cour des Savoirs</small></div><div class="court-trial-progress"><div class="court-progress" role="progressbar" id="courtTrialProgress" aria-label="Défis validés du niveau 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="courtTrialProgressFill"></span></div><span id="courtTrialCount" class="court-trial-count"></span></div><aside id="courtTrialQuests" class="court-quests" aria-label="Quêtes du niveau"><h2>Quêtes du niveau</h2><div class="trial-groups"><div class="trial-group"><b>1</b><div><span id="trialGroupLabel0">Mesures & proportionnalité</span><strong id="trialGroupCount0"></strong></div><span id="trialGroupDone0" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>2</b><div><span id="trialGroupLabel1">Statistiques & probabilités</span><strong id="trialGroupCount1"></strong></div><span id="trialGroupDone1" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>3</b><div><span id="trialGroupLabel2">Calcul & algèbre</span><strong id="trialGroupCount2"></strong></div><span id="trialGroupDone2" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>4</b><div><span id="trialGroupLabel3"></span><strong id="trialGroupCount3"></strong></div><span id="trialGroupDone3" class="court-quest-check" aria-label="Groupe en cours">✓</span></div></div><div id="worldQuestRow0" class="court-quest-row"><b>1</b><span id="worldQuestLabel0">Conversions de longueurs</span><span id="courtTrialDone0" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow1" class="court-quest-row"><b>2</b><span id="worldQuestLabel1">Tableaux de proportionnalité</span><span id="courtTrialDone1" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow2" class="court-quest-row"><b>3</b><span id="worldQuestLabel2">Étendue d’une série</span><span id="courtTrialDone2" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow3" class="court-quest-row"><b>4</b><span id="worldQuestLabel3">Probabilités</span><span id="courtTrialDone3" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow4" class="court-quest-row"><b>5</b><span id="worldQuestLabel4">Calcul d’expressions</span><span id="courtTrialDone4" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow5" class="court-quest-row"><b>6</b><span id="worldQuestLabel5">Équations</span><span id="courtTrialDone5" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow6" class="court-quest-row" hidden><b>7</b><span id="worldQuestLabel6"></span><span id="courtTrialDone6" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow7" class="court-quest-row" hidden><b>8</b><span id="worldQuestLabel7"></span><span id="courtTrialDone7" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow8" class="court-quest-row" hidden><b>9</b><span id="worldQuestLabel8"></span><span id="courtTrialDone8" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow9" class="court-quest-row" hidden><b>10</b><span id="worldQuestLabel9"></span><span id="courtTrialDone9" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow10" class="court-quest-row" hidden><b>11</b><span id="worldQuestLabel10"></span><span id="courtTrialDone10" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow11" class="court-quest-row" hidden><b>12</b><span id="worldQuestLabel11"></span><span id="courtTrialDone11" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow12" class="court-quest-row" hidden><b>13</b><span id="worldQuestLabel12"></span><span id="courtTrialDone12" class="court-quest-check" aria-label="Non validé">✓</span></div><p class="court-goal">⭐ Obtiens au moins<br><strong>80 %</strong> de bonnes réponses<br>pour avancer au niveau <span id="courtGoalLevel">3</span>.</p></aside><img id="courtTrialArt" class="court-trial-art" alt="Vue de face de l’atelier" draggable="false"><div class="court-trial-caption"><span id="courtTrialNumber" class="court-station-number"></span><span id="courtTrialPlace"></span></div><div id="courtTrialRing" hidden aria-hidden="true"></div><img id="courtTrialHero" class="court-trial-hero" alt="Le héros regarde l’atelier." draggable="false"><div class="court-panel"><span id="courtTrialOrder" class="court-order"></span><h1 id="courtTrialTitle"></h1><div class="court-line"></div><p id="courtTrialRule" class="court-rule"></p><p>🎯 10 questions</p><p id="courtTrialTime"></p><p class="court-threshold">⭐ 8 bonnes réponses pour continuer</p><div class="court-line"></div><div class="court-actions"><button id="courtTrialStart" type="button">▶ Commencer le défi</button><button id="courtTrialPass" type="button" hidden>Passer</button></div></div><footer class="court-transition-tools"><button id="courtTrialBack" type="button">← Retour à la carte</button><button id="courtTrialFullscreen" type="button">⛶ Plein écran</button><button id="courtTrialZoom" type="button">⌕ Agrandir la carte</button><button id="courtTrialReplay" type="button">↻ Rejouer le trajet</button><span class="court-version">Maths Quest · v0.3.46</span></footer></div></div></section>
-<div id="courtComplete" class="court-complete" hidden role="dialog" aria-modal="true" aria-labelledby="courtCompleteTitle"><div class="court-victory-card"><div id="courtVictoryScene" class="court-victory-scene"><img id="courtVictoryBackdrop" class="court-victory-backdrop" alt="La dernière porte de la Cour des Savoirs."><h2 id="courtCompleteTitle" class="court-victory-title">🏆 Niveau 2 terminé !<small>La Cour des Savoirs</small></h2><div class="court-victory-aura" aria-hidden="true"></div><div class="court-victory-walker"><img id="courtVictoryHero" alt="Le héros avance vers la porte puis s’arrête."></div><span class="court-victory-spark" aria-hidden="true" style="--sx:64%;--sy:57%;--delay:0.0s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:70%;--sy:50%;--delay:0.08s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:76%;--sy:45%;--delay:0.16s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:83%;--sy:53%;--delay:0.24s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:91%;--sy:60%;--delay:0.32s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:86%;--sy:72%;--delay:0.4s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:68%;--sy:75%;--delay:0.48s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:78%;--sy:68%;--delay:0.56s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:58%;--sy:65%;--delay:0.64s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:94%;--sy:43%;--delay:0.72s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:55%;--sy:43%;--delay:0.8s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:88%;--sy:36%;--delay:0.88s">✦</span></div><div class="court-victory-footer"><p id="courtVictoryStatus" role="status" aria-live="polite">Six épreuves remportées !</p><p id="courtVictoryNext" class="court-victory-next">La prochaine aventure sera ajoutée au-delà de cette porte.</p><button id="observatoryContinue" type="button">Rejoindre l’Observatoire royal →</button><button id="courtVictoryReplay" type="button">↻ Revoir l’animation</button><button id="courtCompleteClose" type="button">Revenir à la cour</button></div></div></div>
+<header class="map-heading" aria-label="Maths Quest, niveau 2"><div class="map-brand"><span class="map-brand-icon" aria-hidden="true">📖</span><div><strong>Maths Quest</strong><small>L’Académie des Nombres</small></div></div><div class="map-level"><strong id="worldLevel">Niveau 2</strong><small id="worldName">La Cour des Savoirs</small></div><div class="map-account-slot" id="worldAccount"></div></header>
+<div id="courtArea" class="court-area"><div id="courtMap" class="court-map"><span class="brand-version">v0.3.86-public</span><img id="courtBackground" class="court-background" src="assets/cour-des-savoirs-sans-progression.png" alt="La Cour des Savoirs : six ateliers autour de la fontaine au cheval." draggable="false"><img class="map-title-restoration" src="assets/cour-sans-titres-v0384.png" alt="" aria-hidden="true"><svg class="court-routes" viewBox="0 0 1616 970" aria-hidden="true"><defs><filter id="courtGlow"><feGaussianBlur stdDeviation="5"/></filter><marker id="courtArrow" viewBox="0 0 24 24" refX="19" refY="12" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M2 2 22 12 2 22 7 12Z" fill="#fff7a8" stroke="#ffd52e" stroke-width="2"/></marker></defs><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M686.94,834.13 L677,808 L647,757 L615,724 L575,712 L540,724 L513.27,747.39" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M503.67,757.5 L482,785 L438,815 L383,825 L327,822 L303.9,813.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M295.81,767.81 L322,745 L332,716 L330.44,690.99" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M330.6,677.03 L333,649 L352,609 L361.2,586.33" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M420.83,514.76 L435,506 L477.4,474.2" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M487.89,464.99 L519.61,432.42" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M595.9,381.8 L618,377 L676.14,365.37" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M689.86,365.37 L733,374 L739.15,375.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M821.47,420.4 L824,423 L880.6,448.16" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M893.69,453.06 L965,475 L997.75,483.89" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1008.99,527.57 L1000,535 L952,577 L918,630 L910.09,680.09" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M914.59,691.22 L962,727 L1044,756 L1105.15,769.34" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1193.23,807.66 L1215,823 L1269.31,861.92" fill="none" stroke="#fff7a8" stroke-width="6"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#ffcf00" stroke-width="16" opacity=".8" filter="url(#courtGlow)"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#ffd52a" stroke-width="11"/><path d="M1281.14,869.36 L1339,901 L1383.89,909.6" fill="none" stroke="#fff7a8" stroke-width="6" marker-end="url(#courtArrow)"/></svg><div class="court-progress-cover"><div id="courtProgress" class="court-progress" role="progressbar" aria-label="Défis validés du niveau 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="courtProgressFill"></span></div><span id="courtCount">0 / 6 défis validés</span></div><span id="courtDone0" class="court-done" style="top:27%" hidden aria-label="Défi 1 validé">✓</span><span id="courtDone1" class="court-done" style="top:33.3%" hidden aria-label="Défi 2 validé">✓</span><span id="courtDone2" class="court-done" style="top:39.8%" hidden aria-label="Défi 3 validé">✓</span><span id="courtDone3" class="court-done" style="top:46.1%" hidden aria-label="Défi 4 validé">✓</span><span id="courtDone4" class="court-done" style="top:52.36%" hidden aria-label="Défi 5 validé">✓</span><span id="courtDone5" class="court-done" style="top:58.42%" hidden aria-label="Défi 6 validé">✓</span><span id="observatoryGroup0" class="observatory-group-count" style="top:30.6%" hidden>0 / 5</span><span id="observatoryGroupDone0" class="observatory-group-done" style="top:28.7%" hidden>✓</span><span id="observatoryGroup1" class="observatory-group-count" style="top:43.4%" hidden>0 / 2</span><span id="observatoryGroupDone1" class="observatory-group-done" style="top:39.0%" hidden>✓</span><span id="observatoryGroup2" class="observatory-group-count" style="top:54.1%" hidden>0 / 6</span><span id="observatoryGroupDone2" class="observatory-group-done" style="top:50.8%" hidden>✓</span><aside class="level-one-quests world-map-quests" aria-label="Quêtes du niveau"><h2>Quêtes du niveau</h2><div class="trial-groups"><div class="trial-group"><b>1</b><div><span id="worldMapGroupLabel0">Mesures & proportionnalité</span><strong id="worldMapGroupCount0"></strong></div><span id="worldMapGroupDone0" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>2</b><div><span id="worldMapGroupLabel1">Statistiques & probabilités</span><strong id="worldMapGroupCount1"></strong></div><span id="worldMapGroupDone1" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>3</b><div><span id="worldMapGroupLabel2">Calcul & algèbre</span><strong id="worldMapGroupCount2"></strong></div><span id="worldMapGroupDone2" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>4</b><div><span id="worldMapGroupLabel3"></span><strong id="worldMapGroupCount3"></strong></div><span id="worldMapGroupDone3" class="court-quest-check" aria-label="Groupe en cours">✓</span></div></div><p>⭐ Obtiens au moins <strong>80 %</strong> de bonnes réponses pour valider chaque épreuve.</p></aside><div id="harbourBoat" class="harbour-boat" hidden aria-label="Le bateau pour la Forge des Nombres"><div class="harbour-vessel"><img class="harbour-boat-art" src="assets/barque-observatoire.png" alt="Barque royale bleue et or amarrée au quai" draggable="false"><img id="harbourPassenger" class="harbour-passenger" hidden alt="Le héros à bord du bateau" draggable="false"></div></div><img id="courtHero" class="court-hero" alt="Le héros se déplace vers les épreuves." draggable="false"><svg class="observatory-foreground" viewBox="0 0 1672 941" preserveAspectRatio="none" aria-hidden="true"><defs><clipPath id="observatoryLampClip"><path d="M479 529 L482 539 L486 545 L484 548 L495 552 L492 558 L488 580 L483 589 L486 595 L493 600 L492 606 L484 610 L484 615 L471 615 L470 609 L463 606 L463 601 L473 595 L474 588 L468 580 L465 558 L459 553 L472 547 L474 540 Z"/><path d="M917 530 L920 540 L924 545 L923 549 L934 553 L932 558 L927 581 L922 590 L924 596 L932 600 L932 607 L924 611 L924 616 L910 616 L909 610 L901 606 L901 601 L911 595 L912 589 L906 581 L902 558 L897 553 L911 547 L913 540 Z"/></clipPath></defs><image href="assets/observatoire_niveau3_sans_parchemin.png" width="1672" height="941" clip-path="url(#observatoryLampClip)"/></svg><svg class="forge-foreground" viewBox="0 0 1672 941" preserveAspectRatio="none" aria-hidden="true"><defs><clipPath id="forgeForegroundClip"><path d="M774 343 L777 362 L768 384 L753 403 L733 416 L713 422 L703 414 L719 401 L736 386 L748 368 L755 348 L757 372 L766 355 Z"/><path d="M464 646 L463 630 L472 618 L485 616 L491 607 L504 614 L518 610 L529 621 L539 625 L546 641 L537 663 L522 678 L521 707 L502 718 L484 706 L487 680 L475 670 Z"/><path d="M943 784 L951 646 L969 623 L961 594 L981 582 L1000 560 L1017 582 L1050 573 L1086 550 L1109 548 L1142 576 L1184 593 L1206 565 L1223 593 L1252 602 L1248 627 L1269 650 L1273 787 L1232 813 L1190 799 L1185 730 L1166 687 L1138 670 L1109 669 L1078 685 L1053 718 L1040 760 L1038 800 L981 811 Z"/></clipPath></defs><image href="assets/forge-jardins-phenix-v0377.png" width="1672" height="941" clip-path="url(#forgeForegroundClip)"/></svg><img id="courtDepthBoard" class="court-depth-board" alt="" aria-hidden="true"></div></div>
+<footer class="court-controls"><p id="courtMessage" role="status" aria-live="polite"></p><div class="court-buttons"><button id="courtAction" type="button">⚔ Commencer le parcours</button><button id="courtFullscreen" type="button">⛶ Plein écran</button><button id="courtZoom" type="button">⌕ Agrandir la carte</button><button id="boatSkip" type="button" hidden>Passer la traversée →</button><button id="courtReset" type="button">↻ Retour à l’entrée</button><button id="skipLevelTwo" type="button">Passer au niveau 3 →</button><button id="skipLevelFour" type="button" hidden>Passer au niveau 5 →</button><button id="skipLevelThree" type="button" hidden>Passer au niveau 4 →</button><button id="courtBack" type="button">← Niveau 1</button></div></footer></section>
+<section id="courtTrial" class="court-screen court-trial" hidden aria-label="Entrée de l’épreuve du niveau 2"><header class="map-heading cloud-trial-heading" aria-label="Maths Quest, niveau 5"><div class="map-brand"><span class="map-brand-icon" aria-hidden="true">📖</span><div><strong>Maths Quest</strong><small>L’Académie des Nombres</small></div></div><div class="map-level"><strong id="trialLevel">Niveau 5</strong><small id="trialName">La Cité des Nuages</small></div><div class="map-account-slot" id="trialAccount"></div></header><div id="courtTrialArea" class="court-area"><div id="courtTrialScene" class="court-trial-scene"><span class="brand-version">v0.3.86-public</span><img id="courtTrialHeader" class="court-ui-header" alt="" aria-hidden="true"><div class="court-world-title"><span id="courtWorldTitle">Niveau 2</span><small id="courtWorldSubtitle">La Cour des Savoirs</small></div><div class="court-trial-progress"><div class="court-progress" role="progressbar" id="courtTrialProgress" aria-label="Défis validés du niveau 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span id="courtTrialProgressFill"></span></div><span id="courtTrialCount" class="court-trial-count"></span></div><aside id="courtTrialQuests" class="court-quests" aria-label="Quêtes du niveau"><h2>Quêtes du niveau</h2><div class="trial-groups"><div class="trial-group"><b>1</b><div><span id="trialGroupLabel0">Mesures & proportionnalité</span><strong id="trialGroupCount0"></strong></div><span id="trialGroupDone0" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>2</b><div><span id="trialGroupLabel1">Statistiques & probabilités</span><strong id="trialGroupCount1"></strong></div><span id="trialGroupDone1" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>3</b><div><span id="trialGroupLabel2">Calcul & algèbre</span><strong id="trialGroupCount2"></strong></div><span id="trialGroupDone2" class="court-quest-check" aria-label="Groupe en cours">✓</span></div><div class="trial-group"><b>4</b><div><span id="trialGroupLabel3"></span><strong id="trialGroupCount3"></strong></div><span id="trialGroupDone3" class="court-quest-check" aria-label="Groupe en cours">✓</span></div></div><div id="worldQuestRow0" class="court-quest-row"><b>1</b><span id="worldQuestLabel0">Conversions de longueurs</span><span id="courtTrialDone0" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow1" class="court-quest-row"><b>2</b><span id="worldQuestLabel1">Tableaux de proportionnalité</span><span id="courtTrialDone1" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow2" class="court-quest-row"><b>3</b><span id="worldQuestLabel2">Étendue d’une série</span><span id="courtTrialDone2" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow3" class="court-quest-row"><b>4</b><span id="worldQuestLabel3">Probabilités</span><span id="courtTrialDone3" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow4" class="court-quest-row"><b>5</b><span id="worldQuestLabel4">Calcul d’expressions</span><span id="courtTrialDone4" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow5" class="court-quest-row"><b>6</b><span id="worldQuestLabel5">Équations</span><span id="courtTrialDone5" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow6" class="court-quest-row" hidden><b>7</b><span id="worldQuestLabel6"></span><span id="courtTrialDone6" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow7" class="court-quest-row" hidden><b>8</b><span id="worldQuestLabel7"></span><span id="courtTrialDone7" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow8" class="court-quest-row" hidden><b>9</b><span id="worldQuestLabel8"></span><span id="courtTrialDone8" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow9" class="court-quest-row" hidden><b>10</b><span id="worldQuestLabel9"></span><span id="courtTrialDone9" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow10" class="court-quest-row" hidden><b>11</b><span id="worldQuestLabel10"></span><span id="courtTrialDone10" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow11" class="court-quest-row" hidden><b>12</b><span id="worldQuestLabel11"></span><span id="courtTrialDone11" class="court-quest-check" aria-label="Non validé">✓</span></div><div id="worldQuestRow12" class="court-quest-row" hidden><b>13</b><span id="worldQuestLabel12"></span><span id="courtTrialDone12" class="court-quest-check" aria-label="Non validé">✓</span></div><p class="court-goal">⭐ Obtiens au moins<br><strong>80 %</strong> de bonnes réponses<br>pour avancer au niveau <span id="courtGoalLevel">3</span>.</p></aside><img id="courtTrialArt" class="court-trial-art" alt="Vue de face de l’atelier" draggable="false"><div class="court-trial-caption"><span id="courtTrialNumber" class="court-station-number"></span><span id="courtTrialPlace"></span></div><div id="courtTrialRing" hidden aria-hidden="true"></div><img id="courtTrialHero" class="court-trial-hero" alt="Le héros regarde l’atelier." draggable="false"><div class="court-panel"><span id="courtTrialOrder" class="court-order"></span><h1 id="courtTrialTitle"></h1><div class="court-line"></div><p id="courtTrialRule" class="court-rule"></p><p>🎯 10 questions</p><p id="courtTrialTime"></p><p class="court-threshold">⭐ 8 bonnes réponses pour continuer</p><div class="court-line"></div><div class="court-actions"><button id="courtTrialStart" type="button">▶ Commencer le défi</button><button id="courtTrialPass" type="button" hidden>Passer</button></div></div><footer class="court-transition-tools"><button id="courtTrialBack" type="button">← Retour à la carte</button><button id="courtTrialFullscreen" type="button">⛶ Plein écran</button><button id="courtTrialZoom" type="button">⌕ Agrandir la carte</button><button id="courtTrialReplay" type="button">↻ Rejouer le trajet</button><span class="court-version">Maths Quest · v0.3.86-public</span></footer></div></div></section>
+<div id="courtComplete" class="court-complete" hidden role="dialog" aria-modal="true" aria-labelledby="courtCompleteTitle"><div class="court-victory-card"><div id="courtVictoryScene" class="court-victory-scene"><img id="courtVictoryBackdrop" class="court-victory-backdrop" alt="La dernière porte de la Cour des Savoirs."><h2 id="courtCompleteTitle" class="court-victory-title">🏆 Niveau 2 terminé !<small>La Cour des Savoirs</small></h2><div class="court-victory-aura" aria-hidden="true"></div><div class="court-victory-walker"><img id="courtVictoryHero" alt="Le héros avance vers la porte puis s’arrête."></div><span class="court-victory-spark" aria-hidden="true" style="--sx:64%;--sy:57%;--delay:0.0s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:70%;--sy:50%;--delay:0.08s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:76%;--sy:45%;--delay:0.16s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:83%;--sy:53%;--delay:0.24s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:91%;--sy:60%;--delay:0.32s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:86%;--sy:72%;--delay:0.4s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:68%;--sy:75%;--delay:0.48s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:78%;--sy:68%;--delay:0.56s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:58%;--sy:65%;--delay:0.64s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:94%;--sy:43%;--delay:0.72s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:55%;--sy:43%;--delay:0.8s">✦</span><span class="court-victory-spark" aria-hidden="true" style="--sx:88%;--sy:36%;--delay:0.88s">✦</span></div><div class="court-victory-footer"><p id="courtVictoryStatus" role="status" aria-live="polite">Six épreuves remportées !</p><p id="courtVictoryNext" class="court-victory-next">La prochaine aventure sera ajoutée au-delà de cette porte.</p><button id="observatoryContinue" type="button">Rejoindre l’Observatoire royal →</button><button id="enterLevelFive" type="button" hidden>Rejoindre la Cité des Nuages — Niveau 5 →</button><button id="enterLevelFour" type="button" hidden>Entrer dans la Forge des Nombres — Niveau 4 →</button><button id="courtVictoryReplay" type="button">↻ Revoir l’animation</button><button id="courtCompleteClose" type="button">Revenir à la cour</button></div></div></div>
 <template id="courtArts"><img src="assets/atelier-1.png" alt="Atelier 1"><img src="assets/atelier-2.png" alt="Atelier 2"><img src="assets/atelier-3.png" alt="Atelier 3"><img src="assets/atelier-4.png" alt="Atelier 4"><img src="assets/atelier-5.png" alt="Atelier 5"><img src="assets/atelier-6.png" alt="Atelier 6"></template>
 <aside id="calculatorDrawer" class="calculator-drawer" hidden aria-labelledby="calculatorTitle"><div class="calculator-heading"><h2 id="calculatorTitle">Calculatrice</h2><button id="calculatorClose" type="button" aria-label="Fermer la calculatrice">×</button></div><label class="sr-only" for="calculatorDisplay">Calcul et résultat</label><input id="calculatorDisplay" class="calculator-display" type="text" readonly value="0" aria-describedby="calculatorStatus" autocomplete="off"><div class="calculator-keys"><button id="calculatorKey0" type="button" aria-label="Effacer tout">C</button><button id="calculatorKey1" type="button" aria-label="Effacer le dernier caractère">⌫</button><button id="calculatorKey2" type="button">(</button><button id="calculatorKey3" type="button">)</button><button id="calculatorKey4" type="button">7</button><button id="calculatorKey5" type="button">8</button><button id="calculatorKey6" type="button">9</button><button id="calculatorKey7" type="button" class="calc-operator">÷</button><button id="calculatorKey8" type="button">4</button><button id="calculatorKey9" type="button">5</button><button id="calculatorKey10" type="button">6</button><button id="calculatorKey11" type="button" class="calc-operator">×</button><button id="calculatorKey12" type="button">1</button><button id="calculatorKey13" type="button">2</button><button id="calculatorKey14" type="button">3</button><button id="calculatorKey15" type="button" class="calc-operator">−</button><button id="calculatorKey16" type="button">0</button><button id="calculatorKey17" type="button">,</button><button id="calculatorKey18" type="button" class="calc-equals">=</button><button id="calculatorKey19" type="button" class="calc-operator">+</button></div><button id="calculatorCopy" class="calculator-copy" type="button" disabled>Reporter le résultat</button><p id="calculatorStatus" class="calculator-status" role="status" aria-live="polite"></p><p><span id="calculatorHint">Étendue = maximum − minimum.</span><br>Le temps continue de s’écouler.</p></aside>
 <section id="observatoryEntrance" class="level-two-screen observatory-entrance" hidden aria-label="Transition vers le niveau 3"><header class="level-two-heading"><h1>Niveau 3 · L’Observatoire royal</h1><p>De la Cour des Savoirs aux terrasses étoilées</p></header><div id="observatoryEntranceArea" class="level-two-stage"><div id="observatoryEntranceScene" class="level-two-scene"><img id="observatoryGatePicture" class="level-two-background" src="assets/observatory-gate.jpg" alt="Un pont et un escalier montent vers la grande porte constellée de l’Observatoire."><div class="gate-opening" aria-hidden="true"><div class="gate-door gate-door-left"><span class="door-inset"></span><span class="gate-emblem">✦</span><span class="gate-handle"></span></div><div class="gate-door gate-door-right"><span class="door-inset"></span><span class="gate-emblem">✦</span><span class="gate-handle"></span></div></div><div class="level-two-walker"><img id="observatoryEntranceHero" alt="Le héros vu de dos avance vers la porte." draggable="false"></div></div></div><footer class="level-two-controls"><p id="observatoryEntranceStatus" role="status" aria-live="polite"></p><div class="level-two-buttons"><button id="observatoryEntranceBack" type="button">← Retour à la cour</button><button id="observatoryEntranceSkip" type="button">Passer l’animation</button><button id="observatoryEntranceReplay" type="button">↻ Revoir la transition</button><button id="observatoryEnter" type="button" hidden>Entrer dans l’Observatoire →</button><button id="observatoryEntranceFullscreen" type="button">⛶ Plein écran</button></div></footer></section><svg width="0" height="0" aria-hidden="true"><defs><clipPath id="observatoryHudClip" clipPathUnits="objectBoundingBox"><rect x="0" y="0" width=".33" height=".15"/><rect x=".386" y="0" width=".227" height=".127"/><rect x=".664" y="0" width=".332" height=".165"/></clipPath></defs></svg><template id="observatoryMapArt"><img src="assets/observatory-map-sans-progression.png" alt="La carte de l’Observatoire royal."></template><template id="observatoryArts"><img src="assets/observatory-station-0.jpg" alt="Épreuve 1 de l’Observatoire."><img src="assets/observatory-station-1.jpg" alt="Épreuve 2 de l’Observatoire."><img src="assets/observatory-station-2.jpg" alt="Épreuve 3 de l’Observatoire."><img src="assets/observatory-station-3.jpg" alt="Épreuve 4 de l’Observatoire."><img src="assets/observatory-station-4.jpg" alt="Épreuve 5 de l’Observatoire."><img src="assets/observatory-station-5.jpg" alt="Épreuve 6 de l’Observatoire."><img src="assets/observatory-station-6.jpg" alt="Épreuve 7 de l’Observatoire."><img src="assets/observatory-station-7.jpg" alt="Épreuve 8 de l’Observatoire."><img src="assets/observatory-station-8.jpg" alt="Épreuve 9 de l’Observatoire."><img src="assets/observatory-station-9.jpg" alt="Épreuve 10 de l’Observatoire."><img src="assets/observatory-station-10.jpg" alt="Épreuve 11 de l’Observatoire."><img src="assets/observatory-station-11.jpg" alt="Épreuve 12 de l’Observatoire."><img src="assets/observatory-station-12.jpg" alt="Épreuve 13 de l’Observatoire."></template><template id="observatoryRoutes"><svg viewBox="0 0 1672 941"><defs><filter id="observatoryGlow"><feGaussianBlur stdDeviation="4"/></filter><marker id="observatoryArrow" viewBox="0 0 24 24" refX="19" refY="12" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M2 2 22 12 2 22 7 12Z" fill="#fff7a8" stroke="#ffd52e" stroke-width="2"/></marker></defs><path d="M223.43,863.22 L208,850 L180,807 L183.32,772.97" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M223.43,863.22 L208,850 L180,807 L183.32,772.97" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M223.43,863.22 L208,850 L180,807 L183.32,772.97" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M188.32,760.49 L213,729 L215.13,725.76" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M188.32,760.49 L213,729 L215.13,725.76" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M188.32,760.49 L213,729 L215.13,725.76" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M270.29,701.0 L285,704 L333.46,722.5" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M270.29,701.0 L285,704 L333.46,722.5" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M270.29,701.0 L285,704 L333.46,722.5" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M346.86,726.37 L390,735 L392.19,734.44" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M346.86,726.37 L390,735 L392.19,734.44" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M346.86,726.37 L390,735 L392.19,734.44" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M450.14,752.9 L454,758 L435,794 L448.09,822.63" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M450.14,752.9 L454,758 L435,794 L448.09,822.63" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M450.14,752.9 L454,758 L435,794 L448.09,822.63" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M457.21,832.23 L501,855 L547,871 L557.52,872.75" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M457.21,832.23 L501,855 L547,871 L557.52,872.75" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M457.21,832.23 L501,855 L547,871 L557.52,872.75" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M629.7,883.59 L663,888 L748.01,893.54" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M629.7,883.59 L663,888 L748.01,893.54" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M629.7,883.59 L663,888 L748.01,893.54" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M762.0,894.23 L809.02,895.76" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M762.0,894.23 L809.02,895.76" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M762.0,894.23 L809.02,895.76" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M881.95,898.8 L944,902 L1031.0,902.0" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M881.95,898.8 L944,902 L1031.0,902.0" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M881.95,898.8 L944,902 L1031.0,902.0" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1044.98,901.47 L1079.11,898.88" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1044.98,901.47 L1079.11,898.88" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1044.98,901.47 L1079.11,898.88" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1149.42,882.81 L1176,872 L1208.43,834.31" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1149.42,882.81 L1176,872 L1208.43,834.31" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1149.42,882.81 L1176,872 L1208.43,834.31" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1216.07,822.71 L1234,786 L1233.78,785.58" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1216.07,822.71 L1234,786 L1233.78,785.58" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1216.07,822.71 L1234,786 L1233.78,785.58" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1250.79,755.87 L1270,758 L1333,765 L1378,758 L1409,732 L1414,702 L1403.95,680.35" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1250.79,755.87 L1270,758 L1333,765 L1378,758 L1409,732 L1414,702 L1403.95,680.35" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1250.79,755.87 L1270,758 L1333,765 L1378,758 L1409,732 L1414,702 L1403.95,680.35" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1397.36,668.02 L1387,651 L1368,623 L1356,594 L1351,561 L1293,543 L1210.97,539.58" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1397.36,668.02 L1387,651 L1368,623 L1356,594 L1351,561 L1293,543 L1210.97,539.58" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1397.36,668.02 L1387,651 L1368,623 L1356,594 L1351,561 L1293,543 L1210.97,539.58" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1207.72,542.42 L1228,545 L1280,548 L1327,549 L1352,540 L1362,520 L1361,500 L1353,480 L1345,455 L1339,434 L1325,413 L1308,395 L1289.11,384.42" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1207.72,542.42 L1228,545 L1280,548 L1327,549 L1352,540 L1362,520 L1361,500 L1353,480 L1345,455 L1339,434 L1325,413 L1308,395 L1289.11,384.42" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1207.72,542.42 L1228,545 L1280,548 L1327,549 L1352,540 L1362,520 L1361,500 L1353,480 L1345,455 L1339,434 L1325,413 L1308,395 L1289.11,384.42" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1276.29,379.01 L1246,370 L1215,362 L1114,343 L1016,362 L908,356 L808,344 L710,342 L620,341 L531,350 L454,361 L369,386 L323.22,400.51" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1276.29,379.01 L1246,370 L1215,362 L1114,343 L1016,362 L908,356 L808,344 L710,342 L620,341 L531,350 L454,361 L369,386 L323.22,400.51" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1276.29,379.01 L1246,370 L1215,362 L1114,343 L1016,362 L908,356 L808,344 L710,342 L620,341 L531,350 L454,361 L369,386 L323.22,400.51" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M319.54,399.1 L345,389 L396.38,371.28" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M319.54,399.1 L345,389 L396.38,371.28" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M319.54,399.1 L345,389 L396.38,371.28" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M409.92,367.92 L416.46,366.89" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M409.92,367.92 L416.46,366.89" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M409.92,367.92 L416.46,366.89" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M488.63,355.93 L529.07,350.01" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M488.63,355.93 L529.07,350.01" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M488.63,355.93 L529.07,350.01" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M542.97,348.34 L582.17,344.6" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M542.97,348.34 L582.17,344.6" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M542.97,348.34 L582.17,344.6" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M655.0,340.62 L705.0,340.08" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M655.0,340.62 L705.0,340.08" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M655.0,340.62 L705.0,340.08" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M718.99,340.29 L770.03,342.42" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M718.99,340.29 L770.03,342.42" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M718.99,340.29 L770.03,342.42" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M842.87,346.97 L895.03,351.41" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M842.87,346.97 L895.03,351.41" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M842.87,346.97 L895.03,351.41" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M908.97,352.61 L978.15,358.68" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M908.97,352.61 L978.15,358.68" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M908.97,352.61 L978.15,358.68" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/><path d="M1050.97,360.57 L1114,358 L1179.28,338.96" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1050.97,360.57 L1114,358 L1179.28,338.96" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1050.97,360.57 L1114,358 L1179.28,338.96" fill="none" stroke="#fff7a8" stroke-width="4"/><path d="M1192.13,333.63 L1212.7,322.31" fill="none" stroke="#ffcf00" stroke-width="13" opacity=".75" filter="url(#observatoryGlow)"/><path d="M1192.13,333.63 L1212.7,322.31" fill="none" stroke="#ffd52a" stroke-width="8"/><path d="M1192.13,333.63 L1212.7,322.31" fill="none" stroke="#fff7a8" stroke-width="4" marker-end="url(#observatoryArrow)"/></svg></template>
@@ -1133,7 +1342,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
   'use strict';
   const URL = 'https://hxfdlujpedxuumqfewvn.supabase.co';
   const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4ZmRsdWpwZWR4dXVtcWZld3ZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMjcyMzAsImV4cCI6MjA5NzcwMzIzMH0.mM0xBhLGWG3vDgE06bEla8b4BhH7v6dvZ-BWn4ZOP0Q';
-  const MODULES = [{"id": "tables", "module": "mult", "title": "Tables de multiplication"}, {"id": "relatifs", "module": "add_rel", "title": "Addition de relatifs"}, {"id": "fractions", "module": "frac_equiv", "title": "Fractions équivalentes"}, {"id": "niveau2-conv_long", "module": "conv_long", "title": "Conversions de longueurs"}, {"id": "niveau2-tableau_prop1", "module": "tableau_prop1", "title": "Tableaux — Niveau 1"}, {"id": "niveau2-etendue", "module": "etendue", "title": "Étendue d'une série"}, {"id": "niveau2-probas_simples", "module": "probas_simples", "title": "Probabilités — Niveau 1"}, {"id": "niveau2-expressions", "module": "expressions", "title": "Calcul d'expressions"}, {"id": "niveau2-eq_niv1", "module": "eq_niv1", "title": "Équations — Niveau 1"}, {"id": "niveau3-mult10", "module": "mult10", "title": "Multiplier par 10, 100, 1 000"}, {"id": "niveau3-mult_rel", "module": "mult_rel", "title": "Multiplication de relatifs"}, {"id": "niveau3-arrondir", "module": "arrondir", "title": "Arrondir au dixième"}, {"id": "niveau3-carre", "module": "carre", "title": "Calculer un carré"}, {"id": "niveau3-moyenne", "module": "moyenne", "title": "Calcul de moyenne"}, {"id": "niveau3-conversions2", "module": "conversions2", "title": "Conversions masses, volumes, aires"}, {"id": "niveau3-angles", "module": "angles", "title": "Angles dans un triangle"}, {"id": "niveau3-tableau_prop2", "module": "tableau_prop2", "title": "Tableaux — Niveau 2"}, {"id": "niveau3-pct_variation", "module": "pct_variation", "title": "Augmentation / diminution en %"}, {"id": "niveau3-probas_des", "module": "probas_des", "title": "Probabilités — Niveau 2"}, {"id": "niveau3-reductions", "module": "reductions", "title": "Réductions d'expressions"}, {"id": "niveau3-eq_niv2", "module": "eq_niv2", "title": "Équations — Niveau 2"}, {"id": "niveau3-eq_niv7", "module": "eq_niv7", "title": "Équations — Niveau 7"}];
+  const MODULES = [{"id": "tables", "module": "mult", "title": "Tables de multiplication"}, {"id": "relatifs", "module": "add_rel", "title": "Addition de relatifs"}, {"id": "fractions", "module": "frac_equiv", "title": "Fractions équivalentes"}, {"id": "niveau2-conv_long", "module": "conv_long", "title": "Conversions de longueurs"}, {"id": "niveau2-tableau_prop1", "module": "tableau_prop1", "title": "Tableaux — Niveau 1"}, {"id": "niveau2-etendue", "module": "etendue", "title": "Étendue d'une série"}, {"id": "niveau2-probas_simples", "module": "probas_simples", "title": "Probabilités — Niveau 1"}, {"id": "niveau2-expressions", "module": "expressions", "title": "Calcul d'expressions"}, {"id": "niveau2-eq_niv1", "module": "eq_niv1", "title": "Équations — Niveau 1"}, {"id": "niveau3-mult10", "module": "mult10", "title": "Multiplier par 10, 100, 1 000"}, {"id": "niveau3-mult_rel", "module": "mult_rel", "title": "Multiplication de relatifs"}, {"id": "niveau3-arrondir", "module": "arrondir", "title": "Arrondir au dixième"}, {"id": "niveau3-carre", "module": "carre", "title": "Calculer un carré"}, {"id": "niveau3-moyenne", "module": "moyenne", "title": "Calcul de moyenne"}, {"id": "niveau3-conversions2", "module": "conversions2", "title": "Conversions masses, volumes, aires"}, {"id": "niveau3-angles", "module": "angles", "title": "Angles dans un triangle"}, {"id": "niveau3-tableau_prop2", "module": "tableau_prop2", "title": "Tableaux — Niveau 2"}, {"id": "niveau3-pct_variation", "module": "pct_variation", "title": "Augmentation / diminution en %"}, {"id": "niveau3-probas_des", "module": "probas_des", "title": "Probabilités — Niveau 2"}, {"id": "niveau3-reductions", "module": "reductions", "title": "Réductions d'expressions"}, {"id": "niveau3-eq_niv2", "module": "eq_niv2", "title": "Équations — Niveau 2"}, {"id": "niveau3-eq_niv7", "module": "eq_niv7", "title": "Équations — Niveau 7"}, {"id": "niveau5-div10", "module": "div10", "title": "Diviser par 10, 100, 1 000"}, {"id": "niveau5-sub_rel", "module": "sub_rel", "title": "Soustraction de relatifs"}, {"id": "niveau5-add_frac", "module": "add_frac", "title": "Addition de fractions"}, {"id": "niveau5-mediane", "module": "mediane", "title": "Médiane d'une série"}, {"id": "niveau5-geo_aire", "module": "geo_aire", "title": "Aires de triangles"}, {"id": "niveau5-pct_simples", "module": "pct_simples", "title": "Pourcentages simples"}, {"id": "niveau5-dev_simple", "module": "dev_simple", "title": "Développement simple"}];
   const SESSION = 'mq-am-session-v1', CACHE = 'mq-am-progress-v1-', QUEUE = 'mq-am-outbox-v1-';
   let identity = null, generation = 0, refreshing = null, syncing = null, syncAgain = false, status = 'Mode invité · progression sur cet appareil';
   let bridge = null;
@@ -1255,7 +1464,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
   function openLogin() {
     if (document.getElementById('mq-login-dialog')) return;
     const dialog = document.createElement('dialog'); dialog.id = 'mq-login-dialog';
-    dialog.innerHTML = '<form><h2>Ton compte Activités mentales</h2><p>Retrouve tes réussites dans les deux aventures.</p><label>Pseudo<input name="pseudo" required maxlength="30" autocomplete="username"></label><label>Classe<select name="classe">' + ['3PM','2TNE1','2TNE2','2TNE3','2REMI1','2REMI2','1CAP','UPE2A'].map(x => '<option>'+x+'</option>').join('') + '</select></label><label>Mot de passe<input name="password" type="password" required autocomplete="current-password"></label><p class="mq-login-error" role="alert"></p><button type="submit">Se connecter</button><button type="button" class="mq-login-cancel">Annuler</button><p><a href="https://offsidealex.github.io/Activites_mentales/" target="_blank" rel="noopener">Créer un compte dans Activités mentales</a></p></form>';
+    dialog.innerHTML = '<form><h2>Ton compte Activités mentales</h2><p>Retrouve tes réussites dans les deux aventures.</p><label>Pseudo<input name="pseudo" required maxlength="30" autocomplete="username"></label><label>Classe<select name="classe">' + ['3PM','2TNE1','2TNE2','2TNE3','2REMI1','2REMI2','1CAP','UPE2A','UE'].map(x => '<option>'+x+'</option>').join('') + '</select></label><label>Mot de passe<input name="password" type="password" required autocomplete="current-password"></label><p class="mq-login-error" role="alert"></p><button type="submit">Se connecter</button><button type="button" class="mq-login-cancel">Annuler</button><p><a href="https://offsidealex.github.io/Activites_mentales/" target="_blank" rel="noopener">Créer un compte dans Activités mentales</a></p></form>';
     document.body.append(dialog); dialog.showModal();
     dialog.querySelector('.mq-login-cancel').onclick = () => dialog.close(); dialog.addEventListener('close', () => dialog.remove());
     dialog.querySelector('form').onsubmit = async event => {
@@ -1283,11 +1492,11 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
         const visible=id=>{const el=document.getElementById(id);return el&&!el.hidden&&el.getClientRects().length>0};
         let host=document.body;
         if(visible('quizScreen'))host=document.body;
-        else if(visible('courtTrial'))host=document.getElementById('courtTrialScene');
+        else if(visible('courtTrial'))host=document.getElementById('courtTrial').classList.contains('cloud-map')?document.getElementById('trialAccount'):document.getElementById('courtTrialScene');
         else if(visible('trialTransition'))host=document.getElementById('transitionViewport');
         else if(visible('observatoryEntrance')||visible('levelTwoScreen')||visible('courtComplete'))host=document.body;
-        else if(visible('courtScreen'))host=document.getElementById('courtMap');
-        else host=document.getElementById('scene')||document.body;
+        else if(visible('courtScreen'))host=document.getElementById('worldAccount');
+        else host=document.getElementById('academyAccount')||document.body;
         if(bar.parentElement!==host){closeMenu();host.append(bar)}
         const floating=host===document.body;if(bar.classList.contains('mq-floating')!==floating)bar.classList.toggle('mq-floating',floating);
       };
@@ -1352,7 +1561,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
       if(hero.src!==url)hero.src=url;
       hero.dataset.facing=facingNames[direction];
     }
-    heroAngles.forEach(src=>{const frame=new Image();frame.src=src;});
+    const heroFramesReady=Promise.allSettled(heroAngles.map(src=>{const frame=new Image();frame.src=src;return frame.decode?frame.decode():Promise.resolve()}));
     function settleHero(){
       hero.style.transform='';
       hero.src=heroIdle[heroFacing];
@@ -1469,7 +1678,9 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
     const questCategories={
       1:[['Calculs entiers',[1,2]],['Fractions',[3]]],
       2:[['Mesures & proportionnalité',[5,6]],['Statistiques & probabilités',[7,8]],['Calcul & algèbre',[9,10]]],
-      3:[['Calcul & algèbre',[12,13,14,15,22,23,24]],['Mesures & géométrie',[17,18]],['Proportionnalité',[19,20]],['Statistiques & probabilités',[16,21]]]
+      3:[['Calcul & relatifs',[12,13]],['Fractions & statistiques',[14,15]],['Proportions & probabilités',[16,17]],['Équations',[18]]],
+      4:[['Calcul & mesures',[19,20]],['Géométrie & pourcentages',[21,22]],['Algèbre',[23]],['Équations',[24]]],
+      5:[['Calcul & relatifs',[25,26]],['Fractions & statistiques',[27,28]],['Géométrie & pourcentages',[29,30]],['Algèbre',[31]]]
     };
     function updateQuestGroups(world,prefix){
       questCategories[world].forEach(([label,stages],i)=>{
@@ -1480,7 +1691,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
         check.classList.toggle('validated',done===stages.length);
         check.setAttribute('aria-label',done===stages.length?'Groupe validé':'Groupe en cours');
       });
-      if(world>1)document.getElementById(prefix+'Label3').closest('.trial-group').hidden=world!==3;
+      if(world>1)document.getElementById(prefix+'Label3').closest('.trial-group').hidden=world===2;
     }
     const stageTitles={1:'Tables de multiplication',2:'Additions de relatifs',3:'Fractions équivalentes'};
     const mapSource=document.querySelector('.scene-image').src;
@@ -1898,14 +2109,14 @@ function generateRelatives(level){
     }
     function showQuiz(){
       if(releasePartialFullscreen(showQuiz))return;
-      if(!challenges.some(item=>item.stage===currentStage)||(currentStage===5&&!isChallengeCompleted(3)&&!levelTwoDirectAccess)||(currentStage===12&&!levelThreeDirectAccess&&!worldTwo.modules.every((_,i)=>isChallengeCompleted(i+5)))||(currentStage>1&&currentStage!==5&&currentStage!==12&&!isChallengeCompleted(currentStage-1)))return;
-      hideTransition();courtTrial.hidden=true;stopQuizTimers();sessionToken++;closeCalculator();resetCalculator();calcToggle.hidden=!calculatorAvailable();document.getElementById('calculatorHint').textContent=currentStage===7?'Étendue = maximum − minimum.':currentStage===14?'Arrondis le résultat au dixième.':currentStage===16?'Moyenne = somme des valeurs ÷ nombre de valeurs.':'Pour un carré, multiplie le nombre par lui-même.';
+      if(!challenges.some(item=>item.stage===currentStage)||(currentStage===5&&!isChallengeCompleted(3)&&!levelTwoDirectAccess)||(currentStage===12&&!levelThreeDirectAccess&&!worldTwo.modules.every((_,i)=>isChallengeCompleted(i+5)))||(currentStage>1&&currentStage!==5&&currentStage!==12&&!(currentStage===25&&levelFiveDirectAccess)&&!(currentStage===19&&levelFourDirectAccess)&&!isChallengeCompleted(currentStage-1)))return;
+      hideTransition();courtTrial.hidden=true;stopQuizTimers();sessionToken++;closeCalculator();resetCalculator();calcToggle.hidden=!calculatorAvailable();document.getElementById('calculatorHint').textContent=currentStage===7?'Étendue = maximum − minimum.':currentStage===14?'Arrondis le résultat au dixième.':currentStage===15?'Moyenne = somme des valeurs ÷ nombre de valeurs.':currentStage===21?'La somme des angles d’un triangle vaut 180°.':currentStage===22?'Utilise la calculatrice pour calculer la variation en pourcentage.':currentStage===24?'Utilise la calculatrice pour vérifier tes calculs.':'Pour un carré, multiplie le nombre par lui-même.';
       quizAccount=window.MQAccount?.accountId()||null;
       questions=currentStage>=5?courtModule().gen().map(q=>({...q,answer:q.ans})):currentStage===3?generateEquivalentFractions():currentStage===2?generateRelatives('add').map(q=>({...q,answer:q.ans})):generateTables();
       questionTime=currentStage>=5?courtModule().time*1000:currentStage===3?30000:10000;questionIndex=0;correct=0;answers=[];totalSpentMs=0;
       const title=stageTitles[currentStage];
-      document.querySelector('.quiz-brand small').textContent="L’Académie des Nombres · Niveau "+(currentStage>=12?'3':currentStage>=5?'2':'1');
-      document.querySelector('.quiz-stage-label').innerHTML=(currentStage>=12?'⚜ L’Observatoire royal':currentStage>=5?'⚜ La Cour des Savoirs':'⚜ Les bases de l’Académie')+' <small>v0.3.47</small>';
+      document.querySelector('.quiz-brand small').textContent="L’Académie des Nombres · Niveau "+(currentStage>=25?'5':currentStage>=19?'4':currentStage>=12?'3':currentStage>=5?'2':'1');
+      document.querySelector('.quiz-stage-label').innerHTML=(currentStage>=25?'☁ La Cité des Nuages':currentStage>=19?'⚜ La Forge des Nombres':currentStage>=12?'⚜ L’Observatoire royal':currentStage>=5?'⚜ La Cour des Savoirs':'⚜ Les bases de l’Académie')+' <small>v0.3.86-public</small>';
       quizScreen.classList.toggle('fractions-quiz',currentStage===3);quizScreen.classList.toggle('level2-quiz',currentStage>=5);
       document.querySelector('.quiz-tip').textContent=currentStage===3?'Trouve le numérateur manquant · 8 bonnes réponses pour rejoindre le pont.':'⚜ Obtiens au moins 8 bonnes réponses pour ouvrir la voie suivante.';
       document.querySelector('.quiz-title-wrap strong').textContent=title;
@@ -1914,7 +2125,7 @@ function generateRelatives(level){
       qInput.type=currentStage>=5?'text':'number';
       qInput.setAttribute('inputmode',currentStage>=5?(courtModule().ansType==='fraction'?'text':courtModule().ansType==='decimal'?'decimal':courtModule().ansType==='text'?'text':'numeric'):currentStage===2?'text':'numeric');
       qInput.placeholder=currentStage>=5&&courtModule().ansType==='fraction'?'Ex. : 3/5':currentStage>=12&&courtModule().ansType==='text'?'Ex. : 2x + 3':'?';
-      if(currentStage>=5){document.querySelector('label[for="quizAnswer"]').textContent=courtModule().ansType==='fraction'?'Probabilité sous forme de fraction (exemple : 3/5)':'Ta réponse';document.querySelector('.quiz-tip').textContent=courtModule().ansType==='fraction'?'Écris une fraction, par exemple 3/5. Les fractions équivalentes sont acceptées.':courtModule().ansType==='decimal'?'Virgule ou point acceptés · 8 bonnes réponses pour continuer.':'8 bonnes réponses pour continuer.';}
+      if(currentStage>=5){document.querySelector('label[for="quizAnswer"]').textContent=courtModule().ansType==='fraction'?'Réponse sous forme de fraction (exemple : 3/5)':'Ta réponse';document.querySelector('.quiz-tip').textContent=courtModule().ansType==='fraction'?'Écris une fraction, par exemple 3/5. Les fractions équivalentes sont acceptées.':courtModule().ansType==='decimal'?'Virgule ou point acceptés · 8 bonnes réponses pour continuer.':'8 bonnes réponses pour continuer.';}
       // Each exercise keeps the frontal scenery of its own preceding transition.
       const exerciseScenery=currentStage>=5?courtArts[currentStage-courtBase]:currentStage===3?fractionArt.src:currentStage===2?relativeArt.src:tableArt;
       quizScreen.style.backgroundSize='cover';quizScreen.style.backgroundPosition='center';
@@ -1922,6 +2133,12 @@ function generateRelatives(level){
       quizActive=true;completed=false;
       resultsArea.hidden=true;questionArea.hidden=false;
       if(currentStage>=12&&courtModule().ansType==='text')document.querySelector('.quiz-tip').textContent='Réduis l’expression. Carré : ² ou ^2 ; termes équivalents acceptés.';
+      if([23,31].includes(currentStage)){
+        const tip=document.querySelector('.quiz-tip');
+        tip.textContent='Carré : maintiens Alt et appuie sur 2 → ² (dans ce jeu). x^2 est aussi accepté. ';
+        const squareButton=document.createElement('button');squareButton.type='button';squareButton.textContent='Insérer ²';squareButton.setAttribute('aria-label','Insérer le symbole carré dans la réponse');squareButton.addEventListener('click',insertAnswerSquare);tip.append(squareButton);
+      }
+      if(currentStage===31)document.querySelector('.quiz-tip').prepend('Développe et réduis. ');
       quizScreen.hidden=false;
       document.body.style.overflow='hidden';
       renderQuestion();
@@ -2089,7 +2306,7 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
     let courtPlaces=['Atelier des mesures','Halle des échanges','Jardin des statistiques','Tour du hasard','Laboratoire des expressions','Sanctuaire des équations'];
     let courtPoints=[[704,879],[257,796],[380,540],[549,392],[788,386],[1046,497],[1154,780],[1433,919]];
     let courtRoutes=[[[704, 879], [677, 808], [647, 757], [615, 724], [575, 712], [540, 724], [508, 752], [482, 785], [438, 815], [383, 825], [327, 822], [287, 807], [257, 796]], [[257, 796], [291, 772], [322, 745], [332, 716], [330, 684], [333, 649], [352, 609], [380, 540]], [[380, 540], [435, 506], [483, 470], [521, 431], [549, 392]], [[549, 392], [618, 377], [683, 364], [733, 374], [788, 386]], [[788, 386], [824, 423], [887, 451], [965, 475], [1046, 497]], [[1046, 497], [1000, 535], [952, 577], [918, 630], [909, 687], [962, 727], [1044, 756], [1154, 780]], [[1154, 780], [1215, 823], [1275, 866], [1339, 901], [1433, 919]]];
-    let levelTwoDirectAccess=false,levelThreeDirectAccess=false,courtWorld=2,courtBase=5;
+    let levelTwoDirectAccess=false,levelThreeDirectAccess=false,levelFourDirectAccess=false,levelFiveDirectAccess=false,courtWorld=2,courtBase=5,observatoryPart='A';
     let courtAt=0,courtTrip=0,courtAnimation=null,courtRaf=0,courtFacing=6;
     let courtZoom=false,courtTrialZoom=false;
     let courtArts=Array.from(document.getElementById('courtArts').content.querySelectorAll('img'),img=>img.src);
@@ -2101,9 +2318,9 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       const stage=i+5;stageTitles[stage]=LEVEL_TWO_MODULES[key].title;
       challenges.push({stage,id:'niveau2-'+key,next:stage+1,move:()=>moveCourt(i+2)});
     });
-    function courtModule(){return (courtWorld===3?LEVEL_THREE_MODULES:LEVEL_TWO_MODULES)[courtModules[currentStage-courtBase]];}
+    function courtModule(){return (courtWorld>=3?LEVEL_THREE_MODULES:LEVEL_TWO_MODULES)[courtModules[currentStage-courtBase]];}
     function courtFit(){
-      for(const [area,node,zoomed,r] of [[document.getElementById('courtArea'),courtMap,courtZoom,courtWorld===3?1672/941:1614/974],[document.getElementById('courtTrialArea'),courtScene,courtTrialZoom,16/9]]){
+      for(const [area,node,zoomed,r] of [[document.getElementById('courtArea'),courtMap,courtZoom,courtWorld>=3?1672/941:1614/974],[document.getElementById('courtTrialArea'),courtScene,courtTrialZoom,16/9]]){
         const w=area.clientWidth-12,h=area.clientHeight-12;if(w<=0||h<=0)continue;
         const fit=zoomed?Math.max(w,1100):Math.min(w,h*r);node.style.width=fit+'px';node.style.height=fit/r+'px';
       }
@@ -2112,24 +2329,37 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
     new ResizeObserver(courtFit).observe(document.getElementById('courtTrialArea'));
     window.addEventListener('resize',courtFit);document.addEventListener('fullscreenchange',()=>requestAnimationFrame(courtFit));
     function updateCourtStatus(){worldProgress()}
-    function courtPosition(p){return {left:(p[0]/(courtWorld===3?1672:1616)*100-2.17)+'%',top:(p[1]/(courtWorld===3?941:970)*100-(courtWorld===3?12.6:12.05))+'%'};}
+    function courtPosition(p){return {left:(p[0]/(courtWorld>=3?1672:1616)*100-2.17)+'%',top:(p[1]/(courtWorld>=3?941:970)*100-(courtWorld>=3?12.6:12.05))+'%'};}
     function courtRest(direction=courtFacing){courtFacing=direction;courtHero.src=heroIdle[direction];courtHero.style.transform='';courtHero.dataset.facing=facingNames[direction];}
-    function cancelCourt(){courtTrip++;cancelAnimationFrame(courtRaf);if(courtAnimation){courtAnimation.cancel();courtAnimation=null}courtRest();}
-    function enterCourt(requestedWorld=2){
-      const nextWorld=requestedWorld===3?3:2;
+    function cancelCourt(){courtTrip++;cancelAnimationFrame(courtRaf);if(courtAnimation){courtAnimation.cancel();courtAnimation=null}cancelHarbourJourney();courtRest();}
+    let courtEntryToken=0;
+    async function enterCourt(requestedWorld=2){
+      if(Number(requestedWorld)>4)return;
+      const nextWorld=requestedWorld===5?5:requestedWorld===4?4:requestedWorld===3?3:2;
+      if(nextWorld===4&&!levelFourDirectAccess&&!worldThreeA.modules.every((_,i)=>isChallengeCompleted(i+12)))return;
       if(nextWorld===3&&!levelThreeDirectAccess&&!worldTwo.modules.every((_,i)=>isChallengeCompleted(i+5)))return;
       if(nextWorld===2&&!isChallengeCompleted(3)&&!levelTwoDirectAccess)return;
+      if(nextWorld===5&&!levelFiveDirectAccess&&!worldFour.modules.every((_,i)=>isChallengeCompleted(19+i)))return;
+      const entryToken=++courtEntryToken;
+      const targetBackground=(nextWorld===5?worldFive:nextWorld===4?worldFour:nextWorld===3?worldThreeA:worldTwo).background;
+      const readyMap=new Image();readyMap.src=targetBackground;
+      if(!readyMap.complete){
+        courtMessage.textContent='Chargement du décor…';
+        try{await readyMap.decode();}catch(error){/* Le secours existant gère une image indisponible. */}
+      }
+      if(entryToken!==courtEntryToken)return;
       hideObservatoryEntrance();setCourtWorld(nextWorld);
       hideLevelTwoEntrance();hideTransition();arrival.hidden=true;oath.hidden=true;
       courtScreen.hidden=false;courtTrial.hidden=true;document.getElementById('courtComplete').hidden=true;cancelCourt();cancelVictory();courtAt=0;currentStage=courtBase;
       Object.assign(courtHero.style,courtPosition(courtPoints[0]));courtRest(6);
       document.getElementById('courtAction').hidden=false;document.getElementById('courtAction').textContent='⚔ Commencer le parcours';
-      courtMessage.textContent=courtWorld===3?'Bienvenue à l’Observatoire royal ! Treize épreuves t’attendent sous les étoiles.':'Bienvenue dans la Cour des Savoirs ! Six épreuves t’attendent autour du cheval.';
+      courtMessage.textContent=courtWorld===5?'Bienvenue dans la Cité des Nuages ! Sept épreuves t’attendent.':courtWorld===4?'Bienvenue à la Forge des Nombres ! Six épreuves t’attendent.':courtWorld===3?'Bienvenue à l’Observatoire royal ! Sept épreuves t’attendent sous les étoiles.':'Bienvenue dans la Cour des Savoirs ! Six épreuves t’attendent autour du cheval.';
       updateCourtStatus();requestAnimationFrame(courtFit);document.getElementById('courtAction').focus({preventScroll:true});
+      if(courtWorld===4)startForgeArrival();
     }
     function leaveCourt(){
       hideObservatoryEntrance();
-      if(courtWorld===3){enterCourt(2);return}
+      if(courtWorld===5){enterCourt(4);return}if(courtWorld===4){enterCourt(3);return}if(courtWorld===3){enterCourt(2);return}
       cancelCourt();cancelVictory();courtScreen.hidden=true;courtTrial.hidden=true;document.getElementById('courtComplete').hidden=true;
       if(!isChallengeCompleted(3)){backToStart();return}
       currentStage=4;arrival.hidden=false;updateArrival();startTrial.focus({preventScroll:true});
@@ -2140,26 +2370,40 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       // Only the current landing point can launch the next part of the route.
       if(target!==courtAt+1)return;
       cancelCourt();const token=courtTrip;
+      if(courtWorld===3&&target===8)courtScreen.classList.add('harbour-departure');
       courtTrial.hidden=true;document.getElementById('courtAction').hidden=true;
-      courtMessage.textContent=target===courtModules.length+1?'Le héros rejoint la dernière porte de la Cour…':'Le héros rejoint '+courtPlaces[target-1]+'…';
+      courtMessage.textContent=target===courtModules.length+1?(courtWorld===3?'Sept épreuves remportées ! Le héros rejoint le quai…':'Le héros rejoint la dernière porte de la Cour…'):'Le héros rejoint '+courtPlaces[target-1]+'…';
       // Switch to the entrance cinematic as soon as the hero reaches the stairs.
       const enteringObservatory=courtWorld===2&&target===courtModules.length+1;
       const points=enteringObservatory?courtRoutes[target-1].slice(0,2):courtRoutes[target-1],dist=points.map((p,i)=>i?Math.hypot(p[0]-points[i-1][0],p[1]-points[i-1][1]):0),length=dist.reduce((a,b)=>a+b,0);
       let covered=0;const path=points.map((p,i)=>{covered+=dist[i];return {offset:covered/length,...courtPosition(p)}});
       const duration=Math.max(2800,length*8);
+      const cloudMotion=courtWorld===5;let lastCloudDirection=null;
+      if(cloudMotion){await heroFramesReady;if(token!==courtTrip)return}
       function faceAt(time){
         const progress=Math.min(.999999,time/duration);let i=0;while(i<path.length-2&&progress>=path[i+1].offset)i++;
-        const a=points[i],b=points[i+1],dir=(Math.round(Math.atan2(b[1]-a[1],b[0]-a[0])/(Math.PI/4))+8)%8;
-        const step=Math.floor(time/115)%4;courtFacing=dir;courtHero.src=heroAngles[step*8+directionArtwork[dir]];courtHero.style.transform=step===3?'scaleX(-1)':'';courtHero.dataset.facing=facingNames[dir];
+        const a=points[cloudMotion?Math.max(0,i-2):i],b=points[cloudMotion?Math.min(points.length-1,i+3):i+1];
+        const angle=Math.atan2(b[1]-a[1],b[0]-a[0]);let dir=(Math.round(angle/(Math.PI/4))+8)%8;
+        if(cloudMotion&&lastCloudDirection!==null){const delta=Math.atan2(Math.sin(angle-lastCloudDirection*Math.PI/4),Math.cos(angle-lastCloudDirection*Math.PI/4));if(Math.abs(delta)<Math.PI/8+.10)dir=lastCloudDirection}
+        lastCloudDirection=dir;
+        const phase=Math.floor(time/125)%4,step=cloudMotion?[0,1,2,1][phase]:Math.floor(time/115)%4;
+        courtFacing=dir;const url=heroAngles[step*8+directionArtwork[dir]];
+        if(courtHero.src!==url)courtHero.src=url;
+        courtHero.style.transform=!cloudMotion&&step===3?'scaleX(-1)':'';courtHero.dataset.facing=facingNames[dir];
       }
       if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&courtHero.animate){
-        courtAnimation=courtHero.animate(path,{duration,easing:'linear',fill:'forwards'});const active=courtAnimation;
+        Object.assign(courtHero.style,path[0]);
+        // Translation avoids recalculating layout on every frame. Rebuild on resize.
+        const motionFrames=()=>cloudMotion?points.map((p,i)=>({offset:path[i].offset,translate:`${(p[0]-points[0][0])*courtMap.clientWidth/1672}px ${(p[1]-points[0][1])*courtMap.clientHeight/941}px`})) : path;
+        courtAnimation=courtHero.animate(motionFrames(),{duration,easing:'linear',fill:'forwards'});const active=courtAnimation;
+        const resizeMotion=cloudMotion?new ResizeObserver(()=>{if(courtAnimation===active)active.effect.setKeyframes(motionFrames())}):null;
+        if(resizeMotion)resizeMotion.observe(courtMap);
         function tick(){if(token!==courtTrip||courtAnimation!==active)return;faceAt(Number(active.currentTime)||0);courtRaf=requestAnimationFrame(tick)}tick();
-        try{await active.finished}catch(e){return}if(token!==courtTrip)return;
+        try{await active.finished}catch(e){return}finally{if(resizeMotion)resizeMotion.disconnect()}if(token!==courtTrip)return;
         cancelAnimationFrame(courtRaf);courtAnimation=null;Object.assign(courtHero.style,path[path.length-1]);active.cancel();
       }else{faceAt(duration);Object.assign(courtHero.style,path[path.length-1]);}
       courtAt=target;currentStage=target+courtBase-1;
-      courtRest(courtWorld===3?6:[6,5,5,6,6,7,6,0][target]);
+      courtRest(courtWorld>=3?6:[6,5,5,6,6,7,6,0][target]);
       if(enteringObservatory){
         courtMessage.textContent='🏆 Les six défis sont validés ! Le héros monte vers l’Observatoire royal.';
         document.getElementById('courtAction').textContent='Rejoindre l’Observatoire royal →';
@@ -2168,27 +2412,35 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       }
       if(!await new Promise(resolve=>setTimeout(()=>resolve(token===courtTrip),650)))return;
       if(target===courtModules.length+1){
-        courtMessage.textContent=courtWorld===3?'🏆 Les treize défis sont validés ! L’Observatoire royal est conquis.':'🏆 Les six défis sont validés ! La voie vers le niveau 3 est ouverte.';
+        if(courtWorld===3){startHarbourJourney();return}
+        courtMessage.textContent=courtWorld===5?'🏆 Les sept défis sont validés ! La Cité des Nuages est conquise.':courtWorld===4?'🏆 Les six défis sont validés ! La Forge des Nombres est conquise.':courtWorld===3?'🏆 Sept défis validés ! La Forge des Nombres est accessible.':'🏆 Les six défis sont validés ! La voie vers le niveau 3 est ouverte.';
         document.getElementById('courtAction').textContent='🏆 Niveau '+courtWorld+' terminé';document.getElementById('courtAction').hidden=false;
         document.getElementById('courtComplete').hidden=false;startVictory();document.getElementById('courtCompleteClose').focus({preventScroll:true});return;
       }
       showCourtTrial();
     }
-    function showCourtTrial(){
+    async function showCourtTrial(){
       const mod=courtModule();if(!mod||courtAt<1||courtAt>courtModules.length)return;
       if(releasePartialFullscreen(showCourtTrial))return;
-      document.getElementById('courtTrialArt').src=courtArts[courtAt-1];
+      const arrivalToken=courtTrip,arrivalAt=courtAt;
+      courtTrial.hidden=true;
+      const trialImage=document.getElementById('courtTrialArt');
+      trialImage.src=courtArts[courtAt-1];
       document.getElementById('courtTrialArt').alt=courtPlaces[courtAt-1]+', vue de face.';
       document.getElementById('courtTrialHero').src=heroIdle[6];
-      const landing=courtWorld===3?[30,90.5]:[[34.3,88.3],[35.2,86.4],[28.4,89],[31.8,89],[31.6,88.1],[28.3,90.9]][courtAt-1];
+      const landing=courtWorld>=3?[30,90.5]:[[34.3,88.3],[35.2,86.4],[28.4,89],[31.8,89],[31.6,88.1],[28.3,90.9]][courtAt-1];
       document.getElementById('courtTrialHero').style.left=(landing[0]-3.5)+'%';document.getElementById('courtTrialHero').style.top=(landing[1]*.884-20.5)+'%';
       document.getElementById('courtTrialPlace').textContent=courtPlaces[courtAt-1];document.getElementById('courtTrialNumber').textContent=String(courtAt);
       document.getElementById('courtTrialTitle').textContent=mod.title;
       document.getElementById('courtTrialOrder').textContent='⚔ '+['Première','Deuxième','Troisième','Quatrième','Cinquième','Sixième','Septième','Huitième','Neuvième','Dixième','Onzième','Douzième','Treizième'][courtAt-1]+' épreuve atteinte !';
       document.getElementById('courtTrialTime').textContent='⌛ '+mod.time+' secondes chacune';
-      document.getElementById('courtTrialRule').textContent=mod.desc;
+      document.getElementById('courtTrialRule').textContent=mod.desc+([23,31].includes(currentStage)?' — Pour saisir ² dans ce jeu : Alt + 2. Tu peux aussi écrire ^2.':'');
       const done=isChallengeCompleted();document.getElementById('courtTrialStart').textContent=done?'Rejouer':'▶ Commencer le défi';
       document.getElementById('courtTrialPass').hidden=!done;
+      if(typeof trialImage.decode==='function'){
+        try{await trialImage.decode()}catch(_){if(arrivalToken===courtTrip&&arrivalAt===courtAt)courtArrival();return}
+        if(arrivalToken!==courtTrip||arrivalAt!==courtAt||courtScreen.hidden)return;
+      }
       courtTrial.hidden=false;updateCourtStatus();requestAnimationFrame(courtFit);document.getElementById('courtTrialStart').focus({preventScroll:true});
       courtMessage.textContent='Le héros regarde '+courtPlaces[courtAt-1]+'.';
     }
@@ -2200,7 +2452,7 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
     document.getElementById('skipLevelOne').addEventListener('click',()=>{stop();levelTwoDirectAccess=true;enterCourt(courtWorld)});
     document.getElementById('courtEnter').addEventListener('click',enterCourt);
     document.getElementById('courtBack').addEventListener('click',leaveCourt);
-    document.getElementById('courtReset').addEventListener('click',()=>{document.getElementById('courtComplete').hidden=true;enterCourt()});
+    document.getElementById('courtReset').addEventListener('click',()=>{document.getElementById('courtComplete').hidden=true;enterCourt(courtWorld,observatoryPart)});
     document.getElementById('courtAction').addEventListener('click',()=>courtAt===0?moveCourt(1):courtAt===courtModules.length+1?(()=>{document.getElementById('courtComplete').hidden=false;startVictory()})():showCourtTrial());
     document.getElementById('courtTrialStart').addEventListener('click',showQuiz);
     document.getElementById('courtTrialPass').addEventListener('click',skipCompletedChallenge);
@@ -2216,7 +2468,7 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       const mod=currentStage>=5?courtModule():null;
       if(!mod)return /^[+-]?\d+$/.test(given)&&Number(given)===q.answer;
       const clean=given.replace(/−/g,'-').replace(/,/g,'.');
-      if(mod.ansType==='text')return polynomialEqual(given,q.answer);
+      if(mod.ansType==='text')return (currentStage!==31||!/[()]/.test(given))&&polynomialEqual(given,q.answer);
       if(mod.ansType==='fraction'){
         const m=clean.match(/^([+-]?\d+)\s*\/\s*([+-]?\d+)$/);if(!m)return false;
         const n=Number(m[1]),d=Number(m[2]);return Number.isSafeInteger(n)&&Number.isSafeInteger(d)&&d!==0&&n*q.answer.d===q.answer.n*d;
@@ -2287,6 +2539,13 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
     // Center the calculator in the actual free space beside the exercise.
     function positionCalculator(){
       if(calcDrawer.hidden)return;
+      const toggleBounds=calcToggle.getBoundingClientRect();
+      const cardBounds=document.getElementById('quizCard').getBoundingClientRect();
+      const top=Math.max(8,toggleBounds.top);
+      calcDrawer.style.top=top+'px';
+      calcDrawer.style.bottom='auto';
+      calcDrawer.style.maxHeight=Math.max(0,window.innerHeight-top-12)+'px';
+      calcDrawer.style.height=window.innerWidth>=960?Math.max(0,Math.min(cardBounds.bottom-top,window.innerHeight-top-12))+'px':'';
       if(window.innerWidth<960){calcDrawer.style.right='10px';return}
       const edge=document.querySelector('.quiz-content').getBoundingClientRect().right;
       const width=calcDrawer.getBoundingClientRect().width;
@@ -2294,6 +2553,76 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
     }
     new ResizeObserver(positionCalculator).observe(document.querySelector('.quiz-content'));
     window.addEventListener('resize',positionCalculator);
+    let forgeArriving=false;
+    let harbourTimer=null,harbourBoarding=null,harbourFrame=0,harbourToken=0,harbourTravelling=false;
+    function cancelHarbourJourney(){
+      harbourToken++;clearTimeout(harbourTimer);harbourTimer=null;cancelAnimationFrame(harbourFrame);
+      if(harbourBoarding){harbourBoarding.cancel();harbourBoarding=null}
+      harbourTravelling=false;forgeArriving=false;courtHero.hidden=false;
+      courtScreen.classList.remove('harbour-departure','harbour-sailing','forge-arriving');
+      document.getElementById('harbourPassenger').hidden=true;document.getElementById('boatSkip').hidden=true;
+      const plank=document.getElementById('harbourGangplank');if(plank)plank.setAttribute('visibility','visible');
+    }
+    async function finishHarbourJourney(){
+      if(!harbourTravelling||courtWorld!==3||!courtModules.every((_,i)=>isChallengeCompleted(courtBase+i)))return;
+      const token=harbourToken;
+      if(typeof Image!=='undefined'){
+        const nextMap=new Image();nextMap.src=worldFour.background;
+        if(typeof nextMap.decode==='function'){try{await nextMap.decode()}catch(_){}}
+      }
+      if(token===harbourToken&&harbourTravelling&&courtWorld===3)enterCourt(4);
+    }
+    async function startHarbourJourney(){
+      if(harbourTravelling||courtWorld!==3||courtAt!==8||!courtModules.every((_,i)=>isChallengeCompleted(courtBase+i)))return;
+      cancelHarbourJourney();const token=harbourToken;harbourTravelling=true;
+      document.getElementById('courtComplete').hidden=true;courtTrial.hidden=true;
+      courtScreen.classList.add('harbour-departure');document.getElementById('courtAction').hidden=true;
+      document.getElementById('boatSkip').hidden=false;courtMessage.textContent='Le héros embarque. Cap sur la Forge des Nombres !';
+      const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const points=[[1400,565],[1400,580],[1440,650],[1480,680]];
+      const frames=points.map((p,i)=>({offset:i/(points.length-1),...courtPosition(p)}));
+      if(!reduced&&courtHero.animate){
+        harbourBoarding=courtHero.animate(frames,{duration:1800,easing:'linear',fill:'forwards'});const boarding=harbourBoarding;
+        function step(){if(token!==harbourToken)return;const phase=Math.floor(Number(boarding.currentTime)/115)%4;courtHero.src=heroAngles[phase*8+directionArtwork[1]];harbourFrame=requestAnimationFrame(step)}step();
+        try{await boarding.finished}catch(_){return}if(token!==harbourToken)return;
+        cancelAnimationFrame(harbourFrame);harbourBoarding=null;Object.assign(courtHero.style,frames.at(-1));boarding.cancel();
+      }
+      if(token!==harbourToken)return;
+      courtHero.hidden=true;const passenger=document.getElementById('harbourPassenger');passenger.src=heroIdle[0];passenger.hidden=false;
+      const plank=document.getElementById('harbourGangplank');if(plank)plank.setAttribute('visibility','hidden');
+      courtScreen.classList.add('harbour-sailing');courtMessage.textContent='⛵ En route vers le niveau 4 — La Forge des Nombres…';
+      harbourTimer=setTimeout(()=>{if(token===harbourToken)finishHarbourJourney()},reduced?1200:6500);
+    }
+    function finishForgeArrival(){
+      if(!forgeArriving||courtWorld!==4)return;
+      clearTimeout(harbourTimer);if(harbourBoarding){harbourBoarding.cancel();harbourBoarding=null}forgeArriving=false;courtHero.hidden=false;document.getElementById('harbourPassenger').hidden=true;
+      courtScreen.classList.remove('forge-arriving');document.getElementById('boatSkip').hidden=true;
+      Object.assign(courtHero.style,courtPosition(courtPoints[0]));courtRest(6);
+      courtMessage.textContent='Bienvenue à la Forge des Nombres ! Six ateliers t’attendent après le quai.';
+      document.getElementById('courtAction').hidden=false;document.getElementById('courtAction').focus({preventScroll:true});
+    }
+    async function disembarkForge(){
+      if(!forgeArriving||courtWorld!==4)return;
+      const token=harbourToken;courtScreen.classList.remove('forge-arriving');
+      document.getElementById('harbourPassenger').hidden=true;courtHero.hidden=false;
+      const frames=[[108,900],[170,885],[240,850],courtPoints[0]].map((p,i)=>({offset:i/3,...courtPosition(p)}));
+      Object.assign(courtHero.style,frames[0]);courtRest(6);
+      if(courtHero.animate){
+        harbourBoarding=courtHero.animate(frames,{duration:1400,easing:'linear',fill:'forwards'});const boarding=harbourBoarding;
+        try{await boarding.finished}catch(_){return}if(token!==harbourToken)return;
+        harbourBoarding=null;Object.assign(courtHero.style,frames.at(-1));boarding.cancel();
+      }
+      if(token===harbourToken)finishForgeArrival();
+    }
+    function startForgeArrival(){
+      forgeArriving=true;courtHero.hidden=true;document.getElementById('courtAction').hidden=true;
+      const passenger=document.getElementById('harbourPassenger');passenger.src=heroIdle[0];passenger.hidden=false;
+      courtScreen.classList.add('forge-arriving');document.getElementById('boatSkip').hidden=false;
+      courtMessage.textContent='⛵ Le bateau accoste à la Forge des Nombres — Niveau 4…';
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishForgeArrival();return}
+      const token=harbourToken;harbourTimer=setTimeout(()=>{if(token===harbourToken)disembarkForge()},3500);
+    }
+    document.getElementById('boatSkip').addEventListener('click',()=>courtWorld===4?finishForgeArrival():finishHarbourJourney());
     let victoryFrame=0,victoryTimer=null,victoryToken=0;
     const victoryHero=document.getElementById('courtVictoryHero');
     document.getElementById('courtVictoryBackdrop').src=courtBackground;
@@ -2301,11 +2630,12 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
     function finishVictory(){
       cancelAnimationFrame(victoryFrame);clearTimeout(victoryTimer);victoryHero.src=heroIdle[6];victoryHero.style.transform='';
       document.getElementById('courtVictoryScene').classList.add('finished');
-      document.getElementById('courtVictoryStatus').textContent=courtWorld===3?'Treize épreuves remportées ! L’Observatoire royal est conquis.':'Six épreuves remportées ! La Cour des Savoirs est conquise.';
+      document.getElementById('courtVictoryStatus').textContent=courtWorld===5?'Sept épreuves remportées ! La Cité des Nuages est conquise.':courtWorld===4?'Six épreuves remportées ! La Forge des Nombres est conquise.':courtWorld===3?'Sept épreuves remportées ! Le niveau 4 est ouvert.':'Six épreuves remportées ! La Cour des Savoirs est conquise.';
     }
     function startVictory(){
       if(courtAt!==courtModules.length+1||!courtModules.every((_,i)=>isChallengeCompleted(courtBase+i)))return;
       if(courtWorld===2){showObservatoryEntrance(false);return}
+      if(courtWorld===3){startHarbourJourney();return}
       cancelVictory();const token=victoryToken,scene=document.getElementById('courtVictoryScene');scene.classList.remove('finished');victoryHero.src=heroIdle[6];
       document.getElementById('courtVictoryStatus').textContent='Le héros fait ses derniers pas vers la porte…';
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishVictory();return}
@@ -2317,6 +2647,7 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       }step();victoryTimer=setTimeout(()=>{if(token===victoryToken&&!document.getElementById('courtComplete').hidden)finishVictory()},4800);
     }
     document.getElementById('courtVictoryReplay').addEventListener('click',startVictory);
+    document.getElementById('enterLevelFour').addEventListener('click',()=>{cancelVictory();document.getElementById('courtComplete').hidden=true;enterCourt(4)});
 
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.getElementById('courtComplete').hidden){cancelVictory();document.getElementById('courtComplete').hidden=true;document.getElementById('courtAction').focus({preventScroll:true})}});
 
@@ -2330,7 +2661,7 @@ arrondir:{group:'Fractions',color:'#16a34a',icon:'🎯',title:'Arrondir au dixi�
     gen(){const r=(n,d)=>Math.round(n/d*10)/10;const p=[{html:F(3,7),ans:r(3,7)},{html:F(6,14),ans:r(6,14)},{html:F(6,9),ans:r(6,9)},{html:F(5,13),ans:r(5,13)},{html:F(50,23),ans:r(50,23)},{html:F(100,62),ans:r(100,62)},{html:F(12,59),ans:r(12,59)},{html:F(15,4),ans:r(15,4)},{html:F(15,3),ans:r(15,3)},{html:F(18,6),ans:r(18,6)},{html:F(16,19),ans:r(16,19)},{html:F(17,20),ans:r(17,20)},{html:F(160,9),ans:r(160,9)},{html:F(185,3),ans:r(185,3)},{html:F(3214,3215),ans:r(3214,3215)},{html:F(3215,3216),ans:r(3215,3216)},{html:F(0,4),ans:0},{html:F(0,3),ans:0}];shuffle(p);return p.slice(0,10);}},
 carre:{group:'Pythagore & racines',color:'#ea580c',icon:'x²',title:'Calculer un carré',desc:'Calculer x² à la calculatrice',tags:['calculatrice','⏱ 20s'],time:20,ansType:'decimal',tol:0.005,note:'📱 Calculatrice autorisée',
     gen(){const s=n=>Math.round(n*n*1000)/1000;const p=[{html:'3²',ans:9},{html:'4²',ans:16},{html:'5²',ans:25},{html:'6²',ans:36},{html:'7²',ans:49},{html:'8²',ans:64},{html:'9²',ans:81},{html:'11²',ans:121},{html:'12²',ans:144},{html:'13²',ans:169},{html:'15²',ans:225},{html:'20²',ans:400},{html:'25²',ans:625},{html:'30²',ans:900},{html:'45²',ans:2025},{html:'50²',ans:2500},{html:'1,5²',ans:s(1.5)},{html:'2,5²',ans:s(2.5)},{html:'3,5²',ans:s(3.5)},{html:'4,5²',ans:s(4.5)},{html:'0,5²',ans:s(0.5)},{html:'1,2²',ans:s(1.2)},{html:'2,3²',ans:s(2.3)},{html:'3,7²',ans:s(3.7)},{html:'14²',ans:196},{html:'16²',ans:256},{html:'18²',ans:324},{html:'22²',ans:484},{html:'0,4²',ans:s(0.4)},{html:'1,8²',ans:s(1.8)}];shuffle(p);return p.slice(0,10);}},
-moyenne:{group:'Statistiques',color:'#0891b2',icon:'📊',title:'Calcul de moyenne',desc:"Calculer la moyenne d'une série",tags:['stats','calculatrice','⏱ 30s'],time:30,ansType:'decimal',tol:0.01,note:'📊 Calcule la moyenne',
+moyenne:{group:'Statistiques',color:'#0891b2',icon:'📊',title:'Calcul de moyenne',desc:"Calculer la moyenne d'une série",tags:['stats','calculatrice','⏱ 45s'],time:45,ansType:'decimal',tol:0.01,note:'📊 Calcule la moyenne',
     gen(){const p=[{html:'1 ; 2 ; 3',ans:2},{html:'1,5 ; 2,5 ; 4,5 ; 1,5',ans:2.5},{html:'15 ; 25 ; 45 ; 15',ans:25},{html:'16 ; 18 ; 13 ; 12 ; 11',ans:14},{html:'78 ; 88 ; 98 ; 28 ; 18',ans:62},{html:'185 ; 12 ; 8 ; 255',ans:115},{html:'11 ; 12 ; 10 ; 13 ; 14 ; 15',ans:12.5},{html:'11,5 ; 12,5 ; 12 ; 12 ; 12 ; 12',ans:12},{html:'11 ; 12 ; 13 ; 9 ; 4 ; 3 ; 18',ans:10},{html:'9,5 ; 13 ; 19 ; 9,5 ; 4,5 ; 3,5 ; 18',ans:11}];shuffle(p);return p.slice(0,10);}},
 conversions2:{group:'Mesures & conversions',color:'#1e40af',icon:'⇄',title:'Conversions masses, volumes, aires',desc:'Convertir kg/g, L/mL, m²/cm²',tags:['mesures','⏱ 25s'],time:25,ansType:'decimal',tol:1e-9,smallFont:true,
     gen(){const p=[{html:'3,5 kg → g',ans:3500},{html:'2 400 g → kg',ans:2.4},{html:'0,75 kg → g',ans:750},{html:'5 200 g → kg',ans:5.2},{html:'2,5 L → mL',ans:2500},{html:'750 mL → L',ans:0.75},{html:'0,3 L → cL',ans:30},{html:'45 cL → L',ans:0.45},{html:'4 m² → cm²',ans:40000},{html:'25 000 cm² → m²',ans:2.5},{html:'1,2 kg → g',ans:1200},{html:'8 500 g → kg',ans:8.5},{html:'1,5 L → cL',ans:150},{html:'250 cL → L',ans:2.5},{html:'6 m² → dm²',ans:600},{html:'0,04 m² → cm²',ans:400},{html:'3 dm³ → L',ans:3},{html:'500 mL → dL',ans:5},{html:'0,5 m² → cm²',ans:5000},{html:'2,5 dm³ → L',ans:2.5}];shuffle(p);return p.slice(0,10);}},
@@ -2349,6 +2680,23 @@ eq_niv7:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
 };
 
     // Worlds share their movement, challenge and result interface.
+Object.assign(LEVEL_THREE_MODULES,{
+  div10:{group:'Calcul de base',color:'#0369a1',icon:'÷',title:'Diviser par 10, 100, 1 000',desc:'Divisions par puissances de 10',tags:['calcul','⏱ 20s'],time:20,ansType:'decimal',tol:1e-9,
+    gen(){const p=[{html:'3 600 ÷ 10',ans:360},{html:'450 ÷ 10',ans:45},{html:'7 200 ÷ 100',ans:72},{html:'85 000 ÷ 1 000',ans:85},{html:'560 ÷ 10',ans:56},{html:'4 200 ÷ 100',ans:42},{html:'9 000 ÷ 1 000',ans:9},{html:'125 ÷ 10',ans:12.5},{html:'3 750 ÷ 100',ans:37.5},{html:'6 500 ÷ 1 000',ans:6.5},{html:'840 ÷ 10',ans:84},{html:'27 000 ÷ 100',ans:270},{html:'15 000 ÷ 1 000',ans:15},{html:'3,5 ÷ 10',ans:0.35},{html:'72 ÷ 100',ans:0.72},{html:'500 ÷ 1 000',ans:0.5},{html:'18 ÷ 10',ans:1.8},{html:'2 400 ÷ 100',ans:24},{html:'45 000 ÷ 1 000',ans:45},{html:'630 ÷ 10',ans:63}];shuffle(p);return p.slice(0,10);}},
+  sub_rel:{group:'Nombres relatifs',color:'#0284c7',icon:'➖',title:'Soustraction de relatifs',desc:'Soustraire des entiers relatifs',tags:['relatifs','niveau 3','⏱ 15s'],time:15,ansType:'int',
+    gen(){return generateRelatives('sub');}},
+  add_frac:{group:'Fractions',color:'#dc2626',icon:'➕',title:'Addition de fractions',desc:'Calculer la somme de deux fractions',tags:['fractions','⏱ 30s'],time:30,ansType:'fraction',
+    gen(){const p=[{html:`${F(1,5)} + ${F(1,3)}`,ans:{n:8,d:15}},{html:`${F(1,7)} + ${F(1,3)}`,ans:{n:10,d:21}},{html:`${F(3,7)} + ${F(4,3)}`,ans:{n:37,d:21}},{html:`${F(5,7)} + ${F(2,3)}`,ans:{n:29,d:21}},{html:`${F(7,3)} + ${F(9,4)}`,ans:{n:55,d:12}},{html:`${F(6,7)} + ${F(9,5)}`,ans:{n:93,d:35}},{html:`7 + ${F(1,4)}`,ans:{n:29,d:4}},{html:`6 + ${F(1,5)}`,ans:{n:31,d:5}},{html:`${F(1,4)} + ${F(1,4)}`,ans:{n:1,d:2}},{html:`${F(1,5)} + ${F(1,5)}`,ans:{n:2,d:5}},{html:`${F(2,3)} + ${F(2,6)}`,ans:{n:1,d:1}},{html:`${F(3,5)} + ${F(4,10)}`,ans:{n:1,d:1}},{html:`${F(14,2)} + ${F(1,2)}`,ans:{n:15,d:2}},{html:`${F(15,5)} + ${F(1,5)}`,ans:{n:16,d:5}},{html:`${F(2,7)} + ${F(3,5)}`,ans:{n:31,d:35}},{html:`${F(2,7)} + ${F(4,5)}`,ans:{n:38,d:35}},{html:`${F(1,3)} + ${F(1,6)}`,ans:{n:1,d:2}},{html:`${F(15,4)} + ${F(1,2)}`,ans:{n:17,d:4}},{html:`${F(0,4)} + ${F(1,3)}`,ans:{n:1,d:3}},{html:`${F(0,3)} + ${F(1,4)}`,ans:{n:1,d:4}}];shuffle(p);return p.slice(0,10);}},
+  mediane:{group:'Statistiques',color:'#065f46',icon:'M',title:"Médiane d'une série",desc:'Trouver la médiane (petite série)',tags:['stats','⏱ 25s'],time:25,ansType:'decimal',tol:0.01,smallFont:true,note:'📊 Trier puis trouver la médiane',
+    gen(){const p=[{html:'{3 ; 7 ; 5 ; 1 ; 9}',ans:5},{html:'{12 ; 8 ; 15 ; 4 ; 10}',ans:10},{html:'{2 ; 6 ; 4 ; 8 ; 10 ; 12}',ans:7},{html:'{5 ; 3 ; 9 ; 1 ; 7}',ans:5},{html:'{20 ; 14 ; 18 ; 16 ; 12}',ans:16},{html:'{1 ; 5 ; 3 ; 7 ; 9 ; 11}',ans:6},{html:'{4 ; 8 ; 2 ; 6 ; 10}',ans:6},{html:'{15 ; 25 ; 10 ; 20 ; 30}',ans:20},{html:'{3 ; 9 ; 6 ; 12 ; 15 ; 18}',ans:10.5},{html:'{7 ; 3 ; 11 ; 5 ; 9}',ans:7},{html:'{100 ; 80 ; 120 ; 60 ; 140}',ans:100},{html:'{2,5 ; 3,5 ; 1,5 ; 4,5 ; 5,5}',ans:3.5},{html:'{10 ; 20 ; 30 ; 40 ; 50 ; 60}',ans:35},{html:'{8 ; 4 ; 12 ; 6 ; 2 ; 10}',ans:7},{html:'{25 ; 15 ; 35 ; 45 ; 5}',ans:25}];shuffle(p);return p.slice(0,10);}},
+  geo_aire:{group:'Géométrie',color:'#0891b2',icon:'📐',title:'Géométrie — Niveau 3',desc:'Aire de rectangles et triangles',tags:['géométrie','niveau 3','⏱ 30s'],time:30,ansType:'int',
+    gen(){const p=[];for(let a=3;a<=12;a++)for(let b=2;b<=10;b+=2)p.push({html:`Triangle : base ${a} cm, hauteur ${b} cm. Aire (cm²) ?`,ans:a*b/2});shuffle(p);return p.slice(0,10);}},
+  pct_simples:{group:'Proportionnalité & %',color:'#92400e',icon:'%',title:'Pourcentages simples',desc:"50 %, 25 %, 10 %, 1 % d'un nombre",tags:['%','⏱ 15s'],time:15,ansType:'decimal',tol:0.05,smallFont:true,
+    gen(){const p=[{html:'50 % de 80',ans:40},{html:'25 % de 60',ans:15},{html:'10 % de 350',ans:35},{html:'1 % de 800',ans:8},{html:'50 % de 124',ans:62},{html:'25 % de 44',ans:11},{html:'10 % de 470',ans:47},{html:'1 % de 2 500',ans:25},{html:'75 % de 80',ans:60},{html:'20 % de 150',ans:30},{html:'5 % de 200',ans:10},{html:'30 % de 90',ans:27},{html:'50 % de 55',ans:27.5},{html:'25 % de 120',ans:30},{html:'10 % de 1 250',ans:125},{html:'1 % de 3 000',ans:30}];shuffle(p);return p.slice(0,10);}},
+  dev_simple:{group:'Algèbre',color:'#a855f7',icon:'📐',title:'Développement simple',desc:'Développer avec un seul facteur',tags:['algèbre','⏱ 30s'],time:30,ansType:'text',note:'✏️ Format : ax²+bx+c (utilise ^ pour ²)',smallFont:true,
+    gen(){const p=[{html:'3(x + 2)',ans:'3x+6'},{html:'3(x + 5)',ans:'3x+15'},{html:'4(x − 3)',ans:'4x-12'},{html:'2(x − 7)',ans:'2x-14'},{html:'5(2x + 1)',ans:'10x+5'},{html:'3(4x + 2)',ans:'12x+6'},{html:'−2(x + 3)',ans:'-2x-6'},{html:'−3(x + 4)',ans:'-3x-12'},{html:'−4(x − 2)',ans:'-4x+8'},{html:'−5(x − 3)',ans:'-5x+15'},{html:'x(x + 2)',ans:'x^2+2x'},{html:'x(x + 5)',ans:'x^2+5x'},{html:'x(x − 3)',ans:'x^2-3x'},{html:'x(x − 7)',ans:'x^2-7x'},{html:'2x(x + 3)',ans:'2x^2+6x'},{html:'3x(x + 4)',ans:'3x^2+12x'},{html:'2x(x − 5)',ans:'2x^2-10x'},{html:'4x(x − 2)',ans:'4x^2-8x'},{html:'−x(x + 4)',ans:'-x^2-4x'},{html:'−2x(x − 3)',ans:'-2x^2+6x'}];shuffle(p);return p.slice(0,10);}},
+});
+LEVEL_THREE_MODULES.geo_aire.title='Aires de triangles';LEVEL_THREE_MODULES.geo_aire.desc='Calculer l’aire : base × hauteur ÷ 2, en cm²';
     const worldTwo={modules:courtModules,places:courtPlaces,points:courtPoints,routes:courtRoutes,arts:courtArts,background:courtBackground,routeMarkup:document.querySelector('.court-routes').innerHTML};
     const worldThree={
       modules:['mult10','mult_rel','arrondir','carre','moyenne','conversions2','angles','tableau_prop2','pct_variation','probas_des','reductions','eq_niv2','eq_niv7'],
@@ -2359,31 +2707,151 @@ eq_niv7:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       background:document.getElementById('observatoryMapArt').content.querySelector('img').src,
       routeMarkup:document.getElementById('observatoryRoutes').content.querySelector('svg').innerHTML
     };
-    worldThree.modules.forEach((key,i)=>{const stage=i+12;stageTitles[stage]=LEVEL_THREE_MODULES[key].title;challenges.push({stage,id:'niveau3-'+key,next:stage+1,move:()=>moveCourt(i+2)})});
+    // Le niveau 3 conserve 7 défis ; les 6 suivants deviennent le niveau 4.
+    // Les IDs de sauvegarde « niveau3-<module> » restent identiques.
+    const order3A=['mult10','mult_rel','arrondir','moyenne','probas_des','tableau_prop2','eq_niv2'];
+    const order3B=['carre','conversions2','angles','pct_variation','reductions','eq_niv7'];
+    function observatoryPartConfig(keys,first,last){
+      return {
+        ...worldThree,
+        modules:keys,
+        places:keys.map(key=>worldThree.places[worldThree.modules.indexOf(key)]),
+        arts:keys.map(key=>worldThree.arts[worldThree.modules.indexOf(key)]),
+        // Inclure le dernier point ET le trajet vers la porte après la dernière épreuve.
+        points:worldThree.points.slice(first,last+3),
+        routes:worldThree.routes.slice(first,last+2)
+      };
+    }
+    // Carte dédiée à sept étapes. Les scènes d'épreuves et les identifiants
+    // Supabase restent ceux de l'Observatoire déjà enregistré.
+    // Coordonnées mesurées sur la cour des ateliers : 1672 × 941.
+    // Sept haltes sur les cercles dorés, toutes à gauche du parchemin.
+    const observatorySevenStops=[
+      [560,915],[272,780],[272,450],[512,346],
+      [720,302],[930,347],[990,535],[973,806],[1400,565]
+    ];
+    // Dense rounded paths are shared by the gold line and the walking animation.
+    function smoothCourtRoute(points){
+      const result=[points[0]];
+      for(let i=0;i<points.length-1;i++){
+        const a=points[Math.max(0,i-1)],b=points[i],c=points[i+1],d=points[Math.min(points.length-1,i+2)];
+        for(let step=1;step<=20;step++){
+          const t=step/20,t2=t*t,t3=t2*t;
+          result.push(b.map((v,axis)=>.5*((2*v)+(-a[axis]+c[axis])*t+(2*a[axis]-5*v+4*c[axis]-d[axis])*t2+(-a[axis]+3*v-3*c[axis]+d[axis])*t3)));
+        }
+      }
+      return result;
+    }
+    const observatorySevenRoutes=[
+      [[560,915],[556,866],[526,824],[453,809],[360,800],[272,780]],
+      [[272,780],[373,779],[480,751],[552,709],[601,658],[586,616],[521,585],[463,546],[418,500],[354,469],[272,450]],
+      [[272,450],[364,459],[425,445],[473,402],[512,346]],
+      [[512,346],[585,349],[638,333],[678,309],[720,302]],
+      [[720,302],[787,306],[838,331],[885,345],[930,347]],
+      [[930,347],[950,389],[940,436],[939,481],[960,518],[990,535]],
+      [[990,535],[939,568],[871,590],[797,610],[733,652],[742,706],[806,756],[890,790],[973,806]],
+      [[973,806],[1052,844],[1110,890],[1180,913],[1245,880],[1296,805],[1325,725],[1320,655],[1340,595],[1400,565]]
+    ].map(smoothCourtRoute);
+    function observatoryRouteMarkup(routes=observatorySevenRoutes,stops=observatorySevenStops){
+      const line=routes.map(points=>'M'+points.map(p=>p.join(',')).join(' L')).join(' ');
+      const rings=stops.slice(1,-1).map(([x,y])=>`<use href="#levelTwoStepCircle" x="${x-35}" y="${y-21}" width="70" height="42"/>`).join('');
+      return `<g id="harbourGangplank"><path d="M1390 579 L1410 573 L1454 652 L1436 664 Z" fill="#aa7338" stroke="#f2cb79" stroke-width="3"/><path d="M1397 590 L1418 586 M1405 605 L1426 601 M1414 622 L1435 618 M1423 638 L1444 634 M1431 653 L1452 649" fill="none" stroke="#50361e" stroke-width="2"/></g><defs><clipPath id="levelTwoStepClip"><ellipse cx="257" cy="796" rx="34" ry="20"/></clipPath><symbol id="levelTwoStepCircle" viewBox="222 775 70 42"><image href="assets/cour-des-savoirs-sans-progression.png" x="0" y="0" width="1616" height="970" clip-path="url(#levelTwoStepClip)"/></symbol><filter id="observatoryRouteGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4"/></filter></defs><path d="${line}" fill="none" stroke="#ffc600" stroke-width="17" opacity=".8" filter="url(#observatoryRouteGlow)"/><path d="${line}" fill="none" stroke="#ffce20" stroke-width="9"/><path d="${line}" fill="none" stroke="#fff5a0" stroke-width="4"/><g>${rings}</g>`;
+    }
+    const worldThreeA={
+      ...observatoryPartConfig(order3A,0,6),
+      background:'assets/observatoire_niveau3_sans_parchemin.png?v=0363',
+      points:observatorySevenStops,
+      routes:observatorySevenRoutes,
+      // Même géométrie pour la ligne, les cercles et les pas du personnage.
+      routeMarkup:observatoryRouteMarkup()
+    };
+    // Coordonnées communes aux cercles, au tracé et aux déplacements (1672 × 941).
+    const forgeStops=[[300, 815], [440, 760], [390, 488], [490, 322], [690, 286], [908, 308], [1010, 530], [1300, 1000]];
+    const forgeRoutes=[[[300, 815], [350, 792], [395, 775], [440, 760]], [[440, 760], [501, 744], [562, 718], [604, 690], [620, 667], [587, 646], [541, 628], [500, 609], [467, 581], [439, 552], [413, 523], [394, 505], [390, 488]], [[390, 488], [437, 464], [483, 444], [525, 423], [552, 406], [553, 386], [537, 363], [513, 342], [490, 322]], [[490, 322], [533, 342], [577, 357], [615, 349], [650, 326], [673, 302], [690, 286]], [[690, 286], [699, 314], [723, 343], [757, 365], [790, 379], [827, 359], [870, 337], [908, 308]], [[908, 308], [902, 336], [885, 363], [875, 392], [883, 422], [905, 451], [939, 481], [977, 511], [1010, 530]], [[1010, 530], [1065, 531], [1119, 539], [1167, 558], [1190, 582], [1186, 620], [1154, 662], [1103, 700], [1069, 741], [1082, 780], [1115, 818], [1168, 860], [1210, 900], [1240, 938], [1270, 970], [1300, 1000]]].map(smoothCourtRoute);
+    function forgeRouteMarkup(){
+      const line=forgeRoutes.map(r=>'M'+r.map(p=>p.join(',')).join(' L')).join(' ');
+      const circles=forgeStops.slice(1,-1).map(([x,y])=>`<g transform="translate(${x} ${y})"><ellipse rx="32" ry="19" fill="url(#forgeCircleGold)" stroke="#ffc900" stroke-width="8"/><ellipse rx="29" ry="16" fill="none" stroke="#fffbd2" stroke-width="4"/></g>`).join('');
+      return `<defs><radialGradient id="forgeCircleGold"><stop offset="0" stop-color="#fff9bd"/><stop offset=".55" stop-color="#ffe05c"/><stop offset="1" stop-color="#eeb000"/></radialGradient><filter id="forgeRouteGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter></defs><path d="M100 900 L120 915 L256 860 L240 845 Z" fill="#ad763d" stroke="#edc077" stroke-width="3"/><path d="${line}" fill="none" stroke="#ffc600" stroke-width="13" opacity=".7" filter="url(#forgeRouteGlow)"/><path d="${line}" fill="none" stroke="#ffd02a" stroke-width="8"/><path d="${line}" fill="none" stroke="#fff6a5" stroke-width="3"/>${circles}`;
+    }
+    const worldFour={...worldThree,modules:order3B,
+      places:order3B.map(key=>worldThree.places[worldThree.modules.indexOf(key)]),
+      arts:order3B.map(key=>worldThree.arts[worldThree.modules.indexOf(key)]),
+      background:'assets/forge-jardins-phenix-v0377.png',points:forgeStops,routes:forgeRoutes,
+      routeMarkup:forgeRouteMarkup()
+    };
+    [...order3A,...order3B].forEach((key,i)=>{
+      const stage=i+12;
+      stageTitles[stage]=LEVEL_THREE_MODULES[key].title;
+      challenges.push({stage,id:'niveau3-'+key,next:stage+1,move:()=>moveCourt((i<7?i:i-7)+2)});
+    });
+    const cloudModules=["div10", "sub_rel", "add_frac", "mediane", "geo_aire", "pct_simples", "dev_simple"];
+    const cloudPoints=[[180, 915], [420, 710], [425, 452], [475, 279], [700, 245], [991, 291], [1005, 482], [1010, 774], [1400, 782]];
+    const cloudRoutes=[[[180, 915], [230, 851], [290, 786], [350, 741], [420, 710]], [[420, 710], [495, 690], [552, 654], [564, 618], [540, 581], [481, 546], [424, 514], [409, 486], [425, 452]], [[425, 452], [463, 421], [462, 395], [435, 362], [432, 334], [446, 306], [475, 279]], [[475, 279], [532, 257], [589, 249], [641, 247], [700, 245]], [[700, 245], [767, 247], [834, 254], [904, 265], [955, 277], [991, 291]], [[991, 291], [1020, 318], [1030, 348], [1012, 377], [990, 406], [989, 435], [1005, 482]], [[1005, 482], [1008, 516], [978, 548], [927, 582], [872, 617], [834, 651], [827, 682], [846, 714], [885, 743], [943, 764], [1010, 774]], [[1010, 774], [1100, 790], [1200, 796], [1290, 786], [1350, 773], [1400, 782]]].map(smoothCourtRoute);
+    function cloudRouteMarkup(){
+      const line=cloudRoutes.map(r=>'M'+r.map(p=>p.join(',')).join(' L')).join(' ');
+      const circles=cloudPoints.slice(1,-1).map(([x,y])=>`<g transform="translate(${x} ${y})"><ellipse rx="32" ry="19" fill="url(#cloudCircleGold)" stroke="#ffc900" stroke-width="8"/><ellipse rx="29" ry="16" fill="none" stroke="#fffbd2" stroke-width="4"/></g>`).join('');
+      return `<defs><radialGradient id="cloudCircleGold"><stop offset="0" stop-color="#fff9bd"/><stop offset=".55" stop-color="#ffe05c"/><stop offset="1" stop-color="#eeb000"/></radialGradient><filter id="cloudRouteGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter></defs><path d="${line}" fill="none" stroke="#ffc600" stroke-width="13" opacity=".7" filter="url(#cloudRouteGlow)"/><path d="${line}" fill="none" stroke="#ffd02a" stroke-width="8"/><path d="${line}" fill="none" stroke="#fff6a5" stroke-width="3"/>${circles}`;
+    }
+    const worldFive={modules:cloudModules,places:['Maison des divisions','Tour des relatifs','Pavillon des fractions','Palais des médianes','Atelier des aires','Comptoir des pourcentages','Bibliothèque du développement'],arts:['divisions','relatifs','fractions','medianes','aires','pourcentages','developpement'].map(name=>'assets/nuages-epreuve-'+name+'-v0385.png'),background:'assets/cite-nuages-v0383.png',points:cloudPoints,routes:cloudRoutes,routeMarkup:cloudRouteMarkup()};
+    cloudModules.forEach((key,i)=>{const stage=25+i;stageTitles[stage]=LEVEL_THREE_MODULES[key].title;challenges.push({stage,id:'niveau5-'+key,next:stage+1,move:()=>moveCourt(i+2)});});
     function setCourtWorld(world){
-      courtWorld=world===3?3:2;const cfg=courtWorld===3?worldThree:worldTwo;
-      courtBase=courtWorld===3?12:5;courtModules=cfg.modules;courtPlaces=cfg.places;courtPoints=cfg.points;courtRoutes=cfg.routes;courtArts=cfg.arts;courtBackground=cfg.background;
+      if(Number(world)>4)return;
+      courtWorld=world===5?5:world===4?4:world===3?3:2;
+      observatoryPart='A';
+      const cfg=courtWorld===5?worldFive:courtWorld===4?worldFour:courtWorld===3?worldThreeA:worldTwo;
+      courtBase=courtWorld===5?25:courtWorld===4?19:courtWorld===3?12:5;courtModules=cfg.modules;courtPlaces=cfg.places;courtPoints=cfg.points;courtRoutes=cfg.routes;courtArts=cfg.arts;courtBackground=cfg.background;
+      // L'image choisie est déposée séparément dans assets ; une carte de
+      // secours reste disponible tant que le fichier n'a pas été transféré.
+      for(const id of ['courtBackground','courtTrialHeader','courtDepthBoard']){
+        const img=document.getElementById(id);
+        img.onerror=()=>{img.onerror=null;img.src='assets/observatoire-niveau3-sept-etapes.svg';};
+      }
+      if(typeof Image!=='undefined')courtArts.forEach(src=>{const preload=new Image();preload.src=src;});
+      if(courtWorld===3&&typeof Image!=='undefined'){const nextMap=new Image();nextMap.src=worldFour.background;}
       document.getElementById('courtBackground').src=courtBackground;
+      document.getElementById('courtBackground').alt=courtWorld===5?'La Cité des Nuages : sept ateliers mathématiques autour du cristal céleste.':courtWorld===3?'L’Observatoire royal : sept ateliers mathématiques autour de la fontaine astronomique.':courtWorld===4?'La Forge des Nombres.':'La Cour des Savoirs : six ateliers autour de la fontaine au cheval.';
       document.getElementById('courtTrialHeader').src=courtBackground;
       document.querySelector('.court-routes').innerHTML=cfg.routeMarkup;
-      document.querySelector('.court-routes').setAttribute('viewBox',courtWorld===3?'0 0 1672 941':'0 0 1616 970');
-      courtScreen.classList.toggle('observatory',courtWorld===3);courtTrial.classList.toggle('observatory',courtWorld===3);
-      document.getElementById('courtTrialRing').hidden=courtWorld!==3;
+      document.querySelector('.court-routes').setAttribute('viewBox',courtWorld>=3?'0 0 1672 941':'0 0 1616 970');
+      courtScreen.classList.toggle('observatory',courtWorld>=3);courtTrial.classList.toggle('observatory',courtWorld>=3);
+      courtScreen.classList.toggle('observatory-seven-map',courtWorld>=3);
+      courtScreen.classList.toggle('forge-map',courtWorld===4);courtScreen.classList.toggle('cloud-map',courtWorld===5);courtTrial.classList.toggle('cloud-map',courtWorld===5);
+      document.getElementById('harbourBoat').hidden=courtWorld<3||courtWorld===5;
+      let markers=document.getElementById('observatorySevenMarkers');
+      if(!markers){markers=document.createElement('div');markers.id='observatorySevenMarkers';markers.className='observatory-seven-markers';markers.setAttribute('aria-label','Les sept étapes de l’Observatoire');courtMap.append(markers);}
+      markers.replaceChildren();
+      markers.hidden=courtWorld<3;
+      markers.setAttribute('aria-label',courtWorld===5?'Les sept étapes de la Cité des Nuages':courtWorld===4?'Les six étapes de la Forge':'Les sept étapes de l’Observatoire');
+      if(courtWorld>=3)courtPoints.slice(1,-1).forEach(([x,y],i)=>{
+        const marker=document.createElement('span');
+        marker.className='observatory-seven-marker';
+        marker.textContent=String(i+1);
+        marker.title='Étape '+(i+1)+' : '+stageTitles[courtBase+i];
+        marker.style.left=(x/1672*100)+'%';
+        marker.style.top=(y/941*100)+'%';
+        markers.append(marker);
+      });
+      document.getElementById('courtTrialRing').hidden=courtWorld<3;
       document.getElementById('courtDepthBoard').hidden=false;document.getElementById('courtDepthBoard').src=courtBackground;
-      document.getElementById('courtBack').textContent=courtWorld===3?'← Niveau 2':'← Niveau 1';
-      document.getElementById('skipLevelTwo').hidden=courtWorld===3;
+      document.getElementById('courtBack').textContent=courtWorld===5?'← Niveau 4':courtWorld===4?'← Niveau 3':courtWorld===3?'← Niveau 2':'← Niveau 1';
+      document.getElementById('skipLevelTwo').hidden=courtWorld>=3;
+      document.getElementById('skipLevelThree').hidden=courtWorld!==3;
       document.getElementById('courtWorldTitle').textContent='Niveau '+courtWorld;
-      document.getElementById('courtWorldSubtitle').textContent=courtWorld===3?'L’Observatoire royal':'La Cour des Savoirs';
+      document.getElementById('courtWorldSubtitle').textContent=courtWorld===5?'La Cité des Nuages':courtWorld===4?'La Forge des Nombres':courtWorld===3?'L’Observatoire royal':'La Cour des Savoirs';
+      document.getElementById('worldLevel').textContent='Niveau '+courtWorld;
+      document.getElementById('worldName').textContent=document.getElementById('courtWorldSubtitle').textContent;
+      document.getElementById('worldLevel').closest('header').setAttribute('aria-label','Maths Quest, niveau '+courtWorld);
       document.getElementById('courtGoalLevel').textContent=String(courtWorld+1);
-      for(let i=0;i<6;i++)document.getElementById('courtDone'+i).hidden=courtWorld===3||!isChallengeCompleted(i+5);
-      for(let i=0;i<3;i++){document.getElementById('observatoryGroup'+i).hidden=courtWorld!==3;document.getElementById('observatoryGroupDone'+i).hidden=true}
+      for(let i=0;i<6;i++)document.getElementById('courtDone'+i).hidden=courtWorld>=3||!isChallengeCompleted(i+5);
+      for(let i=0;i<3;i++){document.getElementById('observatoryGroup'+i).hidden=courtWorld<3;document.getElementById('observatoryGroupDone'+i).hidden=true}
       for(let i=0;i<13;i++){
         const row=document.getElementById('worldQuestRow'+i);row.hidden=i>=courtModules.length;
-        if(i<courtModules.length){document.getElementById('worldQuestLabel'+i).textContent=(courtWorld===3?LEVEL_THREE_MODULES:LEVEL_TWO_MODULES)[courtModules[i]].title;document.getElementById('courtTrialDone'+i).classList.toggle('validated',isChallengeCompleted(courtBase+i))}
+        if(i<courtModules.length){document.getElementById('worldQuestLabel'+i).textContent=(courtWorld>=3?LEVEL_THREE_MODULES:LEVEL_TWO_MODULES)[courtModules[i]].title;document.getElementById('courtTrialDone'+i).classList.toggle('validated',isChallengeCompleted(courtBase+i))}
       }
-      document.getElementById('courtComplete').classList.toggle('observatory-victory',courtWorld===3);document.getElementById('courtVictoryBackdrop').src=courtWorld===3?document.getElementById('observatoryGatePicture').src:courtBackground;
-      document.getElementById('courtCompleteTitle').innerHTML='🏆 Niveau '+courtWorld+' terminé !<small>'+(courtWorld===3?'L’Observatoire royal':'La Cour des Savoirs')+'</small>';
-      document.getElementById('courtVictoryNext').textContent=courtWorld===3?'La prochaine aventure sera ajoutée au-delà de cette porte.':'La porte de l’Observatoire royal t’attend.';
+      document.getElementById('courtComplete').classList.toggle('observatory-victory',courtWorld>=3);document.getElementById('courtVictoryBackdrop').src=courtWorld===3?document.getElementById('observatoryGatePicture').src:courtBackground;
+      document.getElementById('courtCompleteTitle').innerHTML='🏆 Niveau '+courtWorld+' terminé !<small>'+(courtWorld===5?'La Cité des Nuages':courtWorld===4?'La Forge des Nombres':courtWorld===3?'L’Observatoire royal':'La Cour des Savoirs')+'</small>';
+      document.getElementById('courtVictoryNext').textContent=courtWorld===5?'La prochaine aventure sera ajoutée au-delà de cette porte.':courtWorld===4?'La Cité des Nuages est désormais accessible.':courtWorld===3?'La Forge des Nombres est désormais accessible.':'La porte de l’Observatoire royal t’attend.';
+      document.getElementById('enterLevelFour').hidden=courtWorld!==3;document.getElementById('enterLevelFive').hidden=true;document.getElementById('skipLevelFour').hidden=courtWorld!==4;
       document.getElementById('observatoryContinue').hidden=courtWorld!==2;
       courtFit();
     }
@@ -2396,12 +2864,22 @@ eq_niv7:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       courtModules.forEach((_,i)=>{const badge=document.getElementById('courtTrialDone'+i),done=isChallengeCompleted(courtBase+i);badge.classList.toggle('validated',done);badge.setAttribute('aria-label',done?'Validé':'Non validé')});
       if(courtWorld===2){for(let i=0;i<6;i++)document.getElementById('courtDone'+i).hidden=!isChallengeCompleted(i+5)}
       else for(const [i,lo,hi] of [[0,0,5],[1,5,7],[2,7,13]]){
-        const done=courtModules.slice(lo,hi).filter((_,j)=>isChallengeCompleted(12+lo+j)).length;
-        document.getElementById('observatoryGroup'+i).textContent=done+' / '+(hi-lo);
-        document.getElementById('observatoryGroupDone'+i).hidden=done!==hi-lo;
+        const done=courtModules.slice(lo,Math.min(hi,courtModules.length)).filter((_,j)=>isChallengeCompleted(courtBase+lo+j)).length;
+        document.getElementById('observatoryGroup'+i).textContent=done+' / '+Math.max(0,Math.min(hi,courtModules.length)-lo);
+        document.getElementById('observatoryGroupDone'+i).hidden=done!==Math.max(0,Math.min(hi,courtModules.length)-lo);
       }
     }
-    function calculatorAvailable(){return currentStage===7||(currentStage>=12&&!!courtModule()?.tags?.includes('calculatrice'))}
+    function insertAnswerSquare(){
+      if(![23,31].includes(currentStage)||!quizActive||completed||qInput.disabled)return;
+      const start=qInput.selectionStart??qInput.value.length,end=qInput.selectionEnd??start;
+      qInput.setRangeText('²',start,end,'end');qInput.dispatchEvent(new Event('input',{bubbles:true}));qInput.focus();
+    }
+    qInput.addEventListener('keydown',event=>{
+      if([23,31].includes(currentStage)&&event.altKey&&!event.ctrlKey&&!event.metaKey&&(event.code==='Digit2'||event.code==='Numpad2')){
+        event.preventDefault();insertAnswerSquare();
+      }
+    });
+    function calculatorAvailable(){return [7,21,22,24].includes(currentStage)||(currentStage>=12&&!!courtModule()?.tags?.includes('calculatrice'))}
     // Exact comparison of polynomial coefficients: no evaluation of entered JavaScript.
     function polynomialEqual(student,canonical){
       const variable=(canonical.match(/[a-z]/i)||['x'])[0].toLowerCase();
@@ -2453,6 +2931,9 @@ eq_niv7:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
     }
     function hideObservatoryEntrance(){cancelObservatoryEntrance();observatoryEntrance.hidden=true;observatoryEntranceScene.classList.remove('playing','gate-open','arrived')}
     document.getElementById('skipLevelTwo').addEventListener('click',()=>showObservatoryEntrance(true));
+    document.getElementById('enterLevelFive').addEventListener('click',()=>enterCourt(5));
+    document.getElementById('skipLevelFour').addEventListener('click',()=>{levelFiveDirectAccess=true;enterCourt(5)});
+    document.getElementById('skipLevelThree').addEventListener('click',()=>{if(courtWorld!==3)return;levelFourDirectAccess=true;enterCourt(4)});
     document.getElementById('observatoryContinue').addEventListener('click',()=>showObservatoryEntrance(false));
     document.getElementById('observatoryEnter').addEventListener('click',()=>{hideObservatoryEntrance();enterCourt(3)});
     document.getElementById('observatoryEntranceSkip').addEventListener('click',finishObservatoryEntrance);
@@ -2474,7 +2955,7 @@ eq_niv7:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
         sessionToken++;stopQuizTimers();quizActive=false;closeCalculator();calcToggle.hidden=true;
         quizScreen.hidden=true;resultsArea.hidden=true;questionArea.hidden=false;document.body.style.overflow='';
         cancelCourt();cancelVictory();hideObservatoryEntrance();courtScreen.hidden=true;courtTrial.hidden=true;document.getElementById('courtComplete').hidden=true;
-        levelTwoDirectAccess=false;levelThreeDirectAccess=false;setCourtWorld(2);backToStart();
+        levelTwoDirectAccess=false;levelThreeDirectAccess=false;levelFourDirectAccess=false;levelFiveDirectAccess=false;setCourtWorld(2);backToStart();
       }
       const known=new Set(challenges.map(c=>c.id));
       if(ids===null){try{ids=JSON.parse(localStorage.getItem(PROGRESS_KEY)||'[]')}catch(_){ids=[]}}

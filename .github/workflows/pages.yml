@@ -1,8 +1,8 @@
-name: Maths Quest — site public et version test
+name: Maths Quest — site public
 
 on:
   push:
-    branches: [main, test]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -24,27 +24,13 @@ jobs:
           ref: main
           path: public
           persist-credentials: false
-      - name: Récupérer la version de test
-        uses: actions/checkout@v4
-        with:
-          ref: test
-          path: preview
-          persist-credentials: false
       - name: Vérifier le jeu public
         run: node development/test-game-v0336.cjs
         working-directory: public
-      - name: Vérifier le jeu de test
-        run: node development/test-game-v0336.cjs
-        working-directory: preview
-      - name: Préparer les deux versions
+      - name: Préparer le site public
         run: |
-          mkdir -p site/test
-          # Les fichiers de développement ne sont pas nécessaires pour jouer.
-          for folder in public preview; do
-            test -f "$folder/index.html"
-          done
+          mkdir -p site
           rsync -a --exclude='/.git/' --exclude='/.github/' --exclude='/test/' --exclude='/development/' --exclude='/docs/' --exclude='/database/' --exclude='/sources/' --exclude='/work/' public/ site/
-          rsync -a --exclude='/.git/' --exclude='/.github/' --exclude='/test/' --exclude='/development/' --exclude='/docs/' --exclude='/database/' --exclude='/sources/' --exclude='/work/' preview/ site/test/
           touch site/.nojekyll
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5
@@ -59,6 +45,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: verify-and-build
     steps:
-      - name: Déployer les deux versions
+      - name: Déployer le site public
         id: deployment
         uses: actions/deploy-pages@v4
