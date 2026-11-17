@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const raw=fs.readFileSync('index.html','utf8').split('<script>').at(-1).split('</script>')[0];
-function app(saved={},motion=false){
+function app(saved={},motion=false,classe=null){
  let now=0,id=0;const timers=new Map(),els=new Map(),store=new Map(Object.entries(saved));
  class El{
   constructor(name=''){this.name=name;this.hidden=['oath','arrival','trialTransition','quizScreen','quizResults','levelTwoScreen','levelTwoReplay','courtScreen','courtTrial','courtComplete','courtEnter','calculatorDrawer','calculatorToggle','observatoryEntrance','observatoryEnter','observatoryEntranceSkip'].includes(name);this.style={};this.dataset={};this.attrs={};this.children=[];this.textContent='';this.value='';this.disabled=false;this.src=name;this.events={};this.classSet=new Set();this.classList={add:(...v)=>v.forEach(x=>this.classSet.add(x)),remove:(...v)=>v.forEach(x=>this.classSet.delete(x)),contains:x=>this.classSet.has(x),toggle:(x,v)=>{const show=v===undefined?!this.classSet.has(x):v;if(show)this.classSet.add(x);else this.classSet.delete(x);return show}};this.content=this;this.clientWidth=1000;this.clientHeight=700;this.offsetWidth=300;this.offsetHeight=300;}
@@ -17,6 +17,7 @@ function app(saved={},motion=false){
  function timer(f,ms,interval=false){timers.set(++id,{f,at:now+ms,ms,interval});return id}
  const ctx={document,console,Image:class{},ResizeObserver:class{observe(){}},getComputedStyle:()=>({paddingLeft:'0',paddingRight:'0',paddingTop:'0',paddingBottom:'0'}),performance:{now:()=>now},setTimeout:(f,t)=>timer(f,t),clearTimeout:i=>timers.delete(i),setInterval:(f,t)=>timer(f,t,true),clearInterval:i=>timers.delete(i),requestAnimationFrame:f=>timer(()=>f(now),16),cancelAnimationFrame:i=>timers.delete(i),localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)}};
  ctx.window={matchMedia:q=>({matches:q.includes('prefers-reduced-motion')&&!motion}),addEventListener(){},innerHeight:790,innerWidth:1366};
+ if(classe)ctx.window.MQAccount={className:()=>classe,accountId:()=>null,attach(){}};
  let source=raw.replace('  })();',`window.test={start,continueQuest,showTransition,returnFromTransition,showQuiz,gradeAnswer,closeQuiz,continueToSecond,continueToThird,continueToBridge,returnFromBridge,backToStart,skipCompletedChallenge,isChallengeCompleted,generateEquivalentFractions,showLevelTwoEntrance,returnToBridge,playLevelTwoEntrance,finishLevelTwoEntrance,get world(){return courtWorld},get moduleKeys(){return courtModules},polynomialEqual,calculatorAvailable,showObservatoryEntrance,hideObservatoryEntrance,finishObservatoryEntrance,setCourtWorld,LEVEL_THREE_MODULES,startVictory,finishVictory,cancelVictory,positionCalculator,calculateExpression,calculatorKey,enterCourt,leaveCourt,moveCourt,showCourtTrial,courtArrival,acceptsAnswer,courtModule,LEVEL_TWO_MODULES,get courtAt(){return courtAt},get stage(){return currentStage},get questions(){return questions},get index(){return questionIndex},get correct(){return correct},get limit(){return questionTime}};\n  })();`);
  vm.createContext(ctx);vm.runInContext(source,ctx);
  async function flush(){for(let i=0;i<8;i++)await Promise.resolve()}
@@ -24,6 +25,27 @@ function app(saved={},motion=false){
  return{t:ctx.window.test,get,advance,store,document};
 }
 (async()=>{
+ for(const [classe,seconds] of [['3PM',20],['UPE2A',20],['UE',20],['2TNE1',10],[null,10]]){
+  const timed=app({},false,classe);
+  timed.t.showTransition();
+  assert.equal(timed.get('transitionQuestionTime').hidden,seconds===10);
+  assert.equal(timed.get('transitionQuestionTime').textContent,seconds+' secondes chacune');
+  timed.get('transitionStart').events.click();
+  assert.equal(timed.get('quizTimerNumber').textContent,String(seconds));
+  await timed.advance(seconds*1000-100);
+  assert.equal(timed.get('quizAnswer').disabled,false);
+  await timed.advance(100);
+  assert.equal(timed.get('quizAnswer').disabled,true);
+  assert(timed.get('quizFeedback').textContent.includes('Temps écoulé'));
+ }
+ const timedCourt=app({},false,'UE');
+ timedCourt.get('skipLevelOne').events.click();
+ timedCourt.t.moveCourt(1);await timedCourt.advance(650);
+ const doubledTime=2*timedCourt.t.courtModule().time;
+ assert.equal(timedCourt.get('courtTrialTime').textContent,'⌛ '+doubledTime+' secondes chacune');
+ timedCourt.t.showQuiz();
+ assert.equal(timedCourt.get('quizTimerNumber').textContent,String(doubledTime));
+
  const partial=app({'maths-quest-completed-challenges-v1':JSON.stringify(['tables','niveau2-etendue','niveau3-moyenne'])});assert.equal(partial.get('mapQuestCount0').textContent,'1 / 2');assert.equal(partial.get('transitionQuestCount1').textContent,'0 / 1');partial.get('skipLevelOne').events.click();assert.equal(partial.get('trialGroupCount1').textContent,'1 / 2');assert.equal(partial.get('worldMapGroupCount1').textContent,'1 / 2');partial.get('skipLevelTwo').events.click();partial.get('observatoryEnter').events.click();assert.equal(partial.get('trialGroupCount1').textContent,'1 / 2');assert.equal(partial.get('worldMapGroupCount0').textContent,'0 / 2');
  const a=app();a.t.showLevelTwoEntrance();assert(a.get('levelTwoScreen').hidden);await a.get('fullscreen').events.click();assert.equal(a.document.fullscreenElement,a.document.documentElement);a.t.start();await a.advance(650);assert(!a.get('oath').hidden);a.t.continueQuest();await a.advance(650);assert(!a.get('trialTransition').hidden);
  async function solve(app,score){const t=app.t;for(let i=0;i<10;i++){const q=t.questions[t.index];app.get('quizAnswer').value=String(i<score?q.answer:9999);t.gradeAnswer(false);await app.advance(1400)}assert.equal(t.correct,score);assert(!app.get('quizResults').hidden)}

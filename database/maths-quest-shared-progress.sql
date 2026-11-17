@@ -19,13 +19,13 @@ begin
  select id into pupil from public.eleves where auth_user_id=auth.uid();
  if pupil is null then raise exception 'Compte élève requis' using errcode='42501'; end if;
  title := '{"mult": "Tables de multiplication", "add_rel": "Addition de relatifs", "frac_equiv": "Fractions équivalentes", "conv_long": "Conversions de longueurs", "tableau_prop1": "Tableaux — Niveau 1", "etendue": "Étendue d''une série", "probas_simples": "Probabilités — Niveau 1", "expressions": "Calcul d''expressions", "eq_niv1": "Équations — Niveau 1", "mult10": "Multiplier par 10, 100, 1 000", "mult_rel": "Multiplication de relatifs", "arrondir": "Arrondir au dixième", "carre": "Calculer un carré", "moyenne": "Calcul de moyenne", "conversions2": "Conversions masses, volumes, aires", "angles": "Angles dans un triangle", "tableau_prop2": "Tableaux — Niveau 2", "pct_variation": "Augmentation / diminution en %", "probas_des": "Probabilités — Niveau 2", "reductions": "Réductions d''expressions", "eq_niv2": "Équations — Niveau 2", "eq_niv7": "Équations — Niveau 7"}'::jsonb ->> p_module;
- if p_id is null or title is null or p_score is null or p_score not between 0 and 10 or p_duration is null or p_duration not between 0 and 500000 or p_played_at is null or p_played_at<'2026-10-19T00:00:00Z' or p_played_at>now()+interval '5 minutes' then raise exception 'Série invalide' using errcode='22023'; end if;
+ if p_id is null or title is null or p_score is null or p_score not between 0 and 10 or p_duration is null or p_duration not between 0 and 1000000 or p_played_at is null or p_played_at<'2026-10-19T00:00:00Z' or p_played_at>now()+interval '5 minutes' then raise exception 'Série invalide' using errcode='22023'; end if;
  if p_answers is null or jsonb_typeof(p_answers)<>'array' then raise exception 'Réponses invalides' using errcode='22023'; end if;
  if jsonb_array_length(p_answers)<>10 then raise exception 'Dix réponses requises' using errcode='22023'; end if;
  select count(*) into n from jsonb_array_elements(p_answers) a where a->>'correct'='true';
  if n<>p_score or exists(select 1 from jsonb_array_elements(p_answers) with ordinality as a(v,i) where
    (v->>'numero_question')::integer is distinct from i or jsonb_typeof(v->'correct') is distinct from 'boolean' or
-   (v->>'temps_ms')::integer is null or (v->>'temps_ms')::integer not between 0 and 50000 or
+   (v->>'temps_ms')::integer is null or (v->>'temps_ms')::integer not between 0 and 100000 or
    length(v->>'enonce')>3000 or length(v->>'reponse_eleve')>1000) then raise exception 'Réponses incohérentes' using errcode='22023'; end if;
  if (select sum((v->>'temps_ms')::integer) from jsonb_array_elements(p_answers) v)<>p_duration then raise exception 'Durée incohérente' using errcode='22023'; end if;
  insert into public.sessions(id,eleve_id,exercice,score,nb_questions,duree_totale_ms,played_at,source,module_key)

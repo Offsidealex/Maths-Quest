@@ -916,6 +916,8 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
 .level-one-quests h2{font-size:1.65cqw;margin:0 0 8%;text-align:center}
 .level-one-quests .trial-groups{height:62%;display:grid;grid-template-rows:1fr 1fr}
 .level-one-quests p{border-top:1px solid #ac7f32;padding-top:7%;font-size:1.1cqw;line-height:1.2}
+.transition-question-time{position:absolute;left:57.7%;top:49.9%;width:14.9%;height:3.25%;z-index:8;display:flex;align-items:center;padding-left:.22cqw;box-sizing:border-box;background:#06264d;color:#fff;font:400 1.65cqw/1 Georgia,serif;text-shadow:0 1px 2px #001026;white-space:nowrap;pointer-events:none}
+.transition-question-time[hidden]{display:none}
 .transition-panel-title{position:absolute;left:53.2%;top:39%;width:22%;height:6.7%;display:grid;place-items:center;background:#052547;color:#ffe78d;font:700 2cqw Georgia,serif;z-index:8;pointer-events:none}
 
 
@@ -1221,13 +1223,14 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
         <div class="relative-intro" id="relativeIntro" hidden>
           <div class="relative-panel"><span class="relative-number">2</span><p>Deuxième épreuve</p>
           <h1>Additions de relatifs</h1><div class="relative-example">(−7) + 12 = ?</div>
-          <p>10 questions · 10 secondes chacune</p><p>Obtiens au moins 8 bonnes réponses pour valider ce défi.</p>
+          <p>10 questions</p><p>Obtiens au moins 8 bonnes réponses pour valider ce défi.</p>
           <button type="button" id="relativeStart" class="arrival-action">▶ Commencer le défi</button>
           <button type="button" id="relativeBack" class="arrival-action">← Retour à la carte</button></div>
         </div>
         <img class="transition-image" src="assets/transition-tables-sans-progression.png"
           alt="Le héros est devant le tableau des tables de multiplication ; une première épreuve de dix questions l’attend."
           draggable="false">
+        <span id="transitionQuestionTime" class="transition-question-time" aria-hidden="true" hidden></span>
         <div class="quest-progress transition-progress" role="progressbar" aria-label="Défis validés" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span class="quest-progress-fill"></span></div>
         <span class="transition-recap" id="transitionRecap" aria-live="polite">1 / 3 défis validés ✓</span>
         <span class="transition-version">Maths Quest · v0.3.86-public</span>
@@ -1508,6 +1511,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
     document.getElementById('mq-account-logout').onclick = logout;
   }
   window.MQAccount = { modules: MODULES, accountId: () => identity?.eleve.id || null, record, sync, login, logout,
+    className: () => identity?.eleve.classe || null,
     attach(api) { bridge = api; mount(); const saved = savedIdentity(); if (saved?.session?.refresh_token && saved?.eleve?.id) { setIdentity(saved); void sync(); } },
     progressKey: () => identity ? cacheKey(identity.eleve.id) : 'maths-quest-completed-challenges-v1'
   };
@@ -1732,7 +1736,11 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
       transition.classList.toggle('relatives',currentStage===2);
       relativeIntro.hidden=true;
       transitionImage.src=currentStage===3?fractionArt.src:currentStage===2?relativeArt.src:tableArt;
-      transitionImage.alt=currentStage===3?fractionArt.alt:currentStage===2?relativeArt.alt:tableAlt;
+      const duration=document.getElementById('transitionQuestionTime');
+      duration.textContent=secondsPerQuestion()+' secondes chacune';
+      const artDescription=currentStage===3?fractionArt.alt:currentStage===2?relativeArt.alt:tableAlt;
+      transitionImage.alt=artDescription+' Temps par question : '+secondsPerQuestion()+' secondes.';
+      duration.hidden=questionTimeMultiplier()===1;
       transitionViewport.style.backgroundImage='';
       transitionStart.setAttribute('aria-label','Commencer le défi : '+stageTitles[currentStage]);
       transition.setAttribute('aria-label',stageTitles[currentStage]);
@@ -1992,7 +2000,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
       arrival.style.top=currentStage===3?'62%':currentStage===2?'30%':'';
       arrival.querySelector('.arrival-heading').textContent=isChallengeCompleted()?'🏆 Défi déjà validé !':'⚔ Épreuve atteinte !';
       arrival.querySelector('strong').textContent=stageTitles[currentStage];
-      arrival.querySelector('small').textContent='10 questions · '+(currentStage===3?'30':'10')+' secondes chacune';
+      arrival.querySelector('small').textContent='10 questions · '+secondsPerQuestion()+' secondes chacune';
       startTrial.textContent='Voir le défi';nextTrial.hidden=!isChallengeCompleted();
       nextTrial.textContent='Passer le défi →';nextTrial.setAttribute('aria-label','Passer le défi déjà validé');
       message.textContent='Le héros est devant '+stageTitles[currentStage]+'.';
@@ -2037,6 +2045,14 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
     const CIRC=2*Math.PI*27;
     let passed=isChallengeCompleted(1),secondPassed=isChallengeCompleted(2);
     let questionTime=10000;
+    function questionTimeMultiplier(){
+      const classe=window.MQAccount?.className()?.trim().toUpperCase();
+      return ['3PM','UPE2A','UE'].includes(classe)?2:1;
+    }
+    function secondsPerQuestion(){
+      const base=currentStage>=5?courtModule().time:currentStage===3?30:10;
+      return base*questionTimeMultiplier();
+    }
     function shuffle(a){for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]]}}
     function generateTables(){
       // Identique au générateur MODULES.mult d'Activités mentales.
@@ -2113,7 +2129,7 @@ function generateRelatives(level){
       hideTransition();courtTrial.hidden=true;stopQuizTimers();sessionToken++;closeCalculator();resetCalculator();calcToggle.hidden=!calculatorAvailable();document.getElementById('calculatorHint').textContent=currentStage===7?'Étendue = maximum − minimum.':currentStage===14?'Arrondis le résultat au dixième.':currentStage===15?'Moyenne = somme des valeurs ÷ nombre de valeurs.':currentStage===21?'La somme des angles d’un triangle vaut 180°.':currentStage===22?'Utilise la calculatrice pour calculer la variation en pourcentage.':currentStage===24?'Utilise la calculatrice pour vérifier tes calculs.':'Pour un carré, multiplie le nombre par lui-même.';
       quizAccount=window.MQAccount?.accountId()||null;
       questions=currentStage>=5?courtModule().gen().map(q=>({...q,answer:q.ans})):currentStage===3?generateEquivalentFractions():currentStage===2?generateRelatives('add').map(q=>({...q,answer:q.ans})):generateTables();
-      questionTime=currentStage>=5?courtModule().time*1000:currentStage===3?30000:10000;questionIndex=0;correct=0;answers=[];totalSpentMs=0;
+      questionTime=secondsPerQuestion()*1000;questionIndex=0;correct=0;answers=[];totalSpentMs=0;
       const title=stageTitles[currentStage];
       document.querySelector('.quiz-brand small').textContent="L’Académie des Nombres · Niveau "+(currentStage>=25?'5':currentStage>=19?'4':currentStage>=12?'3':currentStage>=5?'2':'1');
       document.querySelector('.quiz-stage-label').innerHTML=(currentStage>=25?'☁ La Cité des Nuages':currentStage>=19?'⚜ La Forge des Nombres':currentStage>=12?'⚜ L’Observatoire royal':currentStage>=5?'⚜ La Cour des Savoirs':'⚜ Les bases de l’Académie')+' <small>v0.3.86-public</small>';
@@ -2433,7 +2449,7 @@ eq_niv1:{group:'Équations',color:'#2563eb',icon:'=',title:'Équations — Nivea
       document.getElementById('courtTrialPlace').textContent=courtPlaces[courtAt-1];document.getElementById('courtTrialNumber').textContent=String(courtAt);
       document.getElementById('courtTrialTitle').textContent=mod.title;
       document.getElementById('courtTrialOrder').textContent='⚔ '+['Première','Deuxième','Troisième','Quatrième','Cinquième','Sixième','Septième','Huitième','Neuvième','Dixième','Onzième','Douzième','Treizième'][courtAt-1]+' épreuve atteinte !';
-      document.getElementById('courtTrialTime').textContent='⌛ '+mod.time+' secondes chacune';
+      document.getElementById('courtTrialTime').textContent='⌛ '+secondsPerQuestion()+' secondes chacune';
       document.getElementById('courtTrialRule').textContent=mod.desc+([23,31].includes(currentStage)?' — Pour saisir ² dans ce jeu : Alt + 2. Tu peux aussi écrire ^2.':'');
       const done=isChallengeCompleted();document.getElementById('courtTrialStart').textContent=done?'Rejouer':'▶ Commencer le défi';
       document.getElementById('courtTrialPass').hidden=!done;
