@@ -2046,8 +2046,7 @@ body:has(dialog[open]) #appFullscreen{visibility:hidden}
     let passed=isChallengeCompleted(1),secondPassed=isChallengeCompleted(2);
     let questionTime=10000;
     function questionTimeMultiplier(){
-      const classe=window.MQAccount?.className()?.trim().toUpperCase();
-      return ['3PM','UPE2A','UE'].includes(classe)?2:1;
+      return 2;
     }
     function secondsPerQuestion(){
       const base=currentStage>=5?courtModule().time:currentStage===3?30:10;
